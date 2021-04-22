@@ -21,7 +21,7 @@ twolink = models.DH.TwoLink(symbolic=True)
 
 q1, q1d, q1dd, q2, q2d, q2dd = sym.symbol('q1 q1d q1dd q2 q2d q2dd')
 tau = twolink.rne_python([q1, q2], [q1d, q2d], [q1dd, q2dd])
-print(tau)
+print(tau[0])
 
 # %% 9.1.5  Modeling the robot joint
 puma = models.DH.Puma560()
@@ -115,6 +115,7 @@ M_loaded = puma.inertia(puma.qn);
 
 M_loaded / M
 
+np.seterr(divide='ignore', invalid='ignore')
 puma.gravload(puma.qn) / gravload
 
 puma.payload(0)
@@ -140,7 +141,7 @@ e = np.sqrt(np.linalg.eig(Mx)[0])
 
 min(e) / max(e)
 
-puma.manipulability(puma.qn, 'asada')
+puma.manipulability(puma.qn, method='asada')
 
 # %% 9.3  Forward dynamics
 

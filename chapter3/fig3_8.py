@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from spatialmath import SE3
 from math import pi
+from rvcprint import rvcprint
 
 T0 = SE3(0.4, 0.2, 0) * SE3.RPY([0, 0, 3])
 T1 = SE3(-0.4, -0.2, 0.3) * SE3.RPY([-pi/2, 0, -pi/2])
@@ -21,21 +22,16 @@ plt.grid(True)
 plt.legend(['x', 'y', 'z'], loc='lower left')
 plt.xlim(0,49)
 
-plt.show(block=True)
-
-# rvcprint('subfig', 'a')
-
-# clf
+rvcprint(subfig='a', thicken=1)
 
 t = np.arange(0, 50)
-plt.plot(t, Ts.rpy().T, '.-', linewidth=2, markersize=8)
+plt.clf()
+plt.plot(t, Ts.rpy(), '.-', linewidth=2, markersize=8)
 plt.ylabel('RPY angles')
 plt.xlabel('k (step)');
 plt.grid(True)
 plt.legend(['roll', 'pitch', 'yaw'], loc='lower left')
 plt.xlim(0,49)
 
-plt.show(block=True)
-# plt.savefig('fig_3.8.svg')
+rvcprint(subfig='b', thicken=1)
 
-# rvcprint('subfig', 'b')

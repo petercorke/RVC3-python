@@ -7,12 +7,12 @@ from numpy.linalg import *
 import matplotlib.pyplot as plt
 from math import pi, sqrt
 import scipy as sp
-from sympy import simplify
+# from sympy import simplify
 
 from spatialmath.base import *
 from spatialmath.base import sym
 from spatialmath import SE3, SO2, SO3, UnitQuaternion
-from roboticstoolbox import tpoly, lspb, mtraj, qplot, ctraj
+from roboticstoolbox import tpoly, lspb, mtraj, qplot, ctraj, mstraj
 
 np.set_printoptions(linewidth=120, formatter={'float': lambda x: f"{x:8.4g}" if abs(x) > 1e-10 else f"{0:8.4g}"})
 
@@ -96,22 +96,22 @@ traj.plot()
 traj2 = tpoly(0, 1, np.linspace(0, 1, 50), 10, 0)
 traj2.plot()
 
-np.mean(traj.yd) / np.max(traj.yd)
+np.mean(traj.qd) / np.max(traj.qd)
 
 traj = lspb(0, 1, np.linspace(0, 1, 50))
 traj.plot()
 
-np.mean(traj.yd) / np.max(traj.yd)
+np.mean(traj.qd) / np.max(traj.qd)
 
-traj = lspb(0, 1, t, 0.025)
-traj = lspb(0, 1, t, 0.035)
+traj = lspb(0, 1, np.linspace(0, 1, 50), 1.2)
+traj = lspb(0, 1, np.linspace(0, 1, 50), 2)
 
-np.max(traj.yd)
+np.max(traj.qd)
 
 # # 3.3.2 multi-dimensional case
 
 q = mtraj(lspb, [0, 2], [1, -1], 50)
-qplot(q.y, block=False)
+qplot(q.q, block=False)
 
 T = SE3.Rand()
 q = np.r_[T.t, T.rpy()]
@@ -140,7 +140,7 @@ R1 = SO3.Rz(1) * SO3.Ry(1)
 rpy0 = R0.rpy()
 rpy1 = R1.rpy()
 rpy = mtraj(tpoly, rpy0, rpy1, 50)
-pose = SO3.RPY(rpy.y)
+pose = SO3.RPY(rpy.q)
 len(pose)
 plotvol3(2); pose.animate()
 
@@ -184,7 +184,7 @@ rpy = Ts.rpy()
 qplot(rpy)
 
 
-Ts = T0.interp(T1,lspb(0, 1, 50).y)
+Ts = T0.interp(T1,lspb(0, 1, 50).q)
 Ts = ctraj(T0, T1, 50)
 
 
@@ -207,34 +207,33 @@ plt.plot(true.t, attitude.rpy())
 from imu_data import IMU
 true, imu = IMU()
 t = imu.t
-attitude_naive = UnitQuaternion()
-for w in imu.gyro[:-1]:
-   attitude_naive.append(attitude_naive[-1] * UnitQuaternion.EulerVec(w * imu.dt))
+o𝜉b = UnitQuaternion()
+for ωm in imu.gyro[:-1]:
+   o𝜉b.append(o𝜉b[-1] * UnitQuaternion.EulerVec(ωm * imu.dt))
 
 plt.clf()
-plt.plot(attitude_naive.rpy())
+plt.plot(o𝜉b.rpy())
 plt.title('naive')
 plt.figure()
 plt.plot(true.attitude.rpy())
 plt.title('true')
 plt.figure()
-plt.plot(t, attitude_naive.angdist(true.attitude, metric=1), 'r' )
+plt.plot(t, o𝜉b.angdist(true.attitude, metric=1), 'r' )
 
 kI = 0.2
 kP =1
 
 b = np.zeros(imu.gyro.shape)  # initial bias
-attitude_ECF = UnitQuaternion()
+o𝜉b_ECF = UnitQuaternion()
 
-for k, (wm, am, mm) in enumerate(zip(imu.gyro[:-1], imu.accel[:-1], imu.magno[:-1])):
-   invq = attitude_ecf[k].inv()
-   sigmaR = np.cross(am, invq * true.g) + np.cross(mm, invq * true.B)
-   wp = wm - b[k,:] + kP * sigmaR
-   attitude_ECF.append(attitude_ECF[k] * UnitQuaternion.EulerVec(wp * imu.dt))
-   b[k+1,:] = b[k,:] - kI * sigmaR * imu.dt
+for k, (ωm, am, mm) in enumerate(zip(imu.gyro[:-1], imu.accel[:-1], imu.magno[:-1])):
+   b𝜉o = o𝜉b_ECF[-1].inv()
+   σR = np.cross(am, b𝜉o * true.g) + np.cross(mm, b𝜉o * true.B)
+   ωp = ωm - b[k,:] + kP * σR
+   o𝜉b_ECF.append(o𝜉b_ECF[k] * UnitQuaternion.EulerVec(ωp * imu.dt))
+   b[k+1,:] = b[k,:] - kI * σR * imu.dt
 
-
-plt.plot(t, attitude_ECF.angdist(true.attitude, metric=1), 'b')
+plt.plot(t, o𝜉b_ECF.angdist(true.attitude, metric=1), 'b')
 plt.xlim(0, 20)
 plt.ylim(0, 0.8)
 plt.legend('Naive integration', 'ECF')

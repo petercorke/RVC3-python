@@ -1,6 +1,7 @@
 from roboticstoolbox import lspb, tpoly, mtraj
 import matplotlib.pyplot as plt
 import numpy as np
+from rvcprint import rvcprint
 
 traj = mtraj(tpoly, [0, 2], [1, -1], 50)
 traj = mtraj(lspb, [0, 2], [1, -1], 50)
@@ -11,6 +12,4 @@ plt.xlabel('k (step)')
 plt.ylabel('q')
 plt.grid(True)
 
-plt.show(block=True)
-
-# rvcprint
+rvcprint()

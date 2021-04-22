@@ -1,7 +1,7 @@
 import pyvista as pv
 import numpy as np
 from spatialmath import SE3
-import frames
+import pvplus
 
 plotter = pv.Plotter(shape=(2,3), border=False, polygon_smoothing=True, window_size=(2000,1000))
 plotter.enable_parallel_projection()
@@ -9,7 +9,7 @@ plotter.enable_parallel_projection()
 def add_plot(i, j, T):
 	print(i, j, T)
 	plotter.subplot(i, j)
-	frames.add_frame(plotter, T)
+	pvplus.add_frame(plotter, T)
 
 
 add_plot(0, 0, SE3())

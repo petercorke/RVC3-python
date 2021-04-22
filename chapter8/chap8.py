@@ -19,17 +19,36 @@ from spatialmath.base import symbol
 
 
 # %% 8.1  Manipulator Jacobian
+# planar2 = models.DH.Planar2(symbolic=True)
+# q1, q2 = sym.symbol('q1 q2')
 
-planar2 = models.DH.Planar2(symbolic=True)
+# Te = planar2.fkine([q1, q2])
+# print(Te)
+
+# p = Te.t[:2]
+# print(p)
+
+# J = sympy.Matrix(p).jacobian([q1, q2])
+# J.simplify()
+# sympy.printing.pretty_print(J)
+
+
 q1, q2 = sym.symbol('q1 q2')
+a1, a2 = sym.symbol('a1 a2')
 
-Te = planar2.fkine([q1, q2])
+e = ETS2.r() * ETS2.tx(a1) * ETS2.r() * ETS2.tx(a2)
+print(e)
+
+print(e[0].T(q1) @ e[1].T() @ e[2].T(q2) @ e[3].T())
+print(e[0].T(q1) @ e[1].T() )
+
+Te = e.eval([q1, q2])
 print(Te)
 
-p = Te.t[:2]
+p = sympy.Matrix(Te.t)
 print(p)
 
-J = sympy.Matrix(p).jacobian([q1, q2])
+J = p.jacobian([q1, q2])
 J.simplify()
 sympy.printing.pretty_print(J)
 
@@ -53,14 +72,14 @@ puma.jacob0(puma.qn, analytical='eul');
 #  %%8.2.1  Jacobian singularities
 J = puma.jacob0(puma.qr)
 
-det(J)
+np.linalg.det(J)
 
 np.linalg.matrix_rank(J)
 
 
 jsingu(J)
 
-qns = puma.qr; qns[4] = np.deg2rad(5)
+qns = puma.qr.copy(); qns[4] = np.deg2rad(5)
 print(qns)
 
 J = puma.jacob0(qns);
@@ -107,9 +126,11 @@ e.plot()
 
 m = puma.manipulability(puma.qr)
 
-puma.manipulability(puma.qr)
+puma.manipulability(puma.qr, axes='both')
 
-puma.manipulability(puma.qn)
+puma.manipulability(puma.qn, axes='both')
+
+puma.jacobm(puma.qn)
 
 # %% 8.3  Resolved-rate motion control
 # sl_rrmc
@@ -135,21 +156,25 @@ puma.manipulability(puma.qn)
 #  8.4  Under- and over- actuated manipulators
 
 # ## 8.4.1 Jacobian for under actuated robot
-planar2 = models.DH.Planar2();
-qn = [1, 1];
+planar2 = models.ETS.Planar2();
+
+qn = [1, 1]
 
 J = planar2.jacob0(qn)
 
-qd = np.linalg.pinv(J) @ [0.1, 0, 0, 0, 0, 0]
+xd_desired = [0.1, 0, 0];
+qd = np.linalg.pinv(J) @ xd_desired
 
 xd = J @ qd
 
+np.linalg.norm(xd_desired - J @ qd)
 
 Jxy = J[:2,:];
-qd = np.linalg.inv(Jxy) @ [0.1, 0]
+qd = np.linalg.inv(Jxy) @ xd_desired[:2]
 
-xd = J @ qd;
-xd
+xd = J @ qd
+
+np.linalg.norm(xd_desired - J @ qd)
 
 # # 8.4.2  Jacobian for over-actuated robot
 
@@ -164,30 +189,34 @@ J.shape
 xd = [0.2, 0.2, 0.2, 0, 0, 0];
 qd = np.linalg.pinv(J) @ xd
 
+(J @ qd).T
+
 np.linalg.matrix_rank(J)
 
 N = sp.linalg.null_space(J)
 
-norm(J @ N[:,0])
+np.linalg.norm(J @ N[:,0])
 
 qd_null = [0, 0, 0, 0, 1, 0, 0];
 
 qp = N @ sp.linalg.pinv(N) @ qd_null
 
-norm( J @ qp)
+np.linalg.norm( J @ qp)
 
 # 8.5 Force relationships
 
 puma = models.DH.Puma560()
 
 # %% 8.5.1 Transforming wrenches into joint space
-tau = puma.jacob0(puma.qn) @ [0, 20, 0, 0, 0, 0]
+tau = puma.jacob0(puma.qn).T @ [0, 20, 0, 0, 0, 0]
 
-tau = puma.jacob0(puma.qn) @ [20, 0, 0, 0, 0, 0]
+tau = puma.jacob0(puma.qn).T @ [20, 0, 0, 0, 0, 0]
 
 # # 8.5.2  Force ellipsoids
 # clf
 planar2.fellipse([30, 40], unit='deg')
+
+planar2.teach(fellipse=True)
 
 # clf
 # p2.teach([0 0], 'callback', @(r,q) r.fellipse(q), 'view', 'top')

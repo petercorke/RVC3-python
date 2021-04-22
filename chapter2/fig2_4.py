@@ -3,7 +3,7 @@ import numpy as np
 from spatialmath import SE3
 from math import cos, sin, pi
 
-import frames
+import pvplus
 
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))
 
@@ -20,13 +20,13 @@ elif box == 1:
 L = 1.4
 
 # initial box + frame (blue)
-frames.add_frame(plotter, SE3(), label='A')
+pvplus.add_frame(plotter, SE3(), label='A')
 cube = pv.Cube(y_length=L, x_length=L/2, z_length=L/2)
 plotter.add_mesh(cube, color='blue', show_edges=True, style='wireframe', opacity=0.2, line_width=15)
 
 # final box + frame (red)
 T = SE3(-0.5, 1.5, 1.5) * SE3.Rz(pi/4) * SE3.Rx(pi/8) * SE3.Ry(pi/8)
-frames.add_frame(plotter, T, label='B')
+pvplus.add_frame(plotter, T, label='B')
 cube = pv.Cube(y_length=L, x_length=L/2, z_length=L/2)
 cube.transform(T.A)
 plotter.add_mesh(cube, color='red', show_edges=True, style='wireframe', opacity=0.2, line_width=15)

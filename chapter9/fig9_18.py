@@ -1,27 +1,33 @@
 # fig 9.18
 
-import bdsim.simulation as sim
+import bdsim
 from math import pi
 import numpy as np
-from roboticstoolbox.models import Puma560
+from roboticstoolbox.models.DH import Puma560
 
-bd = sim.Simulation()
+def PumaCollapse():
+    bd = bdsim.BlockDiagram(name='Puma collapsing', graphics=False)
 
-puma = Puma560()
+    puma = Puma560().nofriction()
 
-# define the blocks
+    # define the blocks
 
-torque = bd.CONSTANT([0, 0, 0, 0, 0, 0])
-robot = bd.FDYN(puma)
-plot = bd.ROBOTPLOT(puma, backend='swift')
+    torque = bd.CONSTANT([0, 0, 0, 0, 0, 0])
+    robot = bd.FOWARDDYNAMICS(robot=puma)
+    plot = bd.ARMPLOT(puma)
 
-# connect the blocks
-robot[0] = torque
-plot[0] = robot
+    # connect the blocks
+    bd.connect(torque, robot)
+    bd.connect(robot[0], plot)
 
-bd.compile()   # check the diagram
-bd.report()    # list all blocks and wires
-bd.run(5)  # simulate for 5s
-bd.dotfile('bd1.dot')  # output a graphviz dot file
-bd.savefig('pdf')      # save all figures as pdf
-bd.done()
+    bd.compile()   # check the diagram
+    bd.report()    # list all blocks and wires
+    out = bd.run(5)  # simulate for 5s
+
+    bd.done()
+
+    return out
+
+if __name__ == "__main__":
+
+    PumaCollapse()

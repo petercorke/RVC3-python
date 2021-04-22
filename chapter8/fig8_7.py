@@ -1,50 +1,60 @@
 # fig 8.7
 
-import bdsim.simulation as sim
+import bdsim
 from math import pi, sin, cos
 import numpy as np
-from roboticstoolbox.models import Puma560
+from roboticstoolbox.models.DH import Puma560
+from spatialmath import SE3
 
-bd = sim.Simulation()
+sim = bdsim.BDSim(verbose=True)
+bd = sim.blockdiagram()
 
 puma = Puma560()
 
 # define the blocks
 
-r = 1
-T = 5
-def circle(t):
-    x = r * np.cos(t / T * 2 * pi) + x0
-    y = r * np.sin(t / T * 2 * pi) + x0
-    return SE3(x, y, 0)
+q0 = [0, pi/4, pi, 0, pi/4, 0]
 
-time = BD.TIME()
+r = 0.05
+T = 5
+cc = puma.fkine(puma.qn).t
+def circle(t):
+    x = r * np.cos(t / T * 2 * pi) + cc[0]
+    y = r * np.sin(t / T * 2 * pi) + cc[1]
+    return SE3(x, y, cc[2]) * SE3.Ry(pi)
+
+time = bd.TIME()
 goal = bd.FUNCTION(circle)
 delta = bd.TR2DELTA()
-jacobian = bd.JACOBIAN(puma)
-inverse = bd.FUNCTION(lambda x: np.linalg.inv(x))
-velocity = bd.CONSTANT([0, 0.5, 0, 0, 0, 0])
-gain = bd.GAIN(5)
-qdot = bd.PRODUCT(inverse, velocity)
-integrator = bd.DINTEGRATOR(x0=[0, pi/4, pi, 0, pi/4, 0])
-robot = bd.FKINE(puma)
+jacobian = bd.JACOBIAN(robot=puma, frame='e', inverse=True, name='Jacobian')
+gain = bd.GAIN(2)
+qdot = bd.PROD('**', matrix=True)
+integrator = bd.INTEGRATOR(x0=q0, name='q')
+fkine = bd.FKINE(puma)
+robot = bd.ARMPLOT(robot=puma, q0=q0, name='plot')
+tr2t = bd.TR2T()
+scope = bd.SCOPEXY(scale=[0.5, 0.7, -0.25, -0.05])
 
 # connect the blocks
 bd.connect(time, goal)
 bd.connect(goal, delta[1])
-bd.connect(velocity, qdot[1])
-bd.connect(qdot, integrator)
-bd.connect(integrator, robot, jacobian)
-bd.connect(jacobian, inverse)
-bd.connect(inverse, qdot[0])
+bd.connect(delta, qdot[1])
+
+bd.connect(qdot, gain)
+bd.connect(gain, integrator)
+bd.connect(integrator, robot, fkine, jacobian)
+bd.connect(fkine, delta[0], tr2t)
+bd.connect(tr2t[0], scope[0])
+bd.connect(tr2t[1], scope[1])
+bd.connect(jacobian, qdot[0])
+
 
 bd.compile()   # check the diagram
 bd.report()    # list all blocks and wires
-bd.run(5)  # simulate for 5s
-bd.dotfile('bd1.dot')  # output a graphviz dot file
-bd.savefig('pdf')      # save all figures as pdf
-bd.done()
-
+out = sim.run(bd, 10, minstepsize=1e-6, dt=0.05)  # simulate for 5s
+# bd.dotfile('bd1.dot')  # output a graphviz dot file
+# bd.savefig('pdf')      # save all figures as pdf
+bd.done(block=True)
 
 """
             [q] -> JACOB0(puma) -> INV  -> PROD('**') -> GAIN(5) -> integrator -> [q]

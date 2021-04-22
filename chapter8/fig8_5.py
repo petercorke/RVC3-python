@@ -2,43 +2,32 @@
 
 from math import pi
 import numpy as np
-from roboticstoolbox.models import Puma560
-
+from roboticstoolbox.models.DH import Puma560
 import bdsim
 
-bd = bdsim.BlockDiagram(debug='s')
+sim = bdsim.BDSim()
+bd = sim.blockdiagram()
 
 puma = Puma560()
 q0 = [0, pi/4, pi, 0, pi/4, 0]
 
-# swift = puma.plot(q0, block=False)
-
-# def update(q):
-#     global puma, swift
-
-#     puma.q = q
-#     swift.step()
-
 # define the blocks
-jacobian = bd.FUNCTION(lambda q: puma.jacob0(q), name='Jacobian')
-inverse = bd.FUNCTION(lambda x: np.linalg.inv(x), name='inv')
+jacobian = bd.JACOBIAN(robot=puma, frame='0', inverse=True, name='Jacobian')
 velocity = bd.CONSTANT([0, 0.5, 0, 0, 0, 0])
 qdot = bd.PROD('**', matrix=True)
-integrator = bd.INTEGRATOR(x0=q0)
-# robot = bd.FUNCTION(update, name='plot')
+integrator = bd.INTEGRATOR(x0=q0, name='q')
+robot = bd.ARMPLOT(robot=puma, q0=q0, name='plot')
 # robot = bd.PRINT('{:.3f}')
 
 # connect the blocks
-inverse[0] = jacobian
-qdot[0] = inverse
-qdot[1] = velocity
-integrator[0] = qdot
-jacobian[0] = integrator
-robot[0] = integrator
+bd.connect(jacobian, qdot[0])
+bd.connect(velocity, qdot[1])
+bd.connect(qdot, integrator)
+bd.connect(integrator, jacobian, robot)
 
 bd.compile()   # check the diagram
 bd.report()    # list all blocks and wires
-bd.run(5)  # simulate for 5s
+out = sim.run(bd, 2, minstepsize=1e-6)  # simulate for 5s
 # bd.dotfile('bd1.dot')  # output a graphviz dot file
 # bd.savefig('pdf')      # save all figures as pdf
 bd.done()

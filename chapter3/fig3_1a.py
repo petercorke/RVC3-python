@@ -13,9 +13,13 @@ T = SE3.Rx(90, 'deg').A
 
 print(pv.__version__)
 
-
+# blue frame at the origin
+# red frame at -2, 0, 0
 frames.add_frame(plotter, SE3(), color='blue', label='A')
 frames.add_frame(plotter, SE3(-2, 0, 0) * SE3.Rz(-pi/2) * SE3.Rx(pi/2), color='red', label='B')
+
+point = pv.Sphere(center=(-1, 1, 0.5), radius=0.1)
+plotter.add_mesh(point, color='green')
 
 # camera position, focus point, up
 # plotter.camera_position = [(2, -2, 1), (0, 0, 0), (0, 0, 1)]
