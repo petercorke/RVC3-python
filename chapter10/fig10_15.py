@@ -3,31 +3,31 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 
-flowers = Image('flowers4.png')
+flowers = Image.Read('flowers4.png')
 
 options = dict(title=False, axes=False
 )
 flowers.disp(**options)
 rvcprint.rvcprint(subfig='a', format='png')
 
-hsv = flowers.colorspace('hsv')
+hsv = flowers.colorspace('HSV')
 
-hsv.plane(2).disp(**options)  # H
+hsv.plane('H').disp(**options)  # H
 rvcprint.rvcprint(subfig='b', format='png')
 
-hsv.plane(1).disp(**options)  # S
+hsv.plane('S').disp(**options)  # S
 rvcprint.rvcprint(subfig='c', format='png')
 
-hsv.plane(0).disp(**options)  # V
+hsv.plane('V').disp(**options)  # V
 rvcprint.rvcprint(subfig='d', format='png')
 
 
-lab = flowers.colorspace('lab')
+lab = flowers.colorspace('Lab')
 
-lab.plane(1).disp(**options)  # A*
+lab.plane('a').disp(**options)  # A*
 rvcprint.rvcprint(subfig='e', format='png')
 
-lab.plane(0).disp(**options)  # B*
+lab.plane('b').disp(**options)  # B*
 rvcprint.rvcprint(subfig='f', format='png')
 
 

@@ -7,11 +7,11 @@ nm = 1e-9
 
 lam = np.arange(300, 1000, 10)
 
-sun_ground = mvt.loadspectrum(lam * nm, 'solar')
-sun_blackbody = mvt.blackbody(lam * nm, 5778)
+sun_ground = loadspectrum(lam * nm, 'solar')
+sun_blackbody = blackbody(lam * nm, 5778)
 scale = 0.58e-4
 
-eye_response = mvt.rluminos(lam * nm)
+eye_response = rluminos(lam * nm)
 
 fig, ax1 = plt.subplots()  # create a figure and an axes
 
@@ -48,7 +48,7 @@ rvcprint.rvcprint(subfig='a')
 
 plt.figure()
 lam_water = np.linspace(400,700,30) 
-water_spectrum = mvt.loadspectrum(lam_water * nm, 'water')
+water_spectrum = loadspectrum(lam_water * nm, 'water')
 d = 5.0
 T = 10.0**(- water_spectrum * d)
 

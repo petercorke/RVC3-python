@@ -6,7 +6,7 @@ from machinevisiontoolbox import *
 nm = 1e-9
 
 lam = np.arange(350, 800, 5) * nm
-cmf = mvt.cmfrgb(lam, method='cubic')
+cmf = cmfrgb(lam, method='cubic')
 
 plt.plot(lam / nm, cmf[:,0], 'r', label='CIE red')
 plt.plot(lam / nm, cmf[:,1], 'g', label='CIE green')

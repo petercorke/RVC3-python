@@ -30,20 +30,24 @@ ab = Lab[:, 1:]
 
 plot_chromaticity_diagram('xy')
 plot_point(xy.T, marker='k*', text=' {:d}', fontsize=8)
+plt.grid(True)
 rvcprint.rvcprint(subfig='a')
 
 plt.xlim(0.15, 0.6)
 plt.ylim(0.15, 0.5)
+plt.grid(True)
 rvcprint.rvcprint(subfig='b')
 
 
 plt.clf()
 plot_chromaticity_diagram('ab')
 plot_point(ab.T, marker='k*', text=' {:d}', fontsize=8)
+plt.grid(True)
 rvcprint.rvcprint(subfig='c')
 
 plt.xlim(-50, 50)
 plt.ylim(-50, 60)
+plt.grid(True)
 rvcprint.rvcprint(subfig='d')
 
 # plt.show(block=True)

@@ -20,19 +20,14 @@ plt.legend(labels=('CIE X', 'CIE Y', 'CIE Z'))
 
 plt.show()
 
-# rvcprint.rvcprint(subfig='a')
+rvcprint.rvcprint(subfig='a')
 
 plt.clf()
 
 
 
-xycolor = showcolorspace('xy')
-xycolor = np.flip(xycolor, axis=0)
-
-plt.imshow(xycolor, extent=(0, 0.8, 0, 0.9))
-
-plt.grid()
-
+plot_chromaticity_diagram('xy')
+plt.grid(True)
 # lam = np.arange(350, 750) * nm
 # xy = lambda2xy(lam)
 # print(xy)
@@ -41,6 +36,6 @@ plt.grid()
 # following fig10_13.m, colorspace looks a bit different...
 
 
-plt.show(block=True)
-# rvcprint.rvcprint(subfig='b')
+# plt.show(block=True)
+rvcprint.rvcprint(subfig='b')
 

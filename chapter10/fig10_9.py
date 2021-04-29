@@ -8,9 +8,9 @@ from matplotlib.ticker import ScalarFormatter
 nm = 1e-9
 
 lam = np.arange(350, 800, 5) * nm
-E = mvt.loadspectrum(lam, 'solar')
-R = mvt.loadspectrum(lam, 'redbrick')
-C = mvt.loadspectrum(lam, 'cones')
+E = loadspectrum(lam, 'solar')
+R = loadspectrum(lam, 'redbrick')
+C = loadspectrum(lam, 'cones')
 
 ax0 = plt.subplot(3,1,1)
 ax0.plot(lam / nm, E, linewidth=2)

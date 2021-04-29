@@ -6,7 +6,7 @@ from machinevisiontoolbox import *
 nm = 1e-9
 
 lam = np.arange(350, 750) * nm
-human = mvt.luminos(lam)
+human = luminos(lam)
 
 plt.figure()
 
@@ -18,7 +18,7 @@ plt.ylim(0, 700)
 plt.grid()
 rvcprint.rvcprint(subfig='a')
 
-cones = mvt.loadspectrum(lam, 'cones')
+cones = loadspectrum(lam, 'cones')
 plt.figure()
 plt.plot(lam / nm, cones[:, 0], 'r')
 plt.plot(lam / nm, cones[:, 1], 'g')

@@ -29,11 +29,11 @@ RGB = colorspace_convert(XYZ, 'xyz', 'rgb')
 RGB = _normalize(RGB)
 RGB = gamma_encode(RGB)
 
-im = Image(RGB)
+im = Image(RGB, colororder='RGB')
 
 # Convert from XYZ to R'G'B'
 # im = imxyz.colorspace('xyz2bgr')
-h = im.disp(extent=(380, 750, 0, 60))
+im.disp(extent=(380, 750, 0, 60))
 
 plt.xlabel('Wavelength (nm)')
 plt.ylabel('')

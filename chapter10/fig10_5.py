@@ -7,8 +7,8 @@ nm = 1e-9
 
 plt.figure()
 lam = np.linspace(400, 700, 400) * nm
-e = mvt.loadspectrum(lam, 'solar')
-r = mvt.loadspectrum(lam, 'redbrick')
+e = loadspectrum(lam, 'solar')
+r = loadspectrum(lam, 'redbrick')
 
 l = e * r
 

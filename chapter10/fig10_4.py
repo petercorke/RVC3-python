@@ -11,7 +11,7 @@ um = 1e-6
 
 plt.figure()
 lam = np.arange(100, 10_000, step=10) * nm
-e = mvt.loadspectrum(lam, 'redbrick')
+e = loadspectrum(lam, 'redbrick')
 
 # TODO add vertical lines
 
@@ -38,7 +38,7 @@ rvcprint.rvcprint(subfig='a')
 plt.figure()
 
 lam = np.linspace(400,700,400) * nm
-e = mvt.loadspectrum(lam, 'redbrick')
+e = loadspectrum(lam, 'redbrick')
 
 # TODO set same y-axis as 10.4a
 

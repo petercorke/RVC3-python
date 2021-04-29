@@ -28,7 +28,7 @@ def outfile(subfig='', format=None):
         print('creating folder', path)
         path.mkdir()
 
-    figure = path / f"fig{chapter}_{fig}.{format}"
+    figure = path / f"fig{chapter}_{fig}{subfig}.{format}"
     return figure
 
 def rvcprint(subfig='', thicken=1.5, interval=None, format = 'eps', pause=2, **kwargs):
