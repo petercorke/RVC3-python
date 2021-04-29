@@ -1,11 +1,21 @@
-# cube via catadioptric camera
+import rvcprint
+import numpy as np
+import matplotlib.pyplot as plt
+from machinevisiontoolbox import *
+from matplotlib.ticker import ScalarFormatter
+from spatialmath import SE3
+from math import pi
 
-cam = CatadioptricCamera('name', 'panocam', ...
-         'projection', 'equiangular', ...
-         'maxangle', pi/4, ...
-         'pixel', 10e-6, ...
-         'resolution', [1280 1024])
-[X,Y,Z] = mkcube(1, 'centre', [1, 1, 0.8], 'edge')
-cam.mesh(X, Y, Z)
+camera = CatadioptricCamera(
+            projection='equiangular',
+            rho=10e-6,
+            imagesize=[1280, 1024],
+            maxangle=pi/4
+        )
+     
+X, Y, Z = mkcube(1, centre=[1, 1, 0.8], edge=True)
 
-rvcprint('hidden', cam.h_image.Parent)
+camera.mesh(X, Y, Z, color='k')
+
+
+rvcprint.rvcprint()

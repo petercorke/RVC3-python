@@ -7,7 +7,7 @@ from math import pi
 
 u0 = 528.1214; v0 = 384.0784; l = 2.7899; m = 996.4617;
 
-fisheye = Image('fisheye_target.png', dtype='float', grey=True)
+fisheye = Image.Read('fisheye_target.png', dtype='float', grey=True)
 
 n = 500
 theta_range = np.linspace(0, pi, n)
@@ -40,4 +40,4 @@ ax.view_init(azim=-143.0, elev=-9)
 
 plt.show()
 
-rvcprint.rvcprint()
+rvcprint.rvcprint(format='png', interval=0.5)

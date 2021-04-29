@@ -1,33 +1,37 @@
-## camera calibration and decomposition
+import rvcprint
+import numpy as np
+import matplotlib.pyplot as plt
+from machinevisiontoolbox import *
+from matplotlib.ticker import ScalarFormatter
+from spatialmath import SE3
+from spatialmath.base import plot_sphere
 
-# create "unknown" camera
 P = mkcube(0.2)
-T_unknown = transl(0.1, 0.2, 1.5) * rpy2tr(0.1, 0.2, 0.3)
-cam_unknown = CentralCamera('name', 'true', 'focal', 0.015, ...
-    'pixel', 10e-6, 'resolution', [1280 1024], 'centre', [512 512], ...
-    'noise', 0.05)
-p = cam_unknown.project(P, 'objpose', T_unknown)
 
-# calibrate it
-C = camcald(P, p)
+T_unknown = SE3(0.1, 0.2, 1.5) * SE3.RPY(0.1, 0.2, 0.3)
 
-# decompose it to parameters
-est = invcamcal(C)
-est.f/est.rho[0]
-cam_unknown.f/cam_unknown.rho[1]
-T_unknown*est.T
+camera = CentralCamera(f=0.015, rho=10e-6, imagesize=[1280, 1024], \
+    noise=0.05)
 
-clf
-hold on
-plot_sphere(P, 0.03, 'r')
-tformplot(eye[3,3], 'frame', 'T', 'color', 'b', 'length', 0.3)
-est.plot_camera('color', 'b')
-#cam_unknown.plot_camera('Tcam', inv(T_unknown), 'color', 'r')
-xyzlabel
-view[53,15]
-lighting gouraud
-light
-axis equal
-grid
+p = camera.project(P, objpose=T_unknown)
 
-rvcprint('opengl')
+C, resid = CentralCamera.camcald(P, p)
+
+est = CentralCamera.InvCamcal(C)
+
+est.f / est.rho[0]
+
+camera.f / camera.rho[1]
+
+(T_unknown * est.pose).printline()
+
+# plt.clf()
+est.plot_camera(scale=0.3)
+plot_sphere(P, 0.03, color='r')
+SE3().plot(frame='T', color='b', length=0.3)
+ax = plt.gca()
+ax.set_xlim3d(-0.9, 0.9)
+ax.set_ylim3d(-0.9, 0.9)
+ax.set_zlim3d(-1.5, 0.3)
+
+rvcprint.rvcprint()

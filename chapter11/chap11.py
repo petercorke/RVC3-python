@@ -16,6 +16,7 @@ from machinevisiontoolbox import *
 # camera.project(P)
 
 # camera.project(P, pose=SE3(-0.5, 0, 0))
+
 # ## 11.1.3  Discrete image plane
 
 # camera = CentralCamera(f=0.015, rho=10e-6,
@@ -137,157 +138,157 @@ from machinevisiontoolbox import *
 # #visualize_distortions
 
 
-## 11.3.1  Fisheye lens camera
+# ## 11.3.1  Fisheye lens camera
 
-camera = FishEyeCamera(
-            projection='equiangular',
-            rho=10e-6,
-            imagesize=[1280, 1024]
-            )
+# camera = FishEyeCamera(
+#             projection='equiangular',
+#             rho=10e-6,
+#             imagesize=[1280, 1024]
+#             )
 
-X, Y, Z = mkcube(0.2, centre=[0.2, 0, 0.3], edge=True)
+# X, Y, Z = mkcube(0.2, centre=[0.2, 0, 0.3], edge=True)
 
-camera.mesh(X, Y, Z, color='k')
+# camera.mesh(X, Y, Z, color='k')
 
 
-## 11.3.2  Catadioptric camera
+# ## 11.3.2  Catadioptric camera
 
-camera = CatadioptricCamera(
-            projection='equiangular',
-            rho=10e-6,
-            imagesize=[1280, 1024],
-            maxangle=pi/4
-        )
+# camera = CatadioptricCamera(
+#             projection='equiangular',
+#             rho=10e-6,
+#             imagesize=[1280, 1024],
+#             maxangle=pi/4
+#         )
      
-X, Y, Z = mkcube(1, centre=[1, 1, 0.8], edge=True)
+# X, Y, Z = mkcube(1, centre=[1, 1, 0.8], edge=True)
 
-camera.mesh(X, Y, Z, color='k')
-
-
-## 11.3.3  Spherical camera
-
-camera = SphericalCamera()
-
-X, Y, Z = mkcube(1, centre=[2, 3, 1], edge=True)
-
-camera.mesh(X, Y, Z, color='k')
+# camera.mesh(X, Y, Z, color='k')
 
 
-## 11.4.1  Mapping wide angle images to the sphere
-# Set the parameters of the fisheye camera that took the picture, then load 
-# the image
+# ## 11.3.3  Spherical camera
 
-u0 = 528.1214; v0 = 384.0784; l = 2.7899; m = 996.4617;
+# camera = SphericalCamera()
 
-fisheye = Image('fisheye_target.png', dtype='float', grey=True)
-fisheye.disp()
+# X, Y, Z = mkcube(1, centre=[2, 3, 1], edge=True)
 
-
-n = 500
-theta_range = np.linspace(0, pi, n)
-phi_range = np.linspace(-pi, pi, n)
-
-Phi, Theta = np.meshgrid(phi_range, theta_range)
-
-r = (l + m) * np.sin(Theta) / (l - np.cos(Theta))
-Us = r * np.cos(Phi) + u0
-Vs = r * np.sin(Phi) + v0
-
-spherical = fisheye.interp2d(Us, Vs)
-# im_spherical = f(theta_range, phi_range)
-
-spherical.disp(badcolor='red')
-# plt.show(block=True)
+# camera.mesh(X, Y, Z, color='k')
 
 
-# sphere
-R = 1
-x = R * np.sin(Theta) * np.cos(Phi)
-y = R * np.sin(Theta) * np.sin(Phi)
-z = R * np.cos(Theta)
+# ## 11.4.1  Mapping wide angle images to the sphere
+# # Set the parameters of the fisheye camera that took the picture, then load 
+# # the image
 
-plt.close('all')
+# u0 = 528.1214; v0 = 384.0784; l = 2.7899; m = 996.4617;
 
-# create 3d Axes
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-img = spherical.colorize()
+# fisheye = Image.Read('fisheye_target.png', dtype='float', grey=True)
+# fisheye.disp()
 
-ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1)
-# ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1) # we've already pruned ourselves
 
-ax.view_init(azim=-143.0, elev=-9)
+# n = 500
+# theta_range = np.linspace(0, pi, n)
+# phi_range = np.linspace(-pi, pi, n)
 
-# plt.show(block=True)
+# Phi, Theta = np.meshgrid(phi_range, theta_range)
 
-## 11.4.2  Mapping from the sphere to a perspective image
+# r = (l + m) * np.sin(Theta) / (l - np.cos(Theta))
+# Us = r * np.cos(Phi) + u0
+# Vs = r * np.sin(Phi) + v0
 
-W = 1000
-m = W / 2 / math.tan(np.radians(45 / 2))
+# spherical = fisheye.interp2d(Us, Vs)
+# # im_spherical = f(theta_range, phi_range)
 
-l = 0
+# spherical.disp(badcolor='red')
+# # plt.show(block=True)
 
-u0 = W / 2; v0 = W/2;
 
-Uo, Vo = np.meshgrid(np.arange(W), np.arange(W))
+# # sphere
+# R = 1
+# x = R * np.sin(Theta) * np.cos(Phi)
+# y = R * np.sin(Theta) * np.sin(Phi)
+# z = R * np.cos(Theta)
 
-U0 = Uo - u0
-V0 = Vo - v0
-phi = np.arctan2(V0, U0)
-r = np.sqrt(U0 ** 2 + V0 ** 2)
+# plt.close('all')
 
-Phi_o = phi
-Theta_o = pi - np.arctan(r / m)
+# # create 3d Axes
+# fig = plt.figure()
+# ax = fig.add_subplot(111, projection='3d')
+# img = spherical.colorize()
 
-# perspective = interp2d(Phi, Theta, im_spherical, Phi_o, Theta_o)
-perspective = spherical.interp2d(Phi_o, Theta_o, Phi, Theta)
-perspective.disp(badcolor='red')
-# plt.show(block=True)
+# ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1)
+# # ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1) # we've already pruned ourselves
 
-# dth = theta_range[1] - theta_range[0]
-# dph = phi_range[1] - phi_range[0]
+# ax.view_init(azim=-143.0, elev=-9)
 
-# spherical2 = spherical.roll(int(0.9/dth), int(-1.5/dph))
-# perspective = spherical2.interp2d(Phi_o, Theta_o, Phi, Theta)
+# # plt.show(block=True)
+
+# ## 11.4.2  Mapping from the sphere to a perspective image
+
+# W = 1000
+# m = W / 2 / math.tan(np.radians(45 / 2))
+
+# l = 0
+
+# u0 = W / 2; v0 = W/2;
+
+# Uo, Vo = np.meshgrid(np.arange(W), np.arange(W))
+
+# U0 = Uo - u0
+# V0 = Vo - v0
+# phi = np.arctan2(V0, U0)
+# r = np.sqrt(U0 ** 2 + V0 ** 2)
+
+# Phi_o = phi
+# Theta_o = pi - np.arctan(r / m)
+
+# # perspective = interp2d(Phi, Theta, im_spherical, Phi_o, Theta_o)
+# perspective = spherical.interp2d(Phi_o, Theta_o, Phi, Theta)
 # perspective.disp(badcolor='red')
+# # plt.show(block=True)
 
-def sphere_rotate(sph, T):
+# # dth = theta_range[1] - theta_range[0]
+# # dph = phi_range[1] - phi_range[0]
 
-    nr, nc = sph.shape
+# # spherical2 = spherical.roll(int(0.9/dth), int(-1.5/dph))
+# # perspective = spherical2.interp2d(Phi_o, Theta_o, Phi, Theta)
+# # perspective.disp(badcolor='red')
 
-    # theta spans [0, pi]
-    theta_range = np.linspace(0, pi, nr)
+# def sphere_rotate(sph, T):
 
-    # phi spans [-pi, pi]
-    phi_range = np.linspace(-pi, pi, nc)
+#     nr, nc = sph.shape
 
-    # build the plaid matrices
-    Phi, Theta = np.meshgrid(phi_range, theta_range)
+#     # theta spans [0, pi]
+#     theta_range = np.linspace(0, pi, nr)
 
-    # convert the spherical coordinates to Cartesian
-    x = np.sin(Theta) * np.cos(Phi)
-    y = np.sin(Theta) * np.sin(Phi)
-    z = np.cos(Theta)
+#     # phi spans [-pi, pi]
+#     phi_range = np.linspace(-pi, pi, nc)
 
-    # convert to 3xN format
-    p = np.array([x.flatten(), y.flatten(), z.flatten()])
+#     # build the plaid matrices
+#     Phi, Theta = np.meshgrid(phi_range, theta_range)
 
-    # transform the points
-    p = T * p
+#     # convert the spherical coordinates to Cartesian
+#     x = np.sin(Theta) * np.cos(Phi)
+#     y = np.sin(Theta) * np.sin(Phi)
+#     z = np.cos(Theta)
 
-    # convert back to Cartesian coordinate matrices
-    x = p[0, :].reshape(x.shape)
-    y = p[1, :].reshape(x.shape)
-    z = p[2, :].reshape(x.shape)
+#     # convert to 3xN format
+#     p = np.array([x.flatten(), y.flatten(), z.flatten()])
 
-    nTheta = np.arccos(z)
-    nPhi = np.arctan2(y, x)
+#     # transform the points
+#     p = T * p
 
-    #warp the image
-    return sph.interp2d(nPhi, nTheta, Phi, Theta)
+#     # convert back to Cartesian coordinate matrices
+#     x = p[0, :].reshape(x.shape)
+#     y = p[1, :].reshape(x.shape)
+#     z = p[2, :].reshape(x.shape)
+
+#     nTheta = np.arccos(z)
+#     nPhi = np.arctan2(y, x)
+
+#     #warp the image
+#     return sph.interp2d(nPhi, nTheta, Phi, Theta)
 
 
-perspective.disp(badcolor='red', title='view2')
+# perspective.disp(badcolor='red', title='view2')
 
 
 ## 11.6.1  Projecting 3D lines and quadrics
@@ -300,7 +301,7 @@ L.w
 camera = CentralCamera()
 l = camera.project(L)
 
-camera.plot(L)
+camera.plot(l)
 
 
 ##
@@ -314,6 +315,11 @@ c = np.linalg.inv(cs) * np.linalg.det(cs)  # adjugate
 
 np.linalg.det(c[:2, :2])
 
-X = Matrix([[*symbols('x y'), 1]])
+from sympy import symbols, Matrix, Eq, plot_implicit
+
+x, y = symbols('x y')
+X = Matrix([[x, y, 1]])
 ellipse = X * Matrix(c) * X.T
-plot_implicit(Eq(ellipse[0], 1), (x, 0, 1024), (y, 0, 1024))
+plot_implicit(Eq(ellipse[0], 1), (x, 0, 1024), (y, 0, 1024), )
+
+plt.show(block=True)

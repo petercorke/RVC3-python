@@ -1,7 +1,17 @@
-[X,Y,Z] = mkcube(1, 'centre', [1, 1, 0.8], 'edge')
+import rvcprint
+import numpy as np
+import matplotlib.pyplot as plt
+from machinevisiontoolbox import *
+from matplotlib.ticker import ScalarFormatter
+from spatialmath import SE3
+from math import pi
 
-cam = SphericalCamera('name', 'spherical')
-[X,Y,Z] = mkcube(1, 'centre', [2, 3, 1], 'edge')
-cam.mesh(X, Y, Z)
+camera = SphericalCamera()
 
-rvcprint('hidden', cam.h_image.Parent)
+X, Y, Z = mkcube(1, centre=[2, 3, 1], edge=True)
+
+camera.mesh(X, Y, Z, color='k')
+
+
+rvcprint.rvcprint()
+

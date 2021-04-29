@@ -8,7 +8,7 @@ from spatialmath import SE3
 
 u0 = 528.1214; v0 = 384.0784; l = 2.7899; m = 996.4617;
 
-fisheye = Image('fisheye_target.png', dtype='float', grey=True)
+fisheye = Image.Read('fisheye_target.png', dtype='float', grey=True)
 fisheye.disp()
 
 
