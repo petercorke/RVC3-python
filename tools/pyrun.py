@@ -1,12 +1,13 @@
+import jupyter_client
+import subprocess
 import sys
-
-import contextlib
 import re
 import argparse
 from subprocess import Popen, PIPE
 from threading  import Thread
 from queue import Queue, Empty
-import time
+
+debug = False
 
 # handle command line arguments
 parser = parser = argparse.ArgumentParser(description='Run Python script for RVC3 book.')
@@ -19,13 +20,14 @@ parser.add_argument('--maxlines', '-m',
 parser.add_argument('--linenumber', '-l', 
         default=False, action='store_const', const=True,
         help='show line numbers, default %(default)s')
-parser.add_argument('--comments', '-c', 
-        action='store_const', const=True, default=False,
-        help='show comments, default %(default)s')
+parser.add_argument('--nocomments', '-c', 
+        action='store_const', const=False, default=True, dest='comments',
+        help='dont show comments, default %(default)s')
 parser.add_argument('--timeout', '-t', 
         type=float, default=0.2,
         help='timeout on each IPython command, default %(default)s seconds')
 args = parser.parse_args()
+
 
 if args.script is None:
     print('no file specified')
@@ -44,79 +46,177 @@ np.set_printoptions(
 
 """
 
-# handle async i/o from subprocess.  stdout goes to a queue
+def print_msg(m, indent=0):
+    for k, i in m.items():
+        if isinstance(i, dict):
+            print(' ' * indent, f"{k}::")
+            print_msg(i, indent+4)
+        else:
+            s = f"{k:10s}: {i}"
+            if len(s) > 100:
+                s = s[:100]
+            print(' ' * indent, s)
+    if indent == 0:
+        print()
 
-# https://stackoverflow.com/questions/375427/a-non-blocking-read-on-a-subprocess-pipe-in-python
 
-def enqueue_output(out, queue):
-    try:
-        for line in iter(out.readline, b''):
-            queue.put(line)
-        out.close()
-    except ValueError:
-        pass
+def run_cell(client, code):
+    # now we can run code.  This is done on the shell channel
 
-ON_POSIX = 'posix' in sys.builtin_module_names
+    # execution is immediate and async, returning a UUID
+    msg_id = client.execute(code, silent=False)
+    if debug:
+        print(f"\nrunning: {code}\n  msg_id = {msg_id}\n")
+
+    # there is one response message which tells how it went
+    reply = client.get_shell_msg()
+    if debug:
+        print_msg(reply)
+
+    assert reply['msg_type'] == 'execute_reply' and\
+        reply['parent_header']['msg_id'] == msg_id, 'bad execute shell reply'
+
+    status = reply['content']['status']
+    if status == 'ok':
+
+        # first message says busy
+        reply = client.get_iopub_msg()
+        if debug:
+            print_msg(reply)
+        assert reply['msg_type'] == 'status' and\
+            reply['parent_header']['msg_id'] == msg_id and\
+            reply['content']['execution_state'] == 'busy', 'bad execute iopub reply'
+
+        # second message is execute_input which reflects back the command
+        reply = client.get_iopub_msg()
+        if debug:
+            print_msg(reply)
+        assert reply['msg_type'] == 'execute_input' and\
+            reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
 
 
-# regexps to remove IPython output, easier than changing the prompts
-re_in = re.compile(r'In \[[0-9]+\]:')
-re_out = re.compile(r'Out\[[0-9]+\]:')
-re_contin = re.compile(r'\.\.\.:')
+        while True:
+            reply = client.get_iopub_msg()
+            if debug:
+                print_msg(reply)
+            
+            # check it is a reply to this transaction
+            assert reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
 
-def print_available(q):
-    while True:
-        try:
-            line = q.get(timeout=args.timeout)
-        except Empty:
-            break
+            # check for last message in response sequence
+            if reply['msg_type'] == 'status' and\
+                    reply['content']['execution_state'] == 'idle':
+                break
 
-        line = line.decode('utf8').rstrip()
-        line = re_in.sub('', line)
-        line = re_out.sub('', line)
-        line = re_contin.sub('', line)
-        if len(line) > 2 and line[0] == ' ' and line[1] == ' ':
-            line = line[2:]
+            if reply['msg_type'] == 'stream':
+                # command had an output
+                print(reply['content']['text'])
+            elif reply['msg_type'] == 'execute_result':
+                # command had an output
+                print(reply['content']['data']['text/plain'])
 
-        if len(line) > 0:
-            print(line)   
+                # get next message
+            
+
+    elif status == 'error':
+        # print('Error: ', reply['content']['ename'])
+        # print('  ', reply['content']['evalue'])
+
+        # first message says busy
+        reply = client.get_iopub_msg()
+        if debug:
+            print_msg(reply)
+        assert reply['msg_type'] == 'status' and\
+            reply['parent_header']['msg_id'] == msg_id and\
+            reply['content']['execution_state'] == 'busy', 'bad execute iopub reply'
+
+        # second message is execute_input which reflects back the command
+        reply = client.get_iopub_msg()
+        if debug:
+            print_msg(reply)
+        assert reply['msg_type'] == 'execute_input' and\
+            reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
+
+        # third message is command display value
+        reply = client.get_iopub_msg()
+        if debug:
+            print_msg(reply)
+        assert reply['msg_type'] == 'error' and\
+            reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
+        print('Traceback:')
+        for line in reply['content']['traceback']:
+            print(line)
+
+        # fourth message is execute_input which reflects back the command
+        reply = client.get_iopub_msg()
+        if debug:
+            print_msg(reply)
+        assert reply['msg_type'] == 'status' and\
+            reply['parent_header']['msg_id'] == msg_id and\
+            reply['content']['execution_state'] == 'idle', 'bad execute iopub reply'
+
+    if debug:
+        print('---------------------------------------------------------')
+
+## connect to the kernel
+
+kernel = subprocess.Popen("ipython kernel", shell=True, text=True, stdout=subprocess.PIPE)
+
+# wait for it to launch, catch the last line it prints at startup
+for line in kernel.stdout:
+    # print(line)
+    if "--existing" in line:
+        break
+
+# get the path to JSON connection file
+cf = jupyter_client.find_connection_file()
+print("connecting via", cf)
+
+client = jupyter_client.BlockingKernelClient(connection_file=cf)
+
+# load connection info and start the communication channels
+client.load_connection_file()
+client.start_channels()
+
+# handle initial chatter from the kernel
+
+# get startup message on shell channel
+reply = client.get_shell_msg()
+if debug:
+    print_msg(reply)
+
+print(reply['content']['banner'])
+
+# get two startup messages on iopub channel
+io = client.get_iopub_msg()
+if debug:
+    print_msg(io)
+assert io['msg_type'] == 'status' and\
+     io['parent_header']['msg_type'] == 'kernel_info_request' and\
+     io['content']['execution_state'] == 'busy', 'wrong message'
+
+io = client.get_iopub_msg()
+if debug:
+    print_msg(io)
+assert io['msg_type'] == 'status' and\
+     io['parent_header']['msg_type'] == 'kernel_info_request' and\
+     io['content']['execution_state'] == 'idle', 'wrong message'
+
+run_cell(client, startup)
+
 
 # globals
 linenum = 1
 indent = 0
 prompt = ">>> "
 
-with open(filename, 'r') as f, \
-     Popen('ipython', stdin=PIPE, stdout=PIPE, bufsize=0, close_fds=ON_POSIX) as p:
+# we keep a buffer of lines from the script
+buffer = []
 
-    # create thread to read stdout from subprocess and a queue
-    q = Queue()
-    t = Thread(target=enqueue_output, args=(p.stdout, q))
-    t.daemon = True # thread dies with the program
-    t.start()
-
-    # give IPython a moment to startup
-    time.sleep(1)
-
-    # give it the initialization commands
-    p.stdin.write(startup.encode('utf8'))
-    print_available(q)
-
-
-    # we keep a buffer of lines from the script
-    buffer = []
-
+with open(filename, 'r') as f:
     for line in f:
         line = line.rstrip()
         linenum += 1
-
-        if len(line) == 0:
-            print()
-        elif line[0] == '#':
-            if args.comments:
-                print(line)
-            line = ''
-            continue
 
         # add current line to end of buffer
         buffer.append(line)
@@ -129,11 +229,17 @@ with open(filename, 'r') as f, \
             # exec last cmd
             if len(buffer) == 2:
                 cmd = buffer.pop(0)
+
+                if len(cmd) == 0:
+                    print()
+                elif cmd[0] == '#':
                 # display the prompt
-                if args.linenumber:
-                    print(f"[{linenum:}] " + prompt + cmd)
+                    print(cmd)
                 else:
-                    print(prompt + cmd)
+                    if args.linenumber:
+                        print(f"[{linenum:}] " + prompt + cmd)
+                    else:
+                        print(prompt + cmd)
 
             elif len(buffer) > 2:
                 cmd = '\n'.join(buffer[:-1])
@@ -153,9 +259,8 @@ with open(filename, 'r') as f, \
 
             if cmd is not None and cmd != '':
                 cmd += '\n'
-                p.stdin.write(cmd.encode('utf8'))
+                run_cell(client, cmd)
 
-            print_available(q)
 
         elif newindent > indent:
             # indent has increased
@@ -164,5 +269,8 @@ with open(filename, 'r') as f, \
         if args.maxlines is not None and linenum > args.maxlines:
             print(f'---- quitting after {args.maxlines} lines as requested!')
             break
-    time.sleep(1)
-    print_available(q)
+
+client.shutdown()
+
+
+
