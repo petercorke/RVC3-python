@@ -312,10 +312,24 @@ Q = np.diag([1, 1, 1, -1])
 Qs = np.linalg.inv(Q) * np.linalg.det(Q) # adjugate
 cs = camera.C @ Qs @ camera.C.T
 c = np.linalg.inv(cs) * np.linalg.det(cs)  # adjugate
+print('c', c)
 
 np.linalg.det(c[:2, :2])
 
+E = c + c.T
+xy = -np.linalg.inv(E[:2, :2]) @ E[:2, 2]
+print(xy)
+i = (-xy @ (c[:2, :2] @ xy))
+print(f"{i:.4g}")
+
+i = c[0,0] * xy[0] ** 2 + c[1,1] * xy[1] ** 2 + 2 * c[0,1] * xy[0] * xy[1]
+i = np.abs(i)
 from sympy import symbols, Matrix, Eq, plot_implicit
+plt.figure()
+s = c[2,2] + 1
+# s ~ 2.5e6
+base.plot_ellipse(-c[:2, :2],  scale=np.sqrt(i+c[2,2]), centre=xy)
+plt.grid(True)
 
 x, y = symbols('x y')
 X = Matrix([[x, y, 1]])
