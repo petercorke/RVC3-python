@@ -31,7 +31,7 @@ def outfile(subfig='', format=None):
     figure = path / f"fig{chapter}_{fig}{subfig}.{format}"
     return figure
 
-def rvcprint(subfig='', thicken=1.5, interval=None, format = 'eps', pause=2, **kwargs):
+def rvcprint(subfig='', debug=False, thicken=1.5, interval=None, format = 'eps', pause=2, **kwargs):
 
     figure = outfile(subfig=subfig, format=format)
 
@@ -90,10 +90,13 @@ def rvcprint(subfig='', thicken=1.5, interval=None, format = 'eps', pause=2, **k
         except BaseException:
             pass
 
-    # save it
-    print('saving --> ', figure)
+    if debug:
+        plt.show(block=True)
+    else:
+        # save it
+        print('saving --> ', figure)
 
-    plt.savefig(figure, format=format)
+        plt.savefig(figure, format=format)
 
-    if pause > 0:
-        plt.pause(pause)
+        if pause > 0:
+            plt.pause(pause)
