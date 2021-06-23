@@ -1,77 +1,30 @@
-#!/usr/bin/env python3
-
+#! /usr/bin/env python3
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from matplotlib import cm
+from math import pi
 
-def scalespace(im, n, sigma=1):
+u0 = 528.1214; v0 = 384.0784; l = 2.7899; m = 996.4617;
 
-    g = [im]
-    scale = 0.5
-    scales = [scale]
-    lap = []
+fisheye = Image.Read('fisheye_target.png', dtype='float', grey=True)
+fisheye.disp(title=False)
 
-    for i in range(n-1):
-        im = im.smooth(sigma)
-        scale = np.sqrt(scale ** 2 + sigma ** 2)
-        scales.append(scale)
-        g.append(im)
-        x = (g[-1] - g[-2]) * scale ** 2 
-        lap.append(x)
-
-    return g, lap, scales
-
-
-def scaleplot(k):
-    L[k].disp(colormap='signed', square=True, grid=True)
-    plt.text(10, 180, f"$\sigma$ = {s[k]:.3g}")
-    plt.plot(63, 63, 'k+')
-    plt.plot(127, 63, 'k+')
-    plt.plot(63, 127, 'k+')
-    plt.plot(127, 127, 'k+')
-
-im = Image.Read('scale-space.png', dtype='float')
-im.disp(square=True, black=0.3, grid=True)
 rvcprint.rvcprint(subfig='a')
 
-G, L, s = scalespace(im, 60, 2)
-scaleplot(5)
+n = 500
+theta_range = np.linspace(0, pi, n)
+phi_range = np.linspace(-pi, pi, n)
+
+Phi, Theta = np.meshgrid(phi_range, theta_range)
+
+r = (l + m) * np.sin(Theta) / (l - np.cos(Theta))
+Us = r * np.cos(Phi) + u0
+Vs = r * np.sin(Phi) + v0
+
+spherical = fisheye.interp2d(Us, Vs)
+
+spherical.disp(badcolor='red')
+
 rvcprint.rvcprint(subfig='b')
-
-scaleplot(20)
-rvcprint.rvcprint(subfig='c')
-
-scaleplot(35)
-rvcprint.rvcprint(subfig='d')
-
-scaleplot(55)
-rvcprint.rvcprint(subfig='e')
-
-
-plt.clf()
-plt.plot(s[:-1], [-M.image[63, 63] for M in L])
-plt.plot(s[:-1], [-M.image[63, 127] for M in L])
-plt.plot(s[:-1], [-M.image[127, 63] for M in L])
-plt.plot(s[:-1], [-M.image[127, 127] for M in L])
-plt.xlim(0, s[-1])
-plt.ylim(0, 2)
-plt.grid(True)
-plt.xlabel('Scale')
-plt.ylabel('$\|$LoG$\|$')
-plt.legend(['5x5', '9x9', '17x17', '33x33'])
-
-rvcprint.rvcprint(subfig='f')
-
-
-# s[4]
-# f = iscalemax(L, s)
-# idisp(im)
-# idisp(im, 'nogui')
-# f(1:4).plot('g*')
-# f(1:4).plot_scale('r')
-# plt.show(block=True)
-
-

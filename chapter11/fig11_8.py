@@ -1,21 +1,51 @@
+##!/usr/bin/env python3
+
 import rvcprint
-import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from spatialmath import SE3
 
+church = Image.Read('church.png', grey=True)
 
-camera = CentralCamera(f=0.015, rho=10e-6,
-    imagesize=[1280, 1024], pp=[640, 512], name='mycamera')
+def plotfig(lut):
+    x = np.arange(256, dtype=np.uint8)
+    church.LUT(lut).disp(plain=True)
+    pos = plt.gca().get_position()
+    print(pos)
+    ax = plt.gcf().add_axes([pos.x0-0.01, pos.y0-0.01, 0.2, 0.2])
+    ax.set_facecolor('xkcd:salmon')
+    ax.plot(x, lut, 'b', linewidth=4)
+    ax.set_xlim(0, 255)
+    ax.set_ylim(-1, 256)
 
-
-X, Y, Z = mkcube(0.2, pose=SE3(0, 0, 1), edge=True)
-
-camera.mesh(X, Y, Z, color='k')
+plotfig(np.arange(256, dtype=np.uint8))
 rvcprint.rvcprint(subfig='a')
 
-T_camera = SE3(-1, 0, 0.5) * SE3.Ry(0.8)
-camera.clf()
-camera.mesh(X, Y, Z, pose=T_camera, color='k')
+# ## threshold
+lut = [255 if i > 180 else 0 for i in np.arange(256)]
+plotfig(lut)
 rvcprint.rvcprint(subfig='b')
+
+
+## histo equalization
+h = church.hist()
+lut = h.ncdf * 255
+plotfig(lut)
+rvcprint.rvcprint(subfig='c')
+
+## gamma
+lut = 255 * np.linspace(0, 1, 256) ** (1 / 0.45) 
+plotfig(lut)
+rvcprint.rvcprint(subfig='d')
+
+## brighten + clip
+lut = np.arange(256) + 100
+lut = lut.clip(0, 255)
+plotfig(lut)
+rvcprint.rvcprint(subfig='e')
+
+## posterize
+lut = [64 * ((i + 32) // 64) for i in np.arange(256)]
+plotfig(lut)
+rvcprint.rvcprint(subfig='f', debug=True)

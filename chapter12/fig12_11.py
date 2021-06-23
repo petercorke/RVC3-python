@@ -5,32 +5,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
+from matplotlib import cm
 
-
-movie = Video('traffic_sequence.mpg', grey=True, dtype='float')
-
-sigma = 0.02
-for framenum, im in enumerate(movie):
-    # plt.imshow(im.image)
-    # plt.pause(0.02)
-
-    if framenum == 0:
-        background = im
-    else:
-        d = im - background
-        background += d.clip(-sigma, sigma)
-
-    if framenum > 200:
-        break
-
-im.disp()
+sharks = Image.Read('sharks.png')
+sharks.disp(title=False, black=0.3)
 rvcprint.rvcprint(subfig='a')
 
-background.disp()
+labels, n = sharks.labels_binary()
+blob = labels == 3
+
+blob.disp(black=0.3, grid=True)
 rvcprint.rvcprint(subfig='b')
 
-(im - background).disp(colormap='signed')
-rvcprint.rvcprint(subfig='c')
+uv = blob.nonzero()
 
+umin = uv[0, :].min()
+umax = uv[0, :].max()
+vmin = uv[1, :].min()
+vmax = uv[1, :].max()
+# print(umin, umax, vmin, vmax)
+
+# print(blob.moments())
 

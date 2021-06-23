@@ -1,67 +1,44 @@
-#!/usr/bin/env python3
-
+#! /usr/bin/env python3
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from matplotlib import cm
-import scipy as sp
-import spatialmath.base as smb
+from math import pi
 
-def scalespace(im, n, sigma=1):
+u0 = 528.1214; v0 = 384.0784; l = 2.7899; m = 996.4617;
 
-    g = [im]
-    scale = 0.5
-    scales = [scale]
-    lap = []
+fisheye = Image.Read('fisheye_target.png', dtype='float', grey=True)
 
-    for i in range(n-1):
-        im = im.smooth(sigma)
-        scale = np.sqrt(scale ** 2 + sigma ** 2)
-        scales.append(scale)
-        g.append(im)
-        x = (g[-1] - g[-2]) * scale ** 2 
-        lap.append(x)
+n = 500
+theta_range = np.linspace(0, pi, n)
+phi_range = np.linspace(-pi, pi, n)
 
-    return g, lap, scales
+Phi, Theta = np.meshgrid(phi_range, theta_range)
 
-def scalemax(L, scale):
+r = (l + m) * np.sin(Theta) / (l - np.cos(Theta))
+Us = r * np.cos(Phi) + u0
+Vs = r * np.sin(Phi) + v0
 
-    # absolute value of Laplacian as a 3D matrix, with scale along axis 2
-    L = np.dstack([np.abs(x.image) for x in L])
+spherical = fisheye.interp2d(Us, Vs)
+# im_spherical = f(theta_range, phi_range)
 
-    # find maxima within all 26 neighbouring pixels
-    # create 3x3x3 structuring element and maximum filter
-    se_nhood = np.ones((3,3,3))
-    se_nhood[1, 1, 1] = 0
-    eps = np.finfo(np.float64).eps
-    maxima = (L > sp.ndimage.maximum_filter(L, footprint=se_nhood, mode='nearest')) & (L > 100 * eps)
+# sphere
+R = 1
+x = R * np.sin(Theta) * np.cos(Phi)
+y = R * np.sin(Theta) * np.sin(Phi)
+z = R * np.cos(Theta)
 
-    # find the locations of the minima
-    i, j, k = np.nonzero(maxima)
-    
-    # create result matrix, one row per feature: i, j, k, |L|
-    # where k is index into scale
-    result = np.column_stack((j, i, np.r_[scale][k], L[i, j, k]))
+# create 3d Axes
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+img = spherical.colorize()
 
-    # sort the rows on strength column, descending order
-    k = np.argsort(-result[:, 3])
-    return result[k, :]
+ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1)
+# ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1) # we've already pruned ourselves
 
+ax.view_init(azim=-143.0, elev=-9)
 
-im = Image.Read('scale-space.png', dtype='float')
-im.disp(square=True, black=0.3, grid=True, title=False)
+plt.show()
 
-G, L, s = scalespace(im, 60, 2)
-
-features = scalemax(L, s)
-print(features)
-
-for feature in features:
-    plt.plot(feature[0], feature[1], 'k+')
-    smb.plot_circle(feature[:2], 'y', radius=feature[2] * np.sqrt(2))
-
-rvcprint.rvcprint()
-
-# plt.show(block=True)
+rvcprint.rvcprint(format='png', interval=0.5)

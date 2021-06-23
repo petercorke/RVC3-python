@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 
 import rvcprint
-import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from matplotlib import cm
+from spatialmath import SE3
 
-castle = Image.Read('castle2.png', dtype='float')
+ev = EarthView()
 
-t = castle.adaptive_thresh(width=30).disp()
+
+ev.grab(-27.475722, 153.0285, zoom=17).disp()
 rvcprint.rvcprint(subfig='a')
 
+ev.grab(-27.475722, 153.0285, zoom=17, type='roadmap').disp()
+rvcprint.rvcprint(subfig='b')

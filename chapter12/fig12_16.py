@@ -5,40 +5,30 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
 from matplotlib import cm
+import pytesseract
+
+castle = Image.Read('penguins.png')
+# roi = [420, 1000, 0, 900]
+castle.disp()
+
+s = pytesseract.image_to_string(castle.image)
+print(s)
+ocr = pytesseract.image_to_data(castle.image,output_type=pytesseract.Output.DICT)
+print(ocr)
+for i, conf in enumerate(ocr['conf']):
+    if conf == '-1':
+        continue
+    if conf < 50:
+        continue
+
+    plot_labelbox(
+        ocr['text'][i],
+        tl=(ocr['left'][i], ocr['top'][i]),
+        wh=(ocr['width'][i], ocr['height'][i]),
+        color='y',
+        linestyle='--')
+    print(conf, ocr['text'][i])
 
 
-
-castle = Image.Read('castle.png', grey=True, dtype='float')
-castle.disp(title=False)
-
-plt.plot([0, castle.width], [360, 360], 'y')
-plt.xlim(0, castle.width)
-rvcprint.rvcprint(subfig='a')
-
-plt.clf()
-p = castle.image[360, :]
-plt.plot(p)
-plt.xlabel('u (pixels)')
-plt.ylabel('Pixel value')
-plt.xlim(0, castle.width)
-plt.grid(True)
-rvcprint.rvcprint(subfig='b')
-
-plt.clf()
-plt.plot(p, '-o', markersize=4)
-plt.xlim(559, 609)
-plt.ylabel('Pixel value')
-plt.xlabel('u (pixels)')
-plt.grid(True)
-rvcprint.rvcprint(subfig='c')
-
-plt.clf()
-plt.plot(np.diff(p), '-o', markersize=4)
-plt.xlim(559, 609)
-plt.xlabel('u (pixels)')
-plt.ylabel('Derivative of grey value')
-plt.grid(True)
-rvcprint.rvcprint(subfig='f')
-
+rvcprint.rvcprint()

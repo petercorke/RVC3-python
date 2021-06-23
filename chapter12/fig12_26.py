@@ -5,71 +5,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
 from matplotlib import cm
 
-im = Image.Read('eg-morph1.png')
-print(im)
+def scalespace(im, n, sigma=1):
 
-S1 = np.ones((5, 5))
-e1 = im.morph(S1, 'min')
-d1 = e1.morph(S1, 'max')
-# im.disp()
-# e1.disp()
-# d1.disp(block=True)
+    g = [im]
+    scale = 0.5
+    scales = [scale]
+    lap = []
 
-S2 = np.ones((7, 7))
-e2 = im.morph(S2, 'min')
-d2 = e2.morph(S2, 'max')
+    for i in range(n-1):
+        im = im.smooth(sigma)
+        scale = np.sqrt(scale ** 2 + sigma ** 2)
+        scales.append(scale)
+        g.append(im)
+        x = (g[-1] - g[-2]) * scale ** 2 
+        lap.append(x)
 
-S3 = np.ones((1,13))
-e3 = im.morph(S3, 'min')
-d3 = e3.morph(S3, 'max')
+    return g, lap, scales
 
+mona = Image.Read('monalisa.png', grey=True, dtype='float')
+G, L, s = scalespace(mona, 8, 8)
+Image.Tile([G]).disp(width=500)
+rvcprint.rvcprint(subfig='a')
 
-def tile(tiles, sep=0, sepcolor=0):
-
-    # TODO tile a sequence into specified shape
-
-    # work with different types
-    out = None
-
-    for row in tiles:
-        tilerow = None
-        for im in row:
-            if tilerow is None:
-                tilerow = im.image
-            else:
-                # add border to the left
-                im = cv.copyMakeBorder(im.image, 0, 0, sep, 0, cv.BORDER_CONSTANT, value=sepcolor)
-                tilerow = np.hstack((tilerow, im))
-        if out is None:
-            out = tilerow
-        else:
-            # add border to the top
-            tilerow = cv.copyMakeBorder(tilerow, sep, 0, 0, 0, cv.BORDER_CONSTANT, value=sepcolor)
-            out = np.vstack((out, tilerow))
-    if len(base.getvector(sepcolor)) == 3:
-        return Image(out, colororder='RGB')
-    else:
-        return Image(out)
-
-results = tile([[im, e1, d1], [im, e2, d2], [im, e3, d3]], sep=1, sepcolor=1)
-# results.disp(title='bb')
-
-
-SE = Image(np.zeros((results.shape[0], 25)))
-SE = SE.paste(S1, [5,15])
-SE = SE.paste(S2, [5,55])
-SE = SE.paste(S3, [5,115])
-# SE.disp()
-
-results = results.colorize([255, 255, 255])
-# results.disp(black=0.4, title='results')
-
-SE = SE.colorize([255, 0, 0])
-
-out = tile([[results, SE]], sep=1, sepcolor=[255, 255, 255])
-out.disp(black=0.4, axes=False)
-
-rvcprint.rvcprint()
+Image.Tile([L]).disp(width=500, colormap='signed')
+rvcprint.rvcprint(subfig='b')

@@ -5,34 +5,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
 from matplotlib import cm
 
-
-
-castle = Image.Read('castle.png', grey=True, dtype='float')
-
-Du = Kernel.DGauss(2)
-Iu = castle.convolve(Du)
-Iv = castle.convolve(Du.T)
-
-Iu.disp(colormap='signed')
+im = Image.Read('5points.png')
+print(im)
+im.disp(black=0.3, title=False, grid=True)
 rvcprint.rvcprint(subfig='a')
 
-Iv.disp(colormap='signed')
+h = Hough(im, 90, 2)
+
+h.plot_accumulator()
+cbar = plt.colorbar()
+cbar.set_label('Votes')
 rvcprint.rvcprint(subfig='b')
-
-m = (Iu ** 2 + Iv ** 2).sqrt()
-m.disp(black=0.4)
-rvcprint.rvcprint(subfig='c')
-
-plt.clf()
-th = np.arctan2(Iv.image, Iu.image)
-s = 10
-plt.quiver(np.arange(0, castle.width, 20), np.arange(0, castle.height, 20), 
-       Iu.image[::20, ::20], Iv.image[::20, ::20], scale=s)
-plt.xlim(0, castle.width)
-plt.ylim(0, castle.height)
-plt.xlabel('u (pixels)')
-plt.ylabel('v (pixels)')
-rvcprint.rvcprint(subfig='d')

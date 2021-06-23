@@ -5,28 +5,41 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
 from matplotlib import cm
 
-castle = Image.Read('castle.png', grey=True)
 
-edges = castle.canny()
-edges.disp(colormap='invert')
-plt.xlim(400, 700)
-plt.ylim(600, 300)
+square = Image.Squares(number=1, shape=256, fg=128).rotate(0.3)
+edges = square.canny()
+edges.disp(black=0.3, grid=True, title=False)
+rvcprint.rvcprint(subfig='a')
+
+h = Hough(edges)
+
+h.plot_accumulator()
+print(h.nz, h.t)
+cbar = plt.colorbar()
+cbar.set_label('Votes')
+rvcprint.rvcprint(subfig='b')
+plt.xlim(1.2, 1.350)
+plt.ylim(210, 240)
+rvcprint.rvcprint(subfig='c')
+
+plt.figure()
+plt.plot(h.votes)
+plt.yscale('log')
+plt.xlim(0, h.t)
+plt.ylim(1, h.votes[0])
+plt.xlabel('Threshold')
+plt.ylabel('Number of votes above threshold')
 plt.grid(True)
-rvcprint.rvcprint(debug=False, subfig='a')
+rvcprint.rvcprint(subfig='d')
 
 
-Iu, Iv = castle.sobel(Kernel.DGauss(2))
-m = (Iu ** 2 + Iv ** 2).sqrt()
-m.disp(colormap='invert')
-plt.xlim(400, 700)
-plt.ylim(600, 300)
-plt.grid(True)
+lines = h.lines(80)
+# lines = lines[[0,2,5],:]
+print(lines)
+square.disp(black=0.3, grid=True)
+h.plot_lines(lines)
+rvcprint.rvcprint(subfig='e')
 
-rvcprint.rvcprint(debug=True, subfig='b')
-
-
-
-
+# plt.show(block=True)

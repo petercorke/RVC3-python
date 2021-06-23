@@ -1,5 +1,4 @@
-## RVC2: Chapter 11 - Image Formation
-
+## RVC2: Chapter 12 - Images and Image Processing
 import numpy as np
 import scipy as sp
 from math import pi
@@ -7,333 +6,511 @@ from spatialmath import SE3
 from spatialmath.base import e2h, h2e, plot_sphere
 from machinevisiontoolbox import *
 
-# ## 11.1.2  Modelling a perspective camera
 
-# camera = CentralCamera(f=0.015)
+# TODO
+# lookup numpy uint88 type and divsion rules
+# .chromaticity()
+#chroma = subject.chromaticity()
 
-# P = [0.3, 0.4, 3.0]
+# this is another image with r, g planes
+# all bool ops give 0/1 images
+# video reader is a generator
+# .clip(min, max)
+# K = Kernel.Box(20)  
+# K = Kernel.Gauss(4)
+# .apply(func)
+#th.width_range(20), th.height_range(20),
+# .roi(start, end) tuples
+# .roi(sx, ex, sy, ey)
+# .roi(box object)
+# .similarity(T, method) how done in OpenCV?
+# randinit
 
-# camera.project(P)
+# Image() constructor from ndarray accepts a shape argument
+# rank filter, rank filter over a mask
+# tag images as binary
+# pickregion returns roi as array
+# planes are a dict, can be multi letter
+# extent of image is kept or defaults
 
-# camera.project(P, pose=SE3(-0.5, 0, 0))
+## 12.1.1  Images from files
 
-# ## 11.1.3  Discrete image plane
+street, _ = iread('street.png')
+type(street)
+street.shape
 
-# camera = CentralCamera(f=0.015, rho=10e-6,
-#     imagesize=[1280, 1024], pp=[640, 512], name='mycamera')
+street
 
-# camera.project(P)
+street[199,299]
 
-# ## 11.1.4  camera matrix
+idisp(street)
 
-# camera.K
+a = np.uint8(99)                                                              
 
-# camera.C
+b = np.uint8(199)
 
-# camera.fov() * 180 / math.pi
+a +  b
+a - b
 
-# ## 11.1.5  Projecting points
+a / b
+a // b
 
-# P = mkgrid(3, 0.2, pose=SE3(0, 0, 1.0))
+street = Image.Read('street.png')
+print(street.shape, street.image.shape)
+street.disp()
 
-# P[:, 0:3]
+#TODO:
+# iread/idisp use BGR order by default
+# iread strip the A plane
+# colorize alpha=x
 
-# camera.project(P)
+flowers, _ = iread('flowers8.png')
+type(flowers)
+flowers.shape
+idisp(flowers[:, :, 2])
 
-# camera.plot(P)
+flowers = Image.Read('flowers8.png')
+flowers
 
-# Tcamera = SE3(-1, 0, 0.5) * SE3.Ry(0.9)
+pix = flowers.image[276, 318, :]
 
-# camera.plot(P, pose=Tcamera)
+flowers = Image.Read('flowers8.png')
+print(flowers.shape, flowers.image.shape)
+flowers.disp()
+flowers.red().disp()
 
-# camera.project([1, 0, 0, 0], pose=Tcamera)
+seq = Image.Read('seq/*.png')
+seq
+seq[3]
+seq[3].disp()
 
-# p = camera.plot(P, pose=Tcamera)
+# TODO: perhaps use that package directly
+# md = Image.ReadMetaData('church.jpg')
+# md
 
-# p[:, :3]
+## 12.1.2  Images from an attached camera
 
-# cube = mkcube(0.2, pose=SE3(0, 0, 1))
+# camera = LocalCamera()
+# VideoCamera('?')
 
-# camera.plot(cube)
+# cam = VideoCamera('macvideo')
 
-# X, Y, Z = mkcube(0.2, pose=SE3(0, 0, 1), edge=True)
+# cam.size[]
 
-# camera.mesh(X, Y, Z)
+# im = cam.grab[]
 
-# T_camera = SE3(-1, 0, 0.5) * SE3.Ry(0.8)
-# camera.mesh(X, Y, Z, pose=T_camera)
+#enable this code if you have a camera and Image Acquisition Toolbox + appropriate Hardware Support Package
 
-# # camera.clf()
-# X, Y, Z = mkcube(0.2, edge=True)
-# for theta in np.linspace(0, 2 * pi, 100):
-#     T_cube = SE3(0, 0, 1.5)  * SE3.RPY(theta * np.r_[1.1, 1.2, 1.3])
-#     camera.clf()
-#     camera.mesh(X, Y, Z, objpose=T_cube)
-#     # plt.pause(0.1)
+## 12.1.3  Images from a movie file
 
-# ## 11.1.6  Lens distortion
+# video = Video('traffic_sequence.mpg')
+# video
 
-# k1 = 0; k2 = 0; k3 = 0; p1 = 0; p2 = 0;  # dummy values
+# im = video.grab()
 
-# camera = CentralCamera(f=0.015, rho=10e-6, 
-#     imagesize=[1280, 1024], pp=[512, 512],
-#     distortion=[k1, k2, k3, p1, p2])
+# while frame in video:
+#     frame.disp()
 
-# ## 11.2.1  Homogeneous transformation approach
+# ## 12.1.4  Images from the web
 
-# P = mkcube(0.2)
+# cam = AxisWebCamera('http://wc2.dartmouth.edu')
 
-# T_unknown = SE3(0.1, 0.2, 1.5) * SE3.RPY(0.1, 0.2, 0.3)
+# cam.size[]
 
-# camera = CentralCamera(f=0.015, rho=10e-6, imagesize=[1280, 1024], \
-#     noise=0.05)
+# im = cam.grab[]
 
-# p = camera.project(P, objpose=T_unknown)
+# ## 12.1.5  Images from maps
 
-# C, resid = CentralCamera.camcald(P, p)
+# ev = EarthView[] #DIFF
 
-# ## 11.2.2  Decomposing the camera calibration matrix
+# ev.grab(-27.475722,153.0285, 17)
 
-# o = sp.linalg.null_space(C)
+# ev.grab('QUT brisbane', 17)
 
-# h2e(o)
-# T_unknown.inv().t
+# ev.grab(-27.475722,153.0285, 15, 'map')
 
-# est = CentralCamera.InvCamcal(C)
+# ev.grab(-27.475722,153.0285, 15, 'roads')
 
-# est.f / est.rho[0]
+## 12.1.6  Images from code
 
-# camera.f / camera.rho[1]
+im = Image.Pattern('rampx', 256, 2)
+im = Image.Pattern('siny', 256, 2)
+im = Image.Pattern('squares', 256, 50, 25)
+im = Image.Pattern('dots', 256, 256, 100)
 
-# (T_unknown * est.pose).printline()
+canvas = Image.Zeros(1000, 1000)
 
-# # plt.clf()
-# est.plot_camera(scale=0.3)
-# plot_sphere(P, 0.03, color='r')
-# SE3().plot(frame='T', color='b', length=0.3)
-# ax = plt.gca()
-# ax.set_xlim3d(-0.9, 0.9)
-# ax.set_ylim3d(-0.9, 0.9)
-# ax.set_zlim3d(-1.5, 0.3)
+sq1 = 0.5 * Image.Ones(150, 150)
+sq2 = 0.9 * Image.Ones(80, 80)
 
+canvas = canvas.paste(sq1, (100, 100))
+canvas = canvas.paste(sq2, (300, 300))
 
+circle = 0.6 * Image(Kernel.Circle(120))
 
-# ## 11.2.3  Pose estimation
+circle.shape
 
-# camera = CentralCamera(f=0.015, rho=10e-6, imagesize=[1280, 1024], pp=[640, 512])
+canvas = canvas.paste(circle, (600, 200))
 
-# P = mkcube(0.2)
+canvas = canvas.line((100, 100), (800, 800), 0.8)
 
-# T_unknown = SE3(0.1, 0.2, 1.5) * SE3.RPY(0.1, 0.2, 0.3)
-# T_unknown.printline()
+canvas.disp()
 
-# p = camera.project(P, objpose=T_unknown)
+## 12.2  Image histograms
 
-# T_est = camera.estpose(P, p).printline()
+church = Image.Read('church.png', grey=True)
+h = church.hist()
+h.plot(block=True)
 
-# ## 11.2.4  camera calibration toolbox
+# TODO
+# x = h.peak()
 
-# #calib_gui
+# x = hist.peak(scale=25)
 
-# #visualize_distortions
+## 12.3  Monadic operations
 
+imd = church.asfloat()
 
-# ## 11.3.1  Fisheye lens camera
+im = imd.asint()
 
-# camera = FishEyeCamera(
-#             projection='equiangular',
-#             rho=10e-6,
-#             imagesize=[1280, 1024]
-#             )
+grey = flowers.grey()
 
-# X, Y, Z = mkcube(0.2, centre=[0.2, 0, 0.3], edge=True)
+color = grey.colorize()
 
-# camera.mesh(X, Y, Z, color='k')
+color = grey.colorize([1, 0, 0])
 
+bright = church >= 180
+bright
+bright.disp()
 
-# ## 11.3.2  Catadioptric camera
+church.stretch().disp()
 
-# camera = CatadioptricCamera(
-#             projection='equiangular',
-#             rho=10e-6,
-#             imagesize=[1280, 1024],
-#             maxangle=pi/4
-#         )
-     
-# X, Y, Z = mkcube(1, centre=[1, 1, 0.8], edge=True)
+# TODO church.normhist().disp()
 
-# camera.mesh(X, Y, Z, color='k')
+# church.hist('cdf').plot()
 
+church.gamma_decode(1 / 0.45)
+church.gamma_decode('sRGB')
 
-# ## 11.3.3  Spherical camera
 
-# camera = SphericalCamera()
+(church // 64 ).disp()
 
-# X, Y, Z = mkcube(1, centre=[2, 3, 1], edge=True)
+## 12.4  Diadic operations
 
-# camera.mesh(X, Y, Z, color='k')
+subject = Image.Read('greenscreen.png', dtype='float', gamma='sRGB')
 
+chroma = subject.chromaticity()
 
-# ## 11.4.1  Mapping wide angle images to the sphere
-# # Set the parameters of the fisheye camera that took the picture, then load 
-# # the image
+# this is another image with r, g planes
 
-# u0 = 528.1214; v0 = 384.0784; l = 2.7899; m = 996.4617;
+# TODO
+chroma.plane('g').hist().plot()
 
-# fisheye = Image.Read('fisheye_target.png', dtype='float', grey=True)
-# fisheye.disp()
+mask = chroma.plane('g') < 0.45
+mask.disp()
 
+# this image has bool values
 
-# n = 500
-# theta_range = np.linspace(0, pi, n)
-# phi_range = np.linspace(-pi, pi, n)
+mask3 = mask.colorize()
 
-# Phi, Theta = np.meshgrid(phi_range, theta_range)
+(mask3 * subject).disp()
 
-# r = (l + m) * np.sin(Theta) / (l - np.cos(Theta))
-# Us = r * np.cos(Phi) + u0
-# Vs = r * np.sin(Phi) + v0
+bg = Image.Read('road.png', dtype='float')
 
-# spherical = fisheye.interp2d(Us, Vs)
-# # im_spherical = f(theta_range, phi_range)
+# TODO interp2d
+# bg = bg.samesize(subject)
 
-# spherical.disp(badcolor='red')
-# # plt.show(block=True)
+# (bg * (1 - mask3)).disp()
 
+# (subject * mask3  + bg * (1 - mask3))
 
-# # sphere
-# R = 1
-# x = R * np.sin(Theta) * np.cos(Phi)
-# y = R * np.sin(Theta) * np.sin(Phi)
-# z = R * np.cos(Theta)
+# Image.which(mask, subject, bg)
 
-# plt.close('all')
+#
 
-# # create 3d Axes
-# fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
-# img = spherical.colorize()
+# traffic = Movie('traffic_sequence.mpg', grey=True, dtype='float')
+# bg = traffic.grab()
+# sigma = 0.02
+# for frame in traffic:
+#     diff = frame - bg
+#     bg += diff.clip(-sigma, sigma)
+#     bg.disp()
 
-# ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1)
-# # ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1) # we've already pruned ourselves
 
-# ax.view_init(azim=-143.0, elev=-9)
+## 12.5.1.1  Smoothing
 
-# # plt.show(block=True)
+K = np.ones((20, 20)) / 21 ** 2
+mona = Image.Read('monalisa.png', grey=True, dtype='float')
+mona.convolve(K).disp()
 
-# ## 11.4.2  Mapping from the sphere to a perspective image
+K = Kernel.Box(20)
 
-# W = 1000
-# m = W / 2 / math.tan(np.radians(45 / 2))
+K = Kernel.Gauss(4)
+mona.convolve(K).disp()
 
-# l = 0
+mona.smooth(5).disp()
+# TODO what does 5 mean
 
-# u0 = W / 2; v0 = W/2;
+# plt.plot_surface(-15:15, -15:15, K)
 
-# Uo, Vo = np.meshgrid(np.arange(W), np.arange(W))
+K = Kernel.Circle(8, hw=15)
 
-# U0 = Uo - u0
-# V0 = Vo - v0
-# phi = np.arctan2(V0, U0)
-# r = np.sqrt(U0 ** 2 + V0 ** 2)
+## 12.5.1.3  Edge detection
 
-# Phi_o = phi
-# Theta_o = pi - np.arctan(r / m)
+castle = Image.Read('castle.png', grey=True, dtype='float')
 
-# # perspective = interp2d(Phi, Theta, im_spherical, Phi_o, Theta_o)
-# perspective = spherical.interp2d(Phi_o, Theta_o, Phi, Theta)
-# perspective.disp(badcolor='red')
-# # plt.show(block=True)
+profile = castle.image[360,:]
 
-# # dth = theta_range[1] - theta_range[0]
-# # dph = phi_range[1] - phi_range[0]
+plt.plot(profile)
 
-# # spherical2 = spherical.roll(int(0.9/dth), int(-1.5/dph))
-# # perspective = spherical2.interp2d(Phi_o, Theta_o, Phi, Theta)
-# # perspective.disp(badcolor='red')
+K = [0.5, 0, -0.5]
+castle.convolve(K).disp(colormap='invsigned')
 
-# def sphere_rotate(sph, T):
+Du = Kernel.Sobel()
 
-#     nr, nc = sph.shape
+castle.convolve(Du).disp(colormap='invsigned')
+castle.convolve(Du.T).disp(colormap='invsigned')
 
-#     # theta spans [0, pi]
-#     theta_range = np.linspace(0, pi, nr)
+sigma = 1
+Gu = Du.smooth(std=sigma)
 
-#     # phi spans [-pi, pi]
-#     phi_range = np.linspace(-pi, pi, nc)
+deriv = Kernel.DGauss(1)
+Iu = castle.convolve(deriv)
+Iv = castle.convolve(deriv.T)
 
-#     # build the plaid matrices
-#     Phi, Theta = np.meshgrid(phi_range, theta_range)
+# m = (Iu ** 2 + Iv ** 2).sqrt()
+# m = Image.map(lambda x, y: sqrt(x ** 2 + y ** 2), Iu, Iv)
+m = Image.Apply(np.sqrt, Iu ** 2 + Iv ** 2)
+m = (Iu ** 2 + Iv ** 2).apply(np.sqrt)
 
-#     # convert the spherical coordinates to Cartesian
-#     x = np.sin(Theta) * np.cos(Phi)
-#     y = np.sin(Theta) * np.sin(Phi)
-#     z = np.cos(Theta)
 
-#     # convert to 3xN format
-#     p = np.array([x.flatten(), y.flatten(), z.flatten()])
+# th = np.arctan2( Iv, Iu)
+th = Image.Apply(np.arctan2, Iv, Iu)
+th = Iv.apply(np.arctan2, Iu)
 
-#     # transform the points
-#     p = T * p
+# plt.quiver(1:20:numcols(th), 1:20:numrows(th), ...
+#        Iu(1:20:end,1:20:end), Iv(1:20:end,1:20:end))
+# plt.quiver(np.arange(0, th.width, 20), np.arange(0, th.height, 20),
+#     Iu[0:20:, 0:20:], Iv[0:20:, 0:20:])
 
-#     # convert back to Cartesian coordinate matrices
-#     x = p[0, :].reshape(x.shape)
-#     y = p[1, :].reshape(x.shape)
-#     z = p[2, :].reshape(x.shape)
+plt.quiver(th.width_range(20), th.height_range(20),
+    Iu[0:20:, 0:20:], Iv[0:20:, 0:20:])
 
-#     nTheta = np.arccos(z)
-#     nPhi = np.arctan2(y, x)
+gradient = castle.sobel(Kernel.DGauss(1))
 
-#     #warp the image
-#     return sph.interp2d(nPhi, nTheta, Phi, Theta)
+edges = castle.Canny(2)
 
+L = Kernel.Laplace()
 
-# perspective.disp(badcolor='red', title='view2')
+laplace = castle.convolve(Kernel.LoG(1))
 
+profile = laplace.image[360, 570: 600]
+plt.plot(np.arange(360, 570), profile, '-o')
 
-## 11.6.1  Projecting 3D lines and quadrics
-from spatialmath import Plucker
+zc = laplace.zerocross()
 
-L = Plucker.PQ([0, 0, 1], [1, 1, 1])
+## 12.5.2  Template matching
 
-L.w
+mona = Image.Read('monalisa.png', grey=True, dtype='float')
+T = mona.roi((170, 220), (245, 295))
 
-camera = CentralCamera()
-l = camera.project(L)
+sad(T, T)
+ssd(T, T)
+ncc(T, T)
 
-camera.plot(l)
+sad(T, T * 0.9)
+ssd(T, T * 0.9)
+ncc(T, T * 0.9)
 
+sad(T, T + 0.1)
+ssd(T, T + 0.1)
+ncc(T, T + 0.1)
+
+zsad(T, T + 0.1)
+zssd(T, T + 0.1)
+zncc(T, T + 0.1)
+
+zncc(T, T * 0.9 + 0.1)
+
+# wally
+crowd = Image.Read('wheres-wally.png', dtype='float')
+crowd.disp()
+
+wally = Image.Read('wally.png', dtype='float')
+wally.disp()
+
+S = crowd.similarity(wally, zncc)
+
+S.disp(colormap='jet', colorbar=True)
+
+p, mx = S.peak2(1, npeaks=5)
+mx
+
+idisp(crowd)
+plot_circle(p, 30, 'edgecolor', 'g')
+plot_point(p, label=' {:}', fontsize=24, color='y', markersize='none')
+
+
+## 12.5.3  Nonlinear operations
+
+out = mona.windowmap((6, 6), np.linalg.std)
+
+mx = mona.rank(rank=0, width2=2)
+
+med = mona.rank(rank=11, width2=2)
+
+np.random.seed(0)
+mona = Image.Read('monalisa.png', grey=True, dtype='float').column()
+npix = mona.npixels
+spotty[np.random.randint(0, npix)] = 0
+spotty[np.random.randint(0, npix)] = 1
+spotty = Image(spotty, shape=mona.shape)
+spotty.disp()
+
+spotty.rank(rank=4, width2=1).disp()
+
+#
+
+M = np.ones(3)
+M[1,1] = 0
+mxn = lena.rank(M, rank=1)
+
+(lena > mxn).disp()
+
+
+## 12.6  Mathematical morphology
+
+im = Image.Read('morph-demo1.png')
+im.disp()
+
+S = np.ones(5, 5)
+
+mn = im.morph('minimum', S)
+
+# %run morphdemo im S 'min'
+
+mx = im.morph('maximum', S)
+
+out = im.erode(S)
+out = im.dilate(S)
+
+## 12.6.1  Noise removal
+
+objects = Image.Read('segmentation.png')
+
+S = Kernel.Circle(3)
+
+clean = objects.close(S).open(S)
+
+closed = objects.open(S).close(S)
+
+## 12.6.2  Boundary detection
+
+eroded = clean.morph(Kernel.Circle(1), 'minimum')
+
+(clean-eroded).disp()
+
+## 12.6.3  Hit or miss transform
+
+out = image.hitormiss(S)
+
+skeleton = clean.thin()
+
+ends = skeleton.endpoint()
+
+joins = skeleton.triplepoint()
+
+## 12.6.4  Distance transform
+
+im = Pattern.Squares(256, 256, 128).rotate(-0.3)
+edges = im.canny() > 0
+
+dx = edges.distancexform('euclidean')
+idisp(dx)
+
+
+## 12.7.1  Cropping
+
+mona = Image.Read('monalisa.png')
+
+roi = mona.pickregion()
+
+eyes = mona.roi(roi)
+idisp(eyes)
+
+smile = mona.roi([265, 342, 264, 286])
+smile.disp()
+
+## 12.7.2  Image resizing
+
+roof = Image.Read('roof.jpg', 'grey')
+
+smaller = roof.image[:7:, :7:]
+
+smaller =  room.subsample(7)
+
+bigger = smaller.replicate(7)
+
+smoother = bigger.smooth(4)
+
+smaller = mona.scale(0.1)
+bigger = smaller.scale(10)
+
+## 12.7.3  Image pyramids
+
+p = mona.grey.pyramid(10)
+
+## 12.7.4  Image warping
+
+mona = Image.Read('monalisa.png', 'double', 'grey')
+
+Up, Vp = Image.meshgrid((400, 400))
+
+U = 4 * (Up - 100)
+V = 4 * (Vp - 200)
+
+little_mona = mona.interp2(U, V)
+little_mona.disp()
+
+
+points = meshgrid((400, 400), points=True)
+T = Twist2.Revolute((256, 256), pi / 6)
+points = T * points
+
+twisted_mona = mona.interp2(points)
+twisted_mona.disp()
+
+twisted_mona = mona.rotate(pi / 6)
+twisted_mona.disp()
 
 ##
-camera = CentralCamera(f=0.015, imagesize=[1024, 1024], rho=10e-6, pose=SE3(0.2,0.1, -5)*SE3.Rx(0.2))
+distorted = Image.Read('Image18.tif', dtype='float')
 
-Q = np.diag([1, 1, 1, -1])
+Up, Vp = distorted.meshgrid()
 
-Qs = np.linalg.inv(Q) * np.linalg.det(Q) # adjugate
-cs = camera.C @ Qs @ camera.C.T
-c = np.linalg.inv(cs) * np.linalg.det(cs)  # adjugate
-print('c', c)
+# load bouget
+k = kc[[1, 2, 5]]
+p = kc[[3, 4]]
+u0 = cc[0]
+v0 = cc[1]
+fpix_u = fc[0]
+fpix_v = fc[1]
 
-np.linalg.det(c[:2, :2])
+u = (Up - u0) / fpix_u
+v = (Vp - v0) / fpix_v
 
-E = c + c.T
-xy = -np.linalg.inv(E[:2, :2]) @ E[:2, 2]
-print(xy)
-i = (-xy @ (c[:2, :2] @ xy))
-print(f"{i:.4g}")
+r = np.sqrt(u ** 2 + v ** 2)
 
-i = c[0,0] * xy[0] ** 2 + c[1,1] * xy[1] ** 2 + 2 * c[0,1] * xy[0] * xy[1]
-i = np.abs(i)
-from sympy import symbols, Matrix, Eq, plot_implicit
-plt.figure()
-s = c[2,2] + 1
-# s ~ 2.5e6
-base.plot_ellipse(-c[:2, :2],  scale=np.sqrt(i+c[2,2]), centre=xy)
-plt.grid(True)
+Δu = u * (k[0] * r ** 2 + k[1] * r ** 4 + k[2] * r **6) + \
+   2 * p[0] * u * v + p[1] * (r ** 2 + 2 * u ** 2)
+Δv = v * (k[0] * r ** 2 + k[1] * r ** 4 + k[2] * r ** 6) + \
+   p[0] * (r ** 2 + 2 * v ** 2) + 2 * p[0] * u * v
 
-x, y = symbols('x y')
-X = Matrix([[x, y, 1]])
-ellipse = X * Matrix(c) * X.T
-plot_implicit(Eq(ellipse[0], 1), (x, 0, 1024), (y, 0, 1024), )
+ud = u + Δu
+vd = v + Δv
 
-plt.show(block=True)
+U = ud * fpix_u + u0
+V = vd * fpix_v + v0
+
+undistorted = distorted(U, V)
+undistorted.disp()

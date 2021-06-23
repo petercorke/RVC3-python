@@ -4,25 +4,15 @@ import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
+from matplotlib.ticker import ScalarFormatter
+from matplotlib import cm
 
+b1 = Image.Read('building2-1.png', grey=True)
+b1.disp(darken=True, grid=True)
 
-objects = Image.Read('segmentation.png')
-objects.disp(colormap='invert', title=False)
-rvcprint.rvcprint(subfig='a')
+sf1 = b1.SIFT().filter(percentstrength=50, minscale=5)
+print(sf1[:20])
+sf1.plot(alpha=0.3)
 
-S = Kernel.Circle(3)
-closed = objects.close(S)
-closed.disp(colormap='invert')
-rvcprint.rvcprint(subfig='b')
-
-
-clean = closed.open(S)
-clean.disp(colormap='invert')
-rvcprint.rvcprint(subfig='c')
-
-opened = objects.open(S)
-clean = opened.close(S)
-clean.disp(colormap='invert')
-rvcprint.rvcprint(subfig='d')
-
-
+rvcprint.rvcprint()
+# plt.show(block=True)

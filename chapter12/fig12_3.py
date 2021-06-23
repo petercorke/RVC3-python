@@ -5,15 +5,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
-from machinevisiontoolbox.base.imageio import convert
+from matplotlib import cm
 
+castle = Image.Read('castle2.png', dtype='float')
 
-dartmouth = WebCam('https://webcam.dartmouth.edu/webcam/image.jpg')
+castle.disp()
+rvcprint.rvcprint(subfig='a')
 
-dartmouth.grab().disp(block=True)
+t = castle.otsu()
+print(t)
 
-# for im in dartmouth:
+h = castle.hist()
+h.plot()
+plt.grid(True)
+plt.gca().axvline(t, color='r', linestyle='--')
+plt.gca().axvline(0.75, color='r', linestyle='--')
+rvcprint.rvcprint(subfig='b')
 
-#     plt.imshow(im.image)
-#     plt.pause(0.02)
+castle.thresh(0.75).disp(black=0.3)
+rvcprint.rvcprint(subfig='c')
+
+castle.thresh(t).disp(black=0.3)
+rvcprint.rvcprint(subfig='d')
+

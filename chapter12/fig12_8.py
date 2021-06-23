@@ -1,51 +1,24 @@
-##!/usr/bin/env python3
+#!/usr/bin/env python3
 
 import rvcprint
+import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
+from matplotlib import cm
 
-church = Image.Read('church.png', grey=True)
-
-def plotfig(lut):
-    x = np.arange(256, dtype=np.uint8)
-    church.LUT(lut).disp(plain=True)
-    pos = plt.gca().get_position()
-    print(pos)
-    ax = plt.gcf().add_axes([pos.x0-0.01, pos.y0-0.01, 0.2, 0.2])
-    ax.set_facecolor('xkcd:salmon')
-    ax.plot(x, lut, 'b', linewidth=4)
-    ax.set_xlim(0, 255)
-    ax.set_ylim(-1, 256)
-
-plotfig(np.arange(256, dtype=np.uint8))
+im = Image.Read('multiblobs.png')
+im.disp(title=False, black=0.3)
 rvcprint.rvcprint(subfig='a')
 
-# ## threshold
-lut = [255 if i > 180 else 0 for i in np.arange(256)]
-plotfig(lut)
+blobs = im.blobs()
+
+labels = blobs.labelImage(image=im)
+
+labels.disp(colormap='viridis', ncolors=len(blobs), colorbar=True)
 rvcprint.rvcprint(subfig='b')
 
-
-## histo equalization
-h = church.hist()
-lut = h.ncdf * 255
-plotfig(lut)
+reg5 = labels == 5
+reg5.disp(black=0.3)
 rvcprint.rvcprint(subfig='c')
 
-## gamma
-lut = 255 * np.linspace(0, 1, 256) ** (1 / 0.45) 
-plotfig(lut)
-rvcprint.rvcprint(subfig='d')
-
-## brighten + clip
-lut = np.arange(256) + 100
-lut = lut.clip(0, 255)
-plotfig(lut)
-rvcprint.rvcprint(subfig='e')
-
-## posterize
-lut = [64 * ((i + 32) // 64) for i in np.arange(256)]
-plotfig(lut)
-rvcprint.rvcprint(subfig='f', debug=True)

@@ -1,23 +1,22 @@
-#!/usr/bin/env python3
-
+#! /usr/bin/env python3
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from matplotlib import cm
+from spatialmath import SE3
+from math import pi
 
-im = Image.Read('church.png', grey=True)
-edges = im.canny()
-h = Hough(edges)
+camera = CatadioptricCamera(
+            projection='equiangular',
+            rho=10e-6,
+            imagesize=[1280, 1024],
+            maxangle=pi/4
+        )
+     
+X, Y, Z = mkcube(1, centre=[1, 1, 0.8], edge=True)
 
-im.disp(grid=True, darken=True, title=False)
-lines = h.lines_p(100, 200, 5)
-print(lines.shape)
-h.plot_lines_p(lines, 'r--')
+camera.plot_wireframe(X, Y, Z, color='k')
 
-
-# plt.show(block=True)
 
 rvcprint.rvcprint()
-

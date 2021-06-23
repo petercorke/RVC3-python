@@ -5,36 +5,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
 from matplotlib import cm
 
+im = Image.Read('church.png', grey=True)
+edges = im.canny()
+h = Hough(edges)
 
-castle = Image.Read('castle.png', dtype='float', grey=True)
+im.disp(grid=True, darken=True, title=False)
+lines = h.lines_p(100, 200, 5)
+print(lines.shape)
+h.plot_lines_p(lines, 'r--')
 
-L = Kernel.LoG(2)
-lap = castle.convolve(L)
-lap.disp(colormap='signed')
-plt.grid(True)
-rvcprint.rvcprint(subfig='a')
 
-plt.xlim(550, 630)
-plt.ylim(390, 310)
-# plt.gca().set_aspect(1)
-rvcprint.rvcprint(subfig='b')
+# plt.show(block=True)
 
-plt.clf()
-p = lap.image[360, 570:601]
-plt.plot(np.arange(570, 601), p, '-o', markersize=6)
-plt.xlabel('u (pixels)')
-plt.ylabel('|Laplacian| at v=360')
-plt.xlim(570, 600)
-plt.grid(True)
-rvcprint.rvcprint(subfig='c')
-
-zc = lap.zerocross()
-zc.disp(colormap='invert')
-plt.xlim(550, 630)
-plt.ylim(390, 310)
-plt.grid(True)
-rvcprint.rvcprint(subfig='d')
+rvcprint.rvcprint()
 

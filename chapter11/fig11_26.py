@@ -1,94 +1,75 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from math import pi
 from spatialmath import SE3
+from matplotlib import cm
 
-u0 = 528.1214; v0 = 384.0784; l = 2.7899; m = 996.4617;
+im = Image.Read('eg-morph1.png')
+print(im)
 
-fisheye = Image.Read('fisheye_target.png', dtype='float', grey=True)
-fisheye.disp()
+S1 = np.ones((5, 5))
+e1 = im.morph(S1, 'min')
+d1 = e1.morph(S1, 'max')
+# im.disp()
+# e1.disp()
+# d1.disp(block=True)
 
+S2 = np.ones((7, 7))
+e2 = im.morph(S2, 'min')
+d2 = e2.morph(S2, 'max')
 
-n = 500
-theta_range = np.linspace(0, pi, n)
-phi_range = np.linspace(-pi, pi, n)
-
-Phi, Theta = np.meshgrid(phi_range, theta_range)
-
-r = (l + m) * np.sin(Theta) / (l - np.cos(Theta))
-Us = r * np.cos(Phi) + u0
-Vs = r * np.sin(Phi) + v0
-
-spherical = fisheye.interp2d(Us, Vs)
-
-
-## 11.4.2  Mapping from the sphere to a perspective image
-
-W = 1000
-m = W / 2 / math.tan(np.radians(45 / 2))
-
-l = 0
-
-u0 = W / 2; v0 = W/2;
-
-Uo, Vo = np.meshgrid(np.arange(W), np.arange(W))
-
-U0 = Uo - u0
-V0 = Vo - v0
-phi = np.arctan2(V0, U0)
-r = np.sqrt(U0 ** 2 + V0 ** 2)
-
-Phi_o = phi
-Theta_o = pi - np.arctan(r / m)
-
-perspective = spherical.interp2d(Phi_o, Theta_o, Phi, Theta)
-perspective.disp(badcolor='red')
-
-rvcprint.rvcprint(subfig='a')
-
-def sphere_rotate(sph, T):
-
-    nr, nc = sph.shape
-
-    # theta spans [0, pi]
-    theta_range = np.linspace(0, pi, nr)
-
-    # phi spans [-pi, pi]
-    phi_range = np.linspace(-pi, pi, nc)
-
-    # build the plaid matrices
-    Phi, Theta = np.meshgrid(phi_range, theta_range)
-
-    # convert the spherical coordinates to Cartesian
-    x = np.sin(Theta) * np.cos(Phi)
-    y = np.sin(Theta) * np.sin(Phi)
-    z = np.cos(Theta)
-
-    # convert to 3xN format
-    p = np.array([x.flatten(), y.flatten(), z.flatten()])
-
-    # transform the points
-    p = T * p
-
-    # convert back to Cartesian coordinate matrices
-    x = p[0, :].reshape(x.shape)
-    y = p[1, :].reshape(x.shape)
-    z = p[2, :].reshape(x.shape)
-
-    nTheta = np.arccos(z)
-    nPhi = np.arctan2(y, x)
-
-    #warp the image
-    return sph.interp2d(nPhi, nTheta, Phi, Theta)
-
-spherical2 = sphere_rotate(spherical, SE3.Ry(0.9)*SE3.Rz(-1.5))
-
-perspective = spherical2.interp2d(Phi_o, Theta_o, Phi, Theta)
-perspective.disp(badcolor='red')
-
-rvcprint.rvcprint(subfig='b')
+S3 = np.ones((1,13))
+e3 = im.morph(S3, 'min')
+d3 = e3.morph(S3, 'max')
 
 
+def tile(tiles, sep=0, sepcolor=0):
+
+    # TODO tile a sequence into specified shape
+
+    # work with different types
+    out = None
+
+    for row in tiles:
+        tilerow = None
+        for im in row:
+            if tilerow is None:
+                tilerow = im.image
+            else:
+                # add border to the left
+                im = cv.copyMakeBorder(im.image, 0, 0, sep, 0, cv.BORDER_CONSTANT, value=sepcolor)
+                tilerow = np.hstack((tilerow, im))
+        if out is None:
+            out = tilerow
+        else:
+            # add border to the top
+            tilerow = cv.copyMakeBorder(tilerow, sep, 0, 0, 0, cv.BORDER_CONSTANT, value=sepcolor)
+            out = np.vstack((out, tilerow))
+    if len(base.getvector(sepcolor)) == 3:
+        return Image(out, colororder='RGB')
+    else:
+        return Image(out)
+
+results = tile([[im, e1, d1], [im, e2, d2], [im, e3, d3]], sep=1, sepcolor=1)
+# results.disp(title='bb')
+
+
+SE = Image(np.zeros((results.shape[0], 25)))
+SE = SE.paste(S1, [5,15])
+SE = SE.paste(S2, [5,55])
+SE = SE.paste(S3, [5,115])
+# SE.disp()
+
+results = results.colorize([255, 255, 255])
+# results.disp(black=0.4, title='results')
+
+SE = SE.colorize([255, 0, 0])
+
+out = tile([[results, SE]], sep=1, sepcolor=[255, 255, 255])
+out.disp(black=0.4, axes=False)
+
+rvcprint.rvcprint()

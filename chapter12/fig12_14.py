@@ -5,60 +5,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
 from matplotlib import cm
 
+sharks = Image.Read('sharks.png')
 
-h = 15
+sharks.disp(black=0.3)
 
-K = Kernel.Gauss(5, hw=h)
-idisp(K, title=None)
-plt.xlabel('u')
-plt.ylabel('v')
-rvcprint.rvcprint(subfig='a')
+fv = sharks.blobs()
+print(fv)
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-x = np.arange(-h, h + 1)
-y = np.arange(-h, h + 1)
-X, Y = np.meshgrid(x, y)
-ax.plot_surface(X, Y, K,cmap=cm.coolwarm,
-                       linewidth=0, antialiased=False)
-ax.set_xlabel('u')
-ax.set_ylabel('v')
-rvcprint.rvcprint(subfig='b')
+fv.plot_centroid()
+fv.plot_contour()
 
-ax.clear()
-K = Kernel.Circle(8, 15);
-ax.plot_surface(X, Y, K,cmap=cm.coolwarm,
-                       linewidth=0, antialiased=False)
-ax.set_xlabel('u')
-ax.set_ylabel('v')
-rvcprint.rvcprint(subfig='c')
-
-K = Kernel.DGauss(5);
-ax.clear()
-ax.plot_surface(X, Y, K,cmap=cm.coolwarm,
-                       linewidth=0, antialiased=False)
-ax.set_xlabel('u')
-ax.set_ylabel('v')
-rvcprint.rvcprint(subfig='d')
-
-
-K = Kernel.LoG(5);
-ax.clear()
-ax.plot_surface(X, Y, K,cmap=cm.coolwarm,
-                       linewidth=0, antialiased=False)
-ax.set_xlabel('u')
-ax.set_ylabel('v')
-rvcprint.rvcprint(subfig='e')
-
-K = Kernel.DoG(4, 4*1.6, 15);
-ax.clear()
-ax.plot_surface(X, Y, K,cmap=cm.coolwarm,
-                       linewidth=0, antialiased=False)
-ax.set_xlabel('u')
-ax.set_ylabel('v')
-rvcprint.rvcprint(subfig='f')
-
-# plt.show(block=True)
+rvcprint.rvcprint()

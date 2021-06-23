@@ -1,37 +1,36 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from spatialmath import SE3
-from spatialmath.base import plot_sphere
 
-P = mkcube(0.2)
 
-T_unknown = SE3(0.1, 0.2, 1.5) * SE3.RPY(0.1, 0.2, 0.3)
+movie = Video('traffic_sequence.mpg', grey=True, dtype='float')
 
-camera = CentralCamera(f=0.015, rho=10e-6, imagesize=[1280, 1024], \
-    noise=0.05)
+sigma = 0.02
+for framenum, im in enumerate(movie):
+    # plt.imshow(im.image)
+    # plt.pause(0.02)
 
-p = camera.project(P, objpose=T_unknown)
+    if framenum == 0:
+        background = im
+    else:
+        d = im - background
+        background += d.clip(-sigma, sigma)
 
-C, resid = CentralCamera.camcald(P, p)
+    if framenum > 200:
+        break
 
-est = CentralCamera.InvCamcal(C)
+im.disp()
+rvcprint.rvcprint(subfig='a')
 
-est.f / est.rho[0]
+background.disp()
+rvcprint.rvcprint(subfig='b')
 
-camera.f / camera.rho[1]
+(im - background).disp(colormap='signed')
+rvcprint.rvcprint(subfig='c')
 
-(T_unknown * est.pose).printline()
 
-# plt.clf()
-est.plot_camera(scale=0.3)
-plot_sphere(P, 0.03, color='r')
-SE3().plot(frame='T', color='b', length=0.3)
-ax = plt.gca()
-ax.set_xlim3d(-0.9, 0.9)
-ax.set_ylim3d(-0.9, 0.9)
-ax.set_zlim3d(-1.5, 0.3)
-
-rvcprint.rvcprint()
