@@ -2,3 +2,16 @@
 *.svg
 *.png
 *.m
+*.pyc
+__pycache__
+*.pdf
+*.mtl
+*.obj
+*.u3d
+*.x3d
+*.wrl
+*.tex
+*.dae
+*.old
+*.pickle
+*.dot
