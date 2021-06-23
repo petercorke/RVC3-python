@@ -15,3 +15,5 @@ __pycache__
 *.old
 *.pickle
 *.dot
+*.mp4
+.pynb_checkpoints
