@@ -1,0 +1,1075 @@
+{
+    "id": 140685247009312,
+    "created_by": "corkep",
+    "creation_time": 1628595522,
+    "scene_width": 12112.800000000001,
+    "scene_height": 5476.8,
+    "blocks": [
+        {
+            "id": 140565726799040,
+            "block_type": "MULTIROTORPLOT",
+            "title": "Multirotorplot Block",
+            "pos_x": 1100.0,
+            "pos_y": -340.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140565726850064,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140565726850112,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "model",
+                    null
+                ],
+                [
+                    "scale",
+                    [
+                        -2,
+                        2,
+                        -2,
+                        2,
+                        10
+                    ]
+                ],
+                [
+                    "flapscale",
+                    1
+                ],
+                [
+                    "projection",
+                    "ortho"
+                ]
+            ]
+        },
+        {
+            "id": 140565726886832,
+            "block_type": "MULTIROTOR",
+            "title": "Multirotor Block",
+            "pos_x": 920.0,
+            "pos_y": -340.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140565726886880,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140565726887024,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "model",
+                    null
+                ],
+                [
+                    "groundcheck",
+                    true
+                ],
+                [
+                    "speedcheck",
+                    true
+                ],
+                [
+                    "x0",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140565757884736,
+            "block_type": "FUNCTION",
+            "title": "angular rate control",
+            "pos_x": 500.0,
+            "pos_y": -340.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 2,
+            "outputsNum": 2,
+            "inputs": [
+                {
+                    "id": 140685315716192,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140685315446096,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140685315447968,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                },
+                {
+                    "id": 140685315448352,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "func",
+                    null
+                ],
+                [
+                    "nin",
+                    2
+                ],
+                [
+                    "nout",
+                    2
+                ],
+                [
+                    "dict",
+                    false
+                ],
+                [
+                    "pargs",
+                    []
+                ],
+                [
+                    "dargs",
+                    {}
+                ]
+            ]
+        },
+        {
+            "id": 140565757884976,
+            "block_type": "FUNCTION",
+            "title": "attitude control",
+            "pos_x": 340.0,
+            "pos_y": -340.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140685315446336,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140685315716288,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140565757885456,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "func",
+                    null
+                ],
+                [
+                    "nin",
+                    2
+                ],
+                [
+                    "nout",
+                    1
+                ],
+                [
+                    "dict",
+                    false
+                ],
+                [
+                    "pargs",
+                    []
+                ],
+                [
+                    "dargs",
+                    {}
+                ]
+            ]
+        },
+        {
+            "id": 140565757885504,
+            "block_type": "FUNCTION",
+            "title": "altitude control",
+            "pos_x": 560.0,
+            "pos_y": 200.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140685315448304,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140685315520112,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140565757885984,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "func",
+                    null
+                ],
+                [
+                    "nin",
+                    2
+                ],
+                [
+                    "nout",
+                    1
+                ],
+                [
+                    "dict",
+                    false
+                ],
+                [
+                    "pargs",
+                    []
+                ],
+                [
+                    "dargs",
+                    {}
+                ]
+            ]
+        },
+        {
+            "id": 140565757886032,
+            "block_type": "FUNCTION",
+            "title": "yaw control",
+            "pos_x": 560.0,
+            "pos_y": 60.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140685315828848,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140685315518624,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140565757886416,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "func",
+                    null
+                ],
+                [
+                    "nin",
+                    2
+                ],
+                [
+                    "nout",
+                    1
+                ],
+                [
+                    "dict",
+                    false
+                ],
+                [
+                    "pargs",
+                    []
+                ],
+                [
+                    "dargs",
+                    {}
+                ]
+            ]
+        },
+        {
+            "id": 140565757952160,
+            "block_type": "RAMP",
+            "title": "Ramp Block",
+            "pos_x": -400.0,
+            "pos_y": 60.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140565757952544,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "T",
+                    1
+                ],
+                [
+                    "off",
+                    0
+                ]
+            ]
+        },
+        {
+            "id": 140565757952640,
+            "block_type": "CONSTANT",
+            "title": "z*",
+            "pos_x": -400.0,
+            "pos_y": 200.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140565757952928,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "value",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140565757952880,
+            "block_type": "WAVEFORM",
+            "title": "y*",
+            "pos_x": -400.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140565757953024,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "wave",
+                    "square"
+                ],
+                [
+                    "freq",
+                    1.0
+                ],
+                [
+                    "unit",
+                    "Hz"
+                ],
+                [
+                    "amplitude",
+                    1.0
+                ],
+                [
+                    "offset",
+                    0.0
+                ],
+                [
+                    "phase",
+                    0.0
+                ],
+                [
+                    "min",
+                    0.0
+                ],
+                [
+                    "max",
+                    1.0
+                ],
+                [
+                    "duty",
+                    0.5
+                ]
+            ]
+        },
+        {
+            "id": 140565757953120,
+            "block_type": "WAVEFORM",
+            "title": "x*",
+            "pos_x": -400.0,
+            "pos_y": -320.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140565757953648,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "wave",
+                    "square"
+                ],
+                [
+                    "freq",
+                    1.0
+                ],
+                [
+                    "unit",
+                    "Hz"
+                ],
+                [
+                    "amplitude",
+                    1.0
+                ],
+                [
+                    "offset",
+                    0.0
+                ],
+                [
+                    "phase",
+                    0.0
+                ],
+                [
+                    "min",
+                    0.0
+                ],
+                [
+                    "max",
+                    1.0
+                ],
+                [
+                    "duty",
+                    0.5
+                ]
+            ]
+        },
+        {
+            "id": 140565757953744,
+            "block_type": "MUX",
+            "title": "Mux Block",
+            "pos_x": -220.0,
+            "pos_y": -320.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140565757954320,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140565758037296,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140565757954272,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "nin",
+                    2
+                ]
+            ]
+        },
+        {
+            "id": 140565758036288,
+            "block_type": "SUM",
+            "title": "position error in {0}",
+            "pos_x": -40.0,
+            "pos_y": -320.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140565758036336,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140565758061056,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140565758060960,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "signs",
+                    "++"
+                ],
+                [
+                    "angles",
+                    false
+                ]
+            ]
+        },
+        {
+            "id": 140565758096240,
+            "block_type": "FUNCTION",
+            "title": "R(yaw).T",
+            "pos_x": 160.0,
+            "pos_y": -40.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140565758096288,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140565758096384,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "func",
+                    null
+                ],
+                [
+                    "nin",
+                    1
+                ],
+                [
+                    "nout",
+                    1
+                ],
+                [
+                    "dict",
+                    false
+                ],
+                [
+                    "pargs",
+                    []
+                ],
+                [
+                    "dargs",
+                    {}
+                ]
+            ]
+        },
+        {
+            "id": 140565758062400,
+            "block_type": "PROD",
+            "title": "transform to {B}",
+            "pos_x": 160.0,
+            "pos_y": -340.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140565758062256,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140565758062448,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140565758062208,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "ops",
+                    "**"
+                ],
+                [
+                    "matrix",
+                    true
+                ]
+            ]
+        },
+        {
+            "id": 140685315928752,
+            "block_type": "INDEX",
+            "title": "Index Block",
+            "pos_x": -20.0,
+            "pos_y": -160.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140685315928992,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140685315928848,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "index",
+                    []
+                ]
+            ]
+        },
+        {
+            "id": 140685315930144,
+            "block_type": "CONNECTOR",
+            "pos_x": 600.0,
+            "pos_y": -120.0,
+            "inputs": [
+                {
+                    "id": 140685315929760,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140685315930240,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 2
+                }
+            ]
+        },
+        {
+            "id": 140685315929856,
+            "block_type": "INDEX",
+            "title": "Index Block 1",
+            "pos_x": 340.0,
+            "pos_y": -40.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140685315930720,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140685315930768,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "index",
+                    []
+                ]
+            ]
+        },
+        {
+            "id": 140685315880272,
+            "block_type": "FUNCTION",
+            "title": "Function Block",
+            "pos_x": 760.0,
+            "pos_y": -340.0,
+            "width": 100,
+            "height": 140.0,
+            "inputsNum": 4,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140685315880032,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140685315882240,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140685315931824,
+                    "index": 2,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140685315931776,
+                    "index": 3,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140685315881856,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "func",
+                    null
+                ],
+                [
+                    "nin",
+                    4
+                ],
+                [
+                    "nout",
+                    1
+                ],
+                [
+                    "dict",
+                    false
+                ],
+                [
+                    "pargs",
+                    []
+                ],
+                [
+                    "dargs",
+                    {}
+                ]
+            ]
+        },
+        {
+            "id": 140685315928656,
+            "block_type": "CONNECTOR",
+            "pos_x": 680.0,
+            "pos_y": 240.0,
+            "inputs": [
+                {
+                    "id": 140685315928608,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140685315928416,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ]
+        }
+    ],
+    "wires": [
+        {
+            "id": 140565758036864,
+            "start_socket": 140565758060960,
+            "end_socket": 140565758062448,
+            "wire_type": 3
+        },
+        {
+            "id": 140565758037440,
+            "start_socket": 140565758096384,
+            "end_socket": 140565758062256,
+            "wire_type": 3
+        },
+        {
+            "id": 140565758098208,
+            "start_socket": 140565757953648,
+            "end_socket": 140565757954320,
+            "wire_type": 3
+        },
+        {
+            "id": 140565758098256,
+            "start_socket": 140565757953024,
+            "end_socket": 140565758037296,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315881616,
+            "start_socket": 140565758062208,
+            "end_socket": 140685315446336,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315929376,
+            "start_socket": 140565757885456,
+            "end_socket": 140685315716192,
+            "wire_type": 3
+        },
+        {
+            "id": 140685301088848,
+            "start_socket": 140565757954272,
+            "end_socket": 140565758036336,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315930048,
+            "start_socket": 140685315928848,
+            "end_socket": 140565758061056,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315930528,
+            "start_socket": 140685315930240,
+            "end_socket": 140685315446096,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315930624,
+            "start_socket": 140685315930240,
+            "end_socket": 140685315716288,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315930672,
+            "start_socket": 140685315930240,
+            "end_socket": 140685315928992,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315717104,
+            "start_socket": 140685315930768,
+            "end_socket": 140565758096288,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315448688,
+            "start_socket": 140685315930240,
+            "end_socket": 140685315930720,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315894432,
+            "start_socket": 140565757952544,
+            "end_socket": 140685315828848,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315850192,
+            "start_socket": 140565757952928,
+            "end_socket": 140685315448304,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315879840,
+            "start_socket": 140685315930240,
+            "end_socket": 140685315518624,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315881712,
+            "start_socket": 140685315930240,
+            "end_socket": 140685315520112,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315881808,
+            "start_socket": 140565726887024,
+            "end_socket": 140565726850064,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315881376,
+            "start_socket": 140565726887024,
+            "end_socket": 140685315929760,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315881664,
+            "start_socket": 140685315881856,
+            "end_socket": 140565726886880,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315928320,
+            "start_socket": 140685315447968,
+            "end_socket": 140685315880032,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315931248,
+            "start_socket": 140685315448352,
+            "end_socket": 140685315882240,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315928176,
+            "start_socket": 140565757886416,
+            "end_socket": 140685315931824,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315928368,
+            "start_socket": 140565757885984,
+            "end_socket": 140685315928608,
+            "wire_type": 3
+        },
+        {
+            "id": 140685315928560,
+            "start_socket": 140685315928416,
+            "end_socket": 140685315931776,
+            "wire_type": 3
+        }
+    ]
+}

@@ -1,0 +1,182 @@
+{
+    "id": 140252600114480,
+    "created_by": "corkep",
+    "creation_time": 1627594455,
+    "scene_width": 8293.6,
+    "scene_height": 4032.0000000000005,
+    "blocks": [
+        {
+            "id": 140611883007616,
+            "block_type": "PIECEWISE",
+            "title": "Steering command",
+            "pos_x": -340.0,
+            "pos_y": -40.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140611883058656,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2,
+                    "socket_sign": null
+                }
+            ],
+            "parameters": [
+                [
+                    "seq",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140611883097008,
+            "block_type": "CONSTANT",
+            "title": "Speed",
+            "pos_x": -340.0,
+            "pos_y": -180.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140611883097200,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2,
+                    "socket_sign": null
+                }
+            ],
+            "parameters": [
+                [
+                    "value",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140611883097152,
+            "block_type": "SCOPEXY1",
+            "title": "Path",
+            "pos_x": 80.0,
+            "pos_y": -140.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140611883097296,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1,
+                    "socket_sign": null
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "indices",
+                    null
+                ],
+                [
+                    "style",
+                    null
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140611883291696,
+            "block_type": "BICYCLE",
+            "title": "Bicycle Block",
+            "pos_x": -100.0,
+            "pos_y": -140.0,
+            "width": 100,
+            "height": 100,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140611883291744,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1,
+                    "socket_sign": null
+                },
+                {
+                    "id": 140611883291888,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1,
+                    "socket_sign": null
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140611883291792,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2,
+                    "socket_sign": null
+                }
+            ],
+            "parameters": [
+                [
+                    "x0",
+                    null
+                ],
+                [
+                    "L",
+                    1
+                ],
+                [
+                    "vlim",
+                    1
+                ],
+                [
+                    "slim",
+                    1
+                ]
+            ]
+        }
+    ],
+    "wires": [
+        {
+            "id": 140611883293376,
+            "start_socket": 140611883097200,
+            "end_socket": 140611883291744,
+            "wire_type": 3
+        },
+        {
+            "id": 140611883293424,
+            "start_socket": 140611883058656,
+            "end_socket": 140611883291888,
+            "wire_type": 3
+        },
+        {
+            "id": 140611883294288,
+            "start_socket": 140611883291792,
+            "end_socket": 140611883097296,
+            "wire_type": 3
+        }
+    ]
+}

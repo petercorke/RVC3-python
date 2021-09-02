@@ -3,7 +3,6 @@
 *.png
 *.m
 *.pyc
-__pycache__
 *.pdf
 *.mtl
 *.obj
@@ -18,3 +17,6 @@ __pycache__
 *.mp4
 .pynb_checkpoints
 Untitled*.ipynb
+Figures_generated
+__pycache__
+OLD
