@@ -1,13 +1,17 @@
 import sys
 import os
 import os.path
-import matplotlib.pyplot as plt
+import subprocess
+import inspect
 from collections.abc import Iterable
-from matplotlib.ticker import MultipleLocator
 import re
 from pathlib import Path
 
-fileparts = re.compile(r'fig(?P<chapter>[0-9]+)_(?P<fig>[0-9]+).py')
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MultipleLocator
+from matplotlib import colors
+
+fileparts = re.compile(r'fig(?P<chapter>[0-9]+)_(?P<fig>.+).py')
 
 def outfile(subfig='', format=None):
     # build the path for saving
@@ -31,11 +35,22 @@ def outfile(subfig='', format=None):
     figure = path / f"fig{chapter}_{fig}{subfig}.{format}"
     return figure
 
-def rvcprint(subfig='', debug=False, thicken=1.5, interval=None, format = 'eps', pause=2, **kwargs):
+def figname(subfig=''):
+    return os.path.splitext(os.path.basename(sys.argv[0]))[0]
+
+def rvcprint(subfig='', debug=False, thicken=1.5, facecolor='white', interval=None, fignum=None, format='pdf', pause=2, **kwargs):
+
+    # if the envariable RVCPRINT is 'no' then don't save the figure
+    # this can be set by runall.py
+    if os.getenv('RVCPRINT') == 'no':
+        return
 
     figure = outfile(subfig=subfig, format=format)
 
     fontsize = 9
+
+    if fignum is not None:
+        plt.figure(fignum)
 
     for ax in plt.gcf().get_axes():
 
@@ -50,7 +65,8 @@ def rvcprint(subfig='', debug=False, thicken=1.5, interval=None, format = 'eps',
 
         if thicken is not None:
             for line in ax.get_lines():
-                line.set_linewidth(thicken)
+                if line.get_linewidth() > 0:
+                    line.set_linewidth(thicken)
 
             # thicken lines in legend
             legend = ax.get_legend()
@@ -73,20 +89,24 @@ def rvcprint(subfig='', debug=False, thicken=1.5, interval=None, format = 'eps',
         if interval is not None:
             if not isinstance(interval, Iterable):
                 interval = (interval,) * 3
-            ax.xaxis.set_major_locator(MultipleLocator(interval[0]))
-            try:
-                ax.yaxis.set_major_locator(MultipleLocator(interval[0]))
-            except:
-                pass
-            try:
-                ax.zaxis.set_major_locator(MultipleLocator(interval[0]))
-            except:
-                pass
+            for i in range(3):
+                if interval[0] is not None:
+                    ax.xaxis.set_major_locator(MultipleLocator(interval[0]))
+                if interval[1] is not None:
+                    ax.yaxis.set_major_locator(MultipleLocator(interval[1]))
 
+                if interval[2] is not None:
+                    try:
+                        ax.zaxis.set_major_locator(MultipleLocator(interval[2]))
+                    except:
+                        pass
+
+        dims = 2
         try:
             a = ax.zaxis.get_label()
             a.set_fontweight('bold')
             ax.set_zlabel(a.get_text())
+            dims = 3
         except BaseException:
             pass
 
@@ -96,7 +116,29 @@ def rvcprint(subfig='', debug=False, thicken=1.5, interval=None, format = 'eps',
         # save it
         print('saving --> ', figure)
 
-        plt.savefig(figure, format=format)
+        for ax in plt.gcf().get_axes():
+
+            if dims == 3:
+                rgba = colors.to_rgba(facecolor)
+                ax.w_xaxis.set_pane_color(rgba)
+                ax.w_yaxis.set_pane_color(rgba)
+                ax.w_zaxis.set_pane_color(rgba)
+
+            ax.set_facecolor(facecolor)
+
+            # get legend
+            legend = ax.get_legend()
+            if legend is not None:
+                frame = legend.get_frame()
+                frame.set_facecolor(facecolor)
+                frame.set_edgecolor('black')
+
+
+        plt.savefig(figure, format=format, facecolor=facecolor)
+
+        if format == 'pdf':
+            # crop it
+            subprocess.run(['pdfcrop', figure, figure], capture_output=True)
 
         if pause > 0:
             plt.pause(pause)

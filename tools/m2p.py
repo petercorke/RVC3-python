@@ -35,6 +35,16 @@ rcomment = re.compile(r'%(.*$)')     # end of line comment
 sc = re.compile(r';$', flags=re.M)        # end of line semicolon
 sc2 = re.compile(r';(.*)$', flags=re.M)
 
+header = """#!/usr/bin/env python3
+
+import rvcprint
+import numpy as np
+import matplotlib.pyplot as plt
+from machinevisiontoolbox import *
+from matplotlib.ticker import ScalarFormatter
+from matplotlib import cm
+
+"""
 
 for arg in sys.argv[1:]:
     file = Path(arg)
@@ -42,6 +52,7 @@ for arg in sys.argv[1:]:
     outfile = file.with_suffix('.py')
 
     with open(file, 'r') as f, open(outfile, 'w') as fout:
+        fout.write(header)
         s = f.read()
 
         s2 = aref.sub(ind_subs, s)
@@ -49,6 +60,10 @@ for arg in sys.argv[1:]:
         # fix comments
         s2 = lcomment.sub(r'\1#', s2)
         s2 = rcomment.sub(r'#\1', s2)
+
+        # fix rvcprint stuff
+        s2 = s2.replace('rvcprint', 'rvcprint.rvcprint')
+        s2 = s2.replace("'subfig', ", "subfig=")
 
         # remove EOL semicolon
         s2 = sc.sub('', s2)

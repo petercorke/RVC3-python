@@ -1,208 +1,355 @@
+#! /usr/bin/env python3
+
 import jupyter_client
 import subprocess
 import sys
 import re
+import os.path
 import argparse
 from subprocess import Popen, PIPE
 from threading  import Thread
 from queue import Queue, Empty
+from  colored import fg, bg, attr
+import copy
+from collections import Counter
 
 debug = False
+tagcount = Counter()
 
 # handle command line arguments
 parser = parser = argparse.ArgumentParser(description='Run Python script for RVC3 book.')
 parser.add_argument('script', 
         default=None, nargs='?',
         help='the script to run')
+
+# things to show
+parser.add_argument('--cell', '-c', 
+        action='store_const', const=True, default=False, dest='show_cell',
+        help='show code cells from file (blue), default %(default)s')
+parser.add_argument('--python', '-p', 
+        action='store_const', const=True, default=False, dest='show_cell_results',
+        help='show results from Python (green), default %(default)s')
+parser.add_argument('--file', '-f', 
+        action='store_const', const=True, default=False, dest='show_file_results',
+        help='show results from file (light blue), default %(default)s')
+parser.add_argument('--diff', '-d', 
+        action='store_const', const=True, default=False, dest='show_diff',
+        help='show results when different %(default)s')
+# creating new file
+parser.add_argument('--replace', '-R', 
+        action='store_const', const=True, default=False, dest='replace_results',
+        help='replace code cell results in .tex file, default %(default)s')
+parser.add_argument('--output', '-o', 
+        action='store_const', const=True, default=False, dest='write_tex',
+        help='copy input .tex file to .output -py.tex, default %(default)s')
+
 parser.add_argument('--maxlines', '-m', 
         type=int, default=None,
         help='maximum number of lines to read, default %(default)s')
+parser.add_argument('--start', type=int, default=1, dest='start_cell',
+        help='cell to commence at, base 1, %(default)s')
+parser.add_argument('--continue', '-C',
+        action='store_const', const=False, default=True, dest='stop_on_error',
+        help='stop at first error, default %(default)s')
+
 parser.add_argument('--linenumber', '-l', 
         default=False, action='store_const', const=True,
         help='show line numbers, default %(default)s')
-parser.add_argument('--nocomments', '-c', 
-        action='store_const', const=False, default=True, dest='comments',
-        help='dont show comments, default %(default)s')
-parser.add_argument('--timeout', '-t', 
+parser.add_argument('--traceback', '-t', 
+        action='store_const', const=False, default=True, dest='show_traceback',
+        help='skip full error traceback, default %(default)s')
+parser.add_argument('--sections', '-s', 
+        action='store_const', const=True, default=False, dest='show_sections',
+        help='show sections, default %(default)s')
+parser.add_argument('--debug', '-D', 
+        action='store_const', const=True, default=False, dest='debug',
+        help='debugging, default %(default)s')
+
+parser.add_argument('--timeout',
         type=float, default=0.2,
         help='timeout on each IPython command, default %(default)s seconds')
+parser.add_argument('--quiet', 
+        action='store_const', const=True, default=False, dest='only_errors',
+        help='only show error reports, default %(default)s')
+
 args = parser.parse_args()
 
+def cprint(color, str, **kwargs):
+    if str is not None:
+        print(fg(color) + str + attr(0), **kwargs)
 
+def c2print(fgcolor, bgcolor, str, **kwargs):
+    if str is not None:
+        print(fg(fgcolor) + bg(bgcolor) +  str + attr(0), **kwargs)
+
+debug = args.debug
 if args.script is None:
     print('no file specified')
     sys.exit(1)
 else:
     filename = args.script
+print(args)
 
 # initial commands pushed to IPython
 startup = r"""
-import numpy as np
 %config InteractiveShell.ast_node_interactivity = 'last_expr_or_assign'
+import numpy as np
+import scipy as sp
+import matplotlib.pyplot as plt
+
+from spatialmath import *
+BasePoseMatrix._color=False
+from roboticstoolbox import *
+
+from spatialmath.base import *
+import math
+from math import pi
+
+from machinevisiontoolbox import *
+from machinevisiontoolbox.base import *
+
 %precision %.3g
 np.set_printoptions(
     linewidth=120, formatter={
         'float': lambda x: f"{x:8.4g}" if abs(x) > 1e-10 else f"{0:8.4g}"})
-
 """
+#from machinevisiontoolbox import *
+#from machinevisiontoolbox.base import *
 
-def print_msg(m, indent=0):
-    for k, i in m.items():
-        if isinstance(i, dict):
-            print(' ' * indent, f"{k}::")
-            print_msg(i, indent+4)
-        else:
-            s = f"{k:10s}: {i}"
-            if len(s) > 100:
-                s = s[:100]
-            print(' ' * indent, s)
-    if indent == 0:
-        print()
+nerrors = 0
+ncells = 0
+nlistings = 0
+linenum = 0
+
+process_cells = False
 
 
-def run_cell(client, code):
-    # now we can run code.  This is done on the shell channel
+class IPython:
 
-    # execution is immediate and async, returning a UUID
-    msg_id = client.execute(code, silent=False)
-    if debug:
-        print(f"\nrunning: {code}\n  msg_id = {msg_id}\n")
+    def __init__(self):
+        ## connect to the kernel
 
-    # there is one response message which tells how it went
-    reply = client.get_shell_msg()
-    if debug:
-        print_msg(reply)
+        kernel = subprocess.Popen("ipython kernel", shell=True, text=True, stdout=subprocess.PIPE)
 
-    assert reply['msg_type'] == 'execute_reply' and\
-        reply['parent_header']['msg_id'] == msg_id, 'bad execute shell reply'
-
-    status = reply['content']['status']
-    if status == 'ok':
-
-        # first message says busy
-        reply = client.get_iopub_msg()
-        if debug:
-            print_msg(reply)
-        assert reply['msg_type'] == 'status' and\
-            reply['parent_header']['msg_id'] == msg_id and\
-            reply['content']['execution_state'] == 'busy', 'bad execute iopub reply'
-
-        # second message is execute_input which reflects back the command
-        reply = client.get_iopub_msg()
-        if debug:
-            print_msg(reply)
-        assert reply['msg_type'] == 'execute_input' and\
-            reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
-
-
-        while True:
-            reply = client.get_iopub_msg()
+        # wait for it to launch, catch the last line it prints at startup
+        for line in kernel.stdout:
             if debug:
-                print_msg(reply)
-            
-            # check it is a reply to this transaction
-            assert reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
-
-            # check for last message in response sequence
-            if reply['msg_type'] == 'status' and\
-                    reply['content']['execution_state'] == 'idle':
+                print('kernel startup: ', line.rstrip())
+            if "--existing" in line:
                 break
 
-            if reply['msg_type'] == 'stream':
-                # command had an output
-                print(reply['content']['text'])
-            elif reply['msg_type'] == 'execute_result':
-                # command had an output
-                print(reply['content']['data']['text/plain'])
+        # get the path to JSON connection file
+        cf = jupyter_client.find_connection_file()
+        if debug:
+            print("connecting via", cf)
 
-                # get next message
+        client = jupyter_client.BlockingKernelClient(connection_file=cf)
+
+        if debug:
+            print("connected")
+        # load connection info and start the communication channels
+        client.load_connection_file()
+        client.start_channels()
+
+        if debug:
+            print('channel started')
+
+        self.client = client
+
+    @staticmethod
+    def print_msg(m, indent=0):
+        for k, i in m.items():
+            if isinstance(i, dict):
+                print(' ' * indent, f"{k}::")
+                IPython.print_msg(i, indent+4)
+            else:
+                s = f"{k:10s}: {i}"
+                if len(s) > 100:
+                    s = s[:100]
+                print(' ' * indent, s)
+        if indent == 0:
+            print()
+
+
+    def read_message(self, channel, msg_type=None, exec_state=None):
+
+        while True:
+            if channel == 'shell':
+                reply = self.client.get_shell_msg()
+            elif channel == 'iopub':
+                reply = self.client.get_iopub_msg()
+
+            if debug:
+                print(f'reading on {channel} channel')
+                IPython.print_msg(reply)
+
+            if reply['parent_header']['msg_id'] != self.msg_id:
+                if debug:
+                    print('message not requested')
+                continue
+
+            if msg_type is not None and reply['msg_type'] != msg_type:
+                IPython.print_msg(reply)
+                raise AssertionError('incorrect msg_type')
+
+            if exec_state is not None and reply['content']['execution_state'] != exec_state:
+                IPython.print_msg(reply)
+                raise AssertionError('incorrect execution_state')
+
+            return reply
+
+
+    def run_cell(self, code):
+        global nerrors, ncells
+
+        ncells += 1
+        
+        # now we can run code.  This is done on the shell channel
+
+        # execution is immediate and async, returning a UUID
+        msg_id = self.client.execute(code, silent=False)
+        self.msg_id = msg_id
+
+        if debug:
+            print(f"\nrunning: {code}\n  msg_id = {msg_id}\n")
+
+        # # there is one response message which tells how it went
+        # while True:
+        #     reply = client.get_shell_msg()
+        #     if debug:
+        #         print_msg(reply)
+
+        #     if reply['msg_type'] == 'execute_reply' and reply['parent_header']['msg_id'] == msg_id:
+        #         break
+        #     if debug:
+        #         print('that was an unrequested message')
+
+        reply = self.read_message('shell', 'execute_reply')
+
+        result = []
+        status = reply['content']['status']
+        if status == 'ok':
+
+            # first message says busy
+            # while True:
+            #     reply = self.client.get_iopub_msg()
+            #     if debug:
+            #         print_msg(reply)
+            #     if reply['msg_type'] == 'status' and\
+            #         reply['parent_header']['msg_id'] == msg_id and\
+            #         reply['content']['execution_state'] == 'busy':
+            #         break
+            #     if debug:
+            #         print('that was an unrequested message')
+            reply = self.read_message('iopub', 'status', 'busy')
+
+            # second message is execute_input which reflects back the command
+            # while True:
+            #     reply = client.get_iopub_msg()
+            #     if debug:
+            #         print_msg(reply)
+            #     if reply['msg_type'] == 'execute_input' and\
+            #         reply['parent_header']['msg_id'] == msg_id:
+            #         break
+            #     if debug:
+            #         print('that was an unrequested message')
+            reply = self.read_message('iopub', 'execute_input')
+
+            while True:
+                reply = self.client.get_iopub_msg()
+                if debug:
+                    print_msg(reply)
+                
+                # check it is a reply to this transaction
+                assert reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
+
+                # check for last message in response sequence
+                if reply['msg_type'] == 'status' and\
+                        reply['content']['execution_state'] == 'idle':
+                    break
+
+                if reply['msg_type'] == 'stream':
+                    # command had an output
+                    if not args.only_errors:
+                        # if args.show_cell_results:
+                        #     cprint('yellow', reply['content']['text'])
+                        result.extend(reply['content']['text'].split('\n'))
+                elif reply['msg_type'] == 'execute_result':
+                    # command had an output
+                    if not args.only_errors:
+                        # if args.show_cell_results:
+                        #     cprint('yellow', reply['content']['data']['text/plain'])
+                        result.extend(reply['content']['data']['text/plain'].split('\n'))
+
+                    # get next message
+
+        elif status == 'error':
+            # print('Error: ', reply['content']['ename'])
+            # print('  ', reply['content']['evalue'])
+
+            # first message says busy
             
+            reply = self.read_message('iopub', 'status', 'busy')
 
-    elif status == 'error':
-        # print('Error: ', reply['content']['ename'])
-        # print('  ', reply['content']['evalue'])
+            # reply = self.client.get_iopub_msg()
+            # if debug:
+            #     print_msg(reply)
+            # assert reply['msg_type'] == 'status' and\
+            #     reply['parent_header']['msg_id'] == msg_id and\
+            #     reply['content']['execution_state'] == 'busy', 'bad execute iopub reply'
 
-        # first message says busy
-        reply = client.get_iopub_msg()
+            # second message is execute_input which reflects back the command
+            # reply = self.client.get_iopub_msg()
+            # if debug:
+            #     print_msg(reply)
+            # assert reply['msg_type'] == 'execute_input' and\
+            #     reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
+            reply = self.read_message('iopub', 'execute_input')
+
+            # third message is command display value
+            # reply = self.client.get_iopub_msg()
+            # if debug:
+            #     print_msg(reply)
+            # assert reply['msg_type'] == 'error' and\
+            #     reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
+            
+            
+            # skip possible display data message
+            while True:
+                reply = self.read_message('iopub')
+                if reply['msg_type'] == 'error':
+                    break
+            
+            c2print('white', 'red', f'\nERROR #{nerrors} at line {linenum-2}:')
+            for line in reply['content']['traceback']:
+                if args.show_traceback:
+                    print('        ' + line.replace('\n', '\n        '))
+
+            while True:
+                # flush messages till idle
+                # fourth message is execute_input which reflects back the command
+                reply = self.client.get_iopub_msg()
+                if debug:
+                    print_msg(reply)
+                if reply['msg_type'] == 'status' and \
+                    reply['parent_header']['msg_id'] == msg_id and \
+                    reply['content']['execution_state'] == 'idle':
+                        break
+            nerrors += 1
+        
+            result = None
+
         if debug:
-            print_msg(reply)
-        assert reply['msg_type'] == 'status' and\
-            reply['parent_header']['msg_id'] == msg_id and\
-            reply['content']['execution_state'] == 'busy', 'bad execute iopub reply'
+            print('---------------------------------------------------------')
 
-        # second message is execute_input which reflects back the command
-        reply = client.get_iopub_msg()
-        if debug:
-            print_msg(reply)
-        assert reply['msg_type'] == 'execute_input' and\
-            reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
+        return result
 
-        # third message is command display value
-        reply = client.get_iopub_msg()
-        if debug:
-            print_msg(reply)
-        assert reply['msg_type'] == 'error' and\
-            reply['parent_header']['msg_id'] == msg_id, 'bad execute iopub reply'
-        print('Traceback:')
-        for line in reply['content']['traceback']:
-            print(line)
+    def shutdown(self):
+        self.client.shutdown()
 
-        # fourth message is execute_input which reflects back the command
-        reply = client.get_iopub_msg()
-        if debug:
-            print_msg(reply)
-        assert reply['msg_type'] == 'status' and\
-            reply['parent_header']['msg_id'] == msg_id and\
-            reply['content']['execution_state'] == 'idle', 'bad execute iopub reply'
+python = IPython()
 
-    if debug:
-        print('---------------------------------------------------------')
-
-## connect to the kernel
-
-kernel = subprocess.Popen("ipython kernel", shell=True, text=True, stdout=subprocess.PIPE)
-
-# wait for it to launch, catch the last line it prints at startup
-for line in kernel.stdout:
-    # print(line)
-    if "--existing" in line:
-        break
-
-# get the path to JSON connection file
-cf = jupyter_client.find_connection_file()
-print("connecting via", cf)
-
-client = jupyter_client.BlockingKernelClient(connection_file=cf)
-
-# load connection info and start the communication channels
-client.load_connection_file()
-client.start_channels()
-
-# handle initial chatter from the kernel
-
-# get startup message on shell channel
-reply = client.get_shell_msg()
-if debug:
-    print_msg(reply)
-
-print(reply['content']['banner'])
-
-# get two startup messages on iopub channel
-io = client.get_iopub_msg()
-if debug:
-    print_msg(io)
-assert io['msg_type'] == 'status' and\
-     io['parent_header']['msg_type'] == 'kernel_info_request' and\
-     io['content']['execution_state'] == 'busy', 'wrong message'
-
-io = client.get_iopub_msg()
-if debug:
-    print_msg(io)
-assert io['msg_type'] == 'status' and\
-     io['parent_header']['msg_type'] == 'kernel_info_request' and\
-     io['content']['execution_state'] == 'idle', 'wrong message'
-
-run_cell(client, startup)
+python.run_cell(startup)
 
 
 # globals
@@ -212,65 +359,220 @@ prompt = ">>> "
 
 # we keep a buffer of lines from the script
 buffer = []
+inline = False
 
-with open(filename, 'r') as f:
-    for line in f:
-        line = line.rstrip()
-        linenum += 1
+last_result = []
+nmismatch = 0
+lastsection = ''
 
-        # add current line to end of buffer
-        buffer.append(line)
+re_section = re.compile(r'^\\(sub)*section{')
+re_space = re.compile(r'\s+')
 
-        # simple logic for indentation
-        newindent = len(line) - len(line.lstrip())
+out = None
+if args.write_tex:
+    out = open(os.path.splitext(filename)[0] + '-py.tex', 'w')
 
-        if newindent == 0:
-            cmd = None
-            # exec last cmd
-            if len(buffer) == 2:
-                cmd = buffer.pop(0)
+def getline():
+    """
+    Read next line from the file
 
-                if len(cmd) == 0:
+    Yields:
+        str: line from file
+
+    Lines have no newlines
+    """
+    global linenum, lastsection
+
+    with open(filename, 'r') as f:
+        for line in f:
+            linenum += 1
+
+            if re_section.match(line) is not None:
+                lastsection = copy.copy(line)
+                if args.show_sections:
                     print()
-                elif cmd[0] == '#':
-                # display the prompt
-                    print(cmd)
+                    c2print('black', 'yellow', line)
+
+            yield line.rstrip()
+
+def getlisting():
+    """
+    Return contents of a lstlisting environment
+
+    Yields:
+        list of str: string comprising lstlisting body
+    """
+    global nlistings, process_cells
+
+    inlisting = False
+    tags = []
+    buffer = []
+
+    for line in getline():
+        inlisting_new = None
+
+        sline = line.lstrip()
+        if sline.startswith('%%TAG:'):
+            tag = sline[6:]
+            # this magic comment applies to the next lstlisting env encountered
+            tags.append(tag)
+            tagcount[tag] += 1
+
+        if sline.startswith(r'\begin{lstlisting}'):
+            nlistings += 1
+            if nlistings >= (args.start_cell):
+                process_cells = True
+            if process_cells and len(tags) == 0:
+                inlisting_new = True
+
+        if sline.startswith(r'\end{lstlisting}'):
+            if process_cells and len(tags) == 0:
+                inlisting_new = False
+            tags = []
+
+        # change state
+        if inlisting_new is False:
+            # at the end of a lstlisting block
+
+            yield buffer
+            buffer = []
+            inlisting = False
+        
+        if inlisting:
+            buffer.append(line)
+        elif out is not None:
+            print(line, file=out)
+        
+        if inlisting_new:
+            inlisting = inlisting_new
+
+
+def getblocks():
+    """
+    Return code or results from lstlisting environment
+
+    Yields:
+        tuple: (blocktype, blocktext)
+
+    blocktype is either 'code' or 'result'. The text is a (multiline) string containing congiguous lines that are
+    either code (starts with a prompt or continuation) or results.
+    """
+
+    for listing in getlisting():
+        buffer = []
+        lstenv = []
+        while len(listing) > 0:
+            line = listing.pop(0)        
+            if line.startswith('>> '):
+                print('*** feral MATLAB prompt at line ', linenum)
+                sys.exit(1)
+            if line.startswith('...: '):
+                print('*** bad continuation at line ', linenum)
+                sys.exit(1)
+
+            if line.startswith('>>> '):
+                # prompt line
+                buffer = [line]
+
+                # add continuation lines
+                while len(listing) > 0 and listing[0].startswith('... '):
+                    buffer.append(listing.pop(0))
+
+                lstenv.append(('code', '\n'.join([l[4:] for l in buffer]), '\n'.join(buffer)))
+            else:
+                # results line
+                buffer = [line]
+                # add results lines
+                while len(listing) > 0 and not listing[0].startswith('>>> '):
+                    buffer.append(listing.pop(0))
+
+                lstenv.append(('result', '\n'.join(buffer), None))
+        yield lstenv
+
+result = None
+
+for listenv in getblocks():
+    for i, (type, block, code) in enumerate(listenv):
+
+        # print(type, block)
+
+        if type == 'code':
+            # this is executable code
+
+            if out is not None:
+                print(code, file=out)
+
+            if args.show_cell:
+                cprint('blue', block) 
+            result = python.run_cell(block)
+
+            # result is a list of strings or None if error
+            if args.show_cell_results and result is not None:
+                cprint('yellow', '\n'.join(result))
+
+            if result is None:
+                if args.stop_on_error:
+                    break
                 else:
-                    if args.linenumber:
-                        print(f"[{linenum:}] " + prompt + cmd)
-                    else:
-                        print(prompt + cmd)
+                    continue
+            else:
+                result = '\n'.join(result)
 
-            elif len(buffer) > 2:
-                cmd = '\n'.join(buffer[:-1])
-                if args.linenumber:
-                    num = f"[{linenum:}]"
-                    print(f"{num:5s} " + prompt, end='')
+
+
+            # is there a result left over from last block?
+            if result is not None and (
+                    i == (len(listenv) - 1) or 
+                    ((i < len(listenv) - 1) and listenv[i+1][0] == 'code')
+                    ):
+                # next block is also code, spit the result now
+                if args.replace_results and result != '':
+                    # replace results in output stream
+                    print(result, file=out)
+
+        elif type == 'result':
+            # this is a code result from the file
+        
+            # display the current line
+            if args.show_file_results:
+                cprint('sky_blue_3', block)
+                if args.show_cell_results:
+                    print()
+
+            if out is not None:
+                if args.replace_results:
+                    # replace results in output stream
+                    print(result, file=out)
                 else:
-                    print(prompt, end='')
-                for i, line in enumerate(buffer[:-1]):
-                    if i > 0:
-                        line = '... ' + line
-                        if args.linenumber:
-                            line = '      ' + line
-                    print(line)
-                buffer = [buffer[-1]]
-                cmd += '\n'
+                    # use old results
+                    print(block, file=out)
 
-            if cmd is not None and cmd != '':
-                cmd += '\n'
-                run_cell(client, cmd)
+            # check for differences
+            if result is None:
+                res1 = ''
+            else:
+                res1 = re_space.sub('', result)
+            res2 = re_space.sub('', block)
+            if res1 != res2:
+                # strings are different
+                nmismatch += 1
+                print()
+                c2print('black', 'white', lastsection.strip())
+                if args.show_diff:
+                    cprint('sky_blue_3', block)
+                    cprint('yellow', result)
 
+                    print(f'^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ at line {linenum}\n')
+                
 
-        elif newindent > indent:
-            # indent has increased
-            indent = newindent
+    if result is None and args.stop_on_error:
+        break
+        # if args.maxlines is not None and linenum > args.maxlines:
+        #     print(f'---- quitting after {args.maxlines} lines as requested!')
+        #     break
 
-        if args.maxlines is not None and linenum > args.maxlines:
-            print(f'---- quitting after {args.maxlines} lines as requested!')
-            break
+python.shutdown()
 
-client.shutdown()
+print(f"processed {linenum} lines, {nlistings} lstlisting blocks, {ncells} cells, with {nmismatch} mismatched results and {nerrors} errors")
 
-
-
+print(tagcount)

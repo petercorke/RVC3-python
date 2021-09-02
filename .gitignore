@@ -1,6 +1,10 @@
+*test*
+*.p
 *.eps
 *.svg
 *.png
+*.jpg
+*.pdf
 *.m
 *.pyc
 *.pdf

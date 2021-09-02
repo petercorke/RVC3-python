@@ -36,6 +36,7 @@ for file in args.files:
     try:
         result = subprocess.run(cmd, capture_output=True, env=env)
     except:
+        print("Unexpected error:", sys.exc_info()[0])
         print(f"subprocess spawn of {file} failed")
         continue
     if result.returncode == 0:
