@@ -18,10 +18,10 @@ veh.control = RandomPath(workspace=veh.workspace)
 map = LandmarkMap(nlandmarks=20, workspace=veh.workspace)
 sensor = RangeBearingSensor(veh, map, covar=W, plot=True)
 
-Q = np.diag([0.1, 0.1, np.radians(1)]) ** 2
+R = np.diag([0.1, 0.1, np.radians(1)]) ** 2
 L = np.diag([0.1, 0.1])
 
-pf = ParticleFilter(veh, sensor=sensor, Q=Q, L=L, nparticles=1000)
+pf = ParticleFilter(veh, sensor=sensor, R=R, L=L, nparticles=1000)
 print(pf)
 
 pf.run(T=20)
