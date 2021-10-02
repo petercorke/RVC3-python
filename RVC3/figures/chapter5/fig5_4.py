@@ -21,6 +21,8 @@ out = sim.run(bd, T=125, dt=0.2)
 # make fig 1 current
 plt.figure(1)
 plt.title('')  # remove the title
+plt.plot(out.x[:,0], out.x[:,1], color='w', label='vehicle path')
+plt.legend(loc='lower right')
 
 rvcprint.rvcprint()
 

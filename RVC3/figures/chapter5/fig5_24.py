@@ -8,6 +8,7 @@ import numpy as np
 from roboticstoolbox.mobile import *
 
 lattice = LatticePlanner()
+v = VehiclePolygon('car', scale=0.5)
 
 ## lattice after 1 iter
 lattice.plan(iterations=10)
@@ -30,6 +31,8 @@ ax.set_aspect('equal')
 ax.grid(True)
 ax.set_xlim(-2, 3)
 ax.set_ylim(-3, 3)
+v.plot(qs, facecolor='none', edgecolor='k')
+v.plot(qg)
 
 rvcprint.rvcprint(subfig='a', thicken=None)
 
@@ -57,5 +60,7 @@ ax.set_aspect('equal')
 ax.grid(True)
 ax.set_xlim(-2, 3)
 ax.set_ylim(-3, 3)
+v.plot(qs, facecolor='none', edgecolor='k')
+v.plot(qg)
 
 rvcprint.rvcprint(subfig='b', thicken=None)

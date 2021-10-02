@@ -14,6 +14,7 @@ og.set([2, 3, 0, 4], True)
 og.set([0, 2, -2, -2], True)
 
 lattice = LatticePlanner(occgrid=og)
+v = VehiclePolygon('car', scale=1, linewidth=2, zorder=20)
 
 lattice.plan(iterations=None)
 print(lattice.graph)
@@ -34,5 +35,7 @@ ax.set_aspect('equal')
 ax.grid(True)
 ax.set_xlim(-5, 5)
 ax.set_ylim(-5, 5)
+v.plot(qs, facecolor='none', edgecolor='k')
+v.plot(qg)
 
 rvcprint.rvcprint(thicken=None)

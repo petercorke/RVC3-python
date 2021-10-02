@@ -24,6 +24,6 @@ plt.ylabel('y')
 path, length, parents = g.path_Astar('Hughenden', 'Brisbane')
 
 g.plot()
-g.highlight_vertex(set(list(parents.keys()) + list(parents.values())))
+g.highlight_vertex(set(list(parents.keys()) + list(parents.values())), color='y')
 
 rvcprint.rvcprint(thicken=None)

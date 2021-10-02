@@ -20,11 +20,12 @@ obstacles[:,0] = 1
 obstacles[:,-1] = 1
 
 og = BinaryOccupancyGrid(obstacles)
-og.plot(cmap='gray')
+# og.plot(cmap='gray')
 
 free = Image(obstacles == 0)
-
-
+free.disp()
+plt.xlabel('x')
+plt.ylabel('y')
 rvcprint.rvcprint(subfig='a', grid=False)
 
 # ------------------------------------------------------------------------- #
@@ -50,6 +51,8 @@ rvcprint.rvcprint(subfig='c', grid=False)
 
 # ------------------------------------------------------------------------- #
 
-free.distance_transform().disp(title=False)
+im = free.distance_transform().disp(title=False, gamma=0.5)
+plt.xlabel('x')
+plt.ylabel('y')
 rvcprint.rvcprint(subfig='d', grid=False)
 

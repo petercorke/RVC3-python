@@ -22,5 +22,5 @@ ax.view_init(9, -46)
 ax.set_xlim(-1, 3)
 ax.set_ylim(-3, 3)
 
-rvcprint.rvcprint(thicken=None)
+rvcprint.rvcprint(thicken=None, interval=1)
 
