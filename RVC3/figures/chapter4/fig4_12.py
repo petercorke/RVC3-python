@@ -26,12 +26,13 @@ sim.options.graphics = False
 
 out = sim.run(bd, T=total_time)
 
-ax = base.plotvol2([0, 90], grid=True)
-plt.plot(path[:,0], path[:,1], 'r-', linewidth=3, alpha=0.5)
-plt.plot(path[:-1, 0], path[:-1, 1], 'ro')
-plt.plot(path[-1, 0], path[-1, 1], 'r*')
-plt.plot(out.x[:, 0], out.x[:, 1], 'k')
+ax = base.plotvol2([-5, 90], grid=True)
+plt.plot(path[:, 0], path[:, 1], 'ro', label='waypoint')
+plt.plot(path[:,0], path[:,1], 'r-', linewidth=3, alpha=0.5, label='desired path')
+plt.plot(out.x[:, 0], out.x[:, 1], 'k', label='actual path')
+plt.legend()
 
-
+v = VehiclePolygon('car', scale=8, facecolor='none', edgecolor='k')
+v.plot([2, 2, 0])
 
 rvcprint.rvcprint()
