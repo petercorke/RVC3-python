@@ -28,21 +28,21 @@ ekf = EKF(robot=(veh, V), P0=P0)
 ekf.run(T=20)
 
 # from previous fig
-p0 = ekf.get_P()
+p0 = ekf.get_Pnorm()
 
 # redo the sims for different values of V
 ekf = EKF(robot=(veh, 2 * V), P0=P0)
 ekf.run(T=20)
-pb = ekf.get_P()
+pb = ekf.get_Pnorm()
 
 ekf = EKF(robot=(veh, 0.5 * V), P0=P0)
 ekf.run(T=20)
-ps = ekf.get_P()
+ps = ekf.get_Pnorm()
 
 t = ekf.get_t()
-plt.plot(t, ps, 'r', label='0.5')
+plt.plot(t, ps, 'r--', label='0.5')
 plt.plot(t, p0, 'g', label='1')
-plt.plot(t, pb, 'b', label='2')
+plt.plot(t, pb, 'b--', label='2')
 
 plt.legend()
 

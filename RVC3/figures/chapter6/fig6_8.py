@@ -72,7 +72,7 @@ lmlog = np.r_[ekf.sensor._landmarklog]
 k =  lmlog != -1
 plt.plot(t[k], lmlog[k], 'bo', markersize=2)
 # plot_poly([1:1000 sensor.landmarklog], 'fill', 'b')
-plt.ylabel('land marks')
+plt.ylabel('landmark id')
 plt.xlim(0, t[-1])
 plt.ylim(-0.5, 20.5)
 plt.grid(True)
