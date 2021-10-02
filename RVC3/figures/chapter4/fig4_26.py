@@ -92,6 +92,10 @@ for k in np.arange(0, len(x), 5):
     p2 = T * [0, -d]
     plt.plot([p1[0, 0], p2[0, 0]], [p1[1, 0], p2[1, 0]], 'k', linewidth=2)
 
+va = VehiclePolygon(scale=0.5)
+va.plot(qs, facecolor='none', edgecolor='k')
+va.plot(qg, alpha=0.5)
+
 plt.xlabel('x')
 plt.ylabel('y')
 rvcprint.rvcprint(subfig='a', thicken=None)
