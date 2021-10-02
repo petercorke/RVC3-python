@@ -4,7 +4,7 @@ import rvcprint
 from roboticstoolbox import *
 import numpy as np
 import matplotlib.pyplot as plt
-
+from spatialmath import base
 
 house = rtb_load_matfile('data/house.mat')
 floorplan = house['floorplan']
@@ -24,11 +24,12 @@ def sensorfunc(pos):
         return changes
 
 print(nex0 := ds.dstar.nexpand)
-p, status = ds.query(places.br3, sensor=sensorfunc, animate=True)
+path, status = ds.query(places.br3, sensor=sensorfunc, animate=True, verbose=True)
 print(ds.dstar.nexpand - nex0)
-ds.plot(p)
+ds.plot(path)
 
-# dstar.query(places.br3, change=[((300, 300), [300, 325, 115,125], 10)]);
+base.plot_box(bbox=[300, 325, 105, 125], filled=True, facecolor='orange', hatch=r'//////\\\\\\')
+
 rvcprint.rvcprint()
 
 # import cProfile
