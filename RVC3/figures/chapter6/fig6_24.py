@@ -19,6 +19,8 @@ og.plot(cmap='gray')
 base.plot_box(l=25, r=45, b=50, t=70, color='k', linewidth=2)
 rvcprint.rvcprint(subfig='a')
 
+# ------------------------------------------------------------------------- #
+
 plt.clf()
 og.plot(cmap='gray')
 plt.xlim(25, 45)

@@ -53,6 +53,8 @@ sf.set_powerlimits((-2, 2))
 ax.zaxis.set_major_formatter(sf)
 rvcprint.rvcprint(subfig='a', thicken=None)
 
+# ------------------------------------------------------------------------- #
+
 plt.clf()
 ax = uncertainty(20, [(30, 40)], cz=-3e-4, point=(20,20))
 ax.set_zlim(-3e-4, 3e-4)
@@ -60,6 +62,8 @@ sf = ScalarFormatter(useOffset=True, useMathText=True)
 sf.set_powerlimits((-2, 2))
 ax.zaxis.set_major_formatter(sf)
 rvcprint.rvcprint(subfig='b', thicken=None)
+
+# ------------------------------------------------------------------------- #
 
 plt.clf()
 ax = uncertainty(3, [(35, 56), (30, 40), (66, 23), (55, 62)], cz=-0.015)
