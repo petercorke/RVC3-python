@@ -1,24 +1,32 @@
 #!/usr/bin/env python3
-
+    
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib import cm
 
-roof = Image.Read('roof.png', grey=True)
+##
+# lena = iread('lena.pgm')
+# idisp(lena, 'nogui')
+# rvcprint('svg', 'subfig', 'a')
+# 
+# eyes = iroi(lena, [239   359 237 294])
+# idisp(eyes, 'nogui')
+# rvcprint('svg', 'subfig', 'b')
 
-roof.disp(title=False)
+##
+mona = Image.Read('monalisa.png')
+
+#smile = iroi(mona, [265 342 264 286])
+
+mona.disp(grid=True)
 rvcprint.rvcprint(subfig='a')
 
-smaller = roof.scale(1/7)
-smaller.disp()
+# eyes = mona.roi([239, 376, 170, 210])
+
+
+smile = mona.roi([265, 342, 264, 286])
+smile.disp(grid=True)
 rvcprint.rvcprint(subfig='b')
 
-smaller = roof.smooth(sigma=3) #.scale(1/7)
-smaller.disp()
-rvcprint.rvcprint(subfig='c')
-
-bigger = smaller.scale(7)
-bigger.disp()
-rvcprint.rvcprint(subfig='d')

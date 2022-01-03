@@ -6,15 +6,13 @@ import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
+from spatialmath import base
+import os
 
-sharks = Image.Read('sharks.png')
 
-sharks.disp(black=0.3)
+im = Image.Read('multiblobs.png')
+blobs = im.blobs()
 
-fv = sharks.blobs()
-print(fv)
-
-fv.plot_centroid()
-fv.plot_contour()
-
-rvcprint.rvcprint()
+dotfile = rvcprint.figname() + '.dot'
+blobs.dotfile(dotfile)
+os.system("dot -Tpdf -o {} {}".format(rvcprint.outfile(format='pdf'), dotfile))

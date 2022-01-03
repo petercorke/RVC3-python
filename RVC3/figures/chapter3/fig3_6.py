@@ -4,33 +4,39 @@ import numpy as np
 from spatialmath import SO2
 from spatialmath.base import plot_point
 from rvcprint import rvcprint
+from spatialmath.base import plot_box
 
 
 
 # one row per waypoint
 vertices = np.array([
-    [-1, 1,  1, -1],
-    [ 1, 1, -1, -1]
+    [-1, 1,  1, -1, -1],
+    [ 1, 1, -1, -1,  1]
 ])
 
 sq = SO2(30, unit='deg') * vertices
 sq = sq.T
 
-traj = mstraj(sq[[1, 2, 3, 0],:], qdmax=[2,1], q0=sq[0,:], dt=0.2, tacc=0)
+traj = mstraj(sq, qdmax=[2,1], dt=0.2, tacc=0)
 
-plt.plot(traj.q[:,0], traj.q[:,1], markersize=8, linewidth=2)
+plt.plot(traj.q[:,0], traj.q[:,1], markersize=8, linewidth=2, color='r', label='$t_{acc}=0$')
 
-traj2 = mstraj(sq[[1, 2, 3, 0],:], qdmax=[2,1], q0=sq[0,:], dt=0.2, tacc=2)
-plt.plot(traj2.q[:,0], traj2.q[:,1], markersize=8, linewidth=2)
+traj2 = mstraj(sq, qdmax=[2, 1], dt=0.2, tacc=2)
+plt.plot(traj2.q[:,0], traj2.q[:,1], markersize=8, linewidth=2, color='b', label='$t_{acc}=2$')
 plt.gca().set_aspect('equal')
 plt.grid(True)
 plt.xlabel('$\mathbf{q_0}$')
 plt.ylabel('$\mathbf{q_1}$')
-plot_point(sq.T, 'ko', label="  {}") # , markersize=12, fillcolor='k'
+plot_point(sq[:-1].T, 'ko', text="  {}", label='via point') # , markersize=12, fillcolor='k'
+plot_point(sq[-1].T, 'ko', text="    , 4")
+
+plt.legend()
 
 # plt.show(block=True)
 
 rvcprint(subfig='a', thicken=1)
+
+# --------------------------------------------------------------------- #
 
 plt.clf()
 plt.plot(traj2.t, traj2.q, '.-', markersize=8, linewidth=2)
@@ -43,7 +49,12 @@ print(lims)
 
 for info in traj2.info:
     t = info.clock
-    plt.plot([t, t], lims, 'k--', linewidth=1.5)
+    if t > 0:
+        tf = t + 2
+    else:
+        tf = t + 1
+    plot_box(bbox=[t, tf, *lims], filled=True, color='black', alpha=0.1, zorder=0)
+    #plt.plot([t, t], lims, 'k--', linewidth=1.5)
     
 plt.legend(['$\mathbf{q_0}$', '$\mathbf{q_1}$'])
 plt.ylim(lims)

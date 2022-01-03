@@ -72,7 +72,7 @@ def IMU():
     wm = omega + wbias
 
     imu = namedtuple('imu', 't dt gyro accel magno')
-    true = namedtuple('true', 't dt omega attitude g B')
+    true = namedtuple('true', 't dt omega orientation g B')
     return true(t, dt, omega, truth, g0, m0), imu(t, dt, wm, am, mm)
 
 if __name__ == "__main__":

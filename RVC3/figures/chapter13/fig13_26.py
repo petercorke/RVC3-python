@@ -10,7 +10,7 @@ import math
 
 u0 = 528.1214; v0 = 384.0784; l = 2.7899; m = 996.4617;
 
-fisheye = Image.Read('fisheye_target.png', dtype='float', grey=True)
+fisheye = Image.Read('fisheye_target.png', dtype='float', mono=True)
 fisheye.disp()
 
 
@@ -21,11 +21,12 @@ phi_range = np.linspace(-pi, pi, n)
 Phi, Theta = np.meshgrid(phi_range, theta_range)
 
 r = (l + m) * np.sin(Theta) / (l - np.cos(Theta))
-Us = r * np.cos(Phi) + u0
-Vs = r * np.sin(Phi) + v0
+U = r * np.cos(Phi) + u0
+V = r * np.sin(Phi) + v0
 
-spherical = fisheye.interp2d(Us, Vs)
+spherical = fisheye.warp(U, V, domain=(phi_range, theta_range))
 
+spherical.disp()
 
 ## 11.4.2  Mapping from the sphere to a perspective image
 
@@ -46,20 +47,19 @@ r = np.sqrt(U0 ** 2 + V0 ** 2)
 Phi_o = phi
 Theta_o = pi - np.arctan(r / m)
 
-perspective = spherical.interp2d(Phi_o, Theta_o, Phi, Theta)
+perspective = spherical.interp2d(Phi_o, Theta_o)
 perspective.disp(badcolor='red')
 
 rvcprint.rvcprint(subfig='a')
 
-
-nPhi, nTheta = base.sphere_rotate(Phi, Theta, SE3.Ry(0.9)*SE3.Rz(-1.5))
+# ------------------------------------------------------------------------- #
 
 # warp the image
-spherical2 = spherical.interp2d(nPhi, nTheta, Phi, Theta)
+spherical2 = spherical.rotate_spherical(SE3.Ry(0.9)*SE3.Rz(-1.5))
 
-perspective = spherical2.interp2d(Phi_o, Theta_o, Phi, Theta)
+perspective = spherical2.interp2d(Phi_o, Theta_o)
 perspective.disp(badcolor='red')
 
-rvcprint.rvcprint(subfig='b', debug=True)
+rvcprint.rvcprint(subfig='b')
 
 

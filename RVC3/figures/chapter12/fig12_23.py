@@ -4,33 +4,83 @@ import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
-from matplotlib.ticker import ScalarFormatter
+from spatialmath.base import plot_box
 from matplotlib import cm
 
+im = np.full((5,5), 0, dtype='uint8')
 
-b1 = Image.Read('building2-1.png', grey=True, dtype='float')
-pks, _ = b1.harriscorner(nfeat=200, hw=2, scale=7)
+canvas = np.full((7, 55), 128, dtype='uint8')
+canvas[1:6, 1:6] = im
+count = 2
+for v in range(1, 4):
+    for u in range(1, 4):
+        W = im[v-1:v+2, u-1:u+2]
 
-s = pks[:, 2]
-print(len(s), ' features returned')
+        k = count * 5
+        canvas[2:5, k:k+3] = W
+        count += 1
 
-h, x = np.histogram(pks[:, 2], 100)
-cdf = np.cumsum(h)
-cdf = cdf / cdf[-1]
-plt.bar(x[1:], cdf, width=x[1]-x[0])
-print(x)
+Image(canvas).disp(plain=True, vrange=[0, 255])
+plot_box(lbrt=[1.5, 1.5, 4.5, 4.5], color='red')
 
-# histogram(s(:), 'Normalization', 'cdf', 'EdgeColor', 'none')
-# #xaxis(max(x)) yaxis(0.8, 1)
-# yaxis(0.5, 1)
-plt.gca().axvline(x[-1] / 2, color='r', linestyle='--')
-plt.xlabel('Corner strength')
-plt.xlim(0, x[-1])
-plt.ylim(0, 1)
-plt.ylabel('Cumulative number of features')
-plt.grid(True)
-#(1-interp1(x, ch, strongest/2))*100
+rvcprint.rvcprint(subfig='a')
 
-rvcprint.rvcprint()
+# ------------------------------------------------------------------------ #
 
+im = np.full((5,5), 0, dtype='uint8')
+im[:, 2:] = 255
 
+canvas = np.full((7, 55), 128, dtype='uint8')
+canvas[1:6, 1:6] = im
+count = 2
+for v in range(1, 4):
+    for u in range(1, 4):
+        W = im[v-1:v+2, u-1:u+2]
+
+        k = count * 5
+        canvas[2:5, k:k+3] = W
+        count += 1
+
+Image(canvas).disp(plain=True, vrange=[0, 255])
+plot_box(lbrt=[1.5, 1.5, 4.5, 4.5], color='red')
+rvcprint.rvcprint(subfig='b')
+
+# ------------------------------------------------------------------------ #
+
+im = np.full((5,5), 0, dtype='uint8')
+im[2,2] = 255
+
+canvas = np.full((7, 55), 128, dtype='uint8')
+canvas[1:6, 1:6] = im
+count = 2
+for v in range(1, 4):
+    for u in range(1, 4):
+        W = im[v-1:v+2, u-1:u+2]
+
+        k = count * 5
+        canvas[2:5, k:k+3] = W
+        count += 1
+
+Image(canvas).disp(plain=True, vrange=[0, 255])
+plot_box(lbrt=[1.5, 1.5, 4.5, 4.5], color='red')
+rvcprint.rvcprint(subfig='c')
+
+# ------------------------------------------------------------------------ #
+
+im = np.full((5,5), 0, dtype='uint8')
+im[2:,2:] = 255
+
+canvas = np.full((7, 55), 128, dtype='uint8')
+canvas[1:6, 1:6] = im
+count = 2
+for v in range(1, 4):
+    for u in range(1, 4):
+        W = im[v-1:v+2, u-1:u+2]
+
+        k = count * 5
+        canvas[2:5, k:k+3] = W
+        count += 1
+
+Image(canvas).disp(plain=True, vrange=[0, 255])
+plot_box(lbrt=[1.5, 1.5, 4.5, 4.5], color='red')
+rvcprint.rvcprint(subfig='d')

@@ -22,9 +22,9 @@ ax = plotvol3([-0.4, 0.6, -0.5, 0.5, -0.2, 1])
 # cam2.plot_camera(ax=ax, scale=0.1, alpha=0.5) #'color', 'r', 'label')
 # T2.plot(length=0.4, style='line', frame='2', flo=(0.09, 0, -0.02))
 
-cam1.plot_camera(ax=ax, scale=0.15, alpha=0.7, shape='camera', color='b') #color', 'b', 'label')
+cam1.plot(ax=ax, scale=0.15, alpha=0.7, shape='camera', color='b') #color', 'b', 'label')
 T1.plot(length=0.4, style='line', color='b', frame='1', flo=(0.07, 0, -0.01))
-cam2.plot_camera(ax=ax, scale=0.15, alpha=0.7, shape='camera', color='r') #'color', 'r', 'label')
+cam2.plot(ax=ax, scale=0.15, alpha=0.7, shape='camera', color='r') #'color', 'r', 'label')
 T2.plot(length=0.4, style='line', color='r', frame='2', flo=(0.09, 0, -0.04))
 
 P = [0.5, 0.1, 0.8]
@@ -33,4 +33,4 @@ plot_sphere(0.03, P, color='b', ax=ax)
 ax.view_init(22, -118)
 
 # rvcprint.rvcprint
-plt.show(block=True)
+rvcprint.rvcprint()

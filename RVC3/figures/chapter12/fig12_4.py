@@ -9,6 +9,6 @@ from matplotlib import cm
 
 castle = Image.Read('castle2.png', dtype='float')
 
-t = castle.adaptive_thresh(width=30).disp()
-rvcprint.rvcprint(subfig='a')
+castle.adaptive_threshold(width=30).disp()
+rvcprint.rvcprint()
 

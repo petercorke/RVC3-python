@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,7 +18,7 @@ plt.xlabel('Wavelength (nm)')
 plt.grid()
 plt.xlim(350, 750)
 plt.ylim(0, 1.8)
-plt.legend(labels=('CIE X', 'CIE Y', 'CIE Z'))
+plt.legend(labels=(r'$\bar{x}$', r'$\bar{y}$', r'$\bar{z}$'))
 
 plt.show()
 

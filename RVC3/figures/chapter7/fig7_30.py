@@ -11,11 +11,11 @@ import rvcprint
 robot = models.DH.IRB140()
 S, TE0 = robot.twists()
 S 
-S.exp(robot.qr).prod() * TE0
+S.SE3(robot.qr).prod() * TE0
 
 robot.plot(robot.qz, limits=[-0.1, 0.5, -0.3, 0.3, -0.1, 0.5])
 
-T = S.exp(robot.qr) * TE0
+T = S.SE3(robot.qr).prod() * TE0
 
 
 lines = S.line()

@@ -18,7 +18,7 @@ for i in range(3):
 
 plt.gca().set_aspect(1)
 plt.grid(True)
-plt.show(block=True)
+rvcprint.rvcprint(thicken=False)
 # // r
 
 # // clf

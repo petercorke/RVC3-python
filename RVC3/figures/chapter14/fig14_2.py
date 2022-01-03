@@ -7,18 +7,15 @@ from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
 
+view1 = Image.Read('eiffel2-1.png', grey=True)
 
-im1 = Image.Read('eiffel2-1.png', grey=True)
-
-pks, _ = im1.harriscorner(nfeat=200)
-im1.disp(grid=True, darken=True, title=False)
-pks, _ = im1.harriscorner(nfeat=250, hw=2, scale=7)
-plot_point(pks[:, :2].T, marker='sy', markerfacecolor='none')
+hf = view1.Harris(nfeat=150)
+view1.disp(grid=True, darken=True, title=False)
+hf.plot()
 rvcprint.rvcprint(subfig='a')
 
 plt.clf()
-im1.disp(grid=True, darken=True, title=False)
-
-sf = im1.SIFT().filter(percentstrength=20, minscale=10)
-sf.plot(alpha=0.3)
+view1.disp(grid=True, darken=True, title=False)
+sf = view1.SIFT().sort().filter(minscale=10)[:150]
+sf.plot(filled=True, color='y', alpha=0.3)
 rvcprint.rvcprint(subfig='b')

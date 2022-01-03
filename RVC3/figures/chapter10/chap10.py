@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 ## RVC2: Chapter 10 - Light and Color
 from machinevisiontoolbox.base.color import plot_chromaticity_diagram, plot_spectral_locus
 import numpy as np

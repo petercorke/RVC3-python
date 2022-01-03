@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt

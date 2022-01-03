@@ -7,13 +7,22 @@ from machinevisiontoolbox import *
 
 
 objects = Image.Read('segmentation.png')
+objects.disp(title=False)
+rvcprint.rvcprint(subfig='a')
+
 S = Kernel.Circle(3)
 closed = objects.close(S)
+closed.disp()
+rvcprint.rvcprint(subfig='b')
+
+
 clean = closed.open(S)
+clean.disp()
+rvcprint.rvcprint(subfig='c')
 
-eroded = clean.erode(S)
+opened = objects.open(S)
+clean = opened.close(S)
+clean.disp()
+rvcprint.rvcprint(subfig='d')
 
-edge = clean - eroded
-edge.disp(colormap='invert')
 
-rvcprint.rvcprint()

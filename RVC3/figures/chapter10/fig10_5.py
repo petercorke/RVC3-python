@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,6 +17,7 @@ l = e * r
 plt.plot(lam / nm, l)
 plt.xlabel('Wavelength (nm)')
 plt.ylabel(r'L(λ) $(W sr^{-1} m^{-2} m^{-1}) \times 10^{8}$')
+plt.xlim(400, 700)
 plt.grid()
 plt.show()
 

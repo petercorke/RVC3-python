@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,7 +12,7 @@ um = 1e-6
 
 
 plt.figure()
-lam = np.arange(100, 10_000, step=10) * nm
+lam = np.linspace(100, 10_000, 100) * nm
 e = loadspectrum(lam, 'redbrick')
 
 # TODO add vertical lines

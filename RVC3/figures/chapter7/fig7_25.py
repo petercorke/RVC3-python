@@ -59,15 +59,15 @@ x = mstraj(segments, tsegment=[3, 0.25, 0.5, 0.25], dt=0.01, tacc=0.07)
 print(x.q.shape)
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-plt.plot(x.t[:300], x.q[:300,0], x.q[:300,2], color='black')
-plt.plot(x.t[299:], x.q[299:,0], x.q[299:,2], color='red')
+plt.plot(x.t[:300], x.q[:300,0]/mm, x.q[:300,2]/mm, color='black')
+plt.plot(x.t[299:], x.q[299:,0]/mm, x.q[299:,2]/mm, color='red')
 
 print(x.q.shape)
 ax.view_init(10, -82)
 
 plt.xlabel('Time (s)')
-plt.ylabel('x')
-ax.set_zlabel('z')
+plt.ylabel('x (mm)')
+ax.set_zlabel('z (mm)')
 
 # plt.show(block=True)
 
@@ -79,13 +79,13 @@ x = x.q[:, 0]
 x = np.r_[x, 0, 0, 0]
 for i in range(4):
     t = np.arange(0, 4, 0.01)
-    q = [x[(i * 100 + j) % 400] for j in range(400)]
+    q = [x[(i * 100 + j) % 400]/mm for j in range(400)]
     plt.plot(t, q)
 
 
 plt.grid(True)
 plt.xlabel('Time (s)')
-plt.ylabel('Foot x-coordinate (m)')
+plt.ylabel('Foot x-coordinate (mm)')
 plt.legend(['Foot 0', 'Foot 1', 'Foot 2', 'Foot 3'], loc='lower right')
 
 # rvcprint('subfig', 'b', 'thicken', 1.5)

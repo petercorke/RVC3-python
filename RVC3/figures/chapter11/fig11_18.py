@@ -8,32 +8,36 @@ from matplotlib.ticker import ScalarFormatter
 from spatialmath import SE3
 from matplotlib import cm
 
-# recompute magnitude from last figure
+
+
 castle = Image.Read('castle.png', grey=True, dtype='float')
-Du = Kernel.DGauss(2)
+
+Du = Kernel.Sobel()
 Iu = castle.convolve(Du)
 Iv = castle.convolve(Du.T)
+
+Iu.disp(colormap='signed')
+rvcprint.rvcprint(subfig='a')
+
+Iv.disp(colormap='signed')
+rvcprint.rvcprint(subfig='b')
+
+
+Iu = castle.convolve(Kernel.DGauss(sigma=2));
+Iv = castle.convolve(Kernel.DGauss(sigma=2).T);
+
 m = (Iu ** 2 + Iv ** 2).sqrt()
+m.disp(black=0.4)
+rvcprint.rvcprint(subfig='c')
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-x = np.arange(318, 409)
-y = np.arange(550, 623)
-Y, X = np.meshgrid(y, x)
-Z = m.image[318:409, 550:623]
-ax.plot_surface(X, Y, Z, cmap=cm.bone,
-                       linewidth=0, antialiased=False)
-ax.set_xlabel('u')
-ax.set_ylabel('v')
-
-
-# surfl(318:408, 550:622, m(318:408,550:622)')
-# colormap(bone)
-
-# xaxis[317,407]
-# yaxis[549,621]
-ax.set_zlabel('edge magnitude')
-ax.view_init(61, 23)
-
-rvcprint.rvcprint()
-
+plt.clf()
+# th = np.arctan2(Iv.image, Iu.image)
+th = Iu.direction(Iv)
+s = 10
+plt.quiver(np.arange(0, castle.width, 20), np.arange(0, castle.height, 20), 
+       Iu.image[::20, ::20], Iv.image[::20, ::20], scale=s)
+plt.xlim(0, castle.width)
+plt.ylim(0, castle.height)
+plt.xlabel('u (pixels)')
+plt.ylabel('v (pixels)')
+rvcprint.rvcprint(subfig='d')

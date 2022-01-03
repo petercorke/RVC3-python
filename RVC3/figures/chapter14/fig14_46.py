@@ -24,16 +24,19 @@ p2 = np.array([
     [mx[1], mn[1], mn[1], mx[1]]
 ])
 
-H = CentralCamera.points2H(p1, p2, method='leastsquares')[0]
+H, _ = CentralCamera.points2H(p1, p2, method='leastsquares')
 
 warped = im.warpPerspective(H)
 warped.disp(grid=True)
 
 rvcprint.rvcprint()
 
-# [~,metadata] = Image.Read('notre-dame.jpg', 'double')
-# f = metadata.DigitalCamera.FocalLength
-# cam = CentralCamera('image', im, 'focal', f/1000, ...
-#     'sensor', [7.18e-3,5.32e-3])
-# sol = cam.invH(H, 'verbose')
+md = im.metadata()
+f = float(md['FocalLength'])
+print(f)
+cam = CentralCamera(imagesize=im.shape, f=f/1000, sensorsize=[7.18e-3, 5.32e-3])
+print(cam)
+sol, normal = cam.decomposeH(H)
+print(sol.printline(orient="rpy/yxz"))
+print(normal[0].T)
 # tr2rpy(sol[1].T, 'deg', 'camera')

@@ -7,27 +7,44 @@ from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
 
-L = Image.Read('rocks2-l.png', reduce=2)
-R = Image.Read('rocks2-r.png', reduce=2)
+def simpeaks2(DSI, u, v):
+    plt.plot(DSI[v, u, :], '-o', markerfacecolor='b', markeredgecolor='b', markersize=6)
+    plt.xlim(0, DSI.shape[2])
+    plt.ylim(-1, 1)
+    plt.grid(True)
+    plt.xlabel('Disparity $\mathbf{d - d_{min}}$ (pixels)')
+    plt.ylabel('NCC similarity')
+    plt.text(2, -0.9, f"pixel at ({u}, {v})", fontsize=11, weight='bold')
 
-disparity, sim, DSI = L.DSI(R, 3, [40, 90])
 
-print(np.isinf(DSI.flatten()).sum())
+L = Image.Read('rocks2-l.png', dtype='float32', reduce=2)
+R = Image.Read('rocks2-r.png', dtype='float32', reduce=2)
 
-print(np.nanmax(sim.image), np.nanmin(sim.image))
-sim.disp(badcolor='red', colorbar=dict(label='ZNCCC similarity peak'))
+disparity, similarity, DSI = L.stereo_simple(R, 3, [40, 90])
 
+import pickle
+pickle.dump([disparity, similarity, DSI], open('DSI.p', 'wb'))
+
+# good
+# 363, 320
+plt.figure()
+simpeaks2(DSI, 395, 281)
 rvcprint.rvcprint(subfig='a')
 
-# Image(np.isnan(sim.image)).disp()
-
-# there are no infs if window w/2=3, a few when window w/2=1
-plt.clf()
-im = sim.colorize()
-
-im = im.switch(np.isinf(sim.image), 'red')
-im = im.switch(np.isnan(sim.image), 'red')
-im = im.switch(sim<0.6, 'blue')
-
-im.disp()
+# multiple
+plt.figure()
+simpeaks2(DSI, 351, 453)
 rvcprint.rvcprint(subfig='b')
+
+# weak
+#simpeaks2(DSI,  410, 276)
+plt.figure()
+simpeaks2(DSI,  356, 17)
+rvcprint.rvcprint(subfig='c')
+
+# broad
+plt.figure()
+simpeaks2(DSI, 543, 173)
+rvcprint.rvcprint(subfig='d')
+
+# plt.show(block=True)

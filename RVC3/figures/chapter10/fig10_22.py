@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
+from spatialmath.base.graphics import *
 
 nm = 1e-9
 
@@ -29,7 +32,7 @@ xy = XYZ[:, :2] / np.tile(np.sum(XYZ, axis=1), (2,1)).T
 ab = Lab[:, 1:]
 
 plot_chromaticity_diagram('xy')
-plot_point(xy.T, marker='k*', text=' {:d}', fontsize=8)
+plot_point(xy.T, marker='k*', text=' {:d}', textargs=dict(fontsize=8))
 plt.grid(True)
 rvcprint.rvcprint(subfig='a')
 
@@ -41,7 +44,7 @@ rvcprint.rvcprint(subfig='b')
 
 plt.clf()
 plot_chromaticity_diagram('ab')
-plot_point(ab.T, marker='k*', text=' {:d}', fontsize=8)
+plot_point(ab.T, marker='k*', text=' {:d}', textargs=dict(fontsize=8))
 plt.grid(True)
 rvcprint.rvcprint(subfig='c')
 

@@ -6,17 +6,19 @@ import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib import cm
 
-mona = Image.Read('monalisa.png', grey=True, dtype='float')
-pyramid = mona.pyramid()
-print(pyramid)
+roof = Image.Read('roof.png', grey=True)
 
-width = sum([im.width for im in pyramid])
+roof.disp(title=False)
+rvcprint.rvcprint(subfig='a')
 
-out = Image.Constant(width, pyramid[0].height, 0.3)
-u = 0
-for im in pyramid:
-    out.paste(im, [u, 0])
-    u += im.width
+smaller = roof[::7, ::7]
+smaller.disp()
+rvcprint.rvcprint(subfig='b')
 
-out.disp()
-rvcprint.rvcprint()
+smaller = roof.smooth(sigma=3)[::7, ::7]
+smaller.disp()
+rvcprint.rvcprint(subfig='c')
+
+bigger = smaller.replicate(7)
+bigger.disp()
+rvcprint.rvcprint(subfig='d')

@@ -20,7 +20,6 @@ qc = sol.q
 
 qplot(t, qc, wrist=True)
 
-
 rvcprint.rvcprint(subfig='a', thicken=1.5)
 
 plt.clf()

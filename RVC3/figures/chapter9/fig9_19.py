@@ -1,13 +1,14 @@
 from rvcprint import rvcprint
-from fig9_18 import PumaCollapse
 import matplotlib.pyplot as plt
-import roboticstoolbox as rtb
+from roboticstoolbox import xplot
 
-out = PumaCollapse()
+import fig9_18 as zt
+
+out = zt.sim.run(zt.bd, 5)  # simulate for 5s
 
 plt.figure()
-rtb.qplot(out.t, out.x[:,:3])
-rtb.ylabel('q (rad)')
-# plt.grid(True)
-# plt.xlabel('Time (s)')
+xplot(out.t, out.x[:,:3])
+plt.ylabel('q (rad)')
+plt.grid(True)
+plt.xlabel('Time (s)')
 rvcprint()

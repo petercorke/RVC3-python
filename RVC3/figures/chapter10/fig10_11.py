@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from machinevisiontoolbox.base.color import plot_spectral_locus
 import rvcprint
 import numpy as np

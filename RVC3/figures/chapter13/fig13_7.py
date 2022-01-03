@@ -16,10 +16,12 @@ P = mkgrid(3, 0.2, pose=SE3(0, 0, 1.0))
 camera.plot_point(P)
 rvcprint.rvcprint(subfig='a')
 
-Tcamera = SE3(-1, 0, 0.5) * SE3.Ry(0.9)
+# ------------------------------------------------------------------------- #
+
+T_camera = SE3(-1, 0, 0.5) * SE3.Ry(0.9)
 
 camera.clf()
-camera.plot_point(P, pose=Tcamera)
+camera.plot_point(P, pose=T_camera)
 
 rvcprint.rvcprint(subfig='b')
 

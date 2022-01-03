@@ -7,28 +7,49 @@ from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
 
-b1 = Image.Read('building2-1.png', grey=True, dtype='float')
 
-pks, _ = b1.harriscorner(nfeat=250, hw=2, scale=7)
-b1.disp(darken=True, title=False)
-plot_point(pks[:, :2].T, marker='sy', markerfacecolor='none')
+square = Image.Squares(number=1, size=256, fg=128).rotate(0.3)
+edges = square.canny()
+edges.disp(black=0.1, grid=True, title=False)
 rvcprint.rvcprint(subfig='a')
 
-plt.xlim(400, 900)
-plt.ylim(350, 50)
+# ----------------------------------------------------------------------- #
+
+h = edges.Hough()
+
+h.plot_accumulator(cmap='viridis_r')
+print(h.nz, h.t)
+cbar = plt.colorbar()
+cbar.set_label('Votes')
 rvcprint.rvcprint(subfig='b')
 
-b2 = Image.Read('building2-2.png', grey=True, dtype='float')
+# ----------------------------------------------------------------------- #
 
-pks, _ = b2.harriscorner(nfeat=250, hw=2, scale=7)
-b2.disp(darken=True, title=False)
-plot_point(pks[:, :2].T, marker='sy', markerfacecolor='none')
+plt.xlim(1.2, 1.350)
+plt.ylim(210, 240)
 rvcprint.rvcprint(subfig='c')
 
-plt.xlim(200, 700)
-plt.ylim(350, 50)
+# ----------------------------------------------------------------------- #
+
+plt.figure()
+plt.plot(h.votes, label='number of votes')
+plt.yscale('log')
+plt.xlim(0, h.t)
+plt.ylim(1, h.votes[0])
+plt.xlabel('Threshold')
+plt.ylabel('Number of votes above threshold')
+plt.gca().axvline(60, color='r', linestyle='--', label='threshold')
+plt.legend()
+plt.grid(True)
 rvcprint.rvcprint(subfig='d')
 
+# ----------------------------------------------------------------------- #
+
+lines = h.lines(60)
+# lines = lines[[0,2,5],:]
+print(lines)
+square.disp(black=0.1, grid=True)
+h.plot_lines(lines)
+rvcprint.rvcprint(subfig='e')
+
 # plt.show(block=True)
-
-

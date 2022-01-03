@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,7 +18,7 @@ plt.xlabel('Wavelength (nm)')
 plt.xlim(350, 750)
 plt.ylim(0, 700)
 plt.grid()
-rvcprint.rvcprint(subfig='a')
+rvcprint.rvcprint(subfig='b')
 
 cones = loadspectrum(lam, 'cones')
 plt.figure()
@@ -30,7 +32,7 @@ plt.ylim(0, 1)
 plt.grid()
 plt.legend(['red (L) cone', 'green (M) cone', 'blue (S) cone'])
 
-rvcprint.rvcprint(subfig='b')
+rvcprint.rvcprint(subfig='a')
 
 # TODO ensure common x-axis ticks
 

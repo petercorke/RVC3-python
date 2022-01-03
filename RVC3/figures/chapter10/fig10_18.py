@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,9 +10,9 @@ nm = 1e-9
 
 lam = np.arange(400, 701, 5) * nm
 
-R = loadspectrum(lam, 'redbrick.dat')
-sun = loadspectrum(lam, 'solar.dat')
-A = loadspectrum(lam, 'water.dat')
+R = loadspectrum(lam, 'redbrick')
+sun = loadspectrum(lam, 'solar')
+A = loadspectrum(lam, 'water')
 
 d = 2
 T = 10 ** (-d*A)

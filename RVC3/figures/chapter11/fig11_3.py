@@ -1,22 +1,14 @@
 #!/usr/bin/env python3
-
 import rvcprint
-import numpy as np
-import matplotlib.pyplot as plt
-from machinevisiontoolbox import *
-from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3
-from machinevisiontoolbox.base.imageio import convert
+from machinevisiontoolbox import Image
 
+flowers = Image.Read('flowers8.png')
 
-dartmouth = WebCam('https://webcam.dartmouth.edu/webcam/image.jpg')
+flowers.plane(0).colorize((1, 0, 0)).disp()
+rvcprint.rvcprint(subfig='a')
 
-dartmouth.grab().disp()
+flowers.plane(1).colorize((0, 1, 0)).disp()
+rvcprint.rvcprint(subfig='b')
 
-# commented out so we don't auto clobber a nice image
-# rvcprint.rvcprint()
-
-# for im in dartmouth:
-
-#     plt.imshow(im.image)
-#     plt.pause(0.02)
+flowers.plane(2).colorize((0, 0, 1)).disp()
+rvcprint.rvcprint(subfig='c')

@@ -19,4 +19,4 @@ X, Y, Z = mkcube(1, centre=[1, 1, 0.8], edge=True)
 camera.plot_wireframe(X, Y, Z, color='k')
 
 
-rvcprint.rvcprint()
+rvcprint.rvcprint(facecolor=None)

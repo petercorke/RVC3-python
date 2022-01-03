@@ -6,30 +6,26 @@ import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 import cv2 as cv
 
-L = Image.Read('walls-l.png', grey=True, reduce=2)
-R = Image.Read('walls-r.png', grey=True, reduce=2)
+walls_l = Image.Read('walls-l.png', reduce=2)
+walls_r = Image.Read('walls-r.png', reduce=2)
 
-sL = L.SIFT()
-sR = R.SIFT()
-m = sL.match(sR)
+sL = walls_l.SIFT()
+sR = walls_r.SIFT()
+matches = sL.match(sR)
 
-cv.setRNGSeed(0)
+F, resid = matches.estimate(CentralCamera.points2F, 
+    'ransac', confidence=0.95, seed=0)
 
-F, resid, inliers = CentralCamera.points2F(m.pt1, m.pt2, 
-    'ransac', ransacReprojThreshold=1, confidence=0.9, maxIters=100)
+# retval, H1, H2 = cv.stereoRectifyUncalibrated(m.pt1[:,inliers], m.pt2[:,inliers], F, L.size)
 
-print(len(m), resid, np.sum(inliers))
+HL, HR = walls_l.rectify_homographies(matches, F)
 
-retval, H1, H2 = cv.stereoRectifyUncalibrated(m.pt1[:,inliers], m.pt2[:,inliers], F, L.size)
+print(HL)
+print(HR)
 
-print(H1)
-print(H2)
-
-Lr = L.warpPerspective(H1)
-Rr = R.warpPerspective(H2)
-
-disparity = Lr.StereoSGBM(Rr, 7, [180, 530], (4, 100))
-disparity.disp(grid=True, colorbar=dict(label='Disparity (pixels)'))
-plt.xlim(200, disparity.width)
+walls_l_rect = walls_l.warp_perspective(HL)
+walls_r_rect = walls_r.warp_perspective(HR)
+Image.hcat(walls_l_rect, walls_r_rect).disp()
 
 rvcprint.rvcprint()
+

@@ -8,33 +8,26 @@ from matplotlib.ticker import ScalarFormatter
 from spatialmath import SE3
 from matplotlib import cm
 
+castle = Image.Read('castle.png', grey=True)
 
-castle = Image.Read('castle.png', dtype='float', grey=True)
-
-L = Kernel.LoG(2)
-lap = castle.convolve(L)
-lap.disp(colormap='signed')
+edges = castle.canny()
+edges.disp(colormap='invert')
+plt.xlim(400, 700)
+plt.ylim(600, 300)
 plt.grid(True)
-rvcprint.rvcprint(subfig='a')
+rvcprint.rvcprint(debug=False, subfig='a')
 
-plt.xlim(550, 630)
-plt.ylim(390, 310)
-# plt.gca().set_aspect(1)
+
+Iu, Iv = castle.to('float32').gradients(Kernel.DGauss(2))
+Iu.disp()
+m = (Iu ** 2 + Iv ** 2).sqrt()
+m.disp(colormap='invert')
+plt.xlim(400, 700)
+plt.ylim(600, 300)
+plt.grid(True)
+
 rvcprint.rvcprint(subfig='b')
 
-plt.clf()
-p = lap.image[360, 570:601]
-plt.plot(np.arange(570, 601), p, '-o', markersize=6)
-plt.xlabel('u (pixels)')
-plt.ylabel('|Laplacian| at v=360')
-plt.xlim(570, 600)
-plt.grid(True)
-rvcprint.rvcprint(subfig='c')
 
-zc = lap.zerocross()
-zc.disp(colormap='invert')
-plt.xlim(550, 630)
-plt.ylim(390, 310)
-plt.grid(True)
-rvcprint.rvcprint(subfig='d')
+
 

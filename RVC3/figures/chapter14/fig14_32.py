@@ -7,23 +7,21 @@ from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
 
+L = Image.Read('rocks2-l.png', dtype='float32', reduce=2)
+R = Image.Read('rocks2-r.png', dtype='float32', reduce=2)
 
-L = Image.Read('rocks2-l.png', reduce=2)
-R = Image.Read('rocks2-r.png', reduce=2)
+disparity, similarity, DSI = L.DSI(R, 3, [40, 90])
 
-disparity = L.StereoSGBM(R, 2, [40, 90], (4, 100))
-disparity.disp(grid=True)
-rvcprint.rvcprint(subfig='a')
+mx = np.nanmax(DSI[:, 90:, :], axis=2)
 
-disparity = L.StereoBM(R, 3, [40, 90], (4, 100))
-disparity.disp(grid=True)
-rvcprint.rvcprint(subfig='b')
+plt.hist(similarity.column(), 100, (0, 1), cumulative=True, density=True)
+# histogram(sim(:), 'Normalization', 'cdf', 'EdgeColor', 'none')
+plt.xlim(0, 1)
+plt.ylim(0, 1)
+plt.grid(True)
+plt.xlabel('ZNCC similarity')
+plt.ylabel('Cumulative distribution')
+plt.gca().axvline(0.6, color='r', linestyle='--')
+plt.gca().axvline(0.9, color='r', linestyle='--')
 
-disparity = L.StereoBM(R, 5, [40, 90], (4, 100))
-disparity.disp(grid=True)
-rvcprint.rvcprint(subfig='c')
-
-disparity = L.StereoBM(R, 11, [40, 90])
-disparity.disp(grid=True)
-rvcprint.rvcprint(subfig='d')
-
+rvcprint.rvcprint()

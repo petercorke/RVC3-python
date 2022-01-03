@@ -11,8 +11,10 @@ im = Image.Read('58060.png')
 im.disp(title=False)
 rvcprint.rvcprint(subfig='a')
 
+# ----------------------------------------------------------------------- #
+
 labels, n = im.labels_graphseg()
 
-labels.disp(colormap='jet', ncolors=n, colorbar=True)
+labels.disp(colormap='viridis_r', ncolors=n, colorbar=dict(shrink=0.7, aspect=20*0.7))
 rvcprint.rvcprint(subfig='b')
 

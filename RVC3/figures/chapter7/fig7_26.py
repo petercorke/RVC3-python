@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 from spatialmath import SE3
-from spatialgeometry import Box
+from spatialgeometry import Cuboid
 from math import pi
 import rvcprint
 
@@ -96,7 +96,7 @@ env.launch(limits=[-L, L, -W, W, -0.15, 0.05])
 for leg in legs:
     leg.q = np.r_[0, 0, 0]
     env.add(leg, readonly=True, jointaxes=False, eeframe=False, shadow=False)
-body = Box([L, W, 30 * mm], color='b')
+body = Cuboid([L, W, 30 * mm], color='b')
 env.add(body)
 env.step()
 

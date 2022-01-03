@@ -8,11 +8,12 @@ from spatialmath import SE3
 from math import pi
 
 camera = SphericalCamera()
+print(camera)
 
 X, Y, Z = mkcube(1, centre=[2, 3, 1], edge=True)
 
 camera.plot_wireframe(X, Y, Z, color='k')
 
 
-rvcprint.rvcprint()
+rvcprint.rvcprint(facecolor=None)
 

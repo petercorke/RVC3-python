@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,7 +7,7 @@ from machinevisiontoolbox import *
 
 nm = 1e-9
 
-lam = np.arange(300, 1000, 10)
+lam = np.linspace(300, 1000, 100)
 
 sun_ground = loadspectrum(lam * nm, 'solar')
 sun_blackbody = blackbody(lam * nm, 5778)

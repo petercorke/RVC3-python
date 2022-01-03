@@ -4,34 +4,35 @@ import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
-from spatialmath import SE3, base
-import cv2 as cv
+from spatialmath import SE3
+from spatialmath.base import plot_sphere, plotvol3
 
-images = FileCollection('calibration/*.jpg')
+P = mkcube(0.2)
 
-K, distortion, frames = CentralCamera.images2C(images, gridsize=(7,6), gridpitch=0.025)
+T_unknown = SE3(0.1, 0.2, 1.5) * SE3.RPY(0.1, 0.2, 0.3)
 
-print(K)
-print(distortion)
-print(len(frames))
+camera = CentralCamera(f=0.015, rho=10e-6, imagesize=[1280, 1024], \
+    noise=0.05)
 
-frames[4].frame.disp()
-rvcprint.rvcprint(subfig='a')
+p = camera.project_point(P, objpose=T_unknown)
 
-cam = CentralCamera()
+C, resid = CentralCamera.points2C(P, p)
 
-ax = base.plotvol3([-0.1, 0.3, -0.1, 0.3, -0.4, 0])
-for id, frame in enumerate(frames):
-    cam.plot_camera(pose=frame.T, scale=0.05, shape='camera')
-    ax.text(*frame.T.t, f" {id}", zorder=20, fontsize=12)
-shape = np.r_[7 * 0.025, 6 * 0.025, 0.01]
-base.plot_cuboid(shape, centre=shape/2)
+est = CentralCamera.decomposeC(C)
 
-corner = np.r_[images[0].width, images[0].height] / K[0,0]
-r = np.linalg.norm(corner) 
-k1, k2, k3 = distortion[[0, 1, 4]]
-duv = corner * (k1 * r**2 + k2 * r**4 + k3 * r**6)
-print(duv)
+est.f / est.rho[0]
 
-rvcprint.rvcprint(subfig='b', interval=0.1)
+camera.f / camera.rho[1]
 
+(T_unknown * est.pose).printline()
+
+# plt.clf()
+plotvol3([-0.9, 0.9, -0.9, 0.9, -1.5, 0.3])
+est.plot_camera(scale=0.3, shape='camera', color='k', frame=True)
+# est.pose.plot(length=0.4, style='line', color='b', flo=(0.07, 0, -0.01))
+
+plot_sphere(0.03, P, color='k')
+SE3().plot(frame='T', color='b', length=0.3)
+
+
+rvcprint.rvcprint(interval=(0.4, 0.4, 0.2))

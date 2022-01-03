@@ -1,35 +1,69 @@
 #!/usr/bin/env python3
-    
+
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
-from matplotlib import cm
+from spatialmath.base import plot_circle
 
-im = Image.Squares(1, size=256).rotate(0.3).canny()
-im.disp()
-dx = im.distance_transform(invert=True)
-dx.disp(colorbar=dict(label='Euclidean distance (pixels)'))
+objects = Image.Read('segmentation.png')
+S = Kernel.Circle(3)
+closed = objects.close(S)
+clean = closed.open(S)
 
+
+skeleton = clean.thin()
+
+bg = clean.to('float32') - 0.2 * skeleton.to('float32')
+bg.disp()
 rvcprint.rvcprint(subfig='a')
 
-corners = np.array([[-1, -1], [1, -1], [1, 1], [-1, 1],  [-1, -1]])
-corners = corners*64 + 128
-plt.plot(corners[:,0], corners[:,1], color='r', linewidth=2)
+ends = skeleton.endpoint()
 
+
+comp = bg.choose((0.5), ends)
+comp.disp(grid=True)
+plot_circle(5, ends.nonzero(), color="r")
+plt.xlim(203, 326)
+plt.ylim(358, 261)
 rvcprint.rvcprint(subfig='b')
 
-fig = plt.figure()
-X, Y = np.meshgrid(np.arange(256), np.arange(256))
-ax = fig.add_subplot(111, projection='3d')
-ax.plot_surface(X, Y, dx.image, cmap=cm.viridis,
-    rstride=2, cstride=2, edgecolor='none', linewidth=0)
-
-corners = np.hstack((corners, 20 * np.ones((5,1))))
-ax.plot(corners[:,0], corners[:,1], corners[:,2], color='r', linewidth=2)
-ax.set_xlabel('u (pixels)')
-ax.set_ylabel('v (pixels)')
-ax.set_zlabel('Euclidean distance (pixels)')
-ax.view_init(40, -105)
-
+joins = skeleton.triplepoint()
+comp = comp.choose(0, joins)
+comp.disp(grid=True)
+plot_circle(5, joins.nonzero(), color="r")
+plt.xlim(203, 326)
+plt.ylim(358, 261)
 rvcprint.rvcprint(subfig='c')
+
+
+# skeleton = clean.thin()
+# composite = clean * 0.3 + skeleton
+
+# composite.disp(colormap='invert', grid=True)
+# rvcprint.rvcprint(subfig='a')
+
+# ends = skeleton.endpoint()
+# ends.disp()
+# composite = ends * 100 + clean * 0.3 + skeleton * 0.2
+# composite.disp(colormap='invert', grid=True)
+# plt.xlim(203, 326)
+# plt.ylim(358, 261)
+# rvcprint.rvcprint(subfig='b')
+
+# joins = skeleton.triplepoint()
+# joins.disp()
+# composite = joins + clean * 0.3 + skeleton * 0.2
+# composite.disp(colormap='invert', grid=True)
+# plt.xlim(203, 326)
+# plt.ylim(358, 261)
+# rvcprint.rvcprint(subfig='c', debug=True)
+
+
+# composite.disp(colormap='invert', grid=True)
+# rvcprint.rvcprint(subfig='a')
+
+# bg = (Image(255 * np.ones(objects.shape)) - clean * 0.3 - skeleton * 0.2).colorize()
+
+# ends = skeleton.endpoint()
+# composite = ends.colorize([255, 0, 0]) + bg

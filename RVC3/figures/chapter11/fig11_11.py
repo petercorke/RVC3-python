@@ -6,31 +6,36 @@ import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from spatialmath import SE3
+from matplotlib import cm
 
+foreground = Image.Read('greenscreen.png', dtype='float')
 
-movie = VideoFile('traffic_sequence.mp4', grey=True, dtype='float')
-
-sigma = 0.02
-for framenum, im in enumerate(movie):
-    # plt.imshow(im.image)
-    # plt.pause(0.02)
-
-    if framenum == 0:
-        background = im
-    else:
-        d = im - background
-        background += d.clip(-sigma, sigma)
-
-    if framenum > 200:
-        break
-
-im.disp()
+foreground.disp(title=False)
 rvcprint.rvcprint(subfig='a')
 
-background.disp()
+cc = foreground.gamma_decode('sRGB').tristim2cc()
+print(cc)
+h = cc.plane('g').hist()
+
+plt.clf()
+h.plot()
+plt.xlabel('Chromaticity (g)');
+plt.grid(True)
+ylim = plt.gca().get_ylim()
+plt.plot([0.45, 0.45], ylim, 'b--')
 rvcprint.rvcprint(subfig='b')
 
-(im - background).disp(colormap='signed')
+mask = cc.plane('g') < 0.45
+mask.disp(black=0.2)
 rvcprint.rvcprint(subfig='c')
 
+mask3 = mask.colorize()
+(foreground * mask3).disp()
+rvcprint.rvcprint(subfig='d')
 
+background = Image.Read('road.png', dtype='float').samesize(foreground)
+(background * (1 - mask3)).disp()
+rvcprint.rvcprint(subfig='e')
+
+(foreground * mask3  + background * (1 - mask3)).disp()
+rvcprint.rvcprint(subfig='f')

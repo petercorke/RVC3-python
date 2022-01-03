@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
 
 import rvcprint
+import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from spatialmath import SE3
+from machinevisiontoolbox.base.imageio import convert
 
-ev = EarthView()
 
+dartmouth = WebCam('https://webcam.dartmouth.edu/webcam/image.jpg')
 
-ev.grab(-27.475722, 153.0285, zoom=17).disp()
-rvcprint.rvcprint(subfig='a')
+dartmouth.grab().disp()
 
-ev.grab(-27.475722, 153.0285, zoom=17, type='roadmap').disp()
-rvcprint.rvcprint(subfig='b')
+# commented out so we don't auto clobber a nice image
+# rvcprint.rvcprint()
+
+# for im in dartmouth:
+
+#     plt.imshow(im.image)
+#     plt.pause(0.02)

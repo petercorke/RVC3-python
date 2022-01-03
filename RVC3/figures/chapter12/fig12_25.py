@@ -6,62 +6,55 @@ import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
-import scipy as sp
-import spatialmath.base as smb
+from spatialmath.base import plot_point
 
-def scalespace(im, n, sigma=1):
+b1 = Image.Read('building2-1.png', grey=True, dtype='float')
+b1.disp(darken=True)
+harris = b1.Harris(nfeat=250)
+C = b1.Harris_corner_strength()
+C.disp(colormap='signed')
+harris.plot(marker='sk', markerfacecolor='none')
+plt.xlim(250, 450)
+plt.ylim(400, 200)
 
-    g = [im]
-    scale = 0.5
-    scales = [scale]
-    lap = []
+rvcprint.rvcprint(subfig='a')
 
-    for i in range(n-1):
-        im = im.smooth(sigma)
-        scale = np.sqrt(scale ** 2 + sigma ** 2)
-        scales.append(scale)
-        g.append(im)
-        x = (g[-1] - g[-2]) * scale ** 2 
-        lap.append(x)
+# ----------------------------------------------------------------------- #
 
-    return g, lap, scales
+# rvcprint.rvcprint(subfig='b')
 
-def scalemax(L, scale):
+# idisp(strength,  'invsigned', 'nogui')
+# C.plot('ks')
+# axis([300 500 300 500])
+# rvcprint.rvcprint(subfig='a', 'svg')
 
-    # absolute value of Laplacian as a 3D matrix, with scale along axis 2
-    L = np.dstack([np.abs(x.image) for x in L])
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+xc = 420
+yc = 390
+xc, yc = 320, 300
+n = 35
+x = np.arange(xc-n, xc+n)
+y = np.arange(yc-n, yc+n)
 
-    # find maxima within all 26 neighbouring pixels
-    # create 3x3x3 structuring element and maximum filter
-    se_nhood = np.ones((3,3,3))
-    se_nhood[1, 1, 1] = 0
-    eps = np.finfo(np.float64).eps
-    maxima = (L > sp.ndimage.maximum_filter(L, footprint=se_nhood, mode='nearest')) & (L > 100 * eps)
+X, Y = np.meshgrid(x, y)
+Z = C.to_float()[yc-n:yc+n, xc-n:xc+n]
+# xnew = np.linspace(xc-n, xc+n, 200)
+# ynew = np.linspace(yc-n, yc+n, 200)
+# Xnew, Ynew = np.meshgrid(xnew, ynew)
 
-    # find the locations of the minima
-    i, j, k = np.nonzero(maxima)
-    
-    # create result matrix, one row per feature: i, j, k, |L|
-    # where k is index into scale
-    result = np.column_stack((j, i, np.r_[scale][k], L[i, j, k]))
+# from scipy import interpolate
+# tck = interpolate.bisplrep(X, Y, Z, s=0.01)
+# Znew = interpolate.bisplev(xnew, ynew, tck)
 
-    # sort the rows on strength column, descending order
-    k = np.argsort(-result[:, 3])
-    return result[k, :]
+# ax.plot_surface(Xnew, Ynew, Znew, cmap=cm.RdBu, cstride=1, rstride=1, alpha=1)
 
-
-im = Image.Read('scale-space.png', dtype='float')
-im.disp(square=True, black=0.3, grid=True, title=False)
-
-G, L, s = scalespace(im, 60, 2)
-
-features = scalemax(L, s)
-print(features)
-
-for feature in features:
-    plt.plot(feature[0], feature[1], 'k+')
-    smb.plot_circle(feature[2] * np.sqrt(2), 'y', centre=feature[:2])
-
-rvcprint.rvcprint()
+ax.plot_surface(X, Y, Z, cmap=cm.RdBu, cstride=1, rstride=1, alpha=1)
+plt.xlabel('u (pixels)')
+plt.ylabel('v (pixels)')
+ax.set_zlabel('corner strength')
+ax.view_init(41, -107)
+rvcprint.rvcprint(subfig='b')
 
 # plt.show(block=True)
+

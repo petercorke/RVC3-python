@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Based on code by Pascal Getreuer 2006
 # Demo for colorspace.m - the CIE xyY "tongue"
 # Based on xycolorspace.m

@@ -11,33 +11,34 @@ from matplotlib import cm
 
 
 castle = Image.Read('castle.png', grey=True, dtype='float')
+castle.disp(title=False)
 
-Du = Kernel.Sobel()
-Iu = castle.convolve(Du)
-Iv = castle.convolve(Du.T)
-
-Iu.disp(colormap='signed')
+plt.plot([0, castle.width], [360, 360], 'y')
+plt.xlim(0, castle.width)
 rvcprint.rvcprint(subfig='a')
 
-Iv.disp(colormap='signed')
+plt.clf()
+p = castle.image[360, :]
+plt.plot(p)
+plt.xlabel('u (pixels)')
+plt.ylabel('Pixel value')
+plt.xlim(0, castle.width)
+plt.grid(True)
 rvcprint.rvcprint(subfig='b')
 
-
-Iu = castle.convolve(Kernel.DGauss(sigma=2));
-Iv = castle.convolve(Kernel.DGauss(sigma=2).T);
-
-m = (Iu ** 2 + Iv ** 2).sqrt()
-m.disp(black=0.4)
+plt.clf()
+plt.plot(p, '-o', markersize=4)
+plt.xlim(559, 609)
+plt.ylabel('Pixel value')
+plt.xlabel('u (pixels)')
+plt.grid(True)
 rvcprint.rvcprint(subfig='c')
 
 plt.clf()
-# th = np.arctan2(Iv.image, Iu.image)
-th = Iu.direction(Iv)
-s = 10
-plt.quiver(np.arange(0, castle.width, 20), np.arange(0, castle.height, 20), 
-       Iu.image[::20, ::20], Iv.image[::20, ::20], scale=s)
-plt.xlim(0, castle.width)
-plt.ylim(0, castle.height)
+plt.plot(np.diff(p), '-o', markersize=4)
+plt.xlim(559, 609)
 plt.xlabel('u (pixels)')
-plt.ylabel('v (pixels)')
+plt.ylabel('Derivative of grey value')
+plt.grid(True)
 rvcprint.rvcprint(subfig='d')
+

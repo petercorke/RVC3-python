@@ -4,11 +4,9 @@ import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
-from matplotlib.ticker import ScalarFormatter
-from matplotlib import cm
 import scipy as sp
 
-def ransac(x, y, npoints=2, maxiter=20, t=1e-6, d=4):
+def ransac_line(x, y, npoints=2, maxiter=20, t=1e-6, d=4):
 
     iterations = 0
     n = len(x)
@@ -42,39 +40,40 @@ def ransac(x, y, npoints=2, maxiter=20, t=1e-6, d=4):
     
     return best_model, best_inliers
 
+n = 11
+nbad = 4
 
-x = np.linspace(0, 10, 10)
+x = np.arange(n)
 y = 3 * x - 10
 
 plt.plot(x,y, 'k', label='_nolegend_')
 plt.grid(True)
 
 
-np.random.seed(0)
-
-k = np.random.randint(1, len(x)-1, (5,))
-good = np.ones((len(x),), np.bool)
-good[k] = False
-y[~good] = y[~good] + np.random.rand(len(k)) * 10
+np.random.seed(1)
+bad = np.random.choice(n, nbad, replace=False)
+print(bad)
+good = list(set(np.arange(11)) - set(bad))
+y[bad] = y[bad] + np.random.rand(nbad) * 10 + 2
 plt.plot(x[good], y[good], 'ko', markerfacecolor='k', markersize=8)
-plt.plot(x[~good], y[~good], 'ro', markerfacecolor='r', markersize=8)
+plt.plot(x[bad], y[bad], 'ro', markerfacecolor='r', markersize=8)
 
 m, c, *_ = sp.stats.linregress(x, y)
 
-plt.plot(x, m * x + c, 'b--')
+plt.plot(x, m * x + c, 'r--')
 
-th, inliers = ransac(x, y)
+th, inliers = ransac_line(x, y)
+print(inliers)
 
-plt.plot(x, th[0] * x + th[1], 'bs', markerfacecolor='w', markersize=3)
+plt.plot(x, th[0] * x + th[1], 'bs-', markerfacecolor='w', markersize=3)
 
 # grid
 plt.ylabel('$y = 3x-10$')
 plt.xlabel('$x$')
 plt.xlim(-0.5, 10.1)
-plt.ylim(-10.5, 25)
+plt.ylim(-10.5, 30)
 plt.legend(['good data point', 'bad data point', 'least squares estimate', 'RANSAC estimate'])
 
 rvcprint.rvcprint()
-# plt.show(block=True)
 
 

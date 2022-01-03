@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 from spatialmath import SE3
 import rvcprint
 
-with (open("writing/hershey.json", "r")) as file:
-    hdict = json.load(file)
+hdict = rtb_load_jsonfile("data/hershey.json")
 
+mm = 1e-3
 letter = hdict['B']
 print(letter)
 lift = 0.1
@@ -23,12 +23,12 @@ traj = mstraj(via, dt=0.02, qdmax=[0.5, 0.5, 0.5], q0=[0, 0, lift], tacc=0.2).q
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-plt.plot(traj[:,0], traj[:,1], traj[:,2], linewidth=2)
-plt.plot(traj[0,0], traj[0,1], traj[0,2], 'k*', markersize=8)
-plt.plot(traj[-1,0], traj[-1,1], traj[-1,2], 'ko')
+plt.plot(traj[:,0]/mm, traj[:,1]/mm, traj[:,2]/mm, linewidth=2)
+plt.plot(traj[0,0]/mm, traj[0,1]/mm, traj[0,2]/mm, 'k*', markersize=8)
+plt.plot(traj[-1,0]/mm, traj[-1,1]/mm, traj[-1,2]/mm, 'ko')
 
-plt.xlabel('x')
-plt.ylabel('y')
-ax.set_zlabel('z')
+plt.xlabel('x (mm)')
+plt.ylabel('y (mm)')
+ax.set_zlabel('z (mm)')
 
-rvcprint.rvcprint(thicken=2, interval=0.05)
+rvcprint.rvcprint(thicken=2)

@@ -6,39 +6,11 @@ from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from spatialmath import SE3
 
-# ax = plt.subplot(2, 2, 1)
-# # im = testpattern('rampx', 256, 2)
-# im = Image.Ramp(cycles=2, size=500, dir='x')
-
-# im.disp(ax=ax, plain=True)
-
-# ax = plt.subplot(2, 2, 2)
-# # im = testpattern('siny', 256, 2)
-# im = Image.Sin(cycles=5, size=500, dir='y')
-# im.disp(ax=ax, plain=True)
-
-# ax = plt.subplot(2, 2, 3)
-# im = Image.Squares(5, 500)
-# im.disp(ax=ax, plain=True)
-
-# ax = plt.subplot(2, 2, 4)
-# # im = testpattern('dots', 256, 256, 100)
-# im = Image.Circles(2, 500)
-
-# im.disp(ax=ax, plain=True)
-
-# rvcprint.rvcprint(subfig='a')
+ev = EarthView()
 
 
-canvas = Image.Zeros(1000, 1000, dtype='float')
-sq1 = Image.Constant(150, 150, value=0.5)
-sq2 = Image.Constant(80, 80, value=0.9)
-canvas.paste(sq1, [100, 100])
-canvas.paste(sq2, [300, 300])
-circle = 0.6 * Kernel.Circle(120)
-canvas.paste(circle, [600, 600])
-# canvas = iline( canvas, [100, 100], [800, 800], value=0.8)
-canvas.disp() #black=0.2)
+ev.grab(-27.475722, 153.0285, zoom=17).disp()
+rvcprint.rvcprint(subfig='a')
 
-rvcprint.rvcprint(subfig='b', debug=True)
-
+ev.grab(-27.475722, 153.0285, zoom=17, type='roadmap').disp()
+rvcprint.rvcprint(subfig='b')

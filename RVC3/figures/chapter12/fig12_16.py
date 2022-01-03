@@ -6,29 +6,15 @@ import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
-import pytesseract
 
-castle = Image.Read('penguins.png')
-# roi = [420, 1000, 0, 900]
-castle.disp()
+sharks = Image.Read('sharks.png')
 
-s = pytesseract.image_to_string(castle.image)
-print(s)
-ocr = pytesseract.image_to_data(castle.image,output_type=pytesseract.Output.DICT)
-print(ocr)
-for i, conf in enumerate(ocr['conf']):
-    if conf == '-1':
-        continue
-    if conf < 50:
-        continue
+sharks.disp(black=0.1)
 
-    plot_labelbox(
-        ocr['text'][i],
-        tl=(ocr['left'][i], ocr['top'][i]),
-        wh=(ocr['width'][i], ocr['height'][i]),
-        color='y',
-        linestyle='--')
-    print(conf, ocr['text'][i])
+fv = sharks.blobs()
+# print(fv)
 
+fv.plot_centroid()
+fv.plot_perimeter(color='red')
 
 rvcprint.rvcprint()
