@@ -1,9 +1,9 @@
 {
-    "id": 140460388295536,
+    "id": 140409833345568,
     "created_by": "corkep",
     "creation_time": 1629712229,
-    "scene_width": 8136.800000000001,
-    "scene_height": 4082.4000000000005,
+    "scene_width": 7168.000000000001,
+    "scene_height": 3785.6000000000004,
     "blocks": [
         {
             "id": 140460448770080,
@@ -13,6 +13,7 @@
             "pos_y": -80.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 2,
             "outputsNum": 1,
             "inputs": [
@@ -52,17 +53,26 @@
                 [
                     "x0",
                     null
+                ],
+                [
+                    "steer_max",
+                    "math.pi*0.45"
+                ],
+                [
+                    "x0",
+                    null
                 ]
             ]
         },
         {
             "id": 140460448927904,
             "block_type": "SUM",
-            "title": "Sum Block",
+            "title": "Eq (5.2)",
             "pos_x": 180.0,
             "pos_y": 60.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 2,
             "outputsNum": 1,
             "inputs": [
@@ -96,19 +106,20 @@
                     "+-"
                 ],
                 [
-                    "angles",
-                    false
+                    "mode",
+                    null
                 ]
             ]
         },
         {
             "id": 140460448928864,
             "block_type": "SUM",
-            "title": "Sum Block 1",
+            "title": "Eq (5.1)",
             "pos_x": 220.0,
             "pos_y": -100.0,
             "width": 100,
             "height": 120.0,
+            "flipped": false,
             "inputsNum": 3,
             "outputsNum": 1,
             "inputs": [
@@ -149,19 +160,20 @@
                     "+--"
                 ],
                 [
-                    "angles",
-                    false
+                    "mode",
+                    null
                 ]
             ]
         },
         {
             "id": 140460448929200,
             "block_type": "FUNCTION",
-            "title": "Function Block",
+            "title": "RIGHT sensor",
             "pos_x": -40.0,
             "pos_y": 60.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -202,17 +214,22 @@
                 [
                     "args",
                     []
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
         {
             "id": 140460448929440,
             "block_type": "FUNCTION",
-            "title": "Function Block 1",
+            "title": "LEFT sensor",
             "pos_x": -40.0,
             "pos_y": -80.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -253,17 +270,22 @@
                 [
                     "args",
                     []
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
         {
             "id": 140460448930256,
             "block_type": "CONSTANT",
-            "title": "Constant Block",
+            "title": "Speed",
             "pos_x": 40.0,
             "pos_y": -220.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 0,
             "outputsNum": 1,
             "inputs": [],
@@ -286,11 +308,12 @@
         {
             "id": 140460448930496,
             "block_type": "GAIN",
-            "title": "Gain Block",
+            "title": "K_s",
             "pos_x": -440.0,
             "pos_y": -60.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -378,6 +401,7 @@
             "pos_y": 60.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 0,
             "inputs": [
@@ -421,6 +445,7 @@
             "pos_y": -100.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 0,
             "inputs": [
@@ -457,18 +482,19 @@
             ]
         },
         {
-            "id": 140460449066432,
-            "block_type": "SCOPEXY1",
-            "title": "Scopexy1 Block",
-            "pos_x": -100.0,
+            "id": 140409901425328,
+            "block_type": "VEHICLEPLOT",
+            "title": "Vehicleplot Block",
+            "pos_x": -80.0,
             "pos_y": -220.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 0,
             "inputs": [
                 {
-                    "id": 140460449066720,
+                    "id": 140409901425376,
                     "index": 0,
                     "multi_wire": true,
                     "position": 1,
@@ -478,22 +504,26 @@
             "outputs": [],
             "parameters": [
                 [
-                    "indices",
-                    [
-                        0,
-                        1
-                    ]
-                ],
-                [
-                    "style",
+                    "animation",
                     null
                 ],
                 [
-                    "scale",
-                    "auto"
+                    "path",
+                    null
                 ],
                 [
                     "labels",
+                    [
+                        "X",
+                        "Y"
+                    ]
+                ],
+                [
+                    "square",
+                    true
+                ],
+                [
+                    "init",
                     null
                 ]
             ]
@@ -573,12 +603,6 @@
             "wire_type": 3
         },
         {
-            "id": 140460449109520,
-            "start_socket": 140460448813008,
-            "end_socket": 140460449066720,
-            "wire_type": 3
-        },
-        {
             "id": 140460449108272,
             "start_socket": 140460448929248,
             "end_socket": 140460449109040,
@@ -589,6 +613,13 @@
             "start_socket": 140460448928192,
             "end_socket": 140460449108224,
             "wire_type": 3
+        },
+        {
+            "id": 140409901322640,
+            "start_socket": 140460448813008,
+            "end_socket": 140409901425376,
+            "wire_type": 3
         }
-    ]
+    ],
+    "labels": []
 }

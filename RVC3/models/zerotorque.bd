@@ -1,0 +1,138 @@
+{
+    "id": 140465743481776,
+    "created_by": "corkep",
+    "creation_time": 1632743026,
+    "scene_width": 7168.000000000001,
+    "scene_height": 3785.6000000000004,
+    "blocks": [
+        {
+            "id": 140386636523792,
+            "block_type": "ARMPLOT",
+            "title": "Armplot",
+            "pos_x": 0.0,
+            "pos_y": 0.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140386636578976,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "robot",
+                    null
+                ],
+                [
+                    "backend",
+                    "pyplot"
+                ]
+            ]
+        },
+        {
+            "id": 140386637475904,
+            "block_type": "CONSTANT",
+            "title": "zero joint torque",
+            "pos_x": -380.0,
+            "pos_y": 0.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140386637475952,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "value",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140465830142832,
+            "block_type": "FDYN",
+            "title": "forward dynamics",
+            "pos_x": -220.0,
+            "pos_y": 0.0,
+            "width": 125,
+            "height": 120.0,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 3,
+            "inputs": [
+                {
+                    "id": 140465830143168,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140465830143024,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                },
+                {
+                    "id": 140465830142736,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                },
+                {
+                    "id": 140465830191888,
+                    "index": 2,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "robot",
+                    null
+                ],
+                [
+                    "end",
+                    "end-effector"
+                ]
+            ]
+        }
+    ],
+    "wires": [
+        {
+            "id": 140465830191840,
+            "start_socket": 140386637475952,
+            "end_socket": 140465830143168,
+            "wire_type": 3
+        },
+        {
+            "id": 140465830194720,
+            "start_socket": 140465830143024,
+            "end_socket": 140386636578976,
+            "wire_type": 3
+        }
+    ],
+    "labels": []
+}

@@ -1,9 +1,9 @@
 {
-    "id": 140252600114480,
+    "id": 140289492570800,
     "created_by": "corkep",
     "creation_time": 1627594455,
-    "scene_width": 8293.6,
-    "scene_height": 4032.0000000000005,
+    "scene_width": 7168.000000000001,
+    "scene_height": 4026.4000000000005,
     "blocks": [
         {
             "id": 140611883007616,
@@ -13,6 +13,7 @@
             "pos_y": -40.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 0,
             "outputsNum": 1,
             "inputs": [],
@@ -22,8 +23,7 @@
                     "index": 0,
                     "multi_wire": true,
                     "position": 3,
-                    "socket_type": 2,
-                    "socket_sign": null
+                    "socket_type": 2
                 }
             ],
             "parameters": [
@@ -41,6 +41,7 @@
             "pos_y": -180.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 0,
             "outputsNum": 1,
             "inputs": [],
@@ -50,8 +51,7 @@
                     "index": 0,
                     "multi_wire": true,
                     "position": 3,
-                    "socket_type": 2,
-                    "socket_sign": null
+                    "socket_type": 2
                 }
             ],
             "parameters": [
@@ -62,53 +62,14 @@
             ]
         },
         {
-            "id": 140611883097152,
-            "block_type": "SCOPEXY1",
-            "title": "Path",
-            "pos_x": 80.0,
-            "pos_y": -140.0,
-            "width": 100,
-            "height": 100,
-            "inputsNum": 1,
-            "outputsNum": 0,
-            "inputs": [
-                {
-                    "id": 140611883097296,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 1,
-                    "socket_type": 1,
-                    "socket_sign": null
-                }
-            ],
-            "outputs": [],
-            "parameters": [
-                [
-                    "indices",
-                    null
-                ],
-                [
-                    "style",
-                    null
-                ],
-                [
-                    "scale",
-                    "auto"
-                ],
-                [
-                    "labels",
-                    null
-                ]
-            ]
-        },
-        {
             "id": 140611883291696,
             "block_type": "BICYCLE",
-            "title": "Bicycle Block",
+            "title": "Bicycle model",
             "pos_x": -100.0,
             "pos_y": -140.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 2,
             "outputsNum": 1,
             "inputs": [
@@ -117,16 +78,14 @@
                     "index": 0,
                     "multi_wire": true,
                     "position": 1,
-                    "socket_type": 1,
-                    "socket_sign": null
+                    "socket_type": 1
                 },
                 {
                     "id": 140611883291888,
                     "index": 1,
                     "multi_wire": true,
                     "position": 1,
-                    "socket_type": 1,
-                    "socket_sign": null
+                    "socket_type": 1
                 }
             ],
             "outputs": [
@@ -135,26 +94,76 @@
                     "index": 0,
                     "multi_wire": true,
                     "position": 3,
-                    "socket_type": 2,
-                    "socket_sign": null
+                    "socket_type": 2
                 }
             ],
             "parameters": [
                 [
                     "x0",
-                    null
+                    "None"
                 ],
                 [
                     "L",
-                    1
+                    1.0
                 ],
                 [
                     "vlim",
-                    1
+                    1.0
                 ],
                 [
                     "slim",
-                    1
+                    1.0
+                ],
+                [
+                    "x0",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140289557476640,
+            "block_type": "VEHICLEPLOT",
+            "title": "Vehicle path",
+            "pos_x": 60.0,
+            "pos_y": -140.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140289557476784,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "animation",
+                    null
+                ],
+                [
+                    "path",
+                    null
+                ],
+                [
+                    "labels",
+                    [
+                        "X",
+                        "Y"
+                    ]
+                ],
+                [
+                    "square",
+                    true
+                ],
+                [
+                    "init",
+                    null
                 ]
             ]
         }
@@ -173,10 +182,11 @@
             "wire_type": 3
         },
         {
-            "id": 140611883294288,
+            "id": 140289555293856,
             "start_socket": 140611883291792,
-            "end_socket": 140611883097296,
+            "end_socket": 140289557476784,
             "wire_type": 3
         }
-    ]
+    ],
+    "labels": []
 }

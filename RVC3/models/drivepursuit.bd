@@ -185,8 +185,8 @@
                     "+-"
                 ],
                 [
-                    "angles",
-                    false
+                    "mode",
+                    null
                 ]
             ]
         },
@@ -270,16 +270,16 @@
                     "nout",
                     1
                 ],
-                [
-                    "dict",
+                  [
+                    "persistent",
                     false
                 ],
                 [
-                    "pargs",
+                    "fargs",
                     []
                 ],
                 [
-                    "dargs",
+                    "fkwargs",
                     {}
                 ]
             ]
@@ -389,8 +389,8 @@
                     "+-"
                 ],
                 [
-                    "angles",
-                    true
+                    "mode",
+                    null
                 ]
             ]
         },
@@ -532,15 +532,15 @@
                     1
                 ],
                 [
-                    "dict",
+                    "persistent",
                     false
                 ],
                 [
-                    "pargs",
+                    "fargs",
                     []
                 ],
                 [
-                    "dargs",
+                    "fkwargs",
                     {}
                 ]
             ]

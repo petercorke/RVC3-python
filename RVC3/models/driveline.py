@@ -20,10 +20,10 @@ def background_graphics(ax):
     ax.plot(x0[0], x0[1], 'o')
 
 speed = bd.CONSTANT(0.5)
-slope = bd.CONSTANT(math.atan2(-L[0], L[1]))
+slope = bd.CONSTANT(math.atan2(L[0], -L[1]))
 d2line = bd.FUNCTION(lambda u: (u[0] * L[0] + u[1] * L[1] + L[2])/math.sqrt(L[0]**2 + L[1]**2))
 heading_error = bd.SUM('+-', angles=True)
-steer_sum = bd.SUM('+-')
+steer_sum = bd.SUM('++')
 Kd = bd.GAIN(0.5, name='Kd')
 Kh = bd.GAIN(1, name='Kh')
 bike = bd.BICYCLE(x0=x0, name='vehicle')

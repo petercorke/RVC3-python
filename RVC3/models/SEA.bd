@@ -1,0 +1,1352 @@
+{
+    "id": 140355776943104,
+    "created_by": "corkep",
+    "creation_time": 1632779048,
+    "scene_width": 13154.400000000001,
+    "scene_height": 5796.000000000001,
+    "blocks": [
+        {
+            "id": 140433475929616,
+            "block_type": "INTEGRATOR",
+            "title": "x1d",
+            "pos_x": 680.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433475968352,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433475968400,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "x0",
+                    0
+                ],
+                [
+                    "min",
+                    null
+                ],
+                [
+                    "max",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140433401351568,
+            "block_type": "INTEGRATOR",
+            "title": "x1",
+            "pos_x": 820.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401351664,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401351616,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "x0",
+                    0
+                ],
+                [
+                    "min",
+                    null
+                ],
+                [
+                    "max",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140433401351712,
+            "block_type": "INTEGRATOR",
+            "title": "x2d",
+            "pos_x": 580.0,
+            "pos_y": 240.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401352000,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401352144,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "x0",
+                    0
+                ],
+                [
+                    "min",
+                    null
+                ],
+                [
+                    "max",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140433401389408,
+            "block_type": "INTEGRATOR",
+            "title": "x2",
+            "pos_x": 880.0,
+            "pos_y": 240.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401389456,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401389792,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "x0",
+                    0
+                ],
+                [
+                    "min",
+                    null
+                ],
+                [
+                    "max",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140433401391136,
+            "block_type": "GAIN",
+            "title": "x*",
+            "pos_x": -240.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401391184,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401391472,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "K",
+                    1
+                ],
+                [
+                    "premul",
+                    false
+                ]
+            ]
+        },
+        {
+            "id": 140433401391568,
+            "block_type": "GAIN",
+            "title": "LQR gain",
+            "pos_x": 60.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401392000,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401391952,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "K",
+                    1
+                ],
+                [
+                    "premul",
+                    false
+                ]
+            ]
+        },
+        {
+            "id": 140433401392048,
+            "block_type": "GAIN",
+            "title": "1/m1",
+            "pos_x": 540.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401392240,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401392192,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "K",
+                    1
+                ],
+                [
+                    "premul",
+                    false
+                ]
+            ]
+        },
+        {
+            "id": 140433401392624,
+            "block_type": "GAIN",
+            "title": "Ks",
+            "pos_x": 1280.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401392480,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401392576,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "K",
+                    1
+                ],
+                [
+                    "premul",
+                    false
+                ]
+            ]
+        },
+        {
+            "id": 140433401393104,
+            "block_type": "GAIN",
+            "title": "1/m2",
+            "pos_x": 440.0,
+            "pos_y": 240.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401392768,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401392912,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "K",
+                    1
+                ],
+                [
+                    "premul",
+                    false
+                ]
+            ]
+        },
+        {
+            "id": 140433401392816,
+            "block_type": "SUM",
+            "title": "state error",
+            "pos_x": -80.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401471040,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140433401471184,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401471136,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "signs",
+                    "+-"
+                ],
+                [
+                    "mode",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140433401471232,
+            "block_type": "SUM",
+            "title": "total force on m1",
+            "pos_x": 400.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401472672,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140433401471568,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401471664,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "signs",
+                    "+-"
+                ],
+                [
+                    "mode",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140433401471328,
+            "block_type": "SUM",
+            "title": "spring displacement",
+            "pos_x": 1140.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401473296,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140433401472192,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401473200,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "signs",
+                    "+-"
+                ],
+                [
+                    "mode",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140433401472816,
+            "block_type": "CLIP",
+            "title": "Clip Block",
+            "pos_x": 200.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401471856,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401473872,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "min",
+                    "-math.inf"
+                ],
+                [
+                    "max",
+                    "math.inf"
+                ]
+            ]
+        },
+        {
+            "id": 140433401473968,
+            "block_type": "PROD",
+            "title": "Prod Block",
+            "pos_x": 740.0,
+            "pos_y": 240.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 2,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401474640,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140433401472912,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401473056,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "ops",
+                    "**"
+                ],
+                [
+                    "matrix",
+                    false
+                ]
+            ]
+        },
+        {
+            "id": 140433401473344,
+            "block_type": "FUNCTION",
+            "title": "collision?",
+            "pos_x": 780.0,
+            "pos_y": 380.0,
+            "width": 100,
+            "height": 100,
+            "flipped": true,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433401474976,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433401474400,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "func",
+                    null
+                ],
+                [
+                    "nin",
+                    1
+                ],
+                [
+                    "nout",
+                    1
+                ],
+                [
+                    "persistent",
+                    false
+                ],
+                [
+                    "args",
+                    []
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140433401474256,
+            "block_type": "STEP",
+            "title": "Step Block",
+            "pos_x": -420.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140433401569488,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "T",
+                    1
+                ],
+                [
+                    "off",
+                    0
+                ],
+                [
+                    "on",
+                    1
+                ]
+            ]
+        },
+        {
+            "id": 140433423449440,
+            "block_type": "MUX",
+            "title": "state",
+            "pos_x": 600.0,
+            "pos_y": -20.0,
+            "width": 100,
+            "height": 140.0,
+            "flipped": true,
+            "inputsNum": 4,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140433423449344,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140433423449632,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140433423450016,
+                    "index": 2,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140433423449920,
+                    "index": 3,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433423449488,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "nin",
+                    4
+                ]
+            ]
+        },
+        {
+            "id": 140433423489488,
+            "block_type": "CONNECTOR",
+            "pos_x": 440.0,
+            "pos_y": 540.0,
+            "inputs": [
+                {
+                    "id": 140433423489536,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140433423489440,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 2
+                }
+            ]
+        },
+        {
+            "id": 140433476075776,
+            "block_type": "SCOPE",
+            "title": "Load position",
+            "pos_x": 1480.0,
+            "pos_y": 240.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140433476076928,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    1
+                ],
+                [
+                    "styles",
+                    null
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    [
+                        "x2"
+                    ]
+                ],
+                [
+                    "grid",
+                    true
+                ]
+            ]
+        },
+        {
+            "id": 140433476077024,
+            "block_type": "SCOPE",
+            "title": "Spring force",
+            "pos_x": 1480.0,
+            "pos_y": -200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140433476077120,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    1
+                ],
+                [
+                    "styles",
+                    null
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    [
+                        "Fs"
+                    ]
+                ],
+                [
+                    "grid",
+                    true
+                ]
+            ]
+        }
+    ],
+    "wires": [
+        {
+            "id": 140433423437248,
+            "start_socket": 140433401569488,
+            "end_socket": 140433401391184,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423449392,
+            "start_socket": 140433401391472,
+            "end_socket": 140433401471040,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423449968,
+            "start_socket": 140433423449488,
+            "end_socket": 140433401471184,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    -80.0,
+                    -140.0
+                ],
+                [
+                    -120.0,
+                    -140.0
+                ],
+                [
+                    -120.0,
+                    20.0
+                ],
+                [
+                    600.0,
+                    20.0
+                ]
+            ]
+        },
+        {
+            "id": 140433423487616,
+            "start_socket": 140433401471136,
+            "end_socket": 140433401392000,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423488240,
+            "start_socket": 140433401391952,
+            "end_socket": 140433401471856,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423488912,
+            "start_socket": 140433401473872,
+            "end_socket": 140433401472672,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423450064,
+            "start_socket": 140433401471664,
+            "end_socket": 140433401392240,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423449824,
+            "start_socket": 140433401392192,
+            "end_socket": 140433475968352,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423488768,
+            "start_socket": 140433475968400,
+            "end_socket": 140433401351664,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423487136,
+            "start_socket": 140433401473200,
+            "end_socket": 140433401392480,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423489296,
+            "start_socket": 140433401351616,
+            "end_socket": 140433401473296,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423489344,
+            "start_socket": 140433401392576,
+            "end_socket": 140433423489536,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    453.0,
+                    540.0
+                ],
+                [
+                    1440.0,
+                    540.0
+                ],
+                [
+                    1440.0,
+                    -160.0
+                ],
+                [
+                    1380.0,
+                    -160.0
+                ]
+            ]
+        },
+        {
+            "id": 140433423489632,
+            "start_socket": 140433423489440,
+            "end_socket": 140433401471568,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423490640,
+            "start_socket": 140433401392912,
+            "end_socket": 140433401352000,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423490736,
+            "start_socket": 140433401352144,
+            "end_socket": 140433401474640,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423490688,
+            "start_socket": 140433401473056,
+            "end_socket": 140433401389456,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423490448,
+            "start_socket": 140433401351616,
+            "end_socket": 140433423449344,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423490160,
+            "start_socket": 140433475968400,
+            "end_socket": 140433423449632,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423489968,
+            "start_socket": 140433401389792,
+            "end_socket": 140433423450016,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    700.0,
+                    60.0
+                ],
+                [
+                    1060.0,
+                    60.0
+                ],
+                [
+                    1060.0,
+                    280.0
+                ],
+                [
+                    980.0,
+                    280.0
+                ]
+            ]
+        },
+        {
+            "id": 140433423489680,
+            "start_socket": 140433401473056,
+            "end_socket": 140433423449920,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423490064,
+            "start_socket": 140433401474400,
+            "end_socket": 140433401472912,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423489776,
+            "start_socket": 140433401389792,
+            "end_socket": 140433401474976,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433423634336,
+            "start_socket": 140433401389792,
+            "end_socket": 140433401472192,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433476077264,
+            "start_socket": 140433401389792,
+            "end_socket": 140433476076928,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140433476077696,
+            "start_socket": 140433401392576,
+            "end_socket": 140433476077120,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    1480.0,
+                    -160.0
+                ],
+                [
+                    1380.0,
+                    -160.0
+                ]
+            ]
+        },
+        {
+            "id": 140446631460336,
+            "start_socket": 140433423489440,
+            "end_socket": 140433401392768,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    440.0,
+                    280.0
+                ],
+                [
+                    360.0,
+                    280.0
+                ],
+                [
+                    360.0,
+                    540.0
+                ],
+                [
+                    440.0,
+                    540.0
+                ]
+            ]
+        }
+    ],
+    "labels": [
+        {
+            "id": 140433423490880,
+            "text": "state vector (x1, x1d, x2, x2d)",
+            "pos_x": 60.0,
+            "pos_y": 20.0,
+            "width": 192,
+            "height": 24,
+            "fill_color": [
+                200,
+                221,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">state vector (x1, x1d, x2, x2d)</p></body></html>"
+        },
+        {
+            "id": 140433423633520,
+            "text": "motor mass",
+            "pos_x": 540.0,
+            "pos_y": -265.0,
+            "width": 122,
+            "height": 31,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600;\">motor mass</span></p></body></html>"
+        },
+        {
+            "id": 140433423633568,
+            "text": "load mass",
+            "pos_x": 415.0,
+            "pos_y": 175.0,
+            "width": 111,
+            "height": 32,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:21pt; font-weight:600;\">load mass</span></p></body></html>"
+        },
+        {
+            "id": 140433423633664,
+            "text": "spring",
+            "pos_x": 1120.0,
+            "pos_y": -265.0,
+            "width": 70,
+            "height": 31,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600;\">spring</span></p></body></html>"
+        },
+        {
+            "id": 140433423633712,
+            "text": "state feedback controller",
+            "pos_x": -285.0,
+            "pos_y": -265.0,
+            "width": 245,
+            "height": 31,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600;\">state feedback controller</span></p></body></html>"
+        },
+        {
+            "id": 140433423634240,
+            "text": "x2*",
+            "pos_x": -285.0,
+            "pos_y": -155.0,
+            "width": 29,
+            "height": 24,
+            "fill_color": [
+                200,
+                221,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">x2*</p></body></html>"
+        },
+        {
+            "id": 140433423634384,
+            "text": "load position",
+            "pos_x": 1105.0,
+            "pos_y": 250.0,
+            "width": 87,
+            "height": 24,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">load position</p></body></html>"
+        },
+        {
+            "id": 140433476075584,
+            "text": "motor\nposition",
+            "pos_x": 1030.0,
+            "pos_y": -210.0,
+            "width": 57,
+            "height": 41,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">motor</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">position</p></body></html>"
+        },
+        {
+            "id": 140433476075680,
+            "text": "fs - spring force",
+            "pos_x": 1275.0,
+            "pos_y": 515.0,
+            "width": 105,
+            "height": 24,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fs - spring force</p></body></html>"
+        }
+    ],
+    "grouping_boxes": [
+        {
+            "id": 140446631240080,
+            "pos_x": -300.0,
+            "pos_y": -280.0,
+            "width": 640.0,
+            "height": 380.0,
+            "color": [
+                146,
+                187,
+                255
+            ]
+        },
+        {
+            "id": 140446631240080,
+            "pos_x": 400.0,
+            "pos_y": 160.0,
+            "width": 640.0,
+            "height": 360.0,
+            "color": [
+                146,
+                187,
+                255
+            ]
+        },
+        {
+            "id": 140446121832944,
+            "pos_x": 520.0,
+            "pos_y": -280.0,
+            "width": 500.0,
+            "height": 240.0,
+            "color": [
+                146,
+                187,
+                255
+            ]
+        },
+        {
+            "id": 140446631242816,
+            "pos_x": 1100.0,
+            "pos_y": -280.0,
+            "width": 320.0,
+            "height": 240.0,
+            "color": [
+                146,
+                187,
+                255
+            ]
+        }
+    ]
+}

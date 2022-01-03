@@ -1,0 +1,258 @@
+{
+    "id": 140351598327984,
+    "created_by": "corkep",
+    "creation_time": 1632046323,
+    "scene_width": 7168.000000000001,
+    "scene_height": 3785.6000000000004,
+    "blocks": [
+        {
+            "id": 140272053097712,
+            "block_type": "ARMPLOT",
+            "title": "Armplot Block",
+            "pos_x": 0.0,
+            "pos_y": -160.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140272053152832,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "robot",
+                    null
+                ],
+                [
+                    "backend",
+                    "pyplot"
+                ]
+            ]
+        },
+        {
+            "id": 140272053250992,
+            "block_type": "SCOPEXY",
+            "title": "XZ-plane motion",
+            "pos_x": 0.0,
+            "pos_y": 0.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 2,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140272053251088,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140272053251040,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "style",
+                    null
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    [
+                        "X",
+                        "Y"
+                    ]
+                ]
+            ]
+        },
+        {
+            "id": 140272058468720,
+            "block_type": "TR2T",
+            "title": "translation",
+            "pos_x": -200.0,
+            "pos_y": 0.0,
+            "width": 100,
+            "height": 120.0,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 3,
+            "inputs": [
+                {
+                    "id": 140272058469104,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140272058469152,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                },
+                {
+                    "id": 140272058469056,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                },
+                {
+                    "id": 140272058469248,
+                    "index": 2,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "T",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140304359599072,
+            "block_type": "IKINE",
+            "title": "inverse kinematics",
+            "pos_x": -200.0,
+            "pos_y": -160.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140304359599120,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140304359599024,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "robot",
+                    null
+                ],
+                [
+                    "q0",
+                    null
+                ],
+                [
+                    "useprevious",
+                    true
+                ],
+                [
+                    "ik",
+                    "ikine_LM"
+                ]
+            ]
+        },
+        {
+            "id": 140351829696176,
+            "block_type": "CTRAJ",
+            "title": "Cartesian trajectory",
+            "pos_x": -380.0,
+            "pos_y": -160.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140351829696320,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "T1",
+                    null
+                ],
+                [
+                    "T2",
+                    null
+                ],
+                [
+                    "T",
+                    null
+                ],
+                [
+                    "lspb",
+                    null
+                ]
+            ]
+        }
+    ],
+    "wires": [
+        {
+            "id": 140272058514016,
+            "start_socket": 140272058469152,
+            "end_socket": 140272053251088,
+            "wire_type": 3
+        },
+        {
+            "id": 140272058514160,
+            "start_socket": 140272058469248,
+            "end_socket": 140272053251040,
+            "wire_type": 3
+        },
+        {
+            "id": 140304359440496,
+            "start_socket": 140304359599024,
+            "end_socket": 140272053152832,
+            "wire_type": 3
+        },
+        {
+            "id": 140351829535232,
+            "start_socket": 140351829696320,
+            "end_socket": 140304359599120,
+            "wire_type": 3
+        },
+        {
+            "id": 140351829533696,
+            "start_socket": 140351829696320,
+            "end_socket": 140272058469104,
+            "wire_type": 3
+        }
+    ],
+    "labels": []
+}

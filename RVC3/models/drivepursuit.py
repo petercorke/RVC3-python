@@ -13,6 +13,7 @@ look_ahead = 5
 speed = 1
 dt = 0.1
 tacc = 1
+x0 = [2, 2, 0]
 
 # create the path
 path = np.array([
@@ -54,12 +55,12 @@ pos_error = bd.SUM('+-', name='err')
 h2goal = bd.FUNCTION(lambda d: math.atan2(d[1], d[0]), name='h2goal')
 heading_error = bd.SUM('+-', angles=True, name='herr')
 Kh = bd.GAIN(0.5, name='Kh')
-bike = bd.BICYCLE(x0=[2, 2, 0])
+bike = bd.BICYCLE(x0=x0)
 vplot = bd.VEHICLEPLOT(scale=[0, 80, 0, 80], size=0.7, shape='box', init=background_graphics) #, movie='rvc4_8.mp4')
 sscope = bd.SCOPE(name='steer angle')
 hscope = bd.SCOPE(name='heading angle')
 stop = bd.STOP(lambda x: np.linalg.norm(x - np.r_[50,10]) < 0.1, name='close_enough')
-pp = bd.FUNCTION(pure_pursuit, dargs={'R': look_ahead, 'traj': robot_traj}, name='pure_pursuit')
+pp = bd.FUNCTION(pure_pursuit, kwargs={'R': look_ahead, 'traj': robot_traj}, name='pure_pursuit')
 
 xy = bd.INDEX([0, 1], name='xy')
 theta = bd.INDEX([2], name='theta')
