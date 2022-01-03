@@ -13,6 +13,11 @@ from matplotlib import colors
 
 fileparts = re.compile(r'fig(?P<chapter>[0-9]+)_(?P<fig>.+).py')
 
+def bdmodel(model, subfig=None):
+    file = outfile(format='pdf', subfig=subfig)
+    print('saving --> ', file)
+    os.system(f"bdedit ../../models/{model} -p {str(file)}")
+
 def outfile(subfig='', format=None):
     # build the path for saving
     try:
@@ -25,7 +30,7 @@ def outfile(subfig='', format=None):
     # figure = os.path.splitext(figure)[0] + subfig + '.' + format
     # chapter = figure[3]
 
-    path = Path(f"/Users/corkep/code/RVC3-python/chapter{chapter}"
+    path = Path(f"/Users/corkep/code/RVC3-python/RVC3/figures/chapter{chapter}"
         f"/Figures_generated")
     
     if not path.exists():
@@ -38,7 +43,7 @@ def outfile(subfig='', format=None):
 def figname(subfig=''):
     return os.path.splitext(os.path.basename(sys.argv[0]))[0]
 
-def rvcprint(subfig='', debug=False, thicken=1.5, facecolor='white', interval=None, fignum=None, format='pdf', pause=2, **kwargs):
+def rvcprint(subfig='', debug=False, thicken=1.5, facecolor='white', interval=None, ax=None, fignum=None, format='pdf', pause=2, **kwargs):
 
     # if the envariable RVCPRINT is 'no' then don't save the figure
     # this can be set by runall.py
@@ -52,7 +57,12 @@ def rvcprint(subfig='', debug=False, thicken=1.5, facecolor='white', interval=No
     if fignum is not None:
         plt.figure(fignum)
 
-    for ax in plt.gcf().get_axes():
+    if ax is None:
+        axes = plt.gcf().get_axes()
+    else:
+        axes = [ax]
+
+    for ax in axes:
 
         # bolden the axis labels
         a = ax.xaxis.get_label()
@@ -95,11 +105,11 @@ def rvcprint(subfig='', debug=False, thicken=1.5, facecolor='white', interval=No
                 if interval[1] is not None:
                     ax.yaxis.set_major_locator(MultipleLocator(interval[1]))
 
-                if interval[2] is not None:
-                    try:
+                try:
+                    if interval[2] is not None:
                         ax.zaxis.set_major_locator(MultipleLocator(interval[2]))
-                    except:
-                        pass
+                except:
+                    pass
 
         dims = 2
         try:
@@ -116,19 +126,21 @@ def rvcprint(subfig='', debug=False, thicken=1.5, facecolor='white', interval=No
         # save it
         print('saving --> ', figure)
 
-        for ax in plt.gcf().get_axes():
+        
+        for ax in axes:
 
-            if dims == 3:
-                rgba = colors.to_rgba(facecolor)
-                ax.w_xaxis.set_pane_color(rgba)
-                ax.w_yaxis.set_pane_color(rgba)
-                ax.w_zaxis.set_pane_color(rgba)
+            if facecolor is not None:
+                if dims == 3:
+                    rgba = colors.to_rgba(facecolor)
+                    ax.w_xaxis.set_pane_color(rgba)
+                    ax.w_yaxis.set_pane_color(rgba)
+                    ax.w_zaxis.set_pane_color(rgba)
 
-            ax.set_facecolor(facecolor)
+                ax.set_facecolor(facecolor)
 
             # get legend
             legend = ax.get_legend()
-            if legend is not None:
+            if legend is not None and facecolor is not None:
                 frame = legend.get_frame()
                 frame.set_facecolor(facecolor)
                 frame.set_edgecolor('black')

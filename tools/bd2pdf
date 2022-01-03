@@ -1,0 +1,6 @@
+#! /bin/tcsh
+conda activate dev
+bdedit -p $1
+convert $1:t:r-screenshot.png $2
+\rm $1:t:r-screenshot.png
+pdfcrop $2 $2
