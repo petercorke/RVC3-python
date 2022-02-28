@@ -1,17 +1,19 @@
-from roboticstoolbox import lspb
+#! /usr/bin/env python3
+
+from roboticstoolbox import trapezoidal
 import matplotlib.pyplot as plt
 import numpy as np
 from rvcprint import rvcprint
 from cycler import cycler
 
-traj = lspb(0, 1, np.linspace(0, 1, 50))
+traj = trapezoidal(0, 1, np.linspace(0, 1, 50))
 traj.plot()
 plt.gcf().get_axes()[0].legend()
 
 rvcprint(subfig='a', thicken=1)
 
-traj2 = lspb(0, 1, np.linspace(0, 1, 50), 1.2);
-traj3 = lspb(0, 1, np.linspace(0, 1, 50), 2.0);
+traj2 = trapezoidal(0, 1, np.linspace(0, 1, 50), 1.2);
+traj3 = trapezoidal(0, 1, np.linspace(0, 1, 50), 2.0);
 
 legends = ['nominal', '1.2', '2.0']
 plotopts = {'markersize': 2}
@@ -24,7 +26,7 @@ ax.set_prop_cycle(custom_cycler)
 lines = ax.plot(traj.t, np.c_[traj.q, traj2.q, traj3.q], '-o', **plotopts)
 ax.legend(lines, legends, loc='upper left')
 ax.grid(True)
-ax.set_ylabel('$s(t)$');
+ax.set_ylabel('$q(t)$');
 ax.set_xlim(0, max(traj.t))
 
 plt.subplot(312)
@@ -32,7 +34,7 @@ plt.gca().set_prop_cycle(custom_cycler)
 plt.plot(traj.t, np.c_[traj.qd, traj2.qd, traj3.qd], '-o', **plotopts)
 # plt.legend(legends, loc='upper left')
 plt.grid(True)
-plt.ylabel('$ds/dt$', **textopts)
+plt.ylabel('$\dot{q}(t)$', **textopts)
 plt.xlim(0, max(traj.t))
 
 plt.subplot(313)
@@ -40,7 +42,7 @@ plt.gca().set_prop_cycle(custom_cycler)
 plt.plot(traj.t, np.c_[traj.qdd, traj2.qdd, traj3.qdd], '-o', **plotopts)
 # plt.legend(legends, loc='upper left')
 plt.grid(True)
-plt.ylabel('$d^2 s/dt^2$', **textopts)
+plt.ylabel('$\ddot{q}(t)$', **textopts)
 plt.xlim(0, max(traj.t))
 plt.xlabel('t (seconds)', **textopts)
 

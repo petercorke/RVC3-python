@@ -1,58 +1,36 @@
 #!/usr/bin/env python3
 
-from roboticstoolbox.mobile.OccGrid import BinaryOccupancyGrid, OccupancyGrid
 import rvcprint
+from roboticstoolbox import *
 import numpy as np
 import matplotlib.pyplot as plt
-from machinevisiontoolbox import *
-from roboticstoolbox import rtb_load_matfile
+from spatialmath import base
 
 house = rtb_load_matfile('data/house.mat')
 floorplan = house['floorplan']
 places = house['places']
 
-# make the free space
-obstacles = floorplan
+ds = DstarPlanner(occgrid=floorplan)
 
-obstacles[0,:] = 1
-obstacles[-1,:] = 1
-obstacles[:,0] = 1
-obstacles[:,-1] = 1
+ds.plan(places.kitchen)
 
-og = BinaryOccupancyGrid(obstacles)
-# og.plot(cmap='gray')
+def sensorfunc(pos):
+    if pos[0] == 300:
+        print('change triggered at', pos)
+        changes = []
+        for x in range(300, 325):
+            for y in range(115,125):
+                changes.append((x, y, np.inf))
+        return changes
 
-free = Image(obstacles == 0)
-free.disp()
-plt.xlabel('x')
-plt.ylabel('y')
-rvcprint.rvcprint(subfig='a', grid=False)
+print(nex0 := ds.nexpand)
+path, status = ds.query(places.br3, sensor=sensorfunc, animate=True) #, verbose=True)
+print(ds.nexpand - nex0)
+ds.plot(path)
 
-# ------------------------------------------------------------------------- #
+base.plot_box(bbox=[300, 325, 105, 125], filled=True, facecolor='orange', hatch=r'//////\\\\\\')
 
-# skeletonise it
-skeleton = free.thin()
-skeleton.disp(title=False)
-plt.xlabel('x')
-plt.ylabel('y')
-rvcprint.rvcprint(subfig='b', grid=False)
+rvcprint.rvcprint()
 
-# ------------------------------------------------------------------------- #
-
-# inverse skeleton + obstacle in red
-
-(~skeleton).colorize().switch(obstacles, 'red').disp()
-r, c = skeleton.triplepoint().nonzero()
-for y, x in zip(r, c):
-    plt.plot(x, y, 'ko', markersize=2)
-plt.xlabel('x')
-plt.ylabel('y')
-rvcprint.rvcprint(subfig='c', grid=False)
-
-# ------------------------------------------------------------------------- #
-
-im = free.distance_transform().disp(title=False, gamma=0.5)
-plt.xlabel('x')
-plt.ylabel('y')
-rvcprint.rvcprint(subfig='d', grid=False)
-
+# import cProfile
+# cProfile.run('ds.plan(places.kitchen)')

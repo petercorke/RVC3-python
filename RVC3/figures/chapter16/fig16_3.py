@@ -17,12 +17,12 @@ P = mkgrid(2, 0.5, pose=SE3(0, 0, 2))
 #Tc0 = transl(-0.3, 0.2, -2)*trotz[0]
 
 lmbda=0.1
-vs = IBVS_polar(camera, lmbda=lmbda, P=P, pose_f=SE3(0, 0, 1), depth=2, graphics=False)
+vs = IBVS_polar(camera, lmbda=lmbda, P=P, pose_d=SE3(0, 0, 1), depth=2, graphics=False)
 
 vs.run(5000)
 
 plt.figure()
-vs.plot_features()
+vs.plot_p()
 rvcprint.rvcprint(subfig='a', facecolor=None)
 
 plt.figure()

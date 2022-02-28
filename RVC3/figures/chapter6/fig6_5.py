@@ -4,56 +4,30 @@ import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from roboticstoolbox.mobile import *
-from matplotlib.ticker import ScalarFormatter
+from spatialmath.base import plotvol2
 
 # EKF dead reckoning
+x0 = [0, 0, 0]
 V = np.diag([0.02, np.radians(0.5)]) ** 2
 P0 = np.diag([.05, .05, np.radians(0.5)]) ** 2
-W = np.diag([0.1, np.radians(1)]) ** 2
 
-veh = Bicycle(covar=V, workspace=10)
-veh.control = RandomPath(workspace=veh.workspace)
-
-# odo = veh.step(1, 0.3)
-# odo = veh.step(1, 0.3)
-print(veh)
-# veh.run(10)
-
-Fx = veh.Fx([0, 0, 0], [0.5, 0.1])
-print(Fx)
+veh = Bicycle(covar=V, workspace=10, x0=x0, seed=0, animation=None) #,animation='car')
+veh.control = RandomPath(workspace=veh.workspace, seed=0)
 
 P0 = np.diag([0.005, 0.005, 0.001]) ** 2
-ekf = EKF(robot=(veh, V), P0=P0)
+ekf = EKF(robot=(veh, V), P0=P0, animate=False)
 
-ekf.run(T=20)
+ekf.run(T=20, animate=False)
 
-# from previous fig
-p0 = ekf.get_Pnorm()
+plotvol2(10)
+ekf.plot_ellipse(filled=True, facecolor='g', alpha=0.3, edgecolor='none', label='_uncertainty')
 
-# redo the sims for different values of V
-ekf = EKF(robot=(veh, 2 * V), P0=P0)
-ekf.run(T=20)
-pb = ekf.get_Pnorm()
+veh.plot_xy(color='b', linewidth=2, label='ground truth')
+ekf.plot_xy('r', linewidth=2, label='EKF estimate')
+plt.legend() #['ground truth', 'EKF estimate'])
 
-ekf = EKF(robot=(veh, 0.5 * V), P0=P0)
-ekf.run(T=20)
-ps = ekf.get_Pnorm()
-
-t = ekf.get_t()
-plt.plot(t, ps, 'r--', label='0.5')
-plt.plot(t, p0, 'g', label='1')
-plt.plot(t, pb, 'b--', label='2')
-
-plt.legend()
-
-sf = ScalarFormatter(useOffset=True, useMathText=True)
-sf.set_powerlimits((-2, 2))
-plt.gca().yaxis.set_major_formatter(sf)
-
-plt.grid(True)
-plt.xlabel('Time (s)')
-plt.ylabel('$\mathbf{(det P)^{0.5}}$')
-plt.xlim(0, 20)
+v = VehiclePolygon('car')
+v.plot(x0, facecolor='none', edgecolor='k')
 
 rvcprint.rvcprint()
 

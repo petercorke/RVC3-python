@@ -18,6 +18,8 @@ xg = [5, 5, pi/2]
 x0 = [5, 2, 0]
 x0 = [5, 9, 0]
 
+x0 = [8, 5, pi/2]
+
 # annotate the graphics
 def background_graphics(ax):
     ax.plot(*xg[:2], '*')
@@ -105,7 +107,7 @@ bd.connect(gsum, wprod[0])
 bd.compile()
 
 if __name__ == "__main__":
-    bd.report()
+    bd.report_summary()
     out = sim.run(bd, T=10)
 
     bd.done(block=True)

@@ -1,9 +1,9 @@
 {
-    "id": 140610893546064,
+    "id": 140682201049792,
     "created_by": "corkep",
     "creation_time": 1628591394,
-    "scene_width": 9984.800000000001,
-    "scene_height": 4804.8,
+    "scene_width": 9940.000000000002,
+    "scene_height": 4569.6,
     "blocks": [
         {
             "id": 140694481284928,
@@ -13,6 +13,7 @@
             "pos_y": -120.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 2,
             "outputsNum": 1,
             "inputs": [
@@ -56,6 +57,14 @@
                 [
                     "slim",
                     1
+                ],
+                [
+                    "x0",
+                    null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -63,10 +72,11 @@
             "id": 140694481378848,
             "block_type": "SCOPE",
             "title": "steering command",
-            "pos_x": 760.0,
+            "pos_x": 740.0,
             "pos_y": 20.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 0,
             "inputs": [
@@ -99,47 +109,21 @@
                 [
                     "grid",
                     true
-                ]
-            ]
-        },
-        {
-            "id": 140694481379280,
-            "block_type": "SCOPEXY1",
-            "title": "path",
-            "pos_x": 760.0,
-            "pos_y": -120.0,
-            "width": 100,
-            "height": 100,
-            "inputsNum": 1,
-            "outputsNum": 0,
-            "inputs": [
-                {
-                    "id": 140694481690928,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 1,
-                    "socket_type": 1
-                }
-            ],
-            "outputs": [],
-            "parameters": [
-                [
-                    "indices",
-                    [
-                        0,
-                        1
-                    ]
-                ],
-                [
-                    "style",
-                    null
-                ],
-                [
-                    "scale",
-                    "auto"
                 ],
                 [
                     "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -152,6 +136,7 @@
             "pos_y": 20.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 2,
             "outputsNum": 1,
             "inputs": [
@@ -187,6 +172,10 @@
                 [
                     "mode",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -198,6 +187,7 @@
             "pos_y": 20.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -226,6 +216,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -237,6 +231,7 @@
             "pos_y": 20.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -270,7 +265,7 @@
                     "nout",
                     1
                 ],
-                  [
+                [
                     "persistent",
                     false
                 ],
@@ -281,6 +276,10 @@
                 [
                     "fkwargs",
                     {}
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -292,6 +291,7 @@
             "pos_y": 20.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 0,
             "outputsNum": 1,
             "inputs": [],
@@ -308,6 +308,10 @@
                 [
                     "value",
                     "[5,5]"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -319,6 +323,7 @@
             "pos_y": 140.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -345,6 +350,10 @@
                     [
                         2
                     ]
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -356,6 +365,7 @@
             "pos_y": 20.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 2,
             "outputsNum": 1,
             "inputs": [
@@ -390,6 +400,10 @@
                 ],
                 [
                     "mode",
+                    "c"
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -402,6 +416,7 @@
             "pos_y": 280.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -429,31 +444,11 @@
                         0,
                         1
                     ]
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
-            ]
-        },
-        {
-            "id": 140241107295968,
-            "block_type": "CONNECTOR",
-            "pos_x": 280.0,
-            "pos_y": 180.0,
-            "inputs": [
-                {
-                    "id": 140241107294048,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 3,
-                    "socket_type": 1
-                }
-            ],
-            "outputs": [
-                {
-                    "id": 140241107293856,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 1,
-                    "socket_type": 2
-                }
             ]
         },
         {
@@ -464,6 +459,7 @@
             "pos_y": -120.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 0,
             "outputsNum": 1,
             "inputs": [],
@@ -480,6 +476,10 @@
                 [
                     "value",
                     "1"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -491,6 +491,7 @@
             "pos_y": 20.0,
             "width": 100,
             "height": 100,
+            "flipped": false,
             "inputsNum": 2,
             "outputsNum": 1,
             "inputs": [
@@ -542,6 +543,65 @@
                 [
                     "fkwargs",
                     {}
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140682281703360,
+            "block_type": "VEHICLEPLOT",
+            "title": "Vehicleplot Block",
+            "pos_x": 740.0,
+            "pos_y": -120.0,
+            "width": 125,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140682281703312,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "animation",
+                    null
+                ],
+                [
+                    "path",
+                    null
+                ],
+                [
+                    "labels",
+                    [
+                        "X",
+                        "Y"
+                    ]
+                ],
+                [
+                    "square",
+                    true
+                ],
+                [
+                    "init",
+                    null
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         }
@@ -551,91 +611,201 @@
             "id": 140694481818960,
             "start_socket": 140694481754240,
             "end_socket": 140694481755824,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140694481818432,
             "start_socket": 140694481754960,
             "end_socket": 140694481331920,
-            "wire_type": 3
-        },
-        {
-            "id": 140694481820352,
-            "start_socket": 140694481331968,
-            "end_socket": 140694481690928,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140694481820448,
             "start_socket": 140694481754960,
             "end_socket": 140694481379136,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140241107222880,
             "start_socket": 140694481331968,
             "end_socket": 140241107180848,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140241107223024,
             "start_socket": 140241107223072,
             "end_socket": 140694481755008,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140241107223552,
             "start_socket": 140694481331968,
             "end_socket": 140241107223312,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140241102827632,
             "start_socket": 140241107223456,
             "end_socket": 140241102722864,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140241107224608,
             "start_socket": 140694481755968,
             "end_socket": 140241102921792,
-            "wire_type": 3
-        },
-        {
-            "id": 140241107222976,
-            "start_socket": 140241107180656,
-            "end_socket": 140241107294048,
-            "wire_type": 3
-        },
-        {
-            "id": 140241107293472,
-            "start_socket": 140241107293856,
-            "end_socket": 140241107222688,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140610416188192,
             "start_socket": 140610416403216,
             "end_socket": 140694481331872,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140610435675952,
             "start_socket": 140610416290592,
             "end_socket": 140241107223984,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140610435676000,
             "start_socket": 140694481819200,
             "end_socket": 140610416404800,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140610435676048,
             "start_socket": 140241107223456,
             "end_socket": 140610416187664,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140682288545904,
+            "start_socket": 140694481331968,
+            "end_socket": 140682281703312,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140682281703216,
+            "start_socket": 140241107180656,
+            "end_socket": 140241107222688,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    180.0,
+                    80.0
+                ],
+                [
+                    150.0,
+                    80.0
+                ],
+                [
+                    150.0,
+                    180.0
+                ],
+                [
+                    380.0,
+                    180.0
+                ],
+                [
+                    380.0,
+                    180.0
+                ],
+                [
+                    480.0,
+                    180.0
+                ]
+            ]
         }
-    ]
+    ],
+    "labels": [
+        {
+            "id": 140682288546048,
+            "text": "p",
+            "pos_x": 105.0,
+            "pos_y": 295.0,
+            "width": 17,
+            "height": 24,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic; color:#0000ff;\">p</span></p></body></html>"
+        },
+        {
+            "id": 140681789607408,
+            "text": "p*",
+            "pos_x": -175.0,
+            "pos_y": 35.0,
+            "width": 23,
+            "height": 24,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic; color:#0000ff;\">p*</span></p></body></html>"
+        },
+        {
+            "id": 140681789619216,
+            "text": "\u03b8*",
+            "pos_x": 140.0,
+            "pos_y": 35.0,
+            "width": 22,
+            "height": 24,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\u03b8*</p></body></html>"
+        },
+        {
+            "id": 140681789619264,
+            "text": "\u03b8",
+            "pos_x": 300.0,
+            "pos_y": 155.0,
+            "width": 16,
+            "height": 24,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\u03b8</p></body></html>"
+        }
+    ],
+    "grouping_boxes": []
 }

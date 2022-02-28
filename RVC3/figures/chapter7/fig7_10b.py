@@ -21,4 +21,4 @@ plotter.set_background('white')
 plotter.camera_position = [(12, 12, -1), (0, 0, 0), (0, 1, 0.5)]
 
 # plotter.save_graphic('fig7_6.svg', raster=False)
-pvplus.show(plotter)
+pvplus.save(plotter)

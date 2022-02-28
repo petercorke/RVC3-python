@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from pgraph import *
 import json
-import os
 
 with open(rtb_path_to_datafile('data/queensland.json'), 'r') as f:
     data = json.loads(f.read())
@@ -16,14 +15,23 @@ for name, info in data['places'].items():
 for route in data['routes']:
     g.add_edge(route['start'], route['end'], cost=route['distance']) # add routes as edges
 
+g.plot()
+plt.xlabel('x')
+plt.ylabel('y')
+
+path, *_ = g.path_BFS('Hughenden', 'Brisbane')
+g.highlight_path(path)
+
+rvcprint.rvcprint(subfig='a', thicken=None)
+
+# ------------------------------------------------------------------------- #
+
 plt.clf()
 g.plot()
 plt.xlabel('x')
 plt.ylabel('y')
 
-path, length, parents = g.path_UCS('Hughenden', 'Brisbane')
+path, *_ = g.path_UCS('Hughenden', 'Brisbane')
+g.highlight_path(path)
 
-tree = DGraph.Dict(parents)
-dotfile = rvcprint.figname() + '.dot'
-tree.dotfile(dotfile)
-os.system("dot -Tpdf -o {} {}".format(rvcprint.outfile(format='pdf'), dotfile))
+rvcprint.rvcprint(subfig='b', thicken=None)

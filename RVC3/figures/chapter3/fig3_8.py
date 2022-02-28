@@ -1,4 +1,6 @@
-from roboticstoolbox import mstraj, lspb
+#! /usr/bin/env python3
+
+from roboticstoolbox import mstraj, trapezoidal
 import matplotlib.pyplot as plt
 import numpy as np
 from spatialmath import SE3
@@ -11,7 +13,7 @@ custom_cycler = cycler(color=['r', 'g', 'b'])
 T0 = SE3(0.4, 0.2, 0) * SE3.RPY([0, 0, 3])
 T1 = SE3(-0.4, -0.2, 0.3) * SE3.RPY([-pi/2, 0, -pi/2])
 
-Ts = T0.interp(T1, lspb(0, 1, 50).q)
+Ts = T0.interp(T1, trapezoidal(0, 1, 50).q)
 
 Ts[0]
 

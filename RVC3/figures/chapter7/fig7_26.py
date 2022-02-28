@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from roboticstoolbox import *
 import pickle
 import numpy as np

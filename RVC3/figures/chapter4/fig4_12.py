@@ -21,8 +21,7 @@ g = globals()
 for key in ['bd', 'sim', 'total_time', 'path']:
     g[key] = dict[key]
 
-sim.options.animation = False
-sim.options.graphics = False
+sim.set_options(animation = False, graphics = False)
 
 out = sim.run(bd, T=total_time)
 

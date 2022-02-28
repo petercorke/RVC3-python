@@ -14,7 +14,7 @@ qg = (1, 0, np.pi/2)
 dubins = DubinsPlanner(curvature=1)
 path, status = dubins.query(qs, qg)
 
-dubins.plot(path, configspace=True)
+dubins.plot(path)
 rvcprint.rvcprint(subfig='a', thicken=None)
 
 # ------------------------------------------------------------------------- #
@@ -23,5 +23,5 @@ rs = ReedsSheppPlanner(curvature=1)
 path, status = rs.query(qs, qg)
 
 plt.clf()
-rs.plot(path, direction=status.direction, configspace=True)
+rs.plot(path, direction=status.direction)
 rvcprint.rvcprint(subfig='b', thicken=None)

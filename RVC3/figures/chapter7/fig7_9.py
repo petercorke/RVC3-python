@@ -7,4 +7,4 @@ panda = models.ETS.Panda()
 
 panda.plot(panda.qr, backend='pyplot')
 
-rvcprint.rvcprint(thicken=None)
+rvcprint.rvcprint(thicken=None, debug=True)

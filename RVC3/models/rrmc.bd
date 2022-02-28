@@ -1,16 +1,16 @@
 {
-    "id": 140472010746848,
+    "id": 140659970143616,
     "created_by": "corkep",
     "creation_time": 1631408397,
-    "scene_width": 8584.800000000001,
-    "scene_height": 4026.4000000000005,
+    "scene_width": 7168.000000000001,
+    "scene_height": 3785.6000000000004,
     "blocks": [
         {
             "id": 140184811303264,
             "block_type": "JACOBIAN",
             "title": "Jacobian",
             "pos_x": -400.0,
-            "pos_y": -160.0,
+            "pos_y": -100.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -54,41 +54,9 @@
                 [
                     "transpose",
                     false
-                ]
-            ]
-        },
-        {
-            "id": 140184811440448,
-            "block_type": "INVERSE",
-            "title": "Inverse",
-            "pos_x": -240.0,
-            "pos_y": -160.0,
-            "width": 100,
-            "height": 100,
-            "flipped": false,
-            "inputsNum": 1,
-            "outputsNum": 1,
-            "inputs": [
-                {
-                    "id": 140184811440640,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 1,
-                    "socket_type": 1
-                }
-            ],
-            "outputs": [
-                {
-                    "id": 140184811440496,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 3,
-                    "socket_type": 2
-                }
-            ],
-            "parameters": [
+                ],
                 [
-                    "pinv",
+                    "blockargs",
                     null
                 ]
             ]
@@ -137,6 +105,10 @@
                 [
                     "matrix",
                     true
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -145,7 +117,7 @@
             "block_type": "CONSTANT",
             "title": "task-space velocity",
             "pos_x": -240.0,
-            "pos_y": -20.0,
+            "pos_y": 60.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -164,6 +136,10 @@
             "parameters": [
                 [
                     "value",
+                    null
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -209,6 +185,10 @@
                 [
                     "max",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -241,76 +221,151 @@
                 [
                     "backend",
                     "pyplot"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
         {
-            "id": 140221834011648,
-            "block_type": "CONNECTOR",
-            "pos_x": 220.0,
-            "pos_y": 160.0,
+            "id": 140660043324432,
+            "block_type": "INVERSE",
+            "title": "Inverse Block",
+            "pos_x": -240.0,
+            "pos_y": -100.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 2,
             "inputs": [
                 {
-                    "id": 140221834011696,
+                    "id": 140660043324624,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 3,
+                    "position": 1,
                     "socket_type": 1
                 }
             ],
             "outputs": [
                 {
-                    "id": 140221834011744,
+                    "id": 140660043324672,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 1,
+                    "position": 3,
+                    "socket_type": 2
+                },
+                {
+                    "id": 140660043324192,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 3,
                     "socket_type": 2
                 }
+            ],
+            "parameters": [
+                [
+                    "pinv",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
             ]
         }
     ],
     "wires": [
         {
-            "id": 140184811781568,
-            "start_socket": 140184811440496,
-            "end_socket": 140184811440688,
-            "wire_type": 3
-        },
-        {
             "id": 140184811820032,
             "start_socket": 140184811442032,
             "end_socket": 140184811440880,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    -60.0,
+                    -40.0
+                ],
+                [
+                    -90.0,
+                    -40.0
+                ],
+                [
+                    -90.0,
+                    100.0
+                ],
+                [
+                    -140.0,
+                    100.0
+                ]
+            ]
         },
         {
             "id": 140184811820224,
             "start_socket": 140184811440928,
             "end_socket": 140184811778160,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140184811820320,
             "start_socket": 140184811778304,
             "end_socket": 140184811779408,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
-            "id": 140184811820464,
+            "id": 140660061590240,
             "start_socket": 140184811354336,
-            "end_socket": 140184811440640,
-            "wire_type": 3
+            "end_socket": 140660043324624,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
-            "id": 140221834011792,
+            "id": 140660061590192,
+            "start_socket": 140660043324672,
+            "end_socket": 140184811440688,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140660061590096,
             "start_socket": 140184811778304,
-            "end_socket": 140221834011696,
-            "wire_type": 3
-        },
-        {
-            "id": 140221834012224,
-            "start_socket": 140221834011744,
             "end_socket": 140184811354288,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    -400.0,
+                    -60.0
+                ],
+                [
+                    -440.0,
+                    -60.0
+                ],
+                [
+                    -440.0,
+                    -130.0
+                ],
+                [
+                    240.0,
+                    -130.0
+                ],
+                [
+                    240.0,
+                    -60.0
+                ],
+                [
+                    220.0,
+                    -60.0
+                ]
+            ]
         }
     ],
     "labels": [
@@ -318,19 +373,32 @@
             "id": 140472066274304,
             "text": "qdot",
             "pos_x": 65.0,
-            "pos_y": -95.0,
+            "pos_y": -85.0,
             "width": 36,
             "height": 24,
-            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">qdot</p></body></html>"
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0433ff;\">qdot</span></p></body></html>"
         },
         {
             "id": 140472066323600,
             "text": "q",
-            "pos_x": 245.0,
-            "pos_y": -95.0,
+            "pos_x": 250.0,
+            "pos_y": -85.0,
             "width": 16,
             "height": 24,
-            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">q</p></body></html>"
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0433ff;\">q</span></p></body></html>"
         }
-    ]
+    ],
+    "grouping_boxes": []
 }

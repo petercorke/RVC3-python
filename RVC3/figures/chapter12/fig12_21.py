@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
+from spatialmath.base import plot_box
 
 
 square = Image.Squares(number=1, size=256, fg=128).rotate(0.3)
@@ -21,6 +22,8 @@ h.plot_accumulator(cmap='viridis_r')
 print(h.nz, h.t)
 cbar = plt.colorbar()
 cbar.set_label('Votes')
+
+plot_box(lrbt=(1.2, 1.350, 210, 240), color='k')
 rvcprint.rvcprint(subfig='b')
 
 # ----------------------------------------------------------------------- #

@@ -21,9 +21,9 @@ g.plot()
 plt.xlabel('x')
 plt.ylabel('y')
 
-path, length, parents = g.path_Astar('Hughenden', 'Brisbane')
+path, length, parents = g.path_UCS('Hughenden', 'Brisbane')
 
-g.plot()
-g.highlight_vertex(set(list(parents.keys()) + list(parents.values())), color='y')
-
-rvcprint.rvcprint(thicken=None)
+tree = DGraph.Dict(parents)
+dotfile = rvcprint.figname() + '.dot'
+tree.dotfile(dotfile)
+os.system("dot -Tpdf -o {} {}".format(rvcprint.outfile(format='pdf'), dotfile))

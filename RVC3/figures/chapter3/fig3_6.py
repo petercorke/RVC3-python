@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 from roboticstoolbox import mstraj
 import matplotlib.pyplot as plt
 import numpy as np
@@ -25,8 +27,8 @@ traj2 = mstraj(sq, qdmax=[2, 1], dt=0.2, tacc=2)
 plt.plot(traj2.q[:,0], traj2.q[:,1], markersize=8, linewidth=2, color='b', label='$t_{acc}=2$')
 plt.gca().set_aspect('equal')
 plt.grid(True)
-plt.xlabel('$\mathbf{q_0}$')
-plt.ylabel('$\mathbf{q_1}$')
+plt.xlabel('$\mathbf{x}$')
+plt.ylabel('$\mathbf{y}$')
 plot_point(sq[:-1].T, 'ko', text="  {}", label='via point') # , markersize=12, fillcolor='k'
 plot_point(sq[-1].T, 'ko', text="    , 4")
 
@@ -53,10 +55,10 @@ for info in traj2.info:
         tf = t + 2
     else:
         tf = t + 1
-    plot_box(bbox=[t, tf, *lims], filled=True, color='black', alpha=0.1, zorder=0)
+    plot_box(lrbt=[t, tf, *lims], filled=True, color='black', alpha=0.1, zorder=0)
     #plt.plot([t, t], lims, 'k--', linewidth=1.5)
     
-plt.legend(['$\mathbf{q_0}$', '$\mathbf{q_1}$'])
+plt.legend(['$\mathbf{x}$', '$\mathbf{y}$'])
 plt.ylim(lims)
 plt.xlim(0, np.max(traj2.t))
 rvcprint(subfig='b', thicken=1)

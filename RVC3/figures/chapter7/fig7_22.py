@@ -16,33 +16,36 @@ t = np.arange(0, 2, 0.02);
 Ts = ctraj(TE1, TE2, t);
 
 sol = puma.ikine_a(Ts, 'lu');
-qplot(t, sol.q, wrist=True, unwrap=True)
+xplot(t, sol.q, wrist=True, unwrap=True)
 
 rvcprint.rvcprint(subfig='a')
+#----------------------------------------------------------------------- #
 
 # numeric inverse kinematics
 soln = puma.ikine_LM(Ts);
-qplot(t, soln.q, wrist=True, unwrap=True, loc='lower left')
+xplot(t, soln.q, wrist=True, unwrap=True, loc='lower left')
 
 rvcprint.rvcprint(subfig='b')
+#----------------------------------------------------------------------- #
 
 # joint space
 sol1 = puma.ikine_a(TE1, 'lu');
 sol2 = puma.ikine_a(TE2, 'lu');
 traj = jtraj(sol1.q, sol2.q, t);
-qplot(t, traj.q, wrist=True, unwrap=True)
+xplot(t, traj.q, wrist=True, unwrap=True, loc='lower left')
 
 rvcprint.rvcprint(subfig='c')
+#----------------------------------------------------------------------- #
 
 # manipulability
-m = puma.manipulability(sol.q);
-mn = puma.manipulability(soln.q);
+m = puma.manipulability(sol.q);  # analytic
+mn = puma.manipulability(soln.q);  # numerical
 
 plt.clf()
 plt.plot(t, m)
 plt.plot(t, mn)
 plt.ylabel('Manipulability')
 plt.xlabel('Time (s)')
-plt.legend(['Cartesian space', 'Joint space'], loc='lower right')
+plt.legend(['Analytic IK', 'Numeric IK'], loc='lower right')
 
 rvcprint.rvcprint(subfig='d')

@@ -2,4 +2,4 @@
 
 import rvcprint
 
-rvcprint.bdmodel('IBVS.bd')
+rvcprint.bdmodel('IBVS-partitioned.bd')

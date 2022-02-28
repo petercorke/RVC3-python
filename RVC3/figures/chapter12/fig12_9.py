@@ -12,7 +12,7 @@ castle = Image.Read('castle2.png')
 mser, nregions = castle.labels_MSER()
 print(nregions)
 # mser.hist().plot()
-mser.disp(colormap='viridis_r')
+mser.disp(colormap='viridis_r', colorbar=dict(shrink=0.8, aspect=20*0.8))
 
 rvcprint.rvcprint()
 

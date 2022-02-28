@@ -116,8 +116,8 @@ for left, right in zip(lefts, rights):
         
         ba = BundleAdjust(cam)
         
-        c_left = ba.add_view(SE3(), fixed=True)  # first camera at origin (prev frame)
-        c_leftprev = ba.add_view(SE3())          # initial guess, zero motion
+        c_left = ba.add_view(SE3(), fixed=True)  # first camera at origin (current frame)
+        c_leftprev = ba.add_view(SE3())          # initial guess, zero motion (prev frame)
 
         for k, Pk in enumerate(P.T):  # for every 3D point from stereo
             if np.any(np.isnan(Pk)):
@@ -128,8 +128,8 @@ for left, right in zip(lefts, rights):
             if m is None:
                 continue
             landmark = ba.add_landmark(Pk)
-            ba.add_projection(c_left, landmark, m.p1)  # current camera
-            ba.add_projection(c_leftprev, landmark, m.p2)  # previous camera
+            ba.add_projection(c_left, landmark, m.p1)  # current left camera
+            ba.add_projection(c_leftprev, landmark, m.p2)  # previous left camera
 
         # solve bundle adjustment, fix number of iterations
         X, error = ba.optimize(iterations=5)

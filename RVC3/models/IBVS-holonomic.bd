@@ -358,7 +358,7 @@
             "parameters": [
                 [
                     "file name",
-                    "ibvs-drivepoint-main.py"
+                    "ibvs-holonomic-main.py"
                 ]
             ]
         },

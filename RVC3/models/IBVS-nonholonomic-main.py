@@ -50,7 +50,7 @@ def polar(x, dict):
 
     return [dict['direction'], rho, alpha, beta, ]
 
-model = Path(__file__).parent / "IBVS-driveconfig.bd"
+model = Path(__file__).parent / "IBVS-nonholonomic.bd"
 print(model)
 
 

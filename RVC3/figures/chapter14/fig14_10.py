@@ -10,8 +10,8 @@ from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
 import spatialmath.base as smb
 
-im1 = Image.Read('eiffel2-1.png')
-sf2 = Image.Read('eiffel2-2.png').SIFT()
+im1 = Image.Read('eiffel-1.png')
+sf2 = Image.Read('eiffel-2.png').SIFT()
 
 m = im1.SIFT().match(sf2)
 # F, inliers, resid = CentralCamera.points2F(m.p1, m.p2, 
@@ -27,10 +27,10 @@ print(len(b))
 
 cam = CentralCamera()
 cam.disp(im1)
-cam.plot_epiline(F.T, m.inliers.subset(20).p2, 'k')
+# cam.plot_epiline(F.T, m.inliers.subset(20).p2, 'k')
 epipole = smb.h2e(sp.linalg.null_space(F))
 # h2e( null(F))
 # cam.hold(true)
 cam.plot_point(epipole, 'wd')
 
-rvcprint.rvcprint()
+rvcprint.rvcprint(debug=True)

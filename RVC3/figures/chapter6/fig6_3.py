@@ -23,12 +23,12 @@ def gauss2d(mu, sigma, X, Y):
         -((X0 / sx) **2 + (Y0 / sy) ** 2) / 2
         )
 
-def uncertainty(sigma, centres, cz, point=None):
+def uncertainty(sigma, centres, cz, pdfscale=1.0, point=None):
     X, Y = np.meshgrid(np.arange(100), np.arange(100))
     Z = np.zeros(X.shape)
     
     for c in centres:
-        Z += gauss2d(c, sigma, X, Y)
+        Z += gauss2d(c, sigma, X, Y) * pdfscale
     
     ax = base.plotvol3()
     ax.plot_surface(X, Y, Z, cmap='viridis_r', cstride=1, rstride=1)
@@ -66,7 +66,7 @@ rvcprint.rvcprint(subfig='b', thicken=None)
 # ------------------------------------------------------------------------- #
 
 plt.clf()
-ax = uncertainty(3, [(35, 56), (30, 40), (66, 23), (55, 62)], cz=-0.015)
+ax = uncertainty(3, [(35, 56), (30, 40), (66, 23), (55, 62)], pdfscale=0.25, cz=-0.015)
 ax.set_zlim(-0.015, 0.02)
 sf = ScalarFormatter(useOffset=True, useMathText=True)
 sf.set_powerlimits((-2, 2))

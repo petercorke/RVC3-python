@@ -8,7 +8,7 @@ from roboticstoolbox.mobile import *
 
 
 # EKF slam
-map = LandmarkMap(nlandmarks=20, workspace=10)
+map = LandmarkMap(20, workspace=10)
 
 V = np.diag([0.02, np.radians(0.5)]) ** 2
 P0 = np.diag([0.05, 0.05, np.radians(0.5)]) ** 2
@@ -26,7 +26,7 @@ print(ekf)
 ekf.run(T=40)
 
 t = ekf.get_t()
-p = ekf.get_P()
+p = ekf.get_Pnorm()
 
 plt.clf()
 plt.plot(t, p, 'k')
@@ -45,7 +45,7 @@ rvcprint.rvcprint(subfig='a')
 
 Pf = ekf.history[-1].P
 plt.clf()
-ekf.show_P(Pf)
+ekf.disp_P(Pf)
 
 
 rvcprint.rvcprint(subfig='b')

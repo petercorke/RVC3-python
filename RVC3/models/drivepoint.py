@@ -5,6 +5,10 @@
 import bdsim
 import math
 
+import sys
+
+print(sys.argv)
+
 sim = bdsim.BDSim()
 bd = sim.blockdiagram()
 
@@ -16,7 +20,7 @@ goal = bd.CONSTANT([5, 5], name='goal')
 pos_error = bd.SUM('+-')
 d2goal = bd.FUNCTION(lambda d: math.sqrt(d[0]**2 + d[1]**2))
 h2goal = bd.FUNCTION(lambda d: math.atan2(d[1], d[0]))
-heading_error = bd.SUM('+-', angles=True)
+heading_error = bd.SUM('+-', mode='c')
 Kv = bd.GAIN(0.5)
 Kh = bd.GAIN(4)
 bike = bd.BICYCLE(x0=[5, 2, 0], name='vehicle')
@@ -42,8 +46,8 @@ bd.connect(xy, pos_error[1])
 bd.compile()
 
 if __name__ == "__main__":
-    bd.report()
+    bd.report_summary()
 
     out = sim.run(bd, T=10)
 
-    sim.done(bd, block=True)q
+    sim.done(bd, block=True)

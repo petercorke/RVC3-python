@@ -24,7 +24,7 @@ print(Fx)
 
 P0 = np.diag([0.005, 0.005, 0.001]) ** 2
 
-map = LandmarkMap(nlandmarks=20)
+map = LandmarkMap(20)
 print(map)
 
 sensor = RangeBearingSensor(veh, map, covar=W, animate=True, range=4,
@@ -39,7 +39,7 @@ ekf.run(T=40)
 
 plt.clf()
 t = ekf.get_t()
-p = ekf.get_P()
+p = ekf.get_Pnorm()
 plt.plot(t, p, 'k')
 sf = ScalarFormatter(useOffset=True, useMathText=True)
 sf.set_powerlimits((-2, 2))
@@ -52,29 +52,30 @@ rvcprint.rvcprint(subfig='a')
 
 # ------------------------------------------------------------------------- #
 
-ekf.plot_error(confidence=0.95, color='k')
+fig, axes = plt.subplots(4)
+ekf.plot_error(confidence=0.95, color='k', ax=axes)
 
 # Useful tip from the late creator of matplotlib, John Hunter.
 
 # http://matplotlib.1069221.n5.nabble.com/dynamically-add-subplots-to-figure-td23571.html
 
 # now later you get a new subplot; change the geometry of the existing
-fig = plt.gcf()
-n = len(fig.axes)
-for i in range(n):
-    fig.axes[i].change_geometry(n+1, 1, i+1)
-    fig.axes[i].xaxis.set_ticklabels([])
+# fig = plt.gcf()
+# n = len(fig.axes)
+# for i in range(n):
+#     fig.axes[i].change_geometry(n+1, 1, i+1)
+#     fig.axes[i].xaxis.set_ticklabels([])
 
-# add the new
-ax = fig.add_subplot(n+1, 1, n+1)
+# # add the new
+# noax = fig.add_subplot(n+1, 1, n+1)
 
 lmlog = np.r_[ekf.sensor._landmarklog]
 k =  lmlog != -1
-plt.plot(t[k], lmlog[k], 'bo', markersize=2)
+axes[3].plot(t[k], lmlog[k], 'bo', markersize=2)
 # plot_poly([1:1000 sensor.landmarklog], 'fill', 'b')
 plt.ylabel('landmark id')
 plt.xlim(0, t[-1])
-plt.ylim(-0.5, 20.5)
+plt.ylim(-0.5, 22)
 plt.grid(True)
 plt.xlabel('Time (s)')
 

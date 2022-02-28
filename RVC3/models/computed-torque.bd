@@ -1,9 +1,9 @@
 {
-    "id": 140381774287872,
+    "id": 140433477989808,
     "created_by": "corkep",
     "creation_time": 1632776601,
-    "scene_width": 12751.2,
-    "scene_height": 5656.000000000001,
+    "scene_width": 12460.000000000002,
+    "scene_height": 5768.000000000001,
     "blocks": [
         {
             "id": 140660237829696,
@@ -42,6 +42,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -82,6 +86,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -128,6 +136,10 @@
                 ],
                 [
                     "mode",
+                    null
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -176,13 +188,17 @@
                 [
                     "mode",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
         {
             "id": 140660238325072,
             "block_type": "SUM",
-            "title": "Sum Block 2",
+            "title": "Sum Block",
             "pos_x": 480.0,
             "pos_y": 240.0,
             "width": 100,
@@ -222,6 +238,10 @@
                 ],
                 [
                     "mode",
+                    null
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -272,11 +292,15 @@
             "parameters": [
                 [
                     "robot",
-                    null
+                    "=robot"
                 ],
                 [
                     "end",
                     "end-effector"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -326,11 +350,15 @@
             "parameters": [
                 [
                     "robot",
-                    null
+                    "=robot"
                 ],
                 [
                     "gravity",
-                    "end-effector"
+                    null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -389,18 +417,22 @@
                 [
                     "qdf",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
         {
             "id": 140660237970880,
             "block_type": "ARMPLOT",
-            "title": "Armplot Block",
-            "pos_x": 1220.0,
-            "pos_y": 100.0,
+            "title": "Arm animation",
+            "pos_x": 1000.0,
+            "pos_y": 260.0,
             "width": 100,
             "height": 100,
-            "flipped": false,
+            "flipped": true,
             "inputsNum": 1,
             "outputsNum": 0,
             "inputs": [
@@ -408,7 +440,7 @@
                     "id": 140660237971360,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 1,
+                    "position": 3,
                     "socket_type": 1
                 }
             ],
@@ -416,11 +448,15 @@
             "parameters": [
                 [
                     "robot",
-                    null
+                    "=robot"
                 ],
                 [
                     "backend",
                     "pyplot"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -465,6 +501,26 @@
                 [
                     "blockargs",
                     {}
+                ]
+            ]
+        },
+        {
+            "id": 140433559852896,
+            "block_type": "MAIN",
+            "title": "Main Block",
+            "pos_x": -100.0,
+            "pos_y": 420.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 0,
+            "outputsNum": 0,
+            "inputs": [],
+            "outputs": [],
+            "parameters": [
+                [
+                    "file name",
+                    null
                 ]
             ]
         }
@@ -600,14 +656,14 @@
                 ],
                 [
                     80.0,
-                    540.0
+                    570.0
                 ],
                 [
-                    1135.0,
-                    540.0
+                    1215.0,
+                    570.0
                 ],
                 [
-                    1135.0,
+                    1215.0,
                     140.0
                 ],
                 [
@@ -628,19 +684,19 @@
                     440.0
                 ],
                 [
-                    110.0,
+                    100.0,
                     440.0
                 ],
                 [
-                    110.0,
-                    560.0
+                    100.0,
+                    550.0
                 ],
                 [
-                    1165.0,
-                    560.0
+                    1195.0,
+                    550.0
                 ],
                 [
-                    1165.0,
+                    1195.0,
                     160.0
                 ],
                 [
@@ -653,10 +709,10 @@
     "labels": [
         {
             "id": 140713700702864,
-            "text": "computed\nacceleration from\ntracking error",
-            "pos_x": 615.0,
-            "pos_y": 290.0,
-            "width": 116,
+            "text": "required acceleration\nto reduce tracking\nerror",
+            "pos_x": 446.0,
+            "pos_y": 440.0,
+            "width": 139,
             "height": 58,
             "fill_color": [
                 255,
@@ -664,13 +720,13 @@
                 255,
                 255
             ],
-            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">computed</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">acceleration from</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">tracking error</p></body></html>"
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">required acceleration</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">to reduce tracking</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">error</p></body></html>"
         },
         {
             "id": 140713700730864,
             "text": "desired position and velocity",
-            "pos_x": 240.0,
-            "pos_y": 170.0,
+            "pos_x": 190.0,
+            "pos_y": 100.0,
             "width": 184,
             "height": 24,
             "fill_color": [
@@ -679,8 +735,60 @@
                 255,
                 255
             ],
-            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">desired position and velocity</p></body></html>"
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#000000;\">desired position and velocity</span></p></body></html>"
+        },
+        {
+            "id": 140433560002464,
+            "text": "robot",
+            "pos_x": 980.0,
+            "pos_y": 35.0,
+            "width": 60,
+            "height": 31,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600; color:#000000;\">robot</span></p></body></html>"
         }
     ],
-    "grouping_boxes": []
+    "grouping_boxes": [
+        {
+            "id": 140433559852944,
+            "pos_x": 960.0,
+            "pos_y": 20.0,
+            "width": 200.0,
+            "height": 380.0,
+            "color": [
+                255,
+                38,
+                0
+            ]
+        },
+        {
+            "id": 140433559852560,
+            "pos_x": 120.0,
+            "pos_y": 80.0,
+            "width": 480.0,
+            "height": 120.0,
+            "color": [
+                146,
+                187,
+                255
+            ]
+        },
+        {
+            "id": 140433560002512,
+            "pos_x": 120.0,
+            "pos_y": 220.0,
+            "width": 480.0,
+            "height": 300.0,
+            "color": [
+                146,
+                187,
+                255
+            ]
+        }
+    ]
 }

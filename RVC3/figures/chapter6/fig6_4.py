@@ -3,31 +3,69 @@
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
-from roboticstoolbox.mobile import *
-from spatialmath.base import plotvol2
+# from collections.abc import Iterable
+from spatialmath import base
+from matplotlib.ticker import ScalarFormatter
+from matplotlib import cm
 
-# EKF dead reckoning
-x0 = [0, 0, 0]
-V = np.diag([0.02, np.radians(0.5)]) ** 2
-P0 = np.diag([.05, .05, np.radians(0.5)]) ** 2
+x = np.linspace(0, 10, 200)
 
-veh = Bicycle(covar=V, workspace=10, x0=x0, seed=0, animation=None) #,animation='car')
-veh.control = RandomPath(workspace=veh.workspace, seed=0)
+def gauss1d(mu, var):
+    sigma = np.sqrt(var)
+    print(mu, sigma)
 
-P0 = np.diag([0.005, 0.005, 0.001]) ** 2
-ekf = EKF(robot=(veh, V), P0=P0, animate=False)
+    return 1.0 / np.sqrt(sigma**2 * 2 * np.pi) * np.exp(-(x-mu)**2/2/sigma**2)
+x0 = 2
+P0 = 0.25
 
-ekf.run(T=20, animate=False)
+plt.plot(x, gauss1d(x0, P0), 'b', label='PDF at step $k$')
+ax = plt.gca()
+ax.axvline(x0, 0, 1, color='b', linestyle=':', label='mean at $k$')
 
-plotvol2(10)
-ekf.plot_ellipse(filled=True, facecolor='g', alpha=0.3, edgecolor='none', label='_uncertainty')
+u = 2
+F = 1
+Vhat = 0
+xp = x0 + u
+Pp = F * P0 * F + Vhat
 
-veh.plot_xy(color='b', linewidth=2, label='ground truth')
-ekf.plot_xy('r', linewidth=2, label='EKF estimate')
-plt.legend() #['ground truth', 'EKF estimate'])
+plt.plot(x, gauss1d(xp, Pp), 'r--', label='predicted PDF at step $k+1$')
+ax.axvline(xp, 0, 1, color='r', linestyle=':', label='predicted mean at $k+1$')
 
-v = VehiclePolygon('car')
-v.plot(x0, facecolor='none', edgecolor='k')
 
-rvcprint.rvcprint()
+plt.grid(True)
+plt.xlabel('x')
+plt.ylabel('PDF')
+plt.xlim(0, 8)
+plt.ylim(0, 1)
+plt.legend(fontsize='small')
 
+plt.gca().annotate("odometry", xy=(2, 0.3), xytext=(4.1, 0.29), 
+    xycoords='data', textcoords='data',
+    arrowprops=dict(arrowstyle="<-")
+)
+
+rvcprint.rvcprint(subfig='a', thicken=2)
+
+# ------------------------------------------------------------------------- #
+
+plt.clf()
+plt.plot(x, gauss1d(x0, P0), 'b', label='PDF at step $k$')
+ax = plt.gca()
+ax.axvline(x0, 0, 1, color='b', linestyle=':', label='mean at $k$')
+
+Vhat = 0.5
+xp = x0 + u
+Pp = F * P0 * F + Vhat
+
+plt.plot(x, gauss1d(xp, Pp), 'r--', label='predicted PDF at $k+1$')
+ax.axvline(xp, 0, 1, color='r', linestyle=':', label='predicted mean at $k+1$')
+
+
+plt.grid(True)
+plt.xlabel('x')
+plt.ylabel('PDF')
+plt.xlim(0, 8)
+plt.ylim(0, 1)
+plt.legend(fontsize='small')
+
+rvcprint.rvcprint(subfig='b', thicken=2)

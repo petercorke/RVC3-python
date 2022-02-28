@@ -17,8 +17,7 @@ g = globals()
 for key in ['bd', 'sim']:
     g[key] = dict[key]
 
-sim.options.animation = False
-sim.options.graphics = False
+sim.set_options(animation = False, graphics = False)
 
 xg = np.r_[5, 5]
 bd['goal'].value = xg
@@ -28,14 +27,14 @@ yc = 5
 N = 8
 radius = 3
 
-v = Bicycle()
+va = VehiclePolygon(scale=0.5, facecolor='None', edgecolor='k')
 
 plt.figure()
 for i in range(N):
     th = (i-1) * 2 * pi / N
     x0 = np.r_[xc + radius * cos(th), yc + radius * sin(th), th + pi / 2]
 
-    v.plot(x0, size=0.5, color='k')
+    va.plot(x0)
     bd['vehicle']._x0 = x0  # TODO make this x0 not _x0
     out = sim.run(bd, T=10)
 

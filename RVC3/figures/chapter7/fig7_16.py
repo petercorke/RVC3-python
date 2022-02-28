@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 from roboticstoolbox import *
 import rvcprint
@@ -22,14 +23,14 @@ swift.step()
 
 time.sleep(0.4)
 
-filename = 'swift_snap.png'
+filename = 'swift_snap'
 swift.screenshot(filename)
 time.sleep(4)
 
 
 file = root / filename
 target = Path(rvcprint.outfile(subfig='a', format='png'))
-file.rename(target)
+file.with_suffix('.png').rename(target)
 
 swift.close()
 
@@ -44,17 +45,19 @@ swift.add(yumi)
 yumi.q = yumi.q1
 
 p = 1
-swift.set_camera_pose([p, 0.03, p], [0, 0, 0.2])
+# swift.set_camera_pose([p, 0.03, p], [0, 0, 0.2])
+swift.set_camera_pose([p, 0.2, .6], [0, 0, 0.3])
+
 swift.step()
 
 time.sleep(0.4)
 
-filename = 'swift_snap.png'
+filename = 'swift_snap'
 swift.screenshot(filename)
 time.sleep(4)
 
 root = Path('~/Downloads').expanduser()
 
-file = root / filename
+file = root / filename + '.png'
 target = Path(rvcprint.outfile(subfig='b', format='png'))
-file.rename(target)
+file.with_suffix('.png').rename(target)

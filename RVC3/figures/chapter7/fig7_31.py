@@ -1,10 +1,12 @@
+#!/usr/bin/env python3
+
 from roboticstoolbox import models
 from spatialmath import SE3
 import time
 
 panda = models.URDF.Panda();
 from spatialgeometry import Cuboid
-box = Cuboid([1, 1, 1], base=SE3(1.1, 0, 0));
+box = Cuboid([1, 1, 1], pose=SE3(1.1, 0, 0));
 panda.collided(panda.qr, box)
 panda.collided(panda.qr, box)
 # plot robot and get reference to graphics environment

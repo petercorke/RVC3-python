@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import numpy as np
 import matplotlib.pyplot as plt
 from math import pi, sqrt
@@ -14,36 +16,36 @@ from rvcprint import rvcprint
 from imu_data import IMU
 true, imu = IMU()
 t = imu.t
-attitude = UnitQuaternion()
+orientation = UnitQuaternion()
 for i, w in enumerate(imu.gyro[:-1]):
-   attitude.append(attitude[-1] * UnitQuaternion.EulerVec(w * imu.dt))
+   orientation.append(orientation[-1] * UnitQuaternion.EulerVec(w * imu.dt))
 
 # plt.clf()
-# plt.plot(attitude.rpy())
+# plt.plot(orientation.rpy())
 # plt.title('naive')
 # plt.figure()
-# plt.plot(true.attitude.rpy())
+# plt.plot(true.orientation.rpy())
 # plt.title('true')
 # plt.figure()
-# plt.plot(t, attitude.angdist(true.attitude, metric=0), 'r' )
+# plt.plot(t, orientation.angdist(true.orientation, metric=0), 'r' )
 # plt.show(block=True)
 
 kI = 0.2
 kP = 1
 
 bias = np.zeros(imu.gyro.shape)  # initial bias
-attitude_ECF = UnitQuaternion()
+orientation_ECF = UnitQuaternion()
 
 for k, (wm, am, mm) in enumerate(zip(imu.gyro[:-1], imu.accel[:-1], imu.magno[:-1])):
-   invq = attitude_ECF[-1].inv()
+   invq = orientation_ECF[-1].inv()
    sigmaR = np.cross(am, invq * true.g) + np.cross(mm, invq * true.B)
    wp = wm - bias[k,:] + kP * sigmaR
-   attitude_ECF.append(attitude_ECF[k] * UnitQuaternion.EulerVec(wp * imu.dt))
+   orientation_ECF.append(orientation_ECF[k] * UnitQuaternion.EulerVec(wp * imu.dt))
    bias[k+1,:] = bias[k,:] - kI * sigmaR * imu.dt
 
 ax = plt.subplot(211)
-plt.plot(t, attitude.angdist(true.attitude), 'r' )
-plt.plot(t, attitude_ECF.angdist(true.attitude), 'b')
+plt.plot(t, orientation.angdist(true.orientation), 'r' )
+plt.plot(t, orientation_ECF.angdist(true.orientation), 'b')
 
 ax.set_xlim(0, 20)
 plt.ylabel('Orientation error (rad)')

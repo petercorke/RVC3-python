@@ -25,6 +25,7 @@ path = np.array([
       
 robot_traj = rtb.mstraj(path[1:,:], qdmax=speed, q0=path[0,:], dt=0.1, tacc=tacc).q
 total_time = robot_traj.shape[0] * dt + look_ahead / speed
+print(robot_traj.shape)
 
 sim = bdsim.BDSim(graphics=False)
 bd = sim.blockdiagram()
@@ -53,14 +54,14 @@ speed = bd.CONSTANT(speed, name='speed')
 pos_error = bd.SUM('+-', name='err')
 #d2goal = bd.FUNCTION(lambda d: math.sqrt(d[0]**2 + d[1]**2), name='d2goal')
 h2goal = bd.FUNCTION(lambda d: math.atan2(d[1], d[0]), name='h2goal')
-heading_error = bd.SUM('+-', angles=True, name='herr')
+heading_error = bd.SUM('+-', mode='c', name='herr')
 Kh = bd.GAIN(0.5, name='Kh')
 bike = bd.BICYCLE(x0=x0)
 vplot = bd.VEHICLEPLOT(scale=[0, 80, 0, 80], size=0.7, shape='box', init=background_graphics) #, movie='rvc4_8.mp4')
 sscope = bd.SCOPE(name='steer angle')
 hscope = bd.SCOPE(name='heading angle')
 stop = bd.STOP(lambda x: np.linalg.norm(x - np.r_[50,10]) < 0.1, name='close_enough')
-pp = bd.FUNCTION(pure_pursuit, kwargs={'R': look_ahead, 'traj': robot_traj}, name='pure_pursuit')
+pp = bd.FUNCTION(pure_pursuit, fkwargs={'R': look_ahead, 'traj': robot_traj}, name='pure_pursuit')
 
 xy = bd.INDEX([0, 1], name='xy')
 theta = bd.INDEX([2], name='theta')

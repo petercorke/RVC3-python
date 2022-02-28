@@ -7,126 +7,123 @@ from bdsim.blockdiagram import BlockDiagram
 from math import pi, sqrt, atan, atan2
 import bdsim
 
-
-sim = bdsim.BDSim(progress=True)
+sim = bdsim.BDSim(animation=True, debug='g')
 bd = sim.blockdiagram()
 
 # state vector indices
 #   would expect the order to R, P, Y but this is compatible with the
 #   MATLAB version
-class State(IntEnum):
+class E(IntEnum):
     X = 0
     Y = 1
     Z = 2
-    YW = 3
-    P = 4
-    R = 5
-    XD = 6
-    YD = 7
-    ZD = 8
-    YWD = 9
-    PD = 10
-    RD = 11
+    XD = 3
+    YD = 4
+    ZD = 5
+
+    YW = 0
+    P = 1
+    R = 2
+    YWD = 3
+    PD = 4
+    RD = 5
 
 # controller parameters
-Kp_yaw = 20
-Kd_yaw = 2
-Kp_z = 4
+Kp_yaw = 100
+Kd_yaw = 0.1
+Kp_z = 40
 Kd_z = 1
 T0 = 40
 Kp_xy = 0.1
 Kd_xy = 2
-Kp_rp = 100
-Kd_rp = 1
 
-# dict of quadrotor parameters
-from bdsim.blocks.quad_model import quadrotor
+Kp_rp = 20
+Kd_rp = 0.1
+
 
 # demand signals
 x_dmd = bd.WAVEFORM('sine', freq=0.25, unit='Hz', phase=0.25)
 y_dmd = bd.WAVEFORM('sine', freq=0.25, unit='Hz')
-xy_dmd = bd.MUX(nin=2, inputs=(x_dmd, y_dmd))
-yaw_dmd = bd.RAMP(slope=0.4, T=1, off=0)
-z_dmd = bd.CONSTANT(-4)
+xy_dmd = bd.MUX(nin=2, inputs=(x_dmd, y_dmd), name='xy_demand')
+
+yaw_dmd = bd.RAMP(slope=0.1, T=3, off=0, name='yaw demand')
+
+z_dmd = bd.INTERPOLATE((0, 0.5, 5.5, np.inf), (0, 0, -5, -5), time=True, name='height demand')
 
 # yaw control
-def yaw_controller(x, yaw_dmd):
-    return 0*(-Kp_yaw) * (yaw_dmd - x[State.YW] - Kd_yaw * x[State.YWD])
+def yaw_controller(yaw_dmd, x):
+    r = x['rot']
+    return (Kp_yaw) * (yaw_dmd - r[E.YW] - Kd_yaw * r[E.YWD])
 
 yaw = bd.FUNCTION(yaw_controller, nin=2, nout=1, name='yawcontrol')
 
 # height control
-def height_controller(x, height_dmd):
-    z=  (-Kp_z) * (height_dmd - x[State.Z] - Kd_z * x[State.ZD]) + T0
+def height_controller(height_dmd, x):
+    t = x['trans']
+    T =  (-Kp_z) * (height_dmd - t[E.Z] - Kd_z * t[E.ZD]) + T0
     # print('h', x[2], z, x[8])
-    return z
+    return -T
 
 height = bd.FUNCTION(height_controller, nin=2, nout=1, name='zcontrol')
 
 # velocity control
-def velocity_controller(x, xy_dmd):
-    xyerr_0 = xy_dmd - x[[State.R, State.P]]
-    xyerr_B = SO2(-x[State.YW]) * xyerr_0  # in {B}
+def velocity_controller(xy_dmd, x):
+    t = x['trans']
+    xyerr_0 = xy_dmd - t[[E.X, E.Y]]
+    xyerr_B = SO2(-x['rot'][E.YW]) * xyerr_0  # in {B}
     K = Kp_xy * np.array([[0, 1], [-1, 0]])
-    return K @ (xyerr_B.ravel() - Kd_xy * x[State.XD:State.ZD])
+    return K @ (xyerr_B.ravel() - Kd_xy * t[[E.XD, E.YD]])
 
 velocity = bd.FUNCTION(velocity_controller, nin=2, nout=1, name='velcontrol')
 
 # attitude control
-def attitude_controller(x, rp_dmd):
-    rp_torque = (-Kp_rp) * (rp_dmd - x[[State.R, State.P]] - Kd_rp * x[[State.RD, State.PD]])
+def attitude_controller(rp_dmd, x):
+    r = x['rot']
+    rp_torque = (Kp_rp) * (rp_dmd - r[[E.R, E.P]] - Kd_rp * r[[E.RD, E.PD]])
     return list(rp_torque)
 
 attitude = bd.FUNCTION(attitude_controller, nin=2, nout=2, name='attitudecontrol')
 
-# mixer
-def mixer_controller(tau_r, tau_p, tau_y, thrust):
-    signs = np.r_[1, -1, 1, -1]
-    w = np.r_[tau_p, -tau_r, -tau_p, tau_r] + tau_y * signs + thrust / quadrotor['nrotors']
-    w = np.clip(w, 5, 1000) * signs
-    # print('w', w)
-    # print()
-    w = np.sign(w) * np.sqrt(np.abs(w) / quadrotor['b'])
+# dict of quadrotor parameters
+from bdsim.blocks.quad_model import quadrotor
 
-    return w
-
-mixer = bd.FUNCTION(mixer_controller, nin=4, nout=1, name='mixer')
-
+# drone + input mixer
+mixer = bd.MULTIROTORMIXER(quadrotor, name='mixer', wmax=1500)
 quad = bd.MULTIROTOR(quadrotor, name='quadrotor')
 
-x = bd.ITEM('X')  # full state vector, 12 elements
+# plot abs value of rotor speeds
+abs_rotorspeed = bd.FUNCTION(lambda x: np.abs(x), name='absval')
+scope_rotorspeed = bd.SCOPE(vector=4, labels=list("0123"), name='rotor speed (abs.val)', inputs=abs_rotorspeed)
+
+# plot position and attitude
+x = bd.ITEM('x', name='state')
+xyz = bd.SLICE1([0, 1, 2], inputs=x)
+scope_xyz = bd.SCOPE(vector=3, labels=list("XYZ"), name='position', inputs=xyz)
+att = bd.SLICE1([3, 4, 5], inputs=x)
+scope_attitude = bd.SCOPE(vector=3, labels=['yaw', 'pitch', 'roll'], name='attitude', inputs=att)
+
+# animation of quad
+quadplot = bd.MULTIROTORPLOT(quadrotor)
 
 # wiring
-bd.connect(quad, x)
-bd.connect(x, yaw[0], height[0], velocity[0], attitude[0])
-bd.connect(yaw_dmd, yaw[1])
-bd.connect(z_dmd, height[1])
-bd.connect(xy_dmd, velocity[1])
-
-bd.connect(velocity, attitude[1])
-
-bd.connect(attitude[0], mixer[0])
-bd.connect(attitude[1], mixer[1])
+bd.connect(quad, yaw[1], height[1], velocity[1], attitude[1], x)  # state
+bd.connect(yaw_dmd, yaw[0])
+bd.connect(z_dmd, height[0])
+bd.connect(xy_dmd, velocity[0])
+bd.connect(velocity, attitude[0])
+bd.connect(attitude, mixer[:2])
 bd.connect(yaw, mixer[2])
 bd.connect(height, mixer[3])
-bd.connect(mixer, quad)
-
-quadplot = bd.MULTIROTORPLOT(quadrotor)
+bd.connect(mixer, quad, abs_rotorspeed)
 bd.connect(quad, quadplot)
-
-# p1 = bd.PRINT(name='h')
-# bd.connect(height, p1)
-# debug
-# bd.PRINT(yaw_dmd, fmt='{:.3f}', name='yawdmd')
-# bd.PRINT(yaw, fmt='{:.3f}', name='yaw')
-
 
 # build it
 bd.compile()
 
 if __name__ == "__main__":
-    bd.report()
-    out = sim.run(bd, T=5, dt=0.05)
+    bd.report_summary()
+
+    out = sim.run(bd, T=10, dt=0.05)
 
     bd.done(block=True)
 

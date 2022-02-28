@@ -3,52 +3,103 @@
 import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
-from roboticstoolbox.mobile import *
+# from collections.abc import Iterable
+from spatialmath import base
 from matplotlib.ticker import ScalarFormatter
-from spatialmath.base import plotvol2
+from matplotlib import cm
 
-# EKF localization with landmarks
+x = np.linspace(0, 10, 200)
 
-map = LandmarkMap(nlandmarks=20, workspace=10)
-print(map)
+def gauss1d(mu, var):
+    sigma = np.sqrt(var)
+    print(mu, sigma)
 
-V = np.diag([0.02, np.radians(0.5)]) ** 2
-P0 = np.diag([.05, .05, np.radians(0.5)]) ** 2
-W = np.diag([0.1, np.radians(1)]) ** 2
-x0 = [0, 0, 0]
+    return 1.0 / np.sqrt(sigma**2 * 2 * np.pi) * np.exp(-(x-mu)**2/2/sigma**2)
+x0 = 2
+P0 = 0.25
 
-veh = Bicycle(covar=V, x0=x0, seed=0, animation=None)
-veh.control = RandomPath(workspace=map.workspace, seed=0)
-
-
-P0 = np.diag([0.005, 0.005, 0.001]) ** 2
-
-sensor = RangeBearingSensor(veh, map, covar=W, animate=True, 
-    angle=[-np.pi/2, np.pi/2], range=4, verbose=True)
-print(sensor)
-ekf = EKF(robot=(veh, V), P0=P0, map=map, sensor=(sensor, W), animate=False)
-print(ekf)
-
-ekf.run(T=20)
-
-map.plot()
-ekf.plot_ellipse(filled=True, N=20, facecolor='g', alpha=0.3, edgecolor='none', label='_uncertainty')
-
-veh.plot_xy(color='b', linewidth=2, label='ground truth')
-ekf.plot_xy('r', linewidth=2, label='EKF estimate')
-plt.legend() #['ground truth', 'EKF estimate'])
-
-v = VehiclePolygon('car')
-v.plot(x0, facecolor='none', edgecolor='k')
-
-rvcprint.rvcprint(subfig='a', thicken=None)
-
+plt.plot(x, gauss1d(x0, P0), 'b', label='PDF at $k$')
 ax = plt.gca()
-ax.set_xlim(-3.5, -1.5)
-ax.set_ylim(0, 2)
+ax.axvline(x0, 0, 1, color='b', linestyle=':')
 
 
+u = 2
+F = 1
+Vhat = 0.5
+xp = x0 + u
+Pp = F * P0 * F + Vhat
 
-rvcprint.rvcprint(subfig='b', thicken=None)
+plt.plot(x, gauss1d(xp, Pp), 'r--', label='predicted PDF at $k+1$')
+ax.axvline(xp, 0, 1, color='r', linestyle=':')
+
+H = 1
+What = 1
+K = Pp * H / (H * Pp * H + What)
+
+xs = 5
+nu = xs - H * xp
+
+plt.plot(x, gauss1d(xs, What), 'c', label='sensor PDF at $k+1$')
+ax.axvline(xs, 0, 1, color='c', linestyle=':')
+
+xp = xp + K * nu
+Pp = Pp - K * H * Pp
 
 
+plt.plot(x, gauss1d(xp, Pp), 'r', label='estimated PDF at $k+1$')
+ax.axvline(xp, 0, 1, color='r', linestyle=':')
+
+
+plt.grid(True)
+plt.xlabel('x')
+plt.ylabel('PDF')
+plt.xlim(0, 8)
+plt.ylim(0, 1)
+plt.legend(fontsize='xx-small')
+
+rvcprint.rvcprint(subfig='a', thicken=2)
+
+# ------------------------------------------------------------------------- #
+
+plt.clf()
+
+plt.plot(x, gauss1d(x0, P0), 'b', label='PDF at $k$')
+ax = plt.gca()
+ax.axvline(x0, 0, 1, color='b', linestyle=':')
+
+
+u = 2
+F = 1
+Vhat = 0.5
+xp = x0 + u
+Pp = F * P0 * F + Vhat
+
+plt.plot(x, gauss1d(xp, Pp), 'r--', label='predicted PDF at $k+1$')
+ax.axvline(xp, 0, 1, color='r', linestyle=':')
+
+H = 1
+What = 0.3
+K = Pp * H / (H * Pp * H + What)
+
+xs = 5
+nu = xs - H * xp
+
+plt.plot(x, gauss1d(xs, What), 'c', label='sensor PDF at $k+1$')
+ax.axvline(xs, 0, 1, color='c', linestyle=':')
+
+xp = xp + K * nu
+Pp = Pp - K * H * Pp
+
+
+plt.plot(x, gauss1d(xp, Pp), 'r', label='estimated PDF at $k+1$')
+ax.axvline(xp, 0, 1, color='r', linestyle=':')
+
+
+plt.grid(True)
+plt.xlabel('x')
+plt.ylabel('PDF')
+plt.xlim(0, 8)
+plt.ylim(0, 1)
+plt.legend(fontsize='xx-small')
+
+rvcprint.rvcprint(subfig='b', thicken=2)

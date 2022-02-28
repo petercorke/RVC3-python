@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 
 import rvcprint
-from roboticstoolbox import rtb_loadmat, rtb_path_to_datafile, mobile
+from roboticstoolbox import rtb_load_jsonfile, rtb_load_matfile, mobile
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
 # show a graph
 
 from pgraph import *
-import json
-with open(rtb_path_to_datafile('data/queensland.json'), 'r') as f:
-    data = json.loads(f.read())
+
+data = rtb_load_jsonfile('data/queensland.json')
 
 g = UGraph()
 for name, info in data['places'].items():
@@ -27,7 +26,7 @@ rvcprint.rvcprint(subfig='a')
 # ------------------------------------------------------------------------- #
 
 # show an occgrid
-house = rtb_loadmat('data/house.mat')
+house = rtb_load_matfile('data/house.mat')
 floorplan = house['floorplan']
 
 colors = [(1, 1, 1, 0), (1, 0, 0, 1)]

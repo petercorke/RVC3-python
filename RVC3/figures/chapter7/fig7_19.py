@@ -20,7 +20,7 @@ sol2 = puma.ikine_a(TE2, 'ru');
 
 qc = jtraj(sol1.q, sol2.q, t).q
 
-qplot(t, qc, wrist=True)
+xplot(t, qc, wrist=True)
 # l = findobj('Type', 'legend')
 # l.Location = 'SouthWest';
 

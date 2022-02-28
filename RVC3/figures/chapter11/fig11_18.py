@@ -22,7 +22,6 @@ rvcprint.rvcprint(subfig='a')
 Iv.disp(colormap='signed')
 rvcprint.rvcprint(subfig='b')
 
-
 Iu = castle.convolve(Kernel.DGauss(sigma=2));
 Iv = castle.convolve(Kernel.DGauss(sigma=2).T);
 

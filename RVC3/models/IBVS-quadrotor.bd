@@ -1,9 +1,9 @@
 {
-    "id": 140189983733216,
+    "id": 140247614477744,
     "created_by": "corkep",
     "creation_time": 1628595522,
-    "scene_width": 9800.000000000002,
-    "scene_height": 4340.0,
+    "scene_width": 14050.400000000001,
+    "scene_height": 7207.200000000001,
     "blocks": [
         {
             "id": 140565726886832,
@@ -65,7 +65,7 @@
             "id": 140565757884736,
             "block_type": "FUNCTION",
             "title": "angular rate control",
-            "pos_x": 500.0,
+            "pos_x": 460.0,
             "pos_y": -340.0,
             "width": 100,
             "height": 100,
@@ -139,7 +139,7 @@
             "id": 140565757884976,
             "block_type": "FUNCTION",
             "title": "velocity control",
-            "pos_x": 340.0,
+            "pos_x": 100.0,
             "pos_y": -340.0,
             "width": 100,
             "height": 100,
@@ -206,7 +206,7 @@
             "id": 140565757885504,
             "block_type": "FUNCTION",
             "title": "altitude rate control",
-            "pos_x": 520.0,
+            "pos_x": 460.0,
             "pos_y": 60.0,
             "width": 100,
             "height": 100,
@@ -273,7 +273,7 @@
             "id": 140565757886032,
             "block_type": "FUNCTION",
             "title": "yaw rate control",
-            "pos_x": 520.0,
+            "pos_x": 460.0,
             "pos_y": -80.0,
             "width": 100,
             "height": 100,
@@ -340,7 +340,7 @@
             "id": 140565757953744,
             "block_type": "MUX",
             "title": "(x*, y*)",
-            "pos_x": 180.0,
+            "pos_x": -60.0,
             "pos_y": -340.0,
             "width": 100,
             "height": 100,
@@ -386,7 +386,7 @@
         {
             "id": 140685315930144,
             "block_type": "CONNECTOR",
-            "pos_x": 560.0,
+            "pos_x": 480.0,
             "pos_y": -120.0,
             "inputs": [
                 {
@@ -530,7 +530,7 @@
             "id": 140535526970656,
             "block_type": "CAMERA",
             "title": "Camera Block",
-            "pos_x": 100.0,
+            "pos_x": 40.0,
             "pos_y": 360.0,
             "width": 100,
             "height": 100,
@@ -577,7 +577,7 @@
             "id": 140535526970944,
             "block_type": "IMAGEPLANE",
             "title": "Imageplane Block",
-            "pos_x": 100.0,
+            "pos_x": 40.0,
             "pos_y": 500.0,
             "width": 100,
             "height": 100,
@@ -629,7 +629,7 @@
             "id": 140535526971184,
             "block_type": "VISJAC_P",
             "title": "Visjac_p Block",
-            "pos_x": 360.0,
+            "pos_x": 300.0,
             "pos_y": 360.0,
             "width": 100,
             "height": 100,
@@ -677,7 +677,7 @@
             "id": 140535041464400,
             "block_type": "CONSTANT",
             "title": "p*",
-            "pos_x": -240.0,
+            "pos_x": -300.0,
             "pos_y": 640.0,
             "width": 100,
             "height": 100,
@@ -709,7 +709,7 @@
             "id": 140535041464496,
             "block_type": "CONSTANT",
             "title": "Constant Block 1",
-            "pos_x": -240.0,
+            "pos_x": -300.0,
             "pos_y": 360.0,
             "width": 100,
             "height": 100,
@@ -741,7 +741,7 @@
             "id": 140535041465120,
             "block_type": "SLICE2",
             "title": "Slice2 Block",
-            "pos_x": 520.0,
+            "pos_x": 460.0,
             "pos_y": 360.0,
             "width": 100,
             "height": 100,
@@ -790,7 +790,7 @@
             "id": 140535041465408,
             "block_type": "FLATTEN",
             "title": "Flatten Block",
-            "pos_x": 520.0,
+            "pos_x": 460.0,
             "pos_y": 620.0,
             "width": 100,
             "height": 100,
@@ -830,7 +830,7 @@
             "id": 140535041465744,
             "block_type": "SUM",
             "title": "p* - p",
-            "pos_x": 360.0,
+            "pos_x": 300.0,
             "pos_y": 620.0,
             "width": 100,
             "height": 100,
@@ -881,7 +881,7 @@
             "id": 140535524917936,
             "block_type": "NORM",
             "title": "Norm Block",
-            "pos_x": 920.0,
+            "pos_x": 860.0,
             "pos_y": 620.0,
             "width": 100,
             "height": 100,
@@ -925,7 +925,7 @@
             "id": 140535524918368,
             "block_type": "PROD",
             "title": "Prod Block",
-            "pos_x": 840.0,
+            "pos_x": 780.0,
             "pos_y": 360.0,
             "width": 100,
             "height": 100,
@@ -976,7 +976,7 @@
             "id": 140535524918800,
             "block_type": "GAIN",
             "title": "Gain Block",
-            "pos_x": 1000.0,
+            "pos_x": 940.0,
             "pos_y": 360.0,
             "width": 100,
             "height": 100,
@@ -1020,7 +1020,7 @@
             "id": 140535526474800,
             "block_type": "DEMUX",
             "title": "Demux Block",
-            "pos_x": -60.0,
+            "pos_x": -300.0,
             "pos_y": -140.0,
             "width": 100,
             "height": 140.0,
@@ -1081,7 +1081,7 @@
             "id": 140535116326560,
             "block_type": "FUNCTION",
             "title": "SE3 camera pose",
-            "pos_x": -80.0,
+            "pos_x": -140.0,
             "pos_y": 440.0,
             "width": 100,
             "height": 100,
@@ -1141,7 +1141,7 @@
             "id": 140535116328048,
             "block_type": "SCOPE",
             "title": "Jacobian condition",
-            "pos_x": 1160.0,
+            "pos_x": 1100.0,
             "pos_y": 480.0,
             "width": 100,
             "height": 100,
@@ -1201,7 +1201,7 @@
             "id": 140535116327424,
             "block_type": "INVERSE",
             "title": "Inverse Block",
-            "pos_x": 680.0,
+            "pos_x": 620.0,
             "pos_y": 360.0,
             "width": 100,
             "height": 100,
@@ -1248,7 +1248,7 @@
             "id": 140535044636928,
             "block_type": "SCOPE",
             "title": "Feature error",
-            "pos_x": 1160.0,
+            "pos_x": 1100.0,
             "pos_y": 620.0,
             "width": 100,
             "height": 100,
@@ -1308,8 +1308,8 @@
             "id": 140195529408032,
             "block_type": "MAIN",
             "title": "Main Block",
-            "pos_x": -240.0,
-            "pos_y": -400.0,
+            "pos_x": -300.0,
+            "pos_y": -460.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -1327,7 +1327,7 @@
         {
             "id": 140375201615776,
             "block_type": "CONNECTOR",
-            "pos_x": 200.0,
+            "pos_x": 180.0,
             "pos_y": 260.0,
             "inputs": [
                 {
@@ -1352,7 +1352,7 @@
             "id": 140702822640944,
             "block_type": "SCOPE",
             "title": "Demanded velocity",
-            "pos_x": 1220.0,
+            "pos_x": 1160.0,
             "pos_y": 320.0,
             "width": 100,
             "height": 100,
@@ -1616,45 +1616,57 @@
                     null
                 ]
             ]
+        },
+        {
+            "id": 140557113596320,
+            "block_type": "CLIP",
+            "title": "roll, pitch limits",
+            "pos_x": 300.0,
+            "pos_y": -340.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140557113596272,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140557113596416,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "min",
+                    -Infinity
+                ],
+                [
+                    "max",
+                    Infinity
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
         }
     ],
     "wires": [
         {
-            "id": 140685315929376,
-            "start_socket": 140565757885456,
-            "end_socket": 140685315716192,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
-            "id": 140685315930528,
-            "start_socket": 140685315930240,
-            "end_socket": 140685315446096,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
             "id": 140685315930624,
             "start_socket": 140685315930240,
             "end_socket": 140685315716288,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
-            "id": 140685315879840,
-            "start_socket": 140685315930240,
-            "end_socket": 140685315518624,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
-            "id": 140685315881712,
-            "start_socket": 140685315930240,
-            "end_socket": 140685315520112,
             "wire_type": 3,
             "custom_routing": false,
             "wire_coordinates": []
@@ -1696,50 +1708,16 @@
             "start_socket": 140565757886416,
             "end_socket": 140364551528112,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    780.0,
-                    -260.0
-                ],
-                [
-                    650.0,
-                    -260.0
-                ],
-                [
-                    650.0,
-                    -40.0
-                ],
-                [
-                    620.0,
-                    -40.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140364551271424,
             "start_socket": 140565757885984,
             "end_socket": 140364551528160,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    780.0,
-                    -240.0
-                ],
-                [
-                    670.0,
-                    -240.0
-                ],
-                [
-                    670.0,
-                    100.0
-                ],
-                [
-                    620.0,
-                    100.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140535041466224,
@@ -1770,25 +1748,8 @@
             "start_socket": 140535526970752,
             "end_socket": 140535041465936,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    360.0,
-                    660.0
-                ],
-                [
-                    320.0,
-                    660.0
-                ],
-                [
-                    320.0,
-                    400.0
-                ],
-                [
-                    200.0,
-                    400.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140535041466080,
@@ -1827,25 +1788,8 @@
             "start_socket": 140535526474320,
             "end_socket": 140565757954320,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    180.0,
-                    -300.0
-                ],
-                [
-                    110.0,
-                    -300.0
-                ],
-                [
-                    110.0,
-                    -100.0
-                ],
-                [
-                    40.0,
-                    -100.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140535116326464,
@@ -1855,19 +1799,19 @@
             "custom_routing": true,
             "wire_coordinates": [
                 [
-                    180.0,
+                    -60.0,
                     -280.0
                 ],
                 [
-                    140.0,
+                    -110.0,
                     -280.0
                 ],
                 [
-                    140.0,
+                    -110.0,
                     -80.0
                 ],
                 [
-                    40.0,
+                    -200.0,
                     -80.0
                 ]
             ]
@@ -1901,25 +1845,8 @@
             "start_socket": 140535116328624,
             "end_socket": 140535116328096,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    1160.0,
-                    520.0
-                ],
-                [
-                    800.0,
-                    520.0
-                ],
-                [
-                    800.0,
-                    420.0
-                ],
-                [
-                    780.0,
-                    420.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140535041901280,
@@ -1958,25 +1885,8 @@
             "start_socket": 140535041465600,
             "end_socket": 140535524918416,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    840.0,
-                    420.0
-                ],
-                [
-                    820.0,
-                    420.0
-                ],
-                [
-                    820.0,
-                    660.0
-                ],
-                [
-                    620.0,
-                    660.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140311678790096,
@@ -1985,31 +1895,6 @@
             "wire_type": 3,
             "custom_routing": false,
             "wire_coordinates": []
-        },
-        {
-            "id": 140375201943808,
-            "start_socket": 140685315930240,
-            "end_socket": 140375201615824,
-            "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    560.0,
-                    -120.0
-                ],
-                [
-                    456.5,
-                    -120.0
-                ],
-                [
-                    456.5,
-                    260.0
-                ],
-                [
-                    213.0,
-                    260.0
-                ]
-            ]
         },
         {
             "id": 140375201943664,
@@ -2074,13 +1959,95 @@
             "wire_type": 3,
             "custom_routing": false,
             "wire_coordinates": []
+        },
+        {
+            "id": 140557113596848,
+            "start_socket": 140565757885456,
+            "end_socket": 140557113596272,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140557113596752,
+            "start_socket": 140557113596416,
+            "end_socket": 140685315716192,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140388839831488,
+            "start_socket": 140685315930240,
+            "end_socket": 140375201615824,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    480.0,
+                    -120.0
+                ],
+                [
+                    416.5,
+                    -120.0
+                ],
+                [
+                    416.5,
+                    260.0
+                ],
+                [
+                    193.0,
+                    260.0
+                ]
+            ]
+        },
+        {
+            "id": 140388839831584,
+            "start_socket": 140685315930240,
+            "end_socket": 140685315446096,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140388839831536,
+            "start_socket": 140685315930240,
+            "end_socket": 140685315518624,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140388839831680,
+            "start_socket": 140685315930240,
+            "end_socket": 140685315520112,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    460.0,
+                    120.0
+                ],
+                [
+                    420.0,
+                    120.0
+                ],
+                [
+                    420.0,
+                    -120.0
+                ],
+                [
+                    480.0,
+                    -120.0
+                ]
+            ]
         }
     ],
     "labels": [
         {
             "id": 140522918579552,
             "text": "state vector x",
-            "pos_x": 880.0,
+            "pos_x": 885.0,
             "pos_y": -100.0,
             "width": 92,
             "height": 24,
@@ -2095,7 +2062,7 @@
         {
             "id": 140535044640432,
             "text": "desired camera velocity (xd*, yd*, zd*, \u03b3d*)",
-            "pos_x": 840.0,
+            "pos_x": 745.0,
             "pos_y": 195.0,
             "width": 273,
             "height": 24,
@@ -2110,8 +2077,8 @@
         {
             "id": 140535044639136,
             "text": "image-based control",
-            "pos_x": 320.0,
-            "pos_y": 300.0,
+            "pos_x": 260.0,
+            "pos_y": 305.0,
             "width": 204,
             "height": 31,
             "fill_color": [
@@ -2125,8 +2092,8 @@
         {
             "id": 140535044639184,
             "text": "camera",
-            "pos_x": 60.0,
-            "pos_y": 300.0,
+            "pos_x": 0.0,
+            "pos_y": 305.0,
             "width": 78,
             "height": 31,
             "fill_color": [
@@ -2140,7 +2107,7 @@
         {
             "id": 140535044638944,
             "text": "UAV",
-            "pos_x": 765.0,
+            "pos_x": 770.0,
             "pos_y": -480.0,
             "width": 49,
             "height": 31,
@@ -2155,7 +2122,7 @@
         {
             "id": 140535044638752,
             "text": "flight control",
-            "pos_x": 105.0,
+            "pos_x": -130.0,
             "pos_y": -480.0,
             "width": 131,
             "height": 31,
@@ -2166,14 +2133,44 @@
                 255
             ],
             "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600;\">flight control</span></p></body></html>"
+        },
+        {
+            "id": 140557894155856,
+            "text": "aiframe\nforce &\ntorques",
+            "pos_x": 665.0,
+            "pos_y": -370.0,
+            "width": 55,
+            "height": 58,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">aiframe</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">force &amp;</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">torques</p></body></html>"
+        },
+        {
+            "id": 140557113596992,
+            "text": "roll, pitch\ndemand",
+            "pos_x": 225.0,
+            "pos_y": -290.0,
+            "width": 64,
+            "height": 41,
+            "fill_color": [
+                219,
+                189,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">roll, pitch</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">demand</p></body></html>"
         }
     ],
     "grouping_boxes": [
         {
             "id": 140364551527008,
-            "pos_x": 80.0,
+            "pos_x": -160.0,
             "pos_y": -500.0,
-            "width": 640.0,
+            "width": 800.0,
             "height": 700.0,
             "color": [
                 180,
@@ -2183,7 +2180,7 @@
         },
         {
             "id": 140535116327568,
-            "pos_x": 40.0,
+            "pos_x": -20.0,
             "pos_y": 280.0,
             "width": 200.0,
             "height": 360.0,
@@ -2195,7 +2192,7 @@
         },
         {
             "id": 140535116327328,
-            "pos_x": 300.0,
+            "pos_x": 240.0,
             "pos_y": 280.0,
             "width": 840.0,
             "height": 520.0,

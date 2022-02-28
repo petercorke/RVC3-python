@@ -14,8 +14,7 @@ for key in ['bd', 'sim']:
     g[key] = dict[key]
 
 # Simulate the model
-sim.options.animation = False
-sim.options.graphics = True
+sim.set_options(animation = False, graphics = True, hold=False)
 out = sim.run(bd, T=125, dt=0.2)
 
 # make fig 1 current

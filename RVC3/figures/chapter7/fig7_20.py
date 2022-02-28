@@ -18,7 +18,7 @@ Ts = ctraj(TE1, TE2, t)
 sol = p560.ikine_a(Ts, 'ru')
 qc = sol.q
 
-qplot(t, qc, wrist=True)
+xplot(t, qc, wrist=True)
 
 rvcprint.rvcprint(subfig='a', thicken=1.5)
 

@@ -1,36 +1,25 @@
 #!/usr/bin/env python3
 
-import rvcprint
 from roboticstoolbox import *
+import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
-from spatialmath import base
 
 house = rtb_load_matfile('data/house.mat')
 floorplan = house['floorplan']
 places = house['places']
 
-ds = DstarPlanner(occgrid=floorplan)
+pmarker = dict(markersize=6, color='y')
+dx = DistanceTransformPlanner(floorplan, inflate=5)
+dx.plan(places.kitchen)
+p = dx.query(places.br3)
 
-ds.plan(places.kitchen)
-
-def sensorfunc(pos):
-    if pos[0] == 300:
-        print('change triggered at', pos)
-        changes = []
-        for x in range(300, 325):
-            for y in range(115,125):
-                changes.append((x, y, np.inf))
-        return changes
-
-print(nex0 := ds.dstar.nexpand)
-path, status = ds.query(places.br3, sensor=sensorfunc, animate=True, verbose=True)
-print(ds.dstar.nexpand - nex0)
-ds.plot(path)
-
-base.plot_box(bbox=[300, 325, 105, 125], filled=True, facecolor='orange', hatch=r'//////\\\\\\')
-
+dx.plot(p, inflated=True, path_marker=pmarker)
 rvcprint.rvcprint()
 
-# import cProfile
-# cProfile.run('ds.plan(places.kitchen)')
+# plt.clf()
+# dx = DistanceTransformPlanner(floorplan)
+# dx.plan(places.kitchen)
+# dx.plot(path=p, path_marker=pmarker, start=places.br3)
+
+# rvcprint.rvcprint(subfig='b');

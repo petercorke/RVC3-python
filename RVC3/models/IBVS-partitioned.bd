@@ -1,9 +1,9 @@
 {
-    "id": 140525502846336,
+    "id": 140361119946112,
     "created_by": "corkep",
     "creation_time": 1638688002,
-    "scene_width": 12829.6,
-    "scene_height": 6731.200000000001,
+    "scene_width": 12112.800000000001,
+    "scene_height": 6092.8,
     "blocks": [
         {
             "id": 140431881511216,
@@ -145,11 +145,11 @@
             "parameters": [
                 [
                     "K",
-                    "=lmbda"
+                    -0.005
                 ],
                 [
                     "premul",
-                    true
+                    false
                 ],
                 [
                     "blockargs",
@@ -248,6 +248,10 @@
                 [
                     "camera",
                     "=camera"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -378,7 +382,7 @@
             "parameters": [
                 [
                     "order",
-                    "C"
+                    "f"
                 ],
                 [
                     "blockargs",
@@ -447,126 +451,6 @@
             ]
         },
         {
-            "id": 140657730906672,
-            "block_type": "SCOPE",
-            "title": "Jacobian condition",
-            "pos_x": 1120.0,
-            "pos_y": 60.0,
-            "width": 100,
-            "height": 100,
-            "flipped": false,
-            "inputsNum": 1,
-            "outputsNum": 0,
-            "inputs": [
-                {
-                    "id": 140657730906576,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 1,
-                    "socket_type": 1
-                }
-            ],
-            "outputs": [],
-            "parameters": [
-                [
-                    "nin",
-                    1
-                ],
-                [
-                    "styles",
-                    "None"
-                ],
-                [
-                    "scale",
-                    "auto"
-                ],
-                [
-                    "labels",
-                    "none"
-                ],
-                [
-                    "grid",
-                    "true"
-                ],
-                [
-                    "labels",
-                    null
-                ],
-                [
-                    "grid",
-                    true
-                ],
-                [
-                    "watch",
-                    false
-                ],
-                [
-                    "blockargs",
-                    null
-                ]
-            ]
-        },
-        {
-            "id": 140657733094944,
-            "block_type": "SCOPE",
-            "title": "Camera velocity",
-            "pos_x": -160.0,
-            "pos_y": 640.0,
-            "width": 100,
-            "height": 100,
-            "flipped": true,
-            "inputsNum": 1,
-            "outputsNum": 0,
-            "inputs": [
-                {
-                    "id": 140657733095184,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 3,
-                    "socket_type": 1
-                }
-            ],
-            "outputs": [],
-            "parameters": [
-                [
-                    "nin",
-                    1
-                ],
-                [
-                    "styles",
-                    null
-                ],
-                [
-                    "scale",
-                    "auto"
-                ],
-                [
-                    "labels",
-                    null
-                ],
-                [
-                    "grid",
-                    true
-                ],
-                [
-                    "labels",
-                    null
-                ],
-                [
-                    "grid",
-                    true
-                ],
-                [
-                    "watch",
-                    false
-                ],
-                [
-                    "blockargs",
-                    null
-                ]
-            ]
-        },
-        {
             "id": 140657733234208,
             "block_type": "MAIN",
             "title": "Main Block",
@@ -582,7 +466,7 @@
             "parameters": [
                 [
                     "file name",
-                    "ibvs-main.py"
+                    "IBVS-partitioned-main.py"
                 ]
             ]
         },
@@ -669,11 +553,15 @@
                 ],
                 [
                     "depth",
-                    1.0
+                    3.0
                 ],
                 [
                     "depthest",
-                    true
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -776,7 +664,7 @@
         {
             "id": 140315044956192,
             "block_type": "FUNCTION",
-            "title": "\u03c3, \u03c9",
+            "title": "(\u03c3*-\u03c3, \u03b8*-\u03b8)",
             "pos_x": 200.0,
             "pos_y": 320.0,
             "width": 100,
@@ -805,7 +693,7 @@
             "parameters": [
                 [
                     "func",
-                    "=area_theta"
+                    "=rho_theta"
                 ],
                 [
                     "nin",
@@ -820,8 +708,12 @@
                     false
                 ],
                 [
-                    "args",
+                    "fargs",
                     []
+                ],
+                [
+                    "fkwargs",
+                    null
                 ],
                 [
                     "blockargs",
@@ -967,7 +859,7 @@
                 ],
                 [
                     "matrix",
-                    false
+                    true
                 ],
                 [
                     "blockargs",
@@ -1015,6 +907,10 @@
                 [
                     "nin",
                     2
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -1102,6 +998,130 @@
                 ],
                 [
                     "init",
+                    "=plot_init"
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140296204662624,
+            "block_type": "SCOPE",
+            "title": "Jacobian condition",
+            "pos_x": 1100.0,
+            "pos_y": 60.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140296204665616,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    1
+                ],
+                [
+                    "vector",
+                    0
+                ],
+                [
+                    "styles",
+                    null
+                ],
+                [
+                    "stairs",
+                    false
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140620777207648,
+            "block_type": "SCOPE",
+            "title": "Camera velocity",
+            "pos_x": -100.0,
+            "pos_y": 660.0,
+            "width": 100,
+            "height": 100,
+            "flipped": true,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140620776632528,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    1
+                ],
+                [
+                    "vector",
+                    6
+                ],
+                [
+                    "styles",
+                    null
+                ],
+                [
+                    "stairs",
+                    false
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -1321,14 +1341,6 @@
             ]
         },
         {
-            "id": 140314570954256,
-            "start_socket": 140223660150400,
-            "end_socket": 140657730906576,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
             "id": 140314570953584,
             "start_socket": 140431881542720,
             "end_socket": 140314570953776,
@@ -1348,14 +1360,6 @@
             "id": 140314570953392,
             "start_socket": 140431881511264,
             "end_socket": 140657730906000,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
-            "id": 140314570954928,
-            "start_socket": 140314570954640,
-            "end_socket": 140657733095184,
             "wire_type": 3,
             "custom_routing": false,
             "wire_coordinates": []
@@ -1423,6 +1427,39 @@
                 [
                     980.0,
                     480.0
+                ]
+            ]
+        },
+        {
+            "id": 140296204666480,
+            "start_socket": 140223660150400,
+            "end_socket": 140296204665616,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140620776633056,
+            "start_socket": 140314570954640,
+            "end_socket": 140620776632528,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    160.0,
+                    800.0
+                ],
+                [
+                    40.0,
+                    800.0
+                ],
+                [
+                    40.0,
+                    700.0
+                ],
+                [
+                    0.0,
+                    700.0
                 ]
             ]
         }
@@ -1547,6 +1584,21 @@
                 255
             ],
             "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Desired image</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">plane coordinates</p></body></html>"
+        },
+        {
+            "id": 140482940794720,
+            "text": "new scalar features",
+            "pos_x": 195.0,
+            "pos_y": 285.0,
+            "width": 130,
+            "height": 24,
+            "fill_color": [
+                201,
+                221,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">new scalar features</p></body></html>"
         }
     ],
     "grouping_boxes": [

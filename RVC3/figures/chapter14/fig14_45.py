@@ -25,7 +25,7 @@ p2 = np.array([
     [mx[1], mn[1], mn[1], mx[1]]
 ])
 smb.plot_poly(p2, 'k--', close=True, linewidth=2, label='undistorted shape')
-smb.plot_point(p1, 'yo', label='distored shape')  # on top
+smb.plot_point(p1, 'yo', label='distorted shape')  # on top
 
 plt.legend()
 

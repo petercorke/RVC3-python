@@ -8,16 +8,16 @@ bd = sim.blockdiagram('forward kinematics')
 
 puma = models.DH.Puma560()
 
-jtraj = bd.JTRAJ(q0=puma.qr, qf=puma.qz)
+_jtraj = bd.JTRAJ(q0=puma.qr, qf=puma.qz)
 fk = bd.FKINE(puma)
 rplot = bd.ARMPLOT(puma)
-t = bd.TR2T()
+_transl = bd.TR2T()
 xyplot = bd.SCOPEXY(name='XZ plane')
 
-bd.connect(jtraj.q, fk.q, rplot.q)
-bd.connect(fk.T, t.T)
-bd.connect(t.x, xyplot[0])
-bd.connect(t.z, xyplot[1])
+bd.connect(_jtraj.q, fk.q, rplot.q)
+bd.connect(fk.T, _transl.T)
+bd.connect(_transl.x, xyplot[0])
+bd.connect(_translt.z, xyplot[1])
 
 bd.compile()
 bd.report()

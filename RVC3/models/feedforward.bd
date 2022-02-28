@@ -1,9 +1,9 @@
 {
-    "id": 140327963464704,
+    "id": 140268991027040,
     "created_by": "corkep",
     "creation_time": 1632776601,
-    "scene_width": 11737.6,
-    "scene_height": 5062.400000000001,
+    "scene_width": 9794.400000000001,
+    "scene_height": 4440.8,
     "blocks": [
         {
             "id": 140660237829696,
@@ -42,6 +42,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -82,6 +86,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -128,6 +136,10 @@
                 ],
                 [
                     "mode",
+                    null
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -176,6 +188,10 @@
                 [
                     "mode",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -223,6 +239,10 @@
                 [
                     "mode",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -230,7 +250,7 @@
             "id": 140660238324688,
             "block_type": "SUM",
             "title": "total torque",
-            "pos_x": 740.0,
+            "pos_x": 760.0,
             "pos_y": -200.0,
             "width": 100,
             "height": 100,
@@ -269,6 +289,10 @@
                 ],
                 [
                     "mode",
+                    null
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -319,11 +343,15 @@
             "parameters": [
                 [
                     "robot",
-                    null
+                    "=robot"
                 ],
                 [
                     "end",
                     "end-effector"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -332,7 +360,7 @@
             "block_type": "IDYN",
             "title": "inverse dynamics",
             "pos_x": 100.0,
-            "pos_y": 100.0,
+            "pos_y": 200.0,
             "width": 125,
             "height": 120.0,
             "flipped": false,
@@ -373,11 +401,15 @@
             "parameters": [
                 [
                     "robot",
-                    null
+                    "=robot"
                 ],
                 [
                     "gravity",
                     "end-effector"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -419,15 +451,15 @@
             "parameters": [
                 [
                     "q0",
-                    null
+                    "=robot.qr"
                 ],
                 [
                     "qf",
-                    null
+                    "=robot.qn"
                 ],
                 [
                     "T",
-                    null
+                    5
                 ],
                 [
                     "qd0",
@@ -436,6 +468,10 @@
                 [
                     "qdf",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -443,7 +479,7 @@
             "id": 140660237968480,
             "block_type": "ZOH",
             "title": "Tfb",
-            "pos_x": 580.0,
+            "pos_x": 560.0,
             "pos_y": -200.0,
             "width": 100,
             "height": 100,
@@ -486,12 +522,12 @@
         {
             "id": 140660237970880,
             "block_type": "ARMPLOT",
-            "title": "Armplot Block",
-            "pos_x": 1120.0,
-            "pos_y": -200.0,
+            "title": "Arm animation",
+            "pos_x": 920.0,
+            "pos_y": -40.0,
             "width": 100,
             "height": 100,
-            "flipped": false,
+            "flipped": true,
             "inputsNum": 1,
             "outputsNum": 0,
             "inputs": [
@@ -499,7 +535,7 @@
                     "id": 140660237971360,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 1,
+                    "position": 3,
                     "socket_type": 1
                 }
             ],
@@ -507,11 +543,15 @@
             "parameters": [
                 [
                     "robot",
-                    null
+                    "=robot"
                 ],
                 [
                     "backend",
                     "pyplot"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -520,7 +560,7 @@
             "block_type": "ZOH",
             "title": "Tff",
             "pos_x": 560.0,
-            "pos_y": 100.0,
+            "pos_y": 200.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -563,7 +603,7 @@
             "id": 140328069404896,
             "block_type": "CONNECTOR",
             "pos_x": 440.0,
-            "pos_y": -220.0,
+            "pos_y": -300.0,
             "inputs": [
                 {
                     "id": 140328069404944,
@@ -581,6 +621,26 @@
                     "position": 1,
                     "socket_type": 2
                 }
+            ]
+        },
+        {
+            "id": 140648022900208,
+            "block_type": "MAIN",
+            "title": "Main Block",
+            "pos_x": -180.0,
+            "pos_y": 200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 0,
+            "outputsNum": 0,
+            "inputs": [],
+            "outputs": [],
+            "parameters": [
+                [
+                    "file name",
+                    "=feedforward-main.py"
+                ]
             ]
         }
     ],
@@ -679,8 +739,25 @@
             "start_socket": 140660238326752,
             "end_socket": 140660237971360,
             "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    1020.0,
+                    0.0
+                ],
+                [
+                    1055.0,
+                    0.0
+                ],
+                [
+                    1055.0,
+                    -160.0
+                ],
+                [
+                    1025.0,
+                    -160.0
+                ]
+            ]
         },
         {
             "id": 140660238129712,
@@ -695,8 +772,25 @@
             "start_socket": 140660238129280,
             "end_socket": 140660238325456,
             "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    760.0,
+                    -140.0
+                ],
+                [
+                    730.0,
+                    -140.0
+                ],
+                [
+                    730.0,
+                    240.0
+                ],
+                [
+                    660.0,
+                    240.0
+                ]
+            ]
         },
         {
             "id": 140328069404848,
@@ -707,11 +801,11 @@
             "wire_coordinates": [
                 [
                     100.0,
-                    140.0
+                    240.0
                 ],
                 [
                     12.5,
-                    140.0
+                    240.0
                 ],
                 [
                     12.5,
@@ -732,11 +826,11 @@
             "wire_coordinates": [
                 [
                     100.0,
-                    160.0
+                    260.0
                 ],
                 [
                     -7.5,
-                    160.0
+                    260.0
                 ],
                 [
                     -7.5,
@@ -757,11 +851,11 @@
             "wire_coordinates": [
                 [
                     100.0,
-                    180.0
+                    280.0
                 ],
                 [
                     -27.5,
-                    180.0
+                    280.0
                 ],
                 [
                     -27.5,
@@ -790,14 +884,14 @@
                 ],
                 [
                     40.0,
-                    -240.0
+                    -320.0
                 ],
                 [
-                    1065.0,
-                    -240.0
+                    1125.0,
+                    -320.0
                 ],
                 [
-                    1065.0,
+                    1125.0,
                     -140.0
                 ],
                 [
@@ -811,8 +905,25 @@
             "start_socket": 140660238326752,
             "end_socket": 140328069404944,
             "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    453.0,
+                    -300.0
+                ],
+                [
+                    1105.0,
+                    -300.0
+                ],
+                [
+                    1105.0,
+                    -160.0
+                ],
+                [
+                    1025.0,
+                    -160.0
+                ]
+            ]
         },
         {
             "id": 140328068364704,
@@ -831,11 +942,11 @@
                 ],
                 [
                     60.0,
-                    -220.0
+                    -300.0
                 ],
                 [
                     440.0,
-                    -220.0
+                    -300.0
                 ]
             ]
         }
@@ -843,19 +954,101 @@
     "labels": [
         {
             "id": 140660238174576,
-            "text": "feedforward torque",
-            "pos_x": 330.0,
-            "pos_y": 150.0,
-            "width": 126,
-            "height": 24,
+            "text": "feedforward control",
+            "pos_x": 105.0,
+            "pos_y": 140.0,
+            "width": 196,
+            "height": 31,
             "fill_color": [
                 255,
                 255,
                 255,
                 255
             ],
-            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">feedforward torque</p></body></html>"
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600;\">feedforward control</span></p></body></html>"
+        },
+        {
+            "id": 140648493021216,
+            "text": "feedback control",
+            "pos_x": 105.0,
+            "pos_y": -260.0,
+            "width": 168,
+            "height": 31,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600;\">feedback control</span></p></body></html>"
+        },
+        {
+            "id": 140648004983920,
+            "text": "robot",
+            "pos_x": 910.0,
+            "pos_y": -245.0,
+            "width": 60,
+            "height": 31,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600;\">robot</span></p></body></html>"
+        },
+        {
+            "id": 140268595895456,
+            "text": "feedforward torque",
+            "pos_x": 330.0,
+            "pos_y": 240.0,
+            "width": 126,
+            "height": 24,
+            "fill_color": [
+                200,
+                221,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0000ff;\">feedforward torque</span></p></body></html>"
         }
     ],
-    "grouping_boxes": []
+    "grouping_boxes": [
+        {
+            "id": 140648004984400,
+            "pos_x": 80.0,
+            "pos_y": -280.0,
+            "width": 620.0,
+            "height": 380.0,
+            "color": [
+                146,
+                187,
+                255
+            ]
+        },
+        {
+            "id": 140648502260160,
+            "pos_x": 80.0,
+            "pos_y": 120.0,
+            "width": 620.0,
+            "height": 240.0,
+            "color": [
+                146,
+                187,
+                255
+            ]
+        },
+        {
+            "id": 140648004984448,
+            "pos_x": 880.0,
+            "pos_y": -260.0,
+            "width": 200.0,
+            "height": 380.0,
+            "color": [
+                255,
+                38,
+                0
+            ]
+        }
+    ]
 }

@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
+from spatialmath.base import plot_point
 
 im = Image.Read('sharks.png')
 im.disp()
@@ -14,6 +15,7 @@ im.disp()
 blobs = im.blobs()
 blobs.plot_centroid()
 blobs.plot_box(color='r')
+plot_point(blobs.p, text="#{0}")
 rvcprint.rvcprint(subfig='a')
 # ----------------------------------------------------------------------- #
 

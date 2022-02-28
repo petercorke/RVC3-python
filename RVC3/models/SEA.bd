@@ -1,9 +1,9 @@
 {
-    "id": 140355776943104,
+    "id": 140492654146944,
     "created_by": "corkep",
     "creation_time": 1632779048,
-    "scene_width": 13154.400000000001,
-    "scene_height": 5796.000000000001,
+    "scene_width": 13193.6,
+    "scene_height": 5482.400000000001,
     "blocks": [
         {
             "id": 140433475929616,
@@ -45,6 +45,10 @@
                 ],
                 [
                     "max",
+                    null
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -90,6 +94,10 @@
                 [
                     "max",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -133,6 +141,10 @@
                 ],
                 [
                     "max",
+                    null
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -178,6 +190,10 @@
                 [
                     "max",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -218,6 +234,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -258,6 +278,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -298,6 +322,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -338,6 +366,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -378,6 +410,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -424,6 +460,10 @@
                 ],
                 [
                     "mode",
+                    null
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -472,6 +512,10 @@
                 [
                     "mode",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -519,6 +563,10 @@
                 [
                     "mode",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -559,6 +607,10 @@
                 [
                     "max",
                     "math.inf"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -606,6 +658,10 @@
                 [
                     "matrix",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -613,7 +669,7 @@
             "id": 140433401473344,
             "block_type": "FUNCTION",
             "title": "collision?",
-            "pos_x": 780.0,
+            "pos_x": 820.0,
             "pos_y": 380.0,
             "width": 100,
             "height": 100,
@@ -662,6 +718,10 @@
                 [
                     "blockargs",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -669,7 +729,7 @@
             "id": 140433401474256,
             "block_type": "STEP",
             "title": "Step Block",
-            "pos_x": -420.0,
+            "pos_x": -440.0,
             "pos_y": -200.0,
             "width": 100,
             "height": 100,
@@ -698,6 +758,10 @@
                 [
                     "on",
                     1
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -755,6 +819,10 @@
                 [
                     "nin",
                     4
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -825,6 +893,22 @@
                 [
                     "grid",
                     true
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -871,6 +955,22 @@
                 [
                     "grid",
                     true
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         }
@@ -986,25 +1086,8 @@
             "start_socket": 140433401392576,
             "end_socket": 140433423489536,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    453.0,
-                    540.0
-                ],
-                [
-                    1440.0,
-                    540.0
-                ],
-                [
-                    1440.0,
-                    -160.0
-                ],
-                [
-                    1380.0,
-                    -160.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140433423489632,
@@ -1141,25 +1224,8 @@
             "start_socket": 140433423489440,
             "end_socket": 140433401392768,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    440.0,
-                    280.0
-                ],
-                [
-                    360.0,
-                    280.0
-                ],
-                [
-                    360.0,
-                    540.0
-                ],
-                [
-                    440.0,
-                    540.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         }
     ],
     "labels": [
@@ -1297,6 +1363,21 @@
                 255
             ],
             "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fs - spring force</p></body></html>"
+        },
+        {
+            "id": 140492281657376,
+            "text": "0 if collision,\n1 otherwise",
+            "pos_x": 710.0,
+            "pos_y": 430.0,
+            "width": 85,
+            "height": 41,
+            "fill_color": [
+                255,
+                147,
+                128,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0000ff;\">0 if collision,</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0000ff;\">1 otherwise</span></p></body></html>"
         }
     ],
     "grouping_boxes": [
@@ -1319,9 +1400,9 @@
             "width": 640.0,
             "height": 360.0,
             "color": [
-                146,
-                187,
-                255
+                255,
+                38,
+                0
             ]
         },
         {
@@ -1331,9 +1412,9 @@
             "width": 500.0,
             "height": 240.0,
             "color": [
-                146,
-                187,
-                255
+                255,
+                38,
+                0
             ]
         },
         {
@@ -1343,9 +1424,9 @@
             "width": 320.0,
             "height": 240.0,
             "color": [
-                146,
-                187,
-                255
+                255,
+                38,
+                0
             ]
         }
     ]

@@ -24,7 +24,7 @@ T_C = transl2(C) @ T_R @ transl2(-C)
 print(trlog2(T_C))
 trplot2(T_C @ T_X, frame='XC', axissubscript=False, color='r')
 
-plot_circle(np.sqrt(2), 'k:', centre=C, zorder=0)
-plot_circle(np.sqrt(13), 'k--', centre=(0, 0), zorder=0)
+plot_circle(np.sqrt(2), C, 'k:', zorder=0)
+plot_circle(np.sqrt(13), (0, 0), 'k--', zorder=0)
 
 rvcprint.rvcprint()

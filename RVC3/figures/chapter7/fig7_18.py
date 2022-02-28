@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from roboticstoolbox import *
 
 from roboticstoolbox.backends.swift import Swift
@@ -19,9 +21,9 @@ swift.launch()
 
 puma = models.URDF.Puma560()
 
-ee = puma.fkine(puma.lu).t
+ee = puma.fkine(puma.configs['lu']).t
 
-print(puma)
+# print(puma)
 
 swift.add(puma)
 
@@ -29,14 +31,16 @@ swift.add(puma)
 swift.set_camera_pose([1.3, 0, ee[2]], ee)
 
 for config, subfig in poses:
-    puma.q = puma._configdict[config]
+    puma.q = puma._configs[config]
     swift.step()
     time.sleep(0.5)
-    swift.screenshot('swift_snap.png')
+    swift.screenshot('swift_snap')
 
     time.sleep(4)
 
-    file = root / 'swift_snap.png'
+    file = root / 'swift_snap'
     target = Path(outfile(subfig=subfig, format='png'))
-    file.rename(target)
+    # file.with_suffix('.png').rename(target)
+
+# this is showing wrong configurations
 

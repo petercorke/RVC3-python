@@ -1,48 +1,49 @@
 #!/usr/bin/env python3
 
 import rvcprint
-import numpy as np
+from roboticstoolbox import rtb_path_to_datafile, mobile
 import matplotlib.pyplot as plt
-from roboticstoolbox import *
-from machinevisiontoolbox import Image
+import matplotlib as mpl
+from pgraph import *
+import json
+import os
+import numpy as np
 
+with open(rtb_path_to_datafile('data/queensland.json'), 'r') as f:
+    data = json.loads(f.read())
 
-floorplan = np.zeros((5, 5))
-floorplan[2,1] = 1
+g = UGraph()
+for name, info in data['places'].items():
+    g.add_vertex(name=name, coord=info["utm"]) # add places as vertices
+for route in data['routes']:
+    g.add_edge(route['start'], route['end'], cost=route['distance']) # add routes as edges
 
-Image(floorplan).disp(black=0.3, )
-plt.xlabel('x')
-plt.ylabel('y')
-plt.gca().invert_yaxis()
-rvcprint.rvcprint(subfig='a')
-
-# ------------------------------------------------------------------------- #
-
-
-goalmarker = {'marker': ''}
-floorplan[2,1] = 0
-dx = DistanceTransformPlanner(occgrid=floorplan, metric='euclidean')
-dx.plan((1,2))
-dx.plot(goal_marker=goalmarker)
-ax = plt.gca()
-ax.grid(False)
-for i in range(floorplan.shape[0]):
-    for j in range(floorplan.shape[1]):
-        ax.text(x=j, y=i,s=np.round(dx.distancemap[i, j], 2), va='center', ha='center', size='xx-large', color='r')
-
-rvcprint.rvcprint(subfig='b')
-
-# ------------------------------------------------------------------------- #
+path, *_ = g.path_Astar('Hughenden', 'Brisbane')
 
 plt.clf()
+g.plot()
+g.highlight_path(path)
+plt.xlabel('x')
+plt.ylabel('y')
 
-dx = DistanceTransformPlanner(occgrid=floorplan, metric='manhattan')
-dx.plan((1,2))
-dx.plot(goal_marker=goalmarker)
-ax = plt.gca()
-ax.grid(False)
-for i in range(floorplan.shape[0]):
-    for j in range(floorplan.shape[1]):
-        ax.text(x=j, y=i,s=np.round(dx.distancemap[i, j], 2), va='center', ha='center', size='xx-large', color='r')
+rvcprint.rvcprint(subfig='a', thicken=None)
 
-rvcprint.rvcprint(subfig='c')
+# ------------------------------------------------------------------------- #
+
+# minimum time
+g = UGraph()
+for name, info in data['places'].items():
+    g.add_vertex(name=name, coord=info["utm"]) # add places as vertices
+for route in data['routes']:
+    g.add_edge(route['start'], route['end'], cost=route['distance'] / route['speed']) # add routes as edges
+g.heuristic = lambda x: np.linalg.norm(x) / 100
+
+path, *_ = g.path_Astar('Hughenden', 'Brisbane')
+
+plt.clf()
+g.plot()
+g.highlight_path(path)
+plt.xlabel('x')
+plt.ylabel('y')
+
+rvcprint.rvcprint(subfig='b', thicken=None)

@@ -22,7 +22,7 @@ pd = camera.project_point(P, pose=SE3(-2, 0, 0)*T_vc)
 q0 = [-8, 2, 0.3]
 lmbda = 1
 
-model = Path(__file__).parent / "IBVS-drivepoint.bd"
+model = Path(__file__).parent / "IBVS-holonomic.bd"
 print(model)
 
 def plot_init(camera):

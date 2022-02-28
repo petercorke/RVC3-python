@@ -25,7 +25,7 @@ bd.report()
 sim = BDSim()
 out = sim.run(bd, T=10, dt=0.01, watch=[bd["steering"]])
 
-qplot(out.t, np.column_stack((out.x[:,1:], out.y0.reshape(-1,1))), stack=True, color='k', grid=True, labels=['y', r'$\theta$', r'$\gamma$'])
+xplot(out.t, np.column_stack((out.x[:,1:], out.y0.reshape(-1,1))), stack=True, color='k', grid=True, labels=['y', r'$\theta$', r'$\gamma$'])
 rvcprint.rvcprint(subfig='a')
 
 # ------------------------------------------------------------------------- #
