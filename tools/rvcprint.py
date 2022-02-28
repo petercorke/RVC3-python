@@ -11,14 +11,13 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 from matplotlib import colors
 
-fileparts = re.compile(r'fig(?P<chapter>[0-9]+)_(?P<fig>.+).py')
+fileparts = re.compile(r'fig(?P<chapter>[0-9]+|[A-K])_(?P<fig>.+).py')
 
-def bdmodel(model, subfig=None):
+def bdmodel(model, subfig=''):
     file = outfile(format='pdf', subfig=subfig)
-    print('saving --> ', file)
-    os.system(f"bdedit ../../models/{model} -p {str(file)}")
+    os.system(f"bdedit -s=14 ../../models/{model} -p {str(file)}")
 
-def outfile(subfig='', format=None):
+def outfile(subfig='', format=None, include=False):
     # build the path for saving
     try:
         m = fileparts.search(os.path.basename(sys.argv[0]))
@@ -30,14 +29,25 @@ def outfile(subfig='', format=None):
     # figure = os.path.splitext(figure)[0] + subfig + '.' + format
     # chapter = figure[3]
 
-    path = Path(f"/Users/corkep/code/RVC3-python/RVC3/figures/chapter{chapter}"
-        f"/Figures_generated")
+    if chapter.isalpha():
+        # its an appendix
+        path = Path(f"/Users/corkep/code/RVC3-python/RVC3/figures/appendices"
+            f"/Figures_generated")
+    else:
+        path = Path(f"/Users/corkep/code/RVC3-python/RVC3/figures/chapter{chapter}"
+            f"/Figures_generated")
     
     if not path.exists():
         print('creating folder', path)
         path.mkdir()
 
-    figure = path / f"fig{chapter}_{fig}{subfig}.{format}"
+    if include:
+        figure = path / f"fig{chapter}_{fig}{subfig}-include.{format}"
+    else:
+        figure = path / f"fig{chapter}_{fig}{subfig}.{format}"
+
+    print('saving --> ', figure)
+
     return figure
 
 def figname(subfig=''):
@@ -124,9 +134,7 @@ def rvcprint(subfig='', debug=False, thicken=1.5, facecolor='white', interval=No
         plt.show(block=True)
     else:
         # save it
-        print('saving --> ', figure)
 
-        
         for ax in axes:
 
             if facecolor is not None:

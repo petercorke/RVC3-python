@@ -4,6 +4,7 @@
 import subprocess
 import sys
 import re
+import os
 import os.path
 import argparse
 from subprocess import Popen, PIPE
@@ -14,6 +15,8 @@ import copy
 from collections import Counter
 import textwrap
 import shutil
+from pathlib import Path
+
 
 
 debug = False
@@ -98,11 +101,18 @@ parser.add_argument('--debug', '-D',
 parser.add_argument('--timeout',
         type=float, default=0.2,
         help='timeout on each IPython command, default %(default)s seconds')
-parser.add_argument('--quiet', 
+parser.add_argument('--quiet', '-q',
         action='store_const', const=True, default=False, dest='only_errors',
         help='only show error reports, default %(default)s')
 
 args = parser.parse_args()
+
+os.system("clear")
+
+root = Path(__file__).absolute().parent.parent / "RVC3"
+sys.path.append(str(root / "models"))
+sys.path.append(str(root / "examples"))
+print(sys.path)
 
 def cprint(color, str, **kwargs):
     if str is not None:
@@ -121,7 +131,6 @@ if args.texfile is None:
     sys.exit(1)
 else:
     filename = args.texfile
-print(args)
 
 out = None
 if args.write_tex:
@@ -270,6 +279,8 @@ if not args.matlab:
                         # command had an output
                         if not args.only_errors:
                             result.extend(reply['content']['data']['text/plain'].split('\n'))
+                            if debug:
+                                print('RESULT', result)
                     elif reply['msg_type'] == 'display_data':
                         # command created graphical  data
                         # try:
@@ -348,7 +359,7 @@ if not args.matlab:
         import cv2 as cv
 
         import ansitable
-        ansitable.options(unicode=False)
+        ansitable.options(unicode=True)
 
         from spatialmath import *
         from spatialmath.base import *
@@ -608,8 +619,9 @@ def main():
                 if res1 != res2:
                     # strings are different
                     nmismatch += 1
-                    print()
-                    c2print('black', 'white', lastsection.strip())
+                    if args.show_sections:
+                        print()
+                        c2print('black', 'white', lastsection.strip())
                     if args.show_diff:
                         cprint('sky_blue_3', block)
                         cprint('yellow', result)
@@ -630,7 +642,7 @@ def main():
         print("--> ", out_tex.name)
 
 
-    print(f"processed {linenum} lines, {nlistings} lstlisting blocks, {ncells} cells, with {nmismatch} mismatched results and {nerrors} errors")
+    print(f"{args.texfile}:: processed {linenum} lines, {nlistings} lstlisting blocks, {ncells} cells, with {nmismatch} mismatched results and {nerrors} errors")
 
     print(tagcount)
 
@@ -646,3 +658,4 @@ if args.script:
 
 if __name__ == "__main__":
     main()
+    sys.exit(nerrors)
