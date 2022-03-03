@@ -7,7 +7,7 @@ from machinevisiontoolbox import *
 import spatialmath.base as smb
 
 # load .enpeda dataset, 12bit pixel values
-images = ZipArchive('bridge-l.zip', grey=True, dtype='uint8', maxintval=4095, roi=[20, 750, 20, 480])
+images = ZipArchive('bridge-l.zip', filter='*.pgm', grey=True, dtype='uint8', maxintval=4095, roi=[20, 750, 20, 480])
 ax = plt.gca()
 for image in images:
     ax.clear()

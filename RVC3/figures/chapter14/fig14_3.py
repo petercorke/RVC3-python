@@ -12,9 +12,9 @@ sf2 = Image.Read('eiffel-2.png').SIFT()
 m = sf1.match(sf2)
 print(m[:5])
 
-# m[:100].plot('y', width=200, linewidth=0.7)
-Image.ColorOverlay(sf1._image, sf2._image)
+m[:100].plot('y', width=200, linewidth=0.7)
+# Image.ColorOverlay(sf1._image, sf2._image)
 
-rvcprint.rvcprint(thicken=None, debug=True)
+rvcprint.rvcprint(thicken=None)
 
 # plt.show(block=True)

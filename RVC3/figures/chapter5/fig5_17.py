@@ -28,7 +28,7 @@ path, status = ds.query(places.br3, sensor=sensorfunc, animate=True) #, verbose=
 print(ds.nexpand - nex0)
 ds.plot(path)
 
-base.plot_box(bbox=[300, 325, 105, 125], filled=True, facecolor='orange', hatch=r'//////\\\\\\')
+base.plot_box(lrbt=[300, 325, 105, 125], filled=True, facecolor='orange', hatch=r'//////\\\\\\')
 
 rvcprint.rvcprint()
 

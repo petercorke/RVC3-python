@@ -90,8 +90,8 @@ view2.pose.printline(orient='rpy/yxz')
 ax = smb.plotvol3([0, 4, 0, 4, 0, 4])
 ba.plot(
     text=False, 
-    vertex=dict(markersize=3, zorder=20),
-    edge=dict(linewidth=0.2, color='k'), 
+    vopt=dict(markersize=3, zorder=20),
+    eopt=dict(linewidth=0.2, color='k'), 
     camera=dict(shape='camera', scale=0.5),
     ax=ax
     )

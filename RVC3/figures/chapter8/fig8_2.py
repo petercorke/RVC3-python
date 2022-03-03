@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 
 
 """
@@ -9,22 +9,31 @@ import swift
 import roboticstoolbox as rtb
 import spatialgeometry as sg
 import spatialmath as sm
+from math import pi
 
 r = rtb.models.UR5()
 r.base = sm.SE3(0.1, 0.1, 0.0)
 r.q = [0, -1.1, 1.4, -0.6, 0.4, 0.4]
+print(r)
 
+length = 0.6
 env = swift.Swift()
 env.launch()
-env.set_camera_pose([0.4, 1, 0.5], [0.4, 0, 0.5])
+env.set_camera_pose([length, 1, 0.5], [0.4, 0, 0.5])
 env.add(r, robot_alpha=0.4)
 
 axes = []
 
 for link in r:
     if link.isjoint:
-        axes.append(sg.Axes(0.08, base=r.fkine(r.q, end=link)))
-        env.add(axes[-1])
+        # axes.append(sg.Axes(0.08, base=r.fkine(r.q, end=link)))
+        joint = link.ets[-1]
+        T = r.fkine(r.q, end=link)
+        if joint.axis == "Rx":
+            T *= sm.SE3.Ry(pi/2)
+        elif joint.axis == "Ry":
+            T *= sm.SE3.Rx(-pi/2)
+        env.add(sg.Arrow(length=0.5, radius=0.005, color='red', pose=T* sm.SE3.Tz(-length/3)))
 
 
 env.hold()
@@ -41,4 +50,4 @@ env.hold()
 # }
 # puma.plot(puma.qn, jointlabels=True, name=False, backend='pyplot', options=options)
 
-rvcprint.rvcprint(thicken=None)
+# rvcprint.rvcprint()

@@ -15,7 +15,7 @@ cam = CentralCamera()
 
 ax = base.plotvol3([-0.1, 0.3, -0.1, 0.3, -0.4, 0])
 for frame in frames:
-    cam.plot_camera(pose=frame.pose, scale=0.05, shape='camera')
+    cam.plot(pose=frame.pose, scale=0.05, shape='camera')
     ax.text(*frame.pose.t, f" {frame.id}", zorder=20, fontsize=12)
 shape = np.r_[7 * 0.025, 6 * 0.025, 0.01]
 base.plot_cuboid(shape, centre=shape/2)

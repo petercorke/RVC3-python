@@ -8,8 +8,8 @@ from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
 import cv2 as cv
 
-sf1 = Image.Read('eiffel2-1.png').SIFT()
-sf2 = Image.Read('eiffel2-2.png').SIFT()
+sf1 = Image.Read('eiffel-1.png').SIFT()
+sf2 = Image.Read('eiffel-2.png').SIFT()
 m = sf1.match(sf2)
 print(m[:5])
 
@@ -26,7 +26,7 @@ cv.setRNGSeed(0)
     #                 maxiters):
 
 
-F, inliers, resid = CentralCamera.points2F(m.p1, m.p2, 
+F, resid, inliers  = CentralCamera.points2F(m.p1, m.p2, 
     'ransac', ransacReprojThreshold=1, confidence=0.9, maxIters=100)
 
 print(F)

@@ -33,8 +33,8 @@ fpix_u = K[0, 0]
 fpix_v = K[1, 1]
 
 Ud, Vd = distorted.meshgrid()
-u = (Up - u0) / fpix_u;
-v = (Vp - v0) / fpix_v;
+u = (Ud - u0) / fpix_u;
+v = (Vd - v0) / fpix_v;
 
 r = np.sqrt( u**2 + v**2 );
 delta_u = u * (k[0]*r**2 + k[1]*r**4 + k[2]*r**6) + p[0]*u*v + p[1]*(r**2 + 2*u**2)

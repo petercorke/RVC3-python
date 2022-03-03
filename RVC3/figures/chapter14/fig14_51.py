@@ -25,8 +25,8 @@ import spatialmath.base as smb
 
 # load .enpeda dataset, 12bit pixel values
 args = dict(mono=True, dtype='uint8', maxintval=4095, roi=[20, 750, 20, 480])
-lefts = ZipArchive('bridge-l.zip', **args)
-rights = ZipArchive('bridge-r.zip', **args)
+lefts = ZipArchive('bridge-l.zip', filter='*.pgm', **args)
+rights = ZipArchive('bridge-r.zip', filter='*.pgm', **args)
 
 # camera intrinsics
 f   =  985.939 # [pixel] focal length
@@ -41,6 +41,7 @@ cv.setRNGSeed(0)
 
 displacements = []
 errors = []
+nmatches = []
 
 for left, right in zip(lefts, rights):
     print('-----------------', left.id)
@@ -59,6 +60,7 @@ for left, right in zip(lefts, rights):
     print(matchLR)
 
     matchLR = matchLR.inliers
+    nmatches.append(len(matchLR))
 
 
     # F, resid, inliers = cam.points2F(LRmatch.p1, LRmatch.p2, method='ransac')
@@ -145,6 +147,6 @@ for left, right in zip(lefts, rights):
         break
 
 f = open('vo.pickle', 'wb')
-d = dict(displacements=displacements, errors=errors)
+d = dict(displacements=displacements, errors=errors, nmatches=nmatches)
 pickle.dump(d, f)
 f.close()

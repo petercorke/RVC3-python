@@ -4,9 +4,6 @@ import rvcprint
 from machinevisiontoolbox.base import iread, idisp
 
 flowers, name = iread('flowers8.png')
-print(flowers[276, 318, :])
 
-# idisp(flowers, block=True)
-
-flowers.disp()
+idisp(flowers)
 rvcprint.rvcprint()

@@ -59,7 +59,7 @@ im.disp(square=True, black=0.1, grid=True, title=False)
 
 G, L, s = im.scalespace(60, 2)
 z = np.stack([np.abs(Lk.image) for Lk in L], axis=2)
-features = peak3(z, npeaks=4)
+features = findpeaks3d(z, npeaks=4)
 # features = scalemax(z, s)
 print(features)
 

@@ -28,7 +28,7 @@ camera.f / camera.rho[1]
 
 # plt.clf()
 plotvol3([-0.9, 0.9, -0.9, 0.9, -1.5, 0.3])
-est.plot_camera(scale=0.3, shape='camera', color='k', frame=True)
+est.plot(scale=0.3, shape='camera', color='k', frame=True)
 # est.pose.plot(length=0.4, style='line', color='b', flo=(0.07, 0, -0.01))
 
 plot_sphere(0.03, P, color='k')

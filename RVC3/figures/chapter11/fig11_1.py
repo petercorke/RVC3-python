@@ -5,7 +5,5 @@ from machinevisiontoolbox.base import iread, idisp
 
 street, name = iread('street.png')
 
-# idisp(street, block=True)
-
-street.disp()
+idisp(street)
 rvcprint.rvcprint()

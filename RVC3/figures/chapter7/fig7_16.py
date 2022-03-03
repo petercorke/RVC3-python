@@ -15,7 +15,7 @@ swift.launch()
 ur5 = models.URDF.UR5()
 
 swift.add(ur5)
-ur5.q = [0, -0.6, 0.5, 0, 0, 0]
+ur5.q = [0, -1.1, 1.4, -0.6, 0.4, 0.4]
 
 p = 1
 swift.set_camera_pose([1.2, 0.5, 0.2], [0, 0, 0.2])
@@ -58,6 +58,6 @@ time.sleep(4)
 
 root = Path('~/Downloads').expanduser()
 
-file = root / filename + '.png'
+file = root / filename
 target = Path(rvcprint.outfile(subfig='b', format='png'))
 file.with_suffix('.png').rename(target)

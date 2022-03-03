@@ -9,8 +9,7 @@ from matplotlib import cm
 from scipy.io import loadmat
 
 # process Kinect images for book
-
-data = loadmat('fig14_44.mat')
+data = loadmat('fig14_42.mat')
 
 ## IR image
 ir = Image(data['ir'])

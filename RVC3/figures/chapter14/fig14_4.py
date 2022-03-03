@@ -7,8 +7,8 @@ from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
 
-sf1 = Image.Read('eiffel2-1.png').SIFT()
-sf2 = Image.Read('eiffel2-2.png').SIFT()
+sf1 = Image.Read('eiffel-1.png').SIFT()
+sf2 = Image.Read('eiffel-2.png').SIFT()
 m = sf1.match(sf2)
 
 n, x, _ = plt.hist(m.distance, bins=100, cumulative=True, density=True)

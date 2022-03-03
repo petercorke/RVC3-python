@@ -2,4 +2,4 @@
 
 import rvcprint
 
-rvcprint.bdmodel('rrmc2.bd')
+rvcprint.bdmodel('RRMC2.bd')

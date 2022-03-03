@@ -7,7 +7,7 @@ from machinevisiontoolbox import *
 from matplotlib.ticker import ScalarFormatter
 from matplotlib import cm
 
-view1 = Image.Read('eiffel2-1.png', grey=True)
+view1 = Image.Read('eiffel-1.png', grey=True)
 
 hf = view1.Harris(nfeat=150)
 view1.disp(grid=True, darken=True, title=False)

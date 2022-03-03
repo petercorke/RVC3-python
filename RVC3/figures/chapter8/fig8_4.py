@@ -30,7 +30,7 @@ bd.connect(qdot, integrator)
 bd.connect(integrator, jacobian, robot)
 
 bd.compile()
-bd.report()
+bd.report_summary()
 
 out = sim.run(bd, 5, minstepsize=1e-6)  # simulate for 5s
 

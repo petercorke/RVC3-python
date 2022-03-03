@@ -25,7 +25,7 @@ out.disp(badcolor='r')
 rvcprint.rvcprint(subfig='b')
 
 tw = Twist2.UnitRevolute([300, 300])
-M = tw.exp(np.pi / 6)[:2, :]
+M = tw.exp(np.pi / 6).A[:2, :]
 
 out = mona.affine_warp(M, bgcolor=np.nan)
 out.disp(badcolor='r')

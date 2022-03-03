@@ -26,7 +26,7 @@ p2 = np.array([
 
 H, _ = CentralCamera.points2H(p1, p2, method='leastsquares')
 
-warped = im.warpPerspective(H)
+warped = im.warp_perspective(H)
 warped.disp(grid=True)
 
 rvcprint.rvcprint()

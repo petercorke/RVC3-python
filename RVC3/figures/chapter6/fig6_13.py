@@ -113,7 +113,7 @@ for lm_id in ekf._landmarks.keys():
 p = np.array(p)
 q = np.array(q)
 
-# T = SE2([3, 6, np.radians(-45)]).inv()
+# get transform from world to EKF frame
 T = align2d(p, q)
 T = SE2(T)
 print(T)

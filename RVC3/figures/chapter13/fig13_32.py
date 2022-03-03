@@ -36,7 +36,7 @@ p = np.array([
 Pp = h2e(np.linalg.inv(H) @ e2h(p))
 print(P)
 
-camera.plot_camera(scale=2, shape='camera', color='k', frame=True)
+camera.plot(scale=2, shape='camera', color='k', frame=True)
 plot_sphere(radius=0.1, centre=P, color='r')
 plot_sphere(radius=0.1, centre=np.vstack((Pp, np.zeros((4,)))), color='b')
 
