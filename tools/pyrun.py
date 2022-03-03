@@ -131,6 +131,7 @@ if args.texfile is None:
     sys.exit(1)
 else:
     filename = args.texfile
+print(args)
 
 out = None
 if args.write_tex:
@@ -545,6 +546,8 @@ def main():
 
 
 
+    # if args.show_cell:
+    #     cprint('blue', block)
     result = None
 
     for listenv in getblocks():
