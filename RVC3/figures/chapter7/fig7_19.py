@@ -1,63 +1,46 @@
 #!/usr/bin/env python3
 
-import rvcprint
-from math import pi
 from roboticstoolbox import *
-from spatialmath import *
-import matplotlib.pyplot as plt
-import numpy as np
 
-puma = models.DH.Puma560()
+from roboticstoolbox.backends.swift import Swift
+from pathlib import Path
+from rvcprint import outfile
+import time
 
-t = np.arange(0, 2, 0.02)
+root = Path('~/Downloads').expanduser()
 
+# cleanup old files
+for file in root.glob('swift_snap*.png'):
+    print('removing ', file)
+    file.unlink()
 
-TE1 = SE3(0.4, -0.2, 0.6) * SE3.Rx(3);
-TE2 = SE3(0.4, 0.2, 0.6) * SE3.Rx(1);
+poses = [('lu', 'a'), ('ru', 'b'), ('ld', 'c'), ('rd', 'd')]
 
-sol1 = puma.ikine_a(TE1, 'ru');
-sol2 = puma.ikine_a(TE2, 'ru');
+swift = Swift()
+swift.launch()
 
-qc = jtraj(sol1.q, sol2.q, t).q
+puma = models.URDF.Puma560()
 
-xplot(t, qc, wrist=True)
-# l = findobj('Type', 'legend')
-# l.Location = 'SouthWest';
+ee = puma.fkine(puma.configs['lu']).t
 
-rvcprint.rvcprint(subfig='a', thicken=1.5)
+# print(puma)
 
-Ts = puma.fkine(qc)
-plt.clf()
-plt.plot(t, Ts.t)
-p = Ts.t
-plt.ylabel('Position (m)')
-plt.xlabel('Time (s)')
-plt.legend(['x', 'y', 'z'])
-plt.legend(['x', 'y', 'z'], loc='lower right');
-plt.xlim(0, 2)
+swift.add(puma)
 
-rvcprint.rvcprint(subfig='b', thicken=1.5)
+# from to
+swift.set_camera_pose([1.3, 0, ee[2]], ee)
 
-p = Ts.t
-plt.clf()
-plt.plot(p[:,0], p[:,1])
-plt.xlabel('x (m)')
-plt.ylabel('y (m)');
-plt.plot(p[0,0], p[0,1], 'o', markerfacecolor='k', markersize=7, markeredgecolor='None')
-plt.plot(p[-1,0], p[-1,1], '*', markerfacecolor='k', markersize=12, markeredgecolor='None')
-plt.ylim(-0.21, 0.21)
-plt.axis('equal')
-# ax.set_aspect('equal'
+for config, subfig in poses:
+    puma.q = puma._configs[config]
+    swift.step()
+    time.sleep(0.5)
+    swift.screenshot('swift_snap')
 
-rvcprint.rvcprint(subfig='c', thicken=1.5)
+    time.sleep(4)
 
-plt.clf()
-plt.plot(t, Ts.rpy('xyz'))
-plt.ylabel('RPY angles (rad)')
-plt.xlabel('Time (s)')
-plt.legend(['roll', 'pitch', 'yaw'], loc='upper right');
-plt.xlim(0, 2)
+    file = root / 'swift_snap'
+    target = Path(outfile(subfig=subfig, format='png'))
+    # file.with_suffix('.png').rename(target)
 
-rvcprint.rvcprint(subfig='d', thicken=1.5)
-
+# this is showing wrong configurations
 

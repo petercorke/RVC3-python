@@ -1,34 +1,51 @@
 #!/usr/bin/env python3
 
-from roboticstoolbox import *
-import json
-import numpy as np
-import matplotlib.pyplot as plt
-from spatialmath import SE3
 import rvcprint
+from math import pi
+from roboticstoolbox import *
+from spatialmath import *
+import matplotlib.pyplot as plt
+import numpy as np
 
-hdict = rtb_load_jsonfile("data/hershey.json")
+puma = models.DH.Puma560()
 
-mm = 1e-3
-letter = hdict['B']
-print(letter)
-lift = 0.1
-scale = 0.25
-via = np.empty((0, 3))
-for stroke in letter['strokes']:
-    xyz = np.pad(np.array(stroke) * scale, ((0, 0), (0, 1)))
-    via = np.vstack((via, xyz, np.r_[xyz[-1,:2], lift]))
+TE1 = SE3(0.5, -0.3, 1.12) * SE3.Ry(pi/2);
+TE2 = SE3(0.5, 0.3, 1.12) * SE3.Ry(pi/2);
+t = np.arange(0, 2, 0.02);
 
-traj = mstraj(via, dt=0.02, qdmax=[0.5, 0.5, 0.5], q0=[0, 0, lift], tacc=0.2).q
+Ts = ctraj(TE1, TE2, t);
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-plt.plot(traj[:,0]/mm, traj[:,1]/mm, traj[:,2]/mm, linewidth=2)
-plt.plot(traj[0,0]/mm, traj[0,1]/mm, traj[0,2]/mm, 'k*', markersize=8)
-plt.plot(traj[-1,0]/mm, traj[-1,1]/mm, traj[-1,2]/mm, 'ko')
+sol = puma.ikine_a(Ts, 'lu');
+xplot(t, sol.q, wrist=True, unwrap=True)
 
-plt.xlabel('x (mm)')
-plt.ylabel('y (mm)')
-ax.set_zlabel('z (mm)')
+rvcprint.rvcprint(subfig='a')
+#----------------------------------------------------------------------- #
 
-rvcprint.rvcprint(thicken=2)
+# numeric inverse kinematics
+soln = puma.ikine_LM(Ts);
+xplot(t, soln.q, wrist=True, unwrap=True, loc='lower left')
+
+rvcprint.rvcprint(subfig='b')
+#----------------------------------------------------------------------- #
+
+# joint space
+sol1 = puma.ikine_a(TE1, 'lu');
+sol2 = puma.ikine_a(TE2, 'lu');
+traj = jtraj(sol1.q, sol2.q, t);
+xplot(t, traj.q, wrist=True, unwrap=True, loc='lower left')
+
+rvcprint.rvcprint(subfig='c')
+#----------------------------------------------------------------------- #
+
+# manipulability
+m = puma.manipulability(sol.q);  # analytic
+mn = puma.manipulability(soln.q);  # numerical
+
+plt.clf()
+plt.plot(t, m)
+plt.plot(t, mn)
+plt.ylabel('Manipulability')
+plt.xlabel('Time (s)')
+plt.legend(['Analytic IK', 'Numeric IK'], loc='lower right')
+
+rvcprint.rvcprint(subfig='d')
