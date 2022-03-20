@@ -1,9 +1,9 @@
 {
-    "id": 140492654146944,
+    "id": 140331591752480,
     "created_by": "corkep",
     "creation_time": 1632779048,
-    "scene_width": 13193.6,
-    "scene_height": 5482.400000000001,
+    "scene_width": 10539.2,
+    "scene_height": 5521.6,
     "blocks": [
         {
             "id": 140433475929616,
@@ -973,6 +973,26 @@
                     null
                 ]
             ]
+        },
+        {
+            "id": 140331664882224,
+            "block_type": "MAIN",
+            "title": "Main Block",
+            "pos_x": -300.0,
+            "pos_y": 300.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 0,
+            "outputsNum": 0,
+            "inputs": [],
+            "outputs": [],
+            "parameters": [
+                [
+                    "file name",
+                    null
+                ]
+            ]
         }
     ],
     "wires": [
@@ -1224,8 +1244,25 @@
             "start_socket": 140433423489440,
             "end_socket": 140433401392768,
             "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    440.0,
+                    280.0
+                ],
+                [
+                    360.0,
+                    280.0
+                ],
+                [
+                    360.0,
+                    540.0
+                ],
+                [
+                    440.0,
+                    540.0
+                ]
+            ]
         }
     ],
     "labels": [

@@ -48,8 +48,8 @@ Kv = 50.0
 rep = 'rpy/xyz'
 
 ## create block diagram
-sim = bdsim.BDSim(name='opspace', graphics=True)
-bd = sim.blockdiagram()
+sim = bdsim.BDSim(graphics=True)
+bd = sim.blockdiagram(name='opspace')
 
 # blocks
 robot_x = bd.FDYN_X(robot, q0=sol.q, gravcomp=True, velcomp=True, representation=rep)

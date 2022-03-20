@@ -1,9 +1,9 @@
 {
-    "id": 140625565332144,
+    "id": 140545963678448,
     "created_by": "corkep",
     "creation_time": 1627595667,
-    "scene_width": 8881.6,
-    "scene_height": 3785.6000000000004,
+    "scene_width": 10830.400000000001,
+    "scene_height": 5437.6,
     "blocks": [
         {
             "id": 140694481284928,
@@ -61,6 +61,10 @@
                 [
                     "x0",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -68,7 +72,7 @@
             "id": 140694481378656,
             "block_type": "SCOPE",
             "title": "distance",
-            "pos_x": -80.0,
+            "pos_x": -60.0,
             "pos_y": -220.0,
             "width": 100,
             "height": 100,
@@ -105,6 +109,22 @@
                 [
                     "grid",
                     true
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -112,11 +132,11 @@
             "id": 140694481378848,
             "block_type": "SCOPE",
             "title": "heading",
-            "pos_x": -280.0,
-            "pos_y": 200.0,
+            "pos_x": -80.0,
+            "pos_y": 240.0,
             "width": 100,
             "height": 100,
-            "flipped": false,
+            "flipped": true,
             "inputsNum": 1,
             "outputsNum": 0,
             "inputs": [
@@ -124,7 +144,7 @@
                     "id": 140694481379136,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 3,
+                    "position": 1,
                     "socket_type": 1
                 }
             ],
@@ -149,6 +169,22 @@
                 [
                     "grid",
                     true
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -196,6 +232,10 @@
                 [
                     "mode",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -238,6 +278,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -245,8 +289,8 @@
             "id": 140694481754912,
             "block_type": "GAIN",
             "title": "Kh - heading gain",
-            "pos_x": 60.0,
-            "pos_y": 40.0,
+            "pos_x": 40.0,
+            "pos_y": 80.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -280,6 +324,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -287,7 +335,7 @@
             "id": 140694481755152,
             "block_type": "FUNCTION",
             "title": "distance from line",
-            "pos_x": -280.0,
+            "pos_x": -220.0,
             "pos_y": -120.0,
             "width": 100,
             "height": 100,
@@ -336,6 +384,10 @@
                 [
                     "fkwargs",
                     {}
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -364,6 +416,10 @@
                 [
                     "value",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -371,8 +427,8 @@
             "id": 140300559578784,
             "block_type": "SUM",
             "title": "heading wrt line",
-            "pos_x": -80.0,
-            "pos_y": 40.0,
+            "pos_x": -100.0,
+            "pos_y": 80.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -411,6 +467,10 @@
                 [
                     "mode",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -418,8 +478,8 @@
             "id": 140300559478352,
             "block_type": "CONSTANT",
             "title": "Line slope",
-            "pos_x": -280.0,
-            "pos_y": 40.0,
+            "pos_x": -420.0,
+            "pos_y": 80.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -439,6 +499,10 @@
                 [
                     "value",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -446,11 +510,11 @@
             "id": 140517675138736,
             "block_type": "INDEX",
             "title": "\u03b8",
-            "pos_x": 60.0,
+            "pos_x": -260.0,
             "pos_y": 200.0,
             "width": 100,
             "height": 100,
-            "flipped": false,
+            "flipped": true,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -458,7 +522,7 @@
                     "id": 140517675138976,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 3,
+                    "position": 1,
                     "socket_type": 1
                 }
             ],
@@ -467,7 +531,7 @@
                     "id": 140517675138784,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 1,
+                    "position": 3,
                     "socket_type": 2
                 }
             ],
@@ -475,6 +539,10 @@
                 [
                     "index",
                     []
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -482,11 +550,11 @@
             "id": 140517675152096,
             "block_type": "INDEX",
             "title": "xy",
-            "pos_x": 60.0,
-            "pos_y": -280.0,
+            "pos_x": -400.0,
+            "pos_y": -120.0,
             "width": 100,
             "height": 100,
-            "flipped": false,
+            "flipped": true,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -494,7 +562,7 @@
                     "id": 140517675152480,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 3,
+                    "position": 1,
                     "socket_type": 1
                 }
             ],
@@ -503,7 +571,7 @@
                     "id": 140517675152048,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 1,
+                    "position": 3,
                     "socket_type": 2
                 }
             ],
@@ -511,6 +579,10 @@
                 [
                     "index",
                     []
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -558,7 +630,39 @@
                 [
                     "init",
                     null
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
+            ]
+        },
+        {
+            "id": 140545548842080,
+            "block_type": "CONNECTOR",
+            "pos_x": -400.0,
+            "pos_y": -280.0,
+            "inputs": [
+                {
+                    "id": 140545548842224,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140545548842176,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 2
+                }
             ]
         }
     ],
@@ -567,86 +671,247 @@
             "id": 140694481818912,
             "start_socket": 140694481755440,
             "end_socket": 140694481754624,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140300559579600,
             "start_socket": 140300559578832,
             "end_socket": 140694481755008,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140300559476288,
             "start_socket": 140694481754960,
             "end_socket": 140694481754336,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    220.0,
+                    80.0
+                ],
+                [
+                    190.0,
+                    80.0
+                ],
+                [
+                    190.0,
+                    120.0
+                ],
+                [
+                    140.0,
+                    120.0
+                ]
+            ]
         },
         {
             "id": 140300559476144,
             "start_socket": 140694481754576,
             "end_socket": 140694481722528,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140300559476192,
             "start_socket": 140694481754240,
             "end_socket": 140694481331920,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140300559476096,
             "start_socket": 140694481819200,
             "end_socket": 140694481331872,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140300559478256,
             "start_socket": 140694481755440,
             "end_socket": 140694481378704,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140300559477968,
             "start_socket": 140300559475568,
             "end_socket": 140300559578880,
-            "wire_type": 3
-        },
-        {
-            "id": 140517675151856,
-            "start_socket": 140694481331968,
-            "end_socket": 140517675138976,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140517675151952,
             "start_socket": 140517675138784,
             "end_socket": 140300559578976,
-            "wire_type": 3
-        },
-        {
-            "id": 140517675152384,
-            "start_socket": 140694481331968,
-            "end_socket": 140517675152480,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140517675152960,
             "start_socket": 140517675152048,
             "end_socket": 140694481755296,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140517675209632,
             "start_socket": 140517675138784,
             "end_socket": 140694481379136,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    -80.0,
+                    280.0
+                ],
+                [
+                    -130.0,
+                    280.0
+                ],
+                [
+                    -130.0,
+                    240.0
+                ],
+                [
+                    -160.0,
+                    240.0
+                ]
+            ]
         },
         {
             "id": 140625625306736,
             "start_socket": 140694481331968,
             "end_socket": 140625617364400,
-            "wire_type": 3
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140545548842560,
+            "start_socket": 140694481331968,
+            "end_socket": 140545548842224,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140545548842704,
+            "start_socket": 140545548842176,
+            "end_socket": 140517675152480,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    -400.0,
+                    -80.0
+                ],
+                [
+                    -460.0,
+                    -80.0
+                ],
+                [
+                    -460.0,
+                    -280.0
+                ],
+                [
+                    -400.0,
+                    -280.0
+                ]
+            ]
+        },
+        {
+            "id": 140545548842752,
+            "start_socket": 140545548842176,
+            "end_socket": 140517675138976,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    -400.0,
+                    -280.0
+                ],
+                [
+                    -460.0,
+                    -280.0
+                ],
+                [
+                    -460.0,
+                    240.0
+                ],
+                [
+                    -260.0,
+                    240.0
+                ]
+            ]
         }
     ],
-    "labels": []
+    "labels": [
+        {
+            "id": 140545525295664,
+            "text": "distance control",
+            "pos_x": -420.0,
+            "pos_y": -220.0,
+            "width": 120,
+            "height": 26,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; color:#000000;\">distance control</span></p></body></html>"
+        },
+        {
+            "id": 140545548678720,
+            "text": "direction control",
+            "pos_x": -255.0,
+            "pos_y": 60.0,
+            "width": 121,
+            "height": 26,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; color:#000000;\">direction control</span></p></body></html>"
+        }
+    ],
+    "grouping_boxes": [
+        {
+            "id": 140545525268432,
+            "pos_x": -440.0,
+            "pos_y": -240.0,
+            "width": 620.0,
+            "height": 260.0,
+            "color": [
+                146,
+                187,
+                255
+            ]
+        },
+        {
+            "id": 140545525293552,
+            "pos_x": -280.0,
+            "pos_y": 40.0,
+            "width": 440.0,
+            "height": 340.0,
+            "color": [
+                255,
+                38,
+                0
+            ]
+        }
+    ]
 }

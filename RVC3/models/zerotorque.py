@@ -3,7 +3,7 @@ from math import pi
 import numpy as np
 from roboticstoolbox.models.DH import Puma560
 
-sim = bdsim.BDSim(name='Puma collapsing', animation=True)
+sim = bdsim.BDSim(animation=True)
 bd = sim.blockdiagram()
 
 puma = Puma560().nofriction()
