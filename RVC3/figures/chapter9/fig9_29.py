@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from rvcprint import rvcprint
 import matplotlib.pyplot as plt
 import site

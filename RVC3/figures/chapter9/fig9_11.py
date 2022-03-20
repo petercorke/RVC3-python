@@ -1,12 +1,15 @@
+#!/usr/bin/env python3
+
 import matplotlib.pyplot as plt
 import rvcprint
 
 import bdsim
 
-import fig9_7 as vloop_test
+import vloop_test
+vloop_test.sim.set_options(hold=False)
 
 vloop_test.bd['disturbance'].set_param('value', 40/107.815)
-out = vloop_test.sim.run(vloop_test.bd, 1, dt=1e-3, watch=["demand[0]", "vloop/out[0]"])
+out = vloop_test.sim.run(vloop_test.bd, 1, dt=1e-3, watch=["demand[0]", "VLOOP/out[0]"])
 
 
 plt.plot(out.t, out.y0, 'r', label='demand')

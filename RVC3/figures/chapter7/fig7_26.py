@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from spatialmath import SE3
 from math import pi
 import rvcprint
+from mpl_toolkits.mplot3d import Axes3D, proj3d
+
 
 # Copyright (C) 1993-2021, by Peter I. Corke
 
@@ -59,8 +61,8 @@ x = mstraj(segments, tsegment=[3, 0.25, 0.5, 0.25], dt=0.01, tacc=0.07)
 print(x.q.shape)
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-plt.plot(x.t[:300], x.q[:300,0]/mm, x.q[:300,2]/mm, color='black')
-plt.plot(x.t[299:], x.q[299:,0]/mm, x.q[299:,2]/mm, color='red')
+plt.plot(x.t[:300], x.q[:300,0]/mm, x.q[:300,2]/mm, color='black', label='stance phase')
+plt.plot(x.t[299:], x.q[299:,0]/mm, x.q[299:,2]/mm, color='red', label='reset phase')
 
 print(x.q.shape)
 ax.view_init(10, -82)
@@ -68,10 +70,14 @@ ax.view_init(10, -82)
 plt.xlabel('Time (s)')
 plt.ylabel('x (mm)')
 ax.set_zlabel('z (mm)')
-
+f = lambda x,y,z: proj3d.proj_transform(x,y,z, ax.get_proj())[:2]
+ax.legend(loc="lower left", bbox_to_anchor=f(0., 40, -30), 
+          bbox_transform=ax.transData)
 # plt.show(block=True)
 
 rvcprint.rvcprint(subfig='a')
+
+# ------------------------------------------------------------------------- #
 
 plt.clf()
 x = x.q[:, 0]

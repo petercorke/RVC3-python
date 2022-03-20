@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import matplotlib.pyplot as plt
 import rvcprint
 import numpy as np
@@ -18,7 +20,7 @@ for i in range(N):
 plt.axes(projection="3d").plot_surface(Q2, Q3, M00)
 plt.xlabel('$\mathbf{q_1}$ (rad)')
 plt.ylabel('$\mathbf{q_2}$ (rad)')
-plt.gca().set_zlabel(r'$\mathbf{M_{00}} \mathrm{(kg\,m^2)}$')
+plt.gca().set_zlabel(r'$\mathbf{m_{00}} \mathrm{(kg\,m^2)}$')
 plt.grid(True)
 
 
@@ -30,7 +32,7 @@ plt.clf()
 plt.axes(projection="3d").plot_surface(Q2, Q3, M01)
 plt.xlabel('$\mathbf{q_1}$ (rad)')
 plt.ylabel('$\mathbf{q_2}$ (rad)')
-plt.gca().set_zlabel(r'$\mathbf{M_{01}} \mathrm{(kg\,m^2)}$')
+plt.gca().set_zlabel(r'$\mathbf{m_{01}} \mathrm{(kg\,m^2)}$')
 plt.grid(True)
 rvcprint.rvcprint(subfig='b')
 
@@ -45,6 +47,6 @@ for i in range(N):
 plt.clf()
 plt.plot(q2, M11)
 plt.xlabel('$\mathbf{q_2}$ (rad)')
-plt.ylabel('$\mathbf{M_{11}} \mathrm{(kg\,m^2)}$')
+plt.ylabel('$\mathbf{m_{11}} \mathrm{(kg\,m^2)}$')
 plt.grid(True)
 rvcprint.rvcprint(subfig='c')

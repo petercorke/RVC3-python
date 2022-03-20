@@ -24,10 +24,11 @@ E = np.array([
     ])
 
 print(E)
-puma = rtb.models.DH.Puma560()
-qns = puma.qr
-qns[4] = np.deg2rad(5)
-J = puma.jacob0(qns)
+
+# robot = rtb.models.DH.Puma560()
+robot = rtb.models.URDF.UR5()
+qns =  np.full((6,), np.deg2rad(1))
+J = robot.jacob0(qns)
 
 
 Jt = J[3:,:]

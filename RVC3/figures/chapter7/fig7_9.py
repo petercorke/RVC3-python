@@ -7,4 +7,10 @@ panda = models.ETS.Panda()
 
 panda.plot(panda.qr, backend='pyplot')
 
-rvcprint.rvcprint(thicken=None, debug=True)
+print(panda)
+
+
+# qt = jtraj(panda.qz, panda.qr, 100)
+# panda.plot(qt.q, backend='pyplot')
+
+rvcprint.rvcprint(thicken=None)

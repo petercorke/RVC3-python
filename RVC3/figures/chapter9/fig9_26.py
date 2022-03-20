@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from rvcprint import rvcprint
 import matplotlib.pyplot as plt
 from cycler import cycler
@@ -7,7 +9,8 @@ site.addsitedir('models')
 
 from models.opspace import sim, bd, robot_x, ftsensor
 
-sim.options.graphics = False
+sim.set_options(graphics = False, hold=False)
+
 out = sim.run(bd, 2, dt=5e-3, watch=[robot_x.x, ftsensor])
 sim.done(bd, block=True)
 print(out.xnames)

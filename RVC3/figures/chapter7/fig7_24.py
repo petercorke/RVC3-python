@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from spatialmath import SE3
 import rvcprint
 
-hdict = rtb_load_jsonfile("data/hershey.json")
+hdict = rtb_load_jsonfile("../../examples/hershey/hershey.json")
 
 mm = 1e-3
 letter = hdict['B']

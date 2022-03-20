@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-#! /usr/bin/env python3
 import pyvista as pv
 
 import numpy as np

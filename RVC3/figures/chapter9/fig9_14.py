@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import matplotlib.pyplot as plt
 import rvcprint
 import site
@@ -9,12 +11,14 @@ import ploop_test
 # import cProfile, pstats
 # profiler = cProfile.Profile()
 # profiler.enable()
-# out = ploop_test.sim.run(ploop_test.bd, 1, dt=1e-3, watch=["PLOOP/out[0]", "lspb[0]"])
+# out = ploop_test.sim.run(ploop_test.bd, 1, dt=1e-3, watch=["PLOOP/out[0]", "quintic[0]"])
 # profiler.disable()
 # stats = pstats.Stats(profiler).sort_stats('cumtime')
 # stats.dump_stats('bdsim.profile')
 
-out = ploop_test.sim.run(ploop_test.bd, 1, dt=1e-3, watch=["PLOOP/out[0]", "lspb[0]"])
+ploop_test.sim.set_options(hold=False)
+
+out = ploop_test.sim.run(ploop_test.bd, 1, dt=1e-3, watch=["PLOOP/out[0]", "quintic[0]"])
 
 plt.figure()
 plt.plot(out.t, out.y1, 'r', label='demand')
@@ -29,7 +33,7 @@ rvcprint.rvcprint(subfig='a')
 # ------------------------------------------------------------------------- #
 
 ploop_test.bd['PLOOP/Kff'].set_param('K', 107.0)
-out = ploop_test.sim.run(ploop_test.bd, 1, dt=1e-3, watch=["PLOOP/out[0]", "lspb[0]"])
+out = ploop_test.sim.run(ploop_test.bd, 1, dt=1e-3, watch=["PLOOP/out[0]", "quintic[0]"])
 
 plt.figure()
 plt.plot(out.t, out.y1, 'r', label='demand')

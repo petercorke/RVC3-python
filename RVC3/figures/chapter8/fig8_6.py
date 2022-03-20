@@ -11,8 +11,9 @@ import matplotlib.pyplot as plt
 import rvcprint
 
 
-sim = bdsim.BDSim(verbose=True)
+sim = bdsim.BDSim(hold=False)
 bd = sim.blockdiagram()
+clock = bd.clock(100, 'Hz')
 
 puma = Puma560()
 
@@ -43,7 +44,7 @@ delta = bd.TR2DELTA()
 jacobian = bd.JACOBIAN(robot=puma, frame='e', inverse=True, name='Jacobian')
 gain = bd.GAIN(Kp)
 qdot = bd.PROD('**', matrix=True)
-integrator = bd.INTEGRATOR(x0=q0, name='q')
+integrator = bd.DINTEGRATOR(clock, x0=q0, name='q')
 fkine = bd.FKINE(puma)
 robot = bd.ARMPLOT(robot=puma, q0=q0, name='plot')
 tr2t = bd.TR2T()
@@ -68,12 +69,17 @@ bd.connect(norm, scope_norm)
 
 bd.compile()   # check the diagram
 bd.report()    # list all blocks and wires
-out = sim.run(bd, 10, minstepsize=1e-6, dt=0.05, watch=[tr2t[0], tr2t[1], tr2t[2]], block=False)  # simulate for 5s
+# out = sim.run(bd, 10, minstepsize=1e-6, dt=0.05, watch=[tr2t[0], tr2t[1], tr2t[2]], block=False)  # simulate for 5s
+
+out = sim.run(bd, 10, watch=[tr2t[0], tr2t[1], tr2t[2]], block=False)  # simulate for 5s
 # bd.dotfile('bd1.dot')  # output a graphviz dot file
 # bd.savefig('pdf')      # save all figures as pdf
+print(out)
+t = out.clock0.t
+x = out.clock0.x
 
 plt.figure()
-plt.subplot(121)
+# plt.subplot(121)
 plt.plot(out.y0, out.y1, 'k')
 base.plot_circle(r, cc[:2], 'r--')
 plt.grid(True)
@@ -81,12 +87,17 @@ plt.xlabel('X')
 plt.ylabel('Y')
 plt.gca().set_aspect('equal')
 
-plt.subplot(122)
-plt.plot(out.y0, out.y2, 'k')
-plt.grid(True)
-plt.xlabel('X')
-plt.ylabel('Z')
-plt.ylim(out.y2[0]-0.012, out.y2[0]+0.01)
-plt.gca().set_aspect('equal')
+# plt.subplot(122)
+# plt.plot(out.y0, out.y2, 'k')
+# plt.grid(True)
+# plt.xlabel('X')
+# plt.ylabel('Z')
+# # plt.ylim(out.y2[0]-0.012, out.y2[0]+0.01)
+# from matplotlib.ticker import ScalarFormatter
+
+# y_formatter = ScalarFormatter(useOffset=True, useMathText=True)
+# plt.gca().yaxis.set_major_formatter(y_formatter)
+
+# plt.gca().set_aspect('equal')
 
 rvcprint.rvcprint()

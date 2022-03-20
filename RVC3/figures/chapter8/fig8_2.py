@@ -10,11 +10,18 @@ import roboticstoolbox as rtb
 import spatialgeometry as sg
 import spatialmath as sm
 from math import pi
+import numpy as np
 
 r = rtb.models.UR5()
-r.base = sm.SE3(0.1, 0.1, 0.0)
+#r.base = sm.SE3(0.1, 0.1, 0.0)
 r.q = [0, -1.1, 1.4, -0.6, 0.4, 0.4]
+r.q = [0, -pi/2, pi/2, 0, pi/2, 0]
 print(r)
+
+J = r.jacob0(r.q)
+print(J)
+print(np.linalg.det(J))
+rtb.jsingu(J)
 
 length = 0.6
 env = swift.Swift()

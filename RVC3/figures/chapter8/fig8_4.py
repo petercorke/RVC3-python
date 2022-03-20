@@ -9,9 +9,10 @@ import bdsim
 import rvcprint
 import matplotlib.pyplot as plt
 
-sim = bdsim.BDSim()
+sim = bdsim.BDSim(hold=False)
 bd = sim.blockdiagram()
 
+clock = bd.clock(100, 'Hz')
 puma = Puma560()
 q0 = [0, pi/4, pi, 0, pi/4, 0]
 
@@ -19,7 +20,7 @@ q0 = [0, pi/4, pi, 0, pi/4, 0]
 jacobian = bd.JACOBIAN(robot=puma, frame='0', inverse=True, name='Jacobian')
 velocity = bd.CONSTANT([0, 0.05, 0, 0, 0, 0])
 qdot = bd.PROD('**', matrix=True)
-integrator = bd.INTEGRATOR(x0=q0, name='q')
+integrator = bd.DINTEGRATOR(clock, x0=q0, name='q')
 robot = bd.ARMPLOT(robot=puma, q0=q0, name='plot')
 # robot = bd.PRINT('{:.3f}')
 
@@ -32,19 +33,28 @@ bd.connect(integrator, jacobian, robot)
 bd.compile()
 bd.report_summary()
 
-out = sim.run(bd, 5, minstepsize=1e-6)  # simulate for 5s
+out = sim.run(bd, 5, dt=0.1)  # simulate for 5s
+print(out)
 
-xplot(out.t, out.x[:,:3], stack=True, color='k')
+# t = out.t
+# x = out.x
+
+t = out.clock0.t
+x = out.clock0.x
+
+xplot(t, x[:,:3], stack=True, color='k')
 
 rvcprint.rvcprint(subfig='a')
 
 # ------------------------------------------------------------------------- #
 
-x = np.array(out.x)
 Tfk = puma.fkine(x)
-ax = xplot(out.t, Tfk.t, stack=True, labels='x y z', color='k')
+ax = xplot(t, Tfk.t, stack=True, labels='x y z', color='k')
 
 from matplotlib.ticker import ScalarFormatter
+
+y_formatter = ScalarFormatter(useOffset=True, useMathText=True)
+ax[0].yaxis.set_major_formatter(y_formatter)
 
 y_formatter = ScalarFormatter(useOffset=True, useMathText=True)
 ax[2].yaxis.set_major_formatter(y_formatter)
@@ -56,3 +66,5 @@ for a in ax[:2]:
     a.set_position(pos)
 
 rvcprint.rvcprint(subfig='b')
+dt = np.diff(out.t)
+print("dt:", dt.min(), dt.max(), dt.mean())

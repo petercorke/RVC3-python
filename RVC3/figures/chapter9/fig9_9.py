@@ -1,12 +1,15 @@
+#!/usr/bin/env python3
+
 import matplotlib.pyplot as plt
 import rvcprint
 
 import bdsim
 
-import fig9_7 as vloop_test
+import vloop_test
 
-out = vloop_test.sim.run(vloop_test.bd, 1, dt=1e-3, watch=["demand[0]", "vloop/out[0]", "vloop/out[2]"])
+vloop_test.sim.set_options(hold=False)
 
+out = vloop_test.sim.run(vloop_test.bd, 1, dt=1e-3, watch=["demand[0]", "VLOOP/out[0]", "VLOOP/out[2]"])
 # set_param('vloop_test/vloop', 'Ki', '0');
 # set_param('vloop_test/tau_d', 'Value', '0');
 

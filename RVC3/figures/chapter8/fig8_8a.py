@@ -12,9 +12,10 @@ from rvcprint import outfile
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))
 print(pv.__version__)
 
-puma = rtb.models.DH.Puma560()
+# robot = rtb.models.DH.Puma560()
+robot = rtb.models.URDF.UR5()
 
-J = puma.jacob0(puma.qn)
+J = robot.jacob0(robot.q1)
 
 Jt = J[:3,:]
 

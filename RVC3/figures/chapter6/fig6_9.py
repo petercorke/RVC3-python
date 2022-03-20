@@ -32,7 +32,7 @@ print(ekf)
 ekf.run(T=20)
 
 map.plot()
-ekf.plot_ellipse(filled=True, N=20, facecolor='g', alpha=0.3, edgecolor='none', label='_uncertainty')
+ekf.plot_ellipse(filled=True, N=20, facecolor='g', alpha=0.3, edgecolor='none')
 
 veh.plot_xy(color='b', linewidth=2, label='ground truth')
 ekf.plot_xy('r', linewidth=2, label='EKF estimate')
