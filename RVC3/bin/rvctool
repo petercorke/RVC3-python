@@ -218,9 +218,15 @@ banner += attr(0)
 if args.banner:
     print(banner)
 
+# append to the module path
+# - RVC3 models and examples
+# - RTB examples
 root = Path(__file__).absolute().parent.parent
 sys.path.append(str(root / "models"))
 sys.path.append(str(root / "examples"))
+
+import roboticstoolbox as rtb
+sys.path.append(str(Path(rtb.__path__[0]) / "examples"))
 
 if args.cwd:
     os.chdir(root)
