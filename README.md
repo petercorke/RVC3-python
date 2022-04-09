@@ -1,6 +1,6 @@
 # Robotics, Vision & Control: 3rd edition in Python
 
-THIS IS A PLACEHOLDER.  THE BOOK WILL BE PUBLISHED LATE IN 2022.
+THIS IS A PLACEHOLDER.  THE BOOK WILL BE PUBLISHED LATE IN 2022. THIS REPO IS A WIP UNTIL THEN
 
 This book depends on the following open-source Python packages:
 
