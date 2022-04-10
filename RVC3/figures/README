@@ -1,0 +1,13 @@
+Each chapter is located in a folder: chapterN
+
+Each folder contains:
+
+chapN.tex  the LaTeX source of the chapter
+mainN.tex  a LaTeX source file that includes chapN.tex and builds a chapter, importing project and style files etc.
+
+oldfigs/ a folder containing eps files for second edition figures, some of these are still used
+newfigs/ a folder containing PDF files created for third edition, these are Python generated
+ezdraw/ a folder containing eps files of line drawings, updated for third edition
+figures/ a folder containing other figures, typically images, that fit none of the above categories
+
+Makefile  a utility to support building the chapter and various other things

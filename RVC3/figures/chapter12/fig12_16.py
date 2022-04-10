@@ -15,6 +15,6 @@ fv = sharks.blobs()
 # print(fv)
 
 fv.plot_centroid()
-fv.plot_perimeter(color='red')
+fv.plot_perimeter(color='orange')
 
 rvcprint.rvcprint()

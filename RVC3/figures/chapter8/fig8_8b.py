@@ -33,17 +33,23 @@ J = robot.jacob0(qns)
 
 Jt = J[3:,:]
 
-E = Jt @ Jt.T
+E = np.linalg.inv(Jt @ Jt.T)
 print(E)
+e, _ = np.linalg.eig(E)
+
+radii = 1 / np.sqrt(e)
+print(radii)
+
 
 # clf
 # puma.vellipse(qns, 'rot')
 
-pvplus.ellipsoid_3d(plotter, E, inverted=True)
+pvplus.ellipsoid_3d(plotter, E, inverted=False)
 plotter.add_axes(line_width=5, color='black')
 
 plotter.set_background('white')
+plotter.show()
 # plotter.enable_eye_dome_lighting()  # messes up subplots
 # plotter.add_axes()
 # plotter.export_obj('exported.obj')
-plotter.show(screenshot=outfile(format='png'))
+# plotter.show(screenshot=outfile(format='png'))

@@ -21,7 +21,7 @@ L2 = 100 * mm
 # define the key parameters of the gait trajectory, walking in the
 # x-direction
 xf = 50; xb = -xf;   # forward and backward limits for foot on ground
-y = 50;              # distance of foot from body along y-axis
+y = -50;              # distance of foot from body along y-axis
 zu = -20; zd = -50;     # height of foot when up and down
 # define the rectangular path taken by the foot
 segments = np.array([

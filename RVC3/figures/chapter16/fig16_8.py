@@ -2,4 +2,4 @@
 
 import rvcprint
 
-rvcprint.bdmodel('IBVS-driveconfig.bd')
+rvcprint.bdmodel('IBVS-nonholonomic.bd')

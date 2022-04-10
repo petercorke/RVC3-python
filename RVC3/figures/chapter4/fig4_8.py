@@ -36,7 +36,7 @@ for i in range(N):
 
     va.plot(x0)
     bd['vehicle']._x0 = x0  # TODO make this x0 not _x0
-    out = sim.run(bd, T=10)
+    out = sim.run(bd, T=10, dt=0.1)
 
     # plot_vehicle(x0, "r", "retain")
     plt.plot(out.x[:, 0], out.x[:, 1])

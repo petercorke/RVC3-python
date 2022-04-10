@@ -13,9 +13,9 @@ im = Image.Read('sharks.png')
 im.disp()
 
 blobs = im.blobs()
-blobs.plot_centroid()
+blobs.plot_centroid(marker='+', color='blue')
 blobs.plot_box(color='r')
-plot_point(blobs.p, text="#{0}")
+plot_point(blobs.p, marker='None', text="#{0}")
 rvcprint.rvcprint(subfig='a')
 # ----------------------------------------------------------------------- #
 

@@ -17,7 +17,7 @@ trplot2(T_R @ T_X, frame='RX', axissubscript=False, color='g')
 trplot2(T_X @ T_R, frame='XR', axissubscript=False, color='g')
 
 C = np.r_[3, 2]
-plot_point(C, 'ko', label=' C', color='k')
+plot_point(C, 'ko', text=' C', color='k')
 
 
 T_C = transl2(C) @ T_R @ transl2(-C)

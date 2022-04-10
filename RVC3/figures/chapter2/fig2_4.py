@@ -38,6 +38,6 @@ plotter.camera_position = [(2, 1, 1), (0, 1, 1), (0, 0, 1)]
 plotter.set_background('white')
 plotter.enable_parallel_projection()
 
-plotter.export_obj('fig2_4')
+# plotter.export_obj('fig2_4')
 
 plotter.show(screenshot='Figures_generated/fig2_4.png')

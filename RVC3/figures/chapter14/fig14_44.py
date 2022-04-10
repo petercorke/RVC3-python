@@ -24,6 +24,11 @@ data.paint([1, 0, 0])  # red
 
 
 (model + data).disp(block=False, file=rvcprint.outfile(subfig='a', format='png'))
+
+import open3d as o3d
+
+o3d.io.write_point_cloud("fig4_44a.ply", (model + data).pcd)
+
 #----------------------------------------------------------------------- #
 
 T, status = model.ICP(data, max_correspondence_distance=1, max_iteration=2000, relative_fitness=0, relative_rmse=0)
