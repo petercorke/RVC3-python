@@ -11,7 +11,7 @@ def ransac_line(x, y, npoints=2, maxiter=20, t=1e-6, d=4):
     best_model = None
 
     while True:
-        inliers = list(np.random.randint(0, len(x), npoints))
+        inliers = list(np.random.choice(np.arange(len(x)), npoints, replace=False))
 
         m, c, r2, *_ = sp.stats.linregress(x[inliers], y[inliers])
         new_inliers = []
@@ -38,7 +38,7 @@ def ransac_line(x, y, npoints=2, maxiter=20, t=1e-6, d=4):
     return best_model, best_inliers
 
 if __name__ == "__main__":
-    import rvcprint
+    # import rvcprint
 
     import matplotlib.pyplot as plt
     from machinevisiontoolbox import *
@@ -78,6 +78,6 @@ if __name__ == "__main__":
     plt.ylim(-10.5, 30)
     plt.legend(['good data point', 'bad data point', 'least squares estimate', 'RANSAC estimate'])
 
-    rvcprint.rvcprint()
+    # rvcprint.rvcprint()
 
 
