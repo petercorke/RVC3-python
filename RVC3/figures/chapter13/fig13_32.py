@@ -38,12 +38,23 @@ print(P)
 
 camera.plot(scale=2, shape='camera', color='k', frame=True)
 plot_sphere(radius=0.1, centre=P, color='r')
-plot_sphere(radius=0.1, centre=np.vstack((Pp, np.zeros((4,)))), color='b')
-
+# plot_sphere(radius=0.1, centre=np.vstack((Pp, np.zeros((4,)))), color='b')
+corners = np.vstack((Pp, np.zeros((4,))))
+for i in range(4):
+    j = (i + 1) % 4
+    p1 = corners[:,i]
+    p2 = corners[:,j]
+    if i == 0:
+        label = 'Camera FOV'
+    else:
+        label = ''
+    plt.plot((p1[0], p2[0]), (p1[1], p2[1]), (p1[2], p2[2]), 'b--', label=label)
 
 ax = plt.gca()
 ax.set_xlim(-8, 12)
 ax.set_ylim(-10, 10)
 ax.set_zlim(0, 10)
+ax.legend()
+
 
 rvcprint.rvcprint(interval=4)

@@ -29,7 +29,7 @@ plt.ylim(0, 1.6e9)
 # set right axes
 ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
 color2 = 'tab:red'
-l3 = ax2.plot(lam, eye_response, '-r', color=color2, label='human eye response')
+l3 = ax2.plot(lam, eye_response, '-r', color=color2, label='human perceived brightness')
 ax2.tick_params(axis='y', labelcolor=color2)
 
 ax1.grid()

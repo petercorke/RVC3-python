@@ -38,7 +38,8 @@ orientation_ECF = UnitQuaternion()
 
 for k, (wm, am, mm) in enumerate(zip(imu.gyro[:-1], imu.accel[:-1], imu.magno[:-1])):
    invq = orientation_ECF[-1].inv()
-   sigmaR = np.cross(am, invq * true.g) + np.cross(mm, invq * true.B)
+   q = orientation_ECF[-1]
+   sigmaR = np.cross(invq*am, true.g) + np.cross(invq*mm, true.B)
    wp = wm - bias[k,:] + kP * sigmaR
    orientation_ECF.append(orientation_ECF[k] * UnitQuaternion.EulerVec(wp * imu.dt))
    bias[k+1,:] = bias[k,:] - kI * sigmaR * imu.dt

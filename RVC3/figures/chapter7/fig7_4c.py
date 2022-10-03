@@ -32,7 +32,7 @@ L1.transform(T1.A)
 plotter.add_mesh(L1, color='red', show_edges=wf, opacity=opacity)
 
 # arrow
-pvplus.axis(plotter, text='q_0')
+pvplus.axis(plotter, text='q_1')
 
 # frame
 pvplus.add_frame2(plotter, SE3(0, 0, zl), scale=0.5, label='O')
@@ -48,7 +48,7 @@ plotter.add_mesh(L2, color='blue', show_edges=wf, opacity=opacity)
 # J2 = pv.Arrow(start=(T1 * SE3(0.1, 0, -0.3)).t, direction=T1.R[:,0], tip_resolution=4, 
 #     shaft_resolution=4, shaft_radius=0.03, tip_radius=0.08)
 # plotter.add_mesh(J2)
-pvplus.axis(plotter, text='q_1', square=True, direction=T1.R[:,0])
+pvplus.axis(plotter, text='q_2', square=True, direction=T1.R[:,0])
 
 ## end effector
 

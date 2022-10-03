@@ -44,21 +44,21 @@ ax2 = plt.subplot(3,1,3)
 # TODO should be plotted using area()
 # TODO make this into a giant polygon - joint first/last pt, join them across to form the polygon
 # use alpha = 0.5
-p0 = np.transpose(np.vstack((lam / nm, L * C[:, 0])))
+p0 = np.transpose(np.vstack((lam / nm, nm * L * C[:, 0])))
 #print(p0)
 #print(p0.shape)
 poly0 = Polygon(p0, closed=True, facecolor='r', linestyle='-', alpha=0.75)
 ax2.add_patch(poly0)
 
-p1 = np.transpose(np.vstack((lam / nm, L * C[:, 1])))
+p1 = np.transpose(np.vstack((lam / nm, nm * L * C[:, 1])))
 poly1 = Polygon(p1, closed=True, facecolor='g', linestyle='-', alpha=0.75)
 ax2.add_patch(poly1)
 
-p2 = np.transpose(np.vstack((lam / nm, L * C[:, 2])))
+p2 = np.transpose(np.vstack((lam / nm, nm * L * C[:, 2])))
 poly2 = Polygon(p2, closed=True, facecolor='b', linestyle='-', alpha=0.75)
 ax2.add_patch(poly2)
 
-ax2.plot(lam / nm, L * C[:,0], color='r', linewidth=1.5, alpha=0)  # addpatch (above) seems to require a plot, so workaround is to plot something and make alpha = 0
+ax2.plot(lam / nm, nm * L * C[:,0], color='r', linewidth=1.5, alpha=0)  # addpatch (above) seems to require a plot, so workaround is to plot something and make alpha = 0
 ax2.yaxis.set_major_formatter(ScalarFormatter(useOffset=False, useMathText=True))
 
 # ax2.plot(lam / nm, L * C.s[:,1], color='g', linewidth=1.5)

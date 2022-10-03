@@ -13,7 +13,7 @@ cmf = cmfxyz(lam)
 
 plt.plot(lam / nm, cmf)
 
-plt.ylabel('color matching function')
+plt.ylabel('color matching functions')
 plt.xlabel('Wavelength (nm)')
 plt.grid()
 plt.xlim(350, 750)

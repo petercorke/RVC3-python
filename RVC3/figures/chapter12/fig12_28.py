@@ -64,7 +64,7 @@ features = findpeaks3d(z, npeaks=4)
 print(features)
 
 for feature in features:
-    plt.plot(feature[0], feature[1], 'k+')
+    plt.plot(feature[1], feature[0], 'k+')
     scale = s[int(feature[2])]
     smb.plot_circle(radius=scale * np.sqrt(2), centre=feature[:2], color='y')
 

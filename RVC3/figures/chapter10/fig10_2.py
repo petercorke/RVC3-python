@@ -34,7 +34,7 @@ e = blackbody(lam * nm, 5778)
 plt.plot(lam, e / max(e), label="Sun (5778K)")
 
 eye = rluminos(lam * nm)
-plt.plot(lam, eye, linestyle='--', label='Human eye response')
+plt.plot(lam, eye, linestyle='--', label='human perceived brightness')
 
 plt.grid(True)
 plt.xlabel('Wavelength (nm)')

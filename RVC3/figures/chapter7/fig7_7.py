@@ -41,7 +41,7 @@ L1.transform(T1.A)
 plotter.add_mesh(L1, color='red', show_edges=wf, opacity=opacity)
 
 # joint
-pvplus.axis(plotter, text='q_0')
+pvplus.axis(plotter, text='q_1')
 
 
 # frame
@@ -54,7 +54,7 @@ L2.transform(T2.A)
 plotter.add_mesh(L2, color='blue', show_edges=wf, opacity=opacity)
 pvplus.add_frame2(plotter, T2, scale=0.5, label='2')
 
-pvplus.axis(plotter, T2, text='q_1')
+pvplus.axis(plotter, T2, text='q_2')
 
 
 ## end-effector
