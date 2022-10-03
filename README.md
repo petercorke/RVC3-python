@@ -2,6 +2,9 @@
 
 THIS IS A PLACEHOLDER.  THE BOOK WILL BE PUBLISHED LATE IN 2022. THIS REPO IS A WIP UNTIL THEN
 
+<img src="https://github.com/petercorke/RVC3-python/raw/main/figs/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="300">
+
+
 This book depends on the following open-source Python packages:
 
 - [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python)
@@ -11,11 +14,11 @@ which in turn have dependencies on other packages created by the author and thir
 
 This package provides a simple one-step installation of the required Toolboxes
 ```
-$ pip install rvc3-python
+$ pip install rvc3python
 ```
 or
 ```
-$ conda install rvc3-python
+$ conda install rvc3python
 ```
 
 The package also provides other resources for readers including:
