@@ -1,8 +1,6 @@
 *test*
 *.p
 *.eps
-*.svg
-*.png
 *.jpg
 *.pdf
 *.m
@@ -24,3 +22,4 @@ Untitled*.ipynb
 Figures_generated
 __pycache__
 OLD
+.vscode
