@@ -1,13 +1,11 @@
-Each chapter is located in a folder: chapterN
+# Figure generation scripts
 
-Each folder contains:
+The code examples in the book contain the essential commands to generate most
+of the figures.  What they leave out are the fiddly Matplotlib commands to set
+colors, line styles, axis labels, legends etc.  All that detail is given in
+these Python scripts which generated the actual figures included in the book.
 
-chapN.tex  the LaTeX source of the chapter
-mainN.tex  a LaTeX source file that includes chapN.tex and builds a chapter, importing project and style files etc.
+Each chapter is located in a folder `chapterN` which contains:
 
-oldfigs/ a folder containing eps files for second edition figures, some of these are still used
-newfigs/ a folder containing PDF files created for third edition, these are Python generated
-ezdraw/ a folder containing eps files of line drawings, updated for third edition
-figures/ a folder containing other figures, typically images, that fit none of the above categories
-
-Makefile  a utility to support building the chapter and various other things
+- figN_M.py  the script to generate Fig. N.M
+- box_NAME.py  the script to generate a figure in an excurse box
