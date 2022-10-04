@@ -1,9 +1,9 @@
 {
-    "id": 140371915044224,
+    "id": 140336250579600,
     "created_by": "corkep",
     "creation_time": 1631408397,
-    "scene_width": 8192.800000000001,
-    "scene_height": 4776.8,
+    "scene_width": 7168.000000000001,
+    "scene_height": 3785.6000000000004,
     "blocks": [
         {
             "id": 140184811303264,
@@ -105,54 +105,6 @@
                 [
                     "matrix",
                     true
-                ],
-                [
-                    "blockargs",
-                    null
-                ]
-            ]
-        },
-        {
-            "id": 140184811441840,
-            "block_type": "INTEGRATOR",
-            "title": "Integrator",
-            "pos_x": 120.0,
-            "pos_y": -100.0,
-            "width": 100,
-            "height": 100,
-            "flipped": false,
-            "inputsNum": 1,
-            "outputsNum": 1,
-            "inputs": [
-                {
-                    "id": 140184811778160,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 1,
-                    "socket_type": 1
-                }
-            ],
-            "outputs": [
-                {
-                    "id": 140184811778304,
-                    "index": 0,
-                    "multi_wire": true,
-                    "position": 3,
-                    "socket_type": 2
-                }
-            ],
-            "parameters": [
-                [
-                    "x0",
-                    0
-                ],
-                [
-                    "min",
-                    null
-                ],
-                [
-                    "max",
-                    null
                 ],
                 [
                     "blockargs",
@@ -429,66 +381,61 @@
                     null
                 ]
             ]
+        },
+        {
+            "id": 140335805343248,
+            "block_type": "DINTEGRATOR",
+            "title": "Dintegrator Block",
+            "pos_x": 100.0,
+            "pos_y": -100.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140335805343200,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140335805343296,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "clock",
+                    null
+                ],
+                [
+                    "x0",
+                    0
+                ],
+                [
+                    "min",
+                    null
+                ],
+                [
+                    "max",
+                    null
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
         }
     ],
     "wires": [
-        {
-            "id": 140184811820224,
-            "start_socket": 140184811440928,
-            "end_socket": 140184811778160,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
-            "id": 140184811820320,
-            "start_socket": 140184811778304,
-            "end_socket": 140184811779408,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
-            "id": 140184811780224,
-            "start_socket": 140184811778304,
-            "end_socket": 140184811354288,
-            "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    -400.0,
-                    -60.0
-                ],
-                [
-                    -440.0,
-                    -60.0
-                ],
-                [
-                    -440.0,
-                    -140.0
-                ],
-                [
-                    240.0,
-                    -140.0
-                ],
-                [
-                    240.0,
-                    -60.0
-                ],
-                [
-                    220.0,
-                    -60.0
-                ]
-            ]
-        },
-        {
-            "id": 140361263041024,
-            "start_socket": 140184811778304,
-            "end_socket": 140361263040064,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
         {
             "id": 140361263096352,
             "start_socket": 140361263041552,
@@ -536,6 +483,80 @@
             "wire_type": 3,
             "custom_routing": false,
             "wire_coordinates": []
+        },
+        {
+            "id": 140336330391616,
+            "start_socket": 140184811440928,
+            "end_socket": 140335805343200,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140336330392048,
+            "start_socket": 140335805343296,
+            "end_socket": 140184811779408,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140336330392144,
+            "start_socket": 140335805343296,
+            "end_socket": 140361263040064,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    160.0,
+                    80.0
+                ],
+                [
+                    240.0,
+                    80.0
+                ],
+                [
+                    240.0,
+                    -60.0
+                ],
+                [
+                    200.0,
+                    -60.0
+                ]
+            ]
+        },
+        {
+            "id": 140335805343920,
+            "start_socket": 140335805343296,
+            "end_socket": 140184811354288,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    -400.0,
+                    -60.0
+                ],
+                [
+                    -420.0,
+                    -60.0
+                ],
+                [
+                    -420.0,
+                    -120.0
+                ],
+                [
+                    240.0,
+                    -120.0
+                ],
+                [
+                    240.0,
+                    -60.0
+                ],
+                [
+                    200.0,
+                    -60.0
+                ]
+            ]
         }
     ],
     "labels": [

@@ -1,9 +1,9 @@
 {
-    "id": 140357559681904,
+    "id": 140274853309120,
     "created_by": "corkep",
     "creation_time": 1628591394,
-    "scene_width": 9396.800000000001,
-    "scene_height": 4575.200000000001,
+    "scene_width": 10152.800000000001,
+    "scene_height": 5924.8,
     "blocks": [
         {
             "id": 140694481284928,
@@ -61,6 +61,10 @@
                 [
                     "x0",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -117,6 +121,10 @@
                 [
                     "watch",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -124,8 +132,8 @@
             "id": 140694481378848,
             "block_type": "SCOPE",
             "title": "steering command",
-            "pos_x": 680.0,
-            "pos_y": 20.0,
+            "pos_x": 700.0,
+            "pos_y": 180.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -173,6 +181,10 @@
                 [
                     "watch",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -180,7 +192,7 @@
             "id": 140694481722480,
             "block_type": "SUM",
             "title": "position error",
-            "pos_x": -240.0,
+            "pos_x": -80.0,
             "pos_y": -120.0,
             "width": 100,
             "height": 100,
@@ -219,6 +231,10 @@
                 ],
                 [
                     "mode",
+                    null
+                ],
+                [
+                    "blockargs",
                     null
                 ]
             ]
@@ -260,6 +276,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -267,8 +287,8 @@
             "id": 140694481754912,
             "block_type": "GAIN",
             "title": "Kh",
-            "pos_x": 240.0,
-            "pos_y": 20.0,
+            "pos_x": 220.0,
+            "pos_y": 180.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -300,6 +320,10 @@
                 [
                     "premul",
                     false
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -307,7 +331,7 @@
             "id": 140694481755152,
             "block_type": "FUNCTION",
             "title": "distance to goal",
-            "pos_x": -60.0,
+            "pos_x": 80.0,
             "pos_y": -120.0,
             "width": 100,
             "height": 100,
@@ -356,6 +380,10 @@
                 [
                     "fkwargs",
                     {}
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -363,8 +391,8 @@
             "id": 140694481755488,
             "block_type": "FUNCTION",
             "title": "heading angle to goal",
-            "pos_x": -60.0,
-            "pos_y": 20.0,
+            "pos_x": -160.0,
+            "pos_y": 180.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -412,6 +440,10 @@
                 [
                     "fkwargs",
                     {}
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -440,6 +472,10 @@
                 [
                     "value",
                     "[5,5]"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -447,11 +483,11 @@
             "id": 140241107180608,
             "block_type": "INDEX",
             "title": "\u03b8",
-            "pos_x": 220.0,
-            "pos_y": 180.0,
+            "pos_x": -160.0,
+            "pos_y": 320.0,
             "width": 100,
             "height": 100,
-            "flipped": false,
+            "flipped": true,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -459,7 +495,7 @@
                     "id": 140241107180848,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 3,
+                    "position": 1,
                     "socket_type": 1
                 }
             ],
@@ -468,7 +504,7 @@
                     "id": 140241107180656,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 1,
+                    "position": 3,
                     "socket_type": 2
                 }
             ],
@@ -478,6 +514,10 @@
                     [
                         2
                     ]
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -485,8 +525,8 @@
             "id": 140241107222784,
             "block_type": "SUM",
             "title": "heading error",
-            "pos_x": 100.0,
-            "pos_y": 20.0,
+            "pos_x": 60.0,
+            "pos_y": 180.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -525,6 +565,10 @@
                 [
                     "mode",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -532,11 +576,11 @@
             "id": 140241107223120,
             "block_type": "INDEX",
             "title": "xy",
-            "pos_x": 40.0,
-            "pos_y": 280.0,
+            "pos_x": -260.0,
+            "pos_y": -40.0,
             "width": 100,
             "height": 100,
-            "flipped": false,
+            "flipped": true,
             "inputsNum": 1,
             "outputsNum": 1,
             "inputs": [
@@ -544,7 +588,7 @@
                     "id": 140241107223312,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 3,
+                    "position": 1,
                     "socket_type": 1
                 }
             ],
@@ -553,7 +597,7 @@
                     "id": 140241107223456,
                     "index": 0,
                     "multi_wire": true,
-                    "position": 1,
+                    "position": 3,
                     "socket_type": 2
                 }
             ],
@@ -564,14 +608,18 @@
                         0,
                         1
                     ]
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
         {
             "id": 140357156323584,
             "block_type": "CONNECTOR",
-            "pos_x": 380.0,
-            "pos_y": 220.0,
+            "pos_x": -300.0,
+            "pos_y": 480.0,
             "inputs": [
                 {
                     "id": 140357156323488,
@@ -635,7 +683,39 @@
                 [
                     "init",
                     null
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
+            ]
+        },
+        {
+            "id": 140274426862608,
+            "block_type": "CONNECTOR",
+            "pos_x": -260.0,
+            "pos_y": 140.0,
+            "inputs": [
+                {
+                    "id": 140274426862560,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140274426862464,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 2
+                }
             ]
         }
     ],
@@ -644,14 +724,6 @@
             "id": 140694481819056,
             "start_socket": 140694481754240,
             "end_socket": 140694481755296,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
-            "id": 140694481818960,
-            "start_socket": 140694481754240,
-            "end_socket": 140694481755824,
             "wire_type": 3,
             "custom_routing": false,
             "wire_coordinates": []
@@ -717,25 +789,8 @@
             "start_socket": 140357156323680,
             "end_socket": 140241107223312,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    380.0,
-                    220.0
-                ],
-                [
-                    360.0,
-                    220.0
-                ],
-                [
-                    360.0,
-                    320.0
-                ],
-                [
-                    140.0,
-                    320.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140357149482336,
@@ -750,25 +805,8 @@
             "start_socket": 140694481754960,
             "end_socket": 140694481331920,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    520.0,
-                    -60.0
-                ],
-                [
-                    420.0,
-                    -60.0
-                ],
-                [
-                    420.0,
-                    60.0
-                ],
-                [
-                    340.0,
-                    60.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140357204084240,
@@ -791,30 +829,29 @@
             "start_socket": 140694481754576,
             "end_socket": 140694481378704,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    680.0,
-                    -220.0
-                ],
-                [
-                    490.0,
-                    -220.0
-                ],
-                [
-                    490.0,
-                    -80.0
-                ],
-                [
-                    340.0,
-                    -80.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140357204084528,
             "start_socket": 140694481754960,
             "end_socket": 140694481379136,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140274426862752,
+            "start_socket": 140694481754240,
+            "end_socket": 140274426862560,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140274426862896,
+            "start_socket": 140274426862464,
+            "end_socket": 140694481755824,
             "wire_type": 3,
             "custom_routing": false,
             "wire_coordinates": []
@@ -824,8 +861,8 @@
         {
             "id": 140357204084720,
             "text": "current pose",
-            "pos_x": 461.0,
-            "pos_y": 235.0,
+            "pos_x": 470.0,
+            "pos_y": 445.0,
             "width": 86,
             "height": 24,
             "fill_color": [
@@ -839,8 +876,8 @@
         {
             "id": 140357160519904,
             "text": "speed",
-            "pos_x": 415.0,
-            "pos_y": -120.0,
+            "pos_x": 405.0,
+            "pos_y": -110.0,
             "width": 47,
             "height": 24,
             "fill_color": [
@@ -855,7 +892,7 @@
             "id": 140357160540672,
             "text": "steering",
             "pos_x": 445.0,
-            "pos_y": -45.0,
+            "pos_y": -55.0,
             "width": 58,
             "height": 24,
             "fill_color": [
@@ -865,6 +902,36 @@
                 255
             ],
             "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">steering</p></body></html>"
+        },
+        {
+            "id": 140274426863568,
+            "text": "distance control",
+            "pos_x": -265.0,
+            "pos_y": -140.0,
+            "width": 120,
+            "height": 26,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; color:#000000;\">distance control</span></p></body></html>"
+        },
+        {
+            "id": 140274426863472,
+            "text": "steering control",
+            "pos_x": 160.0,
+            "pos_y": 400.0,
+            "width": 118,
+            "height": 26,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; color:#000000;\">steering control</span></p></body></html>"
         }
     ],
     "grouping_boxes": [
@@ -872,12 +939,24 @@
             "id": 140357149482144,
             "pos_x": -300.0,
             "pos_y": -160.0,
-            "width": 700.0,
-            "height": 580.0,
+            "width": 680.0,
+            "height": 280.0,
             "color": [
                 146,
                 187,
                 255
+            ]
+        },
+        {
+            "id": 140274426862512,
+            "pos_x": -240.0,
+            "pos_y": 160.0,
+            "width": 620.0,
+            "height": 300.0,
+            "color": [
+                255,
+                38,
+                0
             ]
         }
     ]

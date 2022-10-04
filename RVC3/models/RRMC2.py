@@ -9,6 +9,7 @@ from spatialmath import SE3
 sim = bdsim.BDSim(verbose=True)
 bd = sim.blockdiagram()
 
+clock = bd.clock(100, 'Hz')
 puma = Puma560()
 
 # define the blocks
@@ -38,7 +39,7 @@ delta = bd.TR2DELTA()
 jacobian = bd.JACOBIAN(robot=puma, frame='e', inverse=True, name='Jacobian')
 gain = bd.GAIN(Kp)
 qdot = bd.PROD('**', matrix=True)
-integrator = bd.INTEGRATOR(x0=q0, name='q')
+integrator = bd.DINTEGRATOR(clock, x0=q0, name='q')
 fkine = bd.FKINE(puma)
 robot = bd.ARMPLOT(robot=puma, q0=q0, name='plot')
 tr2t = bd.TR2T()

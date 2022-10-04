@@ -24,7 +24,7 @@ def plot_init(camera):
 
 bd = bdload(bd, model, globalvars=globals())
 bd.compile()
-bd.report()
+bd.report_summary()
 
 print('about to run')
 print(sim.options)

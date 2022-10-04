@@ -1,9 +1,9 @@
 {
-    "id": 140247614477744,
+    "id": 140688201181936,
     "created_by": "corkep",
     "creation_time": 1628595522,
-    "scene_width": 14050.400000000001,
-    "scene_height": 7207.200000000001,
+    "scene_width": 13199.2,
+    "scene_height": 6182.400000000001,
     "blocks": [
         {
             "id": 140565726886832,
@@ -678,7 +678,7 @@
             "block_type": "CONSTANT",
             "title": "p*",
             "pos_x": -300.0,
-            "pos_y": 640.0,
+            "pos_y": 660.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -741,7 +741,7 @@
             "id": 140535041465120,
             "block_type": "SLICE2",
             "title": "Slice2 Block",
-            "pos_x": 460.0,
+            "pos_x": 440.0,
             "pos_y": 360.0,
             "width": 100,
             "height": 100,
@@ -791,7 +791,7 @@
             "block_type": "FLATTEN",
             "title": "Flatten Block",
             "pos_x": 460.0,
-            "pos_y": 620.0,
+            "pos_y": 640.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -831,7 +831,7 @@
             "block_type": "SUM",
             "title": "p* - p",
             "pos_x": 300.0,
-            "pos_y": 620.0,
+            "pos_y": 640.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -882,7 +882,7 @@
             "block_type": "NORM",
             "title": "Norm Block",
             "pos_x": 860.0,
-            "pos_y": 620.0,
+            "pos_y": 640.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -1141,8 +1141,8 @@
             "id": 140535116328048,
             "block_type": "SCOPE",
             "title": "Jacobian condition",
-            "pos_x": 1100.0,
-            "pos_y": 480.0,
+            "pos_x": 1160.0,
+            "pos_y": 500.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -1201,7 +1201,7 @@
             "id": 140535116327424,
             "block_type": "INVERSE",
             "title": "Inverse Block",
-            "pos_x": 620.0,
+            "pos_x": 580.0,
             "pos_y": 360.0,
             "width": 100,
             "height": 100,
@@ -1248,8 +1248,8 @@
             "id": 140535044636928,
             "block_type": "SCOPE",
             "title": "Feature error",
-            "pos_x": 1100.0,
-            "pos_y": 620.0,
+            "pos_x": 1160.0,
+            "pos_y": 640.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -1353,7 +1353,7 @@
             "block_type": "SCOPE",
             "title": "Demanded velocity",
             "pos_x": 1160.0,
-            "pos_y": 320.0,
+            "pos_y": 360.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -1416,9 +1416,9 @@
         {
             "id": 140285649538688,
             "block_type": "ITEM",
-            "title": "Item Block",
-            "pos_x": 1220.0,
-            "pos_y": -440.0,
+            "title": "select x",
+            "pos_x": 1240.0,
+            "pos_y": -340.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -1457,8 +1457,8 @@
             "id": 140285659090128,
             "block_type": "SCOPE",
             "title": "UAV config",
-            "pos_x": 1360.0,
-            "pos_y": -440.0,
+            "pos_x": 1380.0,
+            "pos_y": -340.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -1517,8 +1517,8 @@
             "id": 140189567172128,
             "block_type": "SCOPE",
             "title": "Scope Block",
-            "pos_x": 1420.0,
-            "pos_y": -280.0,
+            "pos_x": 1380.0,
+            "pos_y": -180.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -1580,9 +1580,9 @@
         {
             "id": 140189567172032,
             "block_type": "ITEM",
-            "title": "Item Block 1",
-            "pos_x": 1260.0,
-            "pos_y": -280.0,
+            "title": "select vb",
+            "pos_x": 1240.0,
+            "pos_y": -180.0,
             "width": 100,
             "height": 100,
             "flipped": false,
@@ -1672,14 +1672,6 @@
             "wire_coordinates": []
         },
         {
-            "id": 140685315881376,
-            "start_socket": 140565726887024,
-            "end_socket": 140685315929760,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
             "id": 140522902007616,
             "start_socket": 140565726887024,
             "end_socket": 140522918531952,
@@ -1716,8 +1708,25 @@
             "start_socket": 140565757885984,
             "end_socket": 140364551528160,
             "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    780.0,
+                    -240.0
+                ],
+                [
+                    690.0,
+                    -240.0
+                ],
+                [
+                    690.0,
+                    100.0
+                ],
+                [
+                    560.0,
+                    100.0
+                ]
+            ]
         },
         {
             "id": 140535041466224,
@@ -1845,8 +1854,25 @@
             "start_socket": 140535116328624,
             "end_socket": 140535116328096,
             "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    1160.0,
+                    540.0
+                ],
+                [
+                    730.0,
+                    540.0
+                ],
+                [
+                    730.0,
+                    420.0
+                ],
+                [
+                    680.0,
+                    420.0
+                ]
+            ]
         },
         {
             "id": 140535041901280,
@@ -1885,8 +1911,25 @@
             "start_socket": 140535041465600,
             "end_socket": 140535524918416,
             "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    780.0,
+                    420.0
+                ],
+                [
+                    750.0,
+                    420.0
+                ],
+                [
+                    750.0,
+                    680.0
+                ],
+                [
+                    560.0,
+                    680.0
+                ]
+            ]
         },
         {
             "id": 140311678790096,
@@ -1941,16 +1984,33 @@
             "start_socket": 140535524918896,
             "end_socket": 140535526475472,
             "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
-        },
-        {
-            "id": 140189567170688,
-            "start_socket": 140565726887024,
-            "end_socket": 140189567170784,
-            "wire_type": 3,
-            "custom_routing": false,
-            "wire_coordinates": []
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    -300.0,
+                    -100.0
+                ],
+                [
+                    -320.0,
+                    -100.0
+                ],
+                [
+                    -320.0,
+                    230.0
+                ],
+                [
+                    1120.0,
+                    230.0
+                ],
+                [
+                    1120.0,
+                    400.0
+                ],
+                [
+                    1040.0,
+                    400.0
+                ]
+            ]
         },
         {
             "id": 140189567170976,
@@ -1988,11 +2048,11 @@
                     -120.0
                 ],
                 [
-                    416.5,
+                    266.5,
                     -120.0
                 ],
                 [
-                    416.5,
+                    266.5,
                     260.0
                 ],
                 [
@@ -2041,6 +2101,56 @@
                     -120.0
                 ]
             ]
+        },
+        {
+            "id": 140687780421888,
+            "start_socket": 140565726887024,
+            "end_socket": 140685315929760,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    493.0,
+                    -120.0
+                ],
+                [
+                    1175.0,
+                    -120.0
+                ],
+                [
+                    1175.0,
+                    -300.0
+                ],
+                [
+                    1085.0,
+                    -300.0
+                ]
+            ]
+        },
+        {
+            "id": 140687780422128,
+            "start_socket": 140565726887024,
+            "end_socket": 140189567170784,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    1240.0,
+                    -140.0
+                ],
+                [
+                    1212.5,
+                    -140.0
+                ],
+                [
+                    1212.5,
+                    -300.0
+                ],
+                [
+                    1085.0,
+                    -300.0
+                ]
+            ]
         }
     ],
     "labels": [
@@ -2048,7 +2158,7 @@
             "id": 140522918579552,
             "text": "state vector x",
             "pos_x": 885.0,
-            "pos_y": -100.0,
+            "pos_y": -120.0,
             "width": 92,
             "height": 24,
             "fill_color": [
@@ -2057,13 +2167,13 @@
                 255,
                 255
             ],
-            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">state vector x</p></body></html>"
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0433ff;\">state vector x</span></p></body></html>"
         },
         {
             "id": 140535044640432,
             "text": "desired camera velocity (xd*, yd*, zd*, \u03b3d*)",
-            "pos_x": 745.0,
-            "pos_y": 195.0,
+            "pos_x": 760.0,
+            "pos_y": 200.0,
             "width": 273,
             "height": 24,
             "fill_color": [
@@ -2072,7 +2182,7 @@
                 255,
                 255
             ],
-            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">desired camera velocity (xd*, yd*, zd*, \u03b3d*)</p></body></html>"
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0433ff;\">desired camera velocity (xd*, yd*, zd*, \u03b3d*)</span></p></body></html>"
         },
         {
             "id": 140535044639136,
@@ -2136,10 +2246,10 @@
         },
         {
             "id": 140557894155856,
-            "text": "aiframe\nforce &\ntorques",
+            "text": "airframe\nforce &\ntorques",
             "pos_x": 665.0,
             "pos_y": -370.0,
-            "width": 55,
+            "width": 60,
             "height": 58,
             "fill_color": [
                 255,
@@ -2147,7 +2257,7 @@
                 255,
                 255
             ],
-            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">aiframe</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">force &amp;</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">torques</p></body></html>"
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0433ff;\">airframe</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0433ff;\">force &amp;</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0433ff;\">torques</span></p></body></html>"
         },
         {
             "id": 140557113596992,
@@ -2163,6 +2273,21 @@
                 255
             ],
             "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">roll, pitch</p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">demand</p></body></html>"
+        },
+        {
+            "id": 140688293629568,
+            "text": "state vector",
+            "pos_x": -130.0,
+            "pos_y": 260.0,
+            "width": 81,
+            "height": 24,
+            "fill_color": [
+                255,
+                255,
+                255,
+                255
+            ],
+            "styling": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Arial'; font-size:14pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#0000ff;\">state vector</span></p></body></html>"
         }
     ],
     "grouping_boxes": [
@@ -2206,7 +2331,7 @@
             "id": 140535044640720,
             "pos_x": 740.0,
             "pos_y": -500.0,
-            "width": 440.0,
+            "width": 400.0,
             "height": 360.0,
             "color": [
                 255,
