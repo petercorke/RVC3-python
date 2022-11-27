@@ -60,5 +60,5 @@ rvcprint.rvcprint(subfig='c')
 
 # ----------------------------------------------------------------------- #
 
-scene.choose([255, 255, 255], labels != CLASSES.index("person")).disp()
+scene.choose("white", labels != CLASSES.index("person")).disp()
 rvcprint.rvcprint(subfig='d')

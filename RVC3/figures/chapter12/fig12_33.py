@@ -22,7 +22,7 @@ ocr = pytesseract.image_to_data(penguins.image < 100, output_type=pytesseract.Ou
 for text, conf in zip(ocr['text'], ocr['conf']):
     if conf == '-1':
         continue
-    if text.replace(' ', '') == '':
+    if text.strip() == '':
         continue
     print(conf, text)
 
@@ -32,7 +32,7 @@ for i, (text, confidence) in enumerate(zip(ocr['text'], ocr['conf'])):
     #     continue
 
     # top is the minimum v-coordinate
-    if text.replace(' ', '') != '' and confidence > 50:
+    if text.strip() != '' and confidence > 50:
         plot_labelbox(
             ocr['text'][i],
             lb=(ocr['left'][i], ocr['top'][i]),
