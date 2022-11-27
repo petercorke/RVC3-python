@@ -6,22 +6,14 @@ import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
 import open3d as o3d
 from spatialmath.base import trotx, transl
-# import open3d.cpu.pybind.t.pipelines.registration as treg
 
-# bunny = np.loadtxt(mvtb_path_to_datafile('data/bunny.dat'))
-
-# pcd = o3d.geometry.PointCloud()
-# pcd.points = o3d.utility.Vector3dVector(bunny.T)
-# print(pcd)
 
 bunny_pcd = PointCloud.Read('data/bunny.ply')
-
 
 bunny_pcd.disp(block=False, file=rvcprint.outfile(subfig='a', format='png'))
 print(bunny_pcd)
 
 #----------------------------------------------------------------------- #
-
 
 voxel_grid = bunny_pcd.voxel_grid(voxel_size=0.01)
 
@@ -44,9 +36,4 @@ print(obb.extent, obb.center)
 pcd = bunny_pcd.downsample_voxel(voxel_size=0.01)
 pcd.normals(radius=0.1, max_nn=30)
 pcd.disp(point_show_normal=True, block=False, file=rvcprint.outfile(subfig='c', format='png'))
-
-
-
-
-
 
