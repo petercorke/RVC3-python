@@ -20,6 +20,6 @@ TBA = TB @ TA
 trplot2(TBA, frame='BA', color='c')
 P = [3, 2]
 
-plot_point(P, 'ko', label='P', color='k')
+plot_point(P, 'ko', text='P', color='k')
 
 rvcprint.rvcprint()
