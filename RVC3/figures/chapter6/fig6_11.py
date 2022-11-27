@@ -41,7 +41,7 @@ rvcprint.rvcprint(subfig='b', interval=(0.005, 0.0025))
 # ------------------------------------------------------------------------- #
 
 plt.clf()
-ekf.disp_P(ekf.P_est)
+ekf.disp_P(ekf.P_est, colorbar=True)
 
 print(np.array([h.innov for h in ekf.history]))
 rvcprint.rvcprint(subfig='c')

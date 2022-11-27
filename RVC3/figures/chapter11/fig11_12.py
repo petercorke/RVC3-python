@@ -30,7 +30,7 @@ rvcprint.rvcprint(subfig='a')
 background.disp()
 rvcprint.rvcprint(subfig='b')
 
-(im - background).disp(colormap='signed')
+(im - background).disp(colormap='signed', colorbar=dict(shrink=0.87, aspect=20*0.87))
 (im - background).stats()
 rvcprint.rvcprint(subfig='c')
 

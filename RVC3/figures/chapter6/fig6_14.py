@@ -45,7 +45,7 @@ rvcprint.rvcprint(subfig='a')
 
 Pf = ekf.history[-1].P
 plt.clf()
-ekf.disp_P(Pf)
+ekf.disp_P(Pf, colorbar=True)
 
 
 rvcprint.rvcprint(subfig='b')

@@ -32,7 +32,7 @@ im = data['depth']
 
 depth = Image(im)
 print(depth)
-depth.disp(grid=True, badcolor='red', colormap='viridis', colorbar=dict(label='Depth (m)'))
+depth.disp(grid=True, badcolor='red', colormap='viridis', colorbar=dict(shrink=0.8, aspect=20*0.8,label='Depth (m)'))
 rvcprint.rvcprint(subfig='c')
 
 # plt.show(block=True)
