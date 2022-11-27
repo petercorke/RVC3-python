@@ -38,7 +38,7 @@ SE = SE.colorize([255, 0, 0])
 out = Image.Hstack([results, SE], sep=1, bgcolor=[255, 255, 255])
 
 # display it, and add text labels
-out.disp(black=0.1, axes=False)
+out.disp(black=0.1, axes=False, interpolation='nearest')
 
 plot_text((5, -5), 'input')
 plot_text((57, -5), 'after dilation')
