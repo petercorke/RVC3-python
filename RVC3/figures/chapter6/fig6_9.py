@@ -31,7 +31,7 @@ print(ekf)
 
 ekf.run(T=20)
 
-map.plot()
+# map.plot()
 ekf.plot_ellipse(filled=True, N=20, facecolor='g', alpha=0.3, edgecolor='none')
 
 veh.plot_xy(color='b', linewidth=2, label='ground truth')
