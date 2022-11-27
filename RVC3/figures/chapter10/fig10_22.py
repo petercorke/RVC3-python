@@ -19,12 +19,7 @@ XYZ = np.empty((N, 3))
 Lab = np.empty((N, 3))
 for i in range(N):
     L = macbeth[:,i] * d65
-    tristim = np.maximum( cmfrgb(lam, L), 0)
-    # RGB = gamma_encode(tristim, 0.45)
-    # if np.max(RGB) > 1:
-    #     error('scene is too bright')
-    RGB = tristim.reshape((1, 1, 3)).astype(np.float32)
-    
+    RGB = np.maximum( cmfrgb(lam, L), 0)
     XYZ[i,:] = colorspace_convert(RGB, 'rgb', 'xyz')
     Lab[i,:] = colorspace_convert(RGB, 'rgb', 'lab')
 
