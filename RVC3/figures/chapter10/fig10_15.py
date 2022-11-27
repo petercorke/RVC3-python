@@ -32,20 +32,3 @@ rvcprint.rvcprint(subfig='e', format='png')
 lab.plane('b*').disp(**options)  # B*
 rvcprint.rvcprint(subfig='f', format='png')
 
-
-# idisp(hsv(:,:,1), 'plain')
-# rvcprint.rvcprint(subfig='b', 'format', 'png')
-
-# idisp(hsv(:,:,2), 'plain')
-# rvcprint.rvcprint(subfig='c', 'format', 'png')
-
-# lab = colorspace('RGB->Lab', flowers)
-
-# idisp(lab(:,:,1), 'plain')
-# rvcprint.rvcprint(subfig='d', 'format', 'png')
-
-# idisp(lab(:,:,2), 'plain')
-# rvcprint.rvcprint(subfig='e', 'format', 'png')
-
-# idisp(lab(:,:,3), 'plain')
-# rvcprint.rvcprint(subfig='f', 'format', 'png')
