@@ -10,20 +10,23 @@ from math import pi
 
 sim = BDSim(animation=True) #debug='i')
 bd = sim.blockdiagram()
-
+sim.set_options(animation=True)
 clock = bd.clock(0.1, unit='s')
 
 # wide angle camera
 camera = CentralCamera.Default(f=0.002)
-T_vc = SE3(0.2, 0.1, 0.3) * SE3.Ry(pi/2) * SE3.Rz(-pi/2) #*trotx(-pi/4);   
-P = np.array([[0, 0], [1, -1], [2, 2]])
-pd = camera.project_point(P, pose=SE3(-2, 0, 0)*T_vc)
 
-q0 = [-8, 2, 0.3]
+# camera optical axis is upward
+T_B_C = SE3(0.2, 0.1, 0.3) 
+
+# landmark points on the ceiling
+P = np.array([[0, 1, 3], [0, -1, 3]]).T;
+
+# desired landmark position on the image plane
+pd = camera.project_point(P, pose=SE3(-2, 0, 0)*T_B_C)
+
+q0 = [-6, 2, 0.6]
 lmbda = 1
-
-model = Path(__file__).parent / "IBVS-holonomic.bd"
-print(model)
 
 def plot_init(camera):
 	camera.plot_point(pd, 'b*')
@@ -32,16 +35,13 @@ def world_init(ax):
 	# plot X, Y coords of world points
 	ax.plot(P[0, :], P[1, :], 'b*')
 
-
+# load the bdsim model
+model = Path(__file__).parent / "IBVS-holonomic.bd"
 bd = bdload(bd, model, globalvars=globals())
+
 bd.compile()
 bd.report()
 
-print('about to run')
-print(sim.options)
-sim.set_options(animation=False)
-out = sim.run(bd, 30)
-print('done')
 print(out)
 
 # sim.done(bd)

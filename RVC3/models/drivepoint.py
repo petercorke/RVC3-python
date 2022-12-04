@@ -10,6 +10,7 @@ import sys
 print(sys.argv)
 
 sim = bdsim.BDSim()
+sim.set_options(animation=True)
 bd = sim.blockdiagram()
 
 def background_graphics(ax):
@@ -24,7 +25,7 @@ heading_error = bd.SUM('+-', mode='c')
 Kv = bd.GAIN(0.5)
 Kh = bd.GAIN(1.5)
 bike = bd.BICYCLE(x0=[5, 2, 0], name='vehicle')
-vplot = bd.VEHICLEPLOT(scale=[0, 10], size=0.7, shape='box', path='b:', init=background_graphics, movie='rvc4_4.mp4')
+vplot = bd.VEHICLEPLOT(scale=[0, 10], size=0.7, shape='box', path='b:', init=background_graphics) #, movie='rvc4_4.mp4')
 vscope = bd.SCOPE(name='velocity')
 hscope = bd.SCOPE(name='heading')
 

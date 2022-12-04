@@ -9,7 +9,11 @@ import matplotlib.pyplot as plt
 
 
 sim = BDSim(animation=True)
+
+
 bd = sim.blockdiagram()
+print(sim.options)
+sim.set_options(animation=True)
 
 clock = bd.clock(10, unit='Hz')
 
@@ -23,7 +27,7 @@ lmbda = 0.5
 
 model = Path(__file__).parent / "IBVS-arm.bd"
 print(model)
-print(sim.argv)
+# print(sim.argv)
 
 def plot_init(camera):
 	print('@@@@@plot_init')

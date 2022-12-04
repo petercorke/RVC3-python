@@ -2,4 +2,4 @@
 
 import rvcprint
 
-rvcprint.bdmodel('IBVS-drivepoint.bd')
+rvcprint.bdmodel('IBVS-holonomic.bd')

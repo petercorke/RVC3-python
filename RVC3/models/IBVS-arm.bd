@@ -369,8 +369,16 @@
                     1
                 ],
                 [
+                    "vector",
+                    null
+                ],
+                [
                     "styles",
                     null
+                ],
+                [
+                    "stairs",
+                    false
                 ],
                 [
                     "scale",
@@ -385,20 +393,8 @@
                     true
                 ],
                 [
-                    "labels",
-                    null
-                ],
-                [
-                    "grid",
-                    true
-                ],
-                [
                     "watch",
                     false
-                ],
-                [
-                    "blockargs",
-                    null
                 ]
             ]
         },
@@ -429,8 +425,16 @@
                     1
                 ],
                 [
+                    "vector",
+                    null
+                ],
+                [
                     "styles",
                     null
+                ],
+                [
+                    "stairs",
+                    false
                 ],
                 [
                     "scale",
@@ -445,20 +449,8 @@
                     true
                 ],
                 [
-                    "labels",
-                    null
-                ],
-                [
-                    "grid",
-                    true
-                ],
-                [
                     "watch",
                     false
-                ],
-                [
-                    "blockargs",
-                    null
                 ]
             ]
         },
@@ -960,10 +952,6 @@
                 [
                     "watch",
                     false
-                ],
-                [
-                    "blockargs",
-                    null
                 ]
             ]
         },
@@ -1020,10 +1008,6 @@
                 [
                     "watch",
                     false
-                ],
-                [
-                    "blockargs",
-                    null
                 ]
             ]
         }
