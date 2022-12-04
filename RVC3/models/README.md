@@ -14,47 +14,70 @@ For each bdsim model called `model` there can be many related files
 | model.bd       | a block diagram drawn with bdedit (a JSON file) |
 | model-main.py  | a "main" function called by a complex bdsim model file |
 
+## `model.py`
 
-You can run a Python+bdsim model from the command line
-
+This is a pure Python file that uses `bdsim` classes to implement a system model in terms of
+blocks and interconnections.  You run it directly from the command line
 ```
-% ./model.py
+$ python model.py
+```
 or
-% python model.py
+```
+$ ./model.py
+```
+or from inside Jupyter or IPython by
+```
+%run -m model
 ```
 
-You can open a model file using bdedit
-
+## `model.bd`
+You can open a model file using the Qt-based graphical tool `bdedit`, from the command line, by
 ```
-% bdedit model.bd
+$ bdedit model.bd
+```
+and execute the model by pushing the run button.  This will invoke `bdrun` which will load and parse `model.bd`,
+build a block diagram and execute it.
+
+
+## `model-main.py`
+This approach is used for a "complex" model file that contains a "Main" block.
+It comprises a `bdsim` model called `model.bd` as well a Python file `model-main.py`, referenced by the "Main" block,
+which sets up the Python objects required for the bdsim model, then imports that model and executes it.
+
+You run it directly from the command line
+```
+$ python model-main.py
+```
+or
+```
+$ ./model-main.py
+```
+or from inside Jupyter or IPython by
+```
+%run -m model-main.py
 ```
 
-and execute it by pushing the run button.
-
-You can run a model file directly by
-
+Alternatively you can run the editor
 ```
-% bdrun model.bd
+$ bdedit model.bd
 ```
-which will parse the model file, build a block diagram and execute it.
+and press the run button which will perform the action described above.
 
-For a "complex" model file that contains a "Main" block you need to run the main file
 
-```
-% python model-main.py
-```
+
+
+
 
 ## Installing bdsim
 
-bdsim requires Python 3.8 or better.
+`bdsim` requires Python 3.8 or better, and is installed as part of the `rvc3python` install.  To install it explicitly
 
 ```
-pip install bdsim
+$ pip install bdsim
 ```
 
-To run some of these models you need to have two additional Robotics Toolbox installed.  It is not a dependency of `bdsim`.
-
+Many of these models require additional installed toolboxes, which are not a dependency of `bdsim`
 ```
-pip install roboticstoolbox-python
-pip install machinevisiontoolbox-python
+$ pip install roboticstoolbox-python
+$ pip install machinevisiontoolbox-python
 ```
