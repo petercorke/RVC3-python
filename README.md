@@ -1,6 +1,6 @@
 # Robotics, Vision & Control: 3rd edition in Python
 
-<img src="https://github.com/petercorke/RVC3-python/raw/main/figs/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="300">
+<img src="https://github.com/petercorke/RVC3-python/raw/main/doc/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="300">
 
 This book depends on the following open-source Python packages:
 
@@ -121,7 +121,7 @@ ERobot: Panda (by Franka Emika), 7 joints (RRRRRRR)
 IKSolution(q=array([  -1.849,   -2.576,   -2.914,     1.22,   -1.587,    2.056,   -1.013]), success=True, iterations=13, searches=1, residual=3.3549072615799585e-10, reason='Success')
 >>> panda.teach(panda.qz)
 ```
-![](https://github.com/petercorke/RVC3-python/raw/main/figs/panda_noodle.png)
+![](https://github.com/petercorke/RVC3-python/raw/main/doc/panda_noodle.png)
 
 Computer vision is just as easy.  For example, we can import an image, blur it and display it alongside the
 original
