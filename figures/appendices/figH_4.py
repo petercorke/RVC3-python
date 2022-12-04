@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from spatialmath.base import *
 
 x = np.linspace(-10, 60, 200);
-plt.plot(x, gauss1d(5, 2**2, x), "r", label=r'$x=\mathcal{N}(\mu=2, \sigma=2)$')
+plt.plot(x, gauss1d(5, 2**2, x), "r", label=r'$x=N(\mu=2, \sigma=2)$')
 
 x = np.random.normal(5, 2, size=(1_000_000,));
 y = (x + 2)**2 / 4;
