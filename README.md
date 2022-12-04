@@ -12,12 +12,12 @@ which in turn have dependencies on other packages created by the author and thir
 ## Installing the package
 
 This package provides a simple one-step installation of the required Toolboxes
-```
-$ pip install rvc3python
+```shell
+pip install rvc3python
 ```
 or
-```
-$ conda install rvc3python
+```shell
+conda install rvc3python
 ```
 
 ### Installing into a Conda environment
@@ -25,28 +25,28 @@ $ conda install rvc3python
 It's probably a good idea to create a virtual environment to keep this package and its dependencies
 separated from your other Python code and projects.  This is really easy using Conda 
 conda, and only adds a couple of extra lines
-```
-$ conda create -n RVC3 python=3.10
-$ conda activate RVC3
-$ pip install rvc3python
+```shell
+conda create -n RVC3 python=3.10
+conda activate RVC3
+pip install rvc3python
 ```
 
 ### Installing deep learning tools
 
 Chapter 11 has some deep learning examples based on PyTorch.  If you don't have 
 PyTorch installed you can use an install option
-```
-$ pip install rvc3python[pytorch]
+```shell
+pip install rvc3python[pytorch]
 ```
 or
-```
-$ conda install rvc3python[pytorch]
+```shell
+conda install rvc3python[pytorch]
 ```
 ## Using the Toolboxes
 
 The simplest way to get going is to use the command line tool
 
-```
+```shell
 $ rvctool
  ____       _           _   _             __     ___     _                ___      ____            _             _   _____ 
 |  _ \ ___ | |__   ___ | |_(_) ___ ___    \ \   / (_)___(_) ___  _ __    ( _ )    / ___|___  _ __ | |_ _ __ ___ | | |___ / 
@@ -89,7 +89,7 @@ workbench environment for robotics and computer vision.
 For example to load an ETS model of a Panda robot, solve a forward kinematics and
 inverse kinematics problem, and an interactive graphical display is simply:
 
-```
+```python
 >>> panda = models.ETS.Panda()
 ERobot: Panda (by Franka Emika), 7 joints (RRRRRRR)
 ┌─────┬───────┬───────┬────────┬─────────────────────────────────────────────┐
@@ -125,14 +125,14 @@ IKSolution(q=array([  -1.849,   -2.576,   -2.914,     1.22,   -1.587,    2.056, 
 
 Computer vision is just as easy.  For example, we can import an image, blur it and display it alongside the
 original
-```
+```python
 >>> mona = Image.Read("monalisa.png")
 >>> Image.Hstack([mona, mona.smooth(sigma=5)]).disp()
 ```
 ![](https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/mona%2Bsmooth.png)
 
 or load two images of the same scene, compute SIFT features and display putative matches
-```
+```python
 >>> sf1 = Image.Read("eiffel-1.png", mono=True).SIFT()
 >>> sf2 = Image.Read("eiffel-2.png", mono=True).SIFT()
 >>> matches = sf1.match(sf2)
@@ -157,12 +157,13 @@ code you can control the imports as you see fit.
 ## Other command line tools
 
 This package provides additional command line tools including:
-- `eigdemo`, animation showing linear transformation of rotating unit vector
-- `tripleangledemo`, experiment with various triple-angle sequences
-- `twistdemo`, experiment with 3D twists
+- `eigdemo`, animation showing linear transformation of a rotating unit vector which demonstrates
+  eigenvalues and eigenvectors.
+- `tripleangledemo`, experiment with various triple-angle sequences.
+- `twistdemo`, experiment with 3D twists.
 # Block diagram models
 
-<img src="https://github.com/petercorke/bdsim/raw/master/figs/BDSimLogo_NoBackgnd%402x.png" alt="bdsim logo" width="300">
+<a href="https://github.com/petercorke/bdsim"><img src="https://github.com/petercorke/bdsim/raw/master/figs/BDSimLogo_NoBackgnd%402x.png" alt="bdsim logo" width="300"></a>
 
 Block diagram models are key to the pedagogy of the RVC3 book and 25 models are included.
 To simulate these models we use the Python package [bdsim](https://github.com/petercorke/bdsim) which can run models:
@@ -172,17 +173,17 @@ To simulate these models we use the Python package [bdsim](https://github.com/pe
 
 The models are included in the `RVC3` package when it is installed and `rvctool` adds them
 to the module search path.  This means you can invoke them from `rvctool` by
-```
+```python
 >>> %run -m vloop_test
 ```
 
 If you want to directly access the folder containing the models
 use the command line tool
-```
-$ bdsim_path
+```shell
+bdsim_path
 ... opt/miniconda3/envs/RVC3b/lib/python3.8/site-packages/RVC3/models
 ```
-to find where it is in the Python package install tree.
+to find where they have been installed in the Python package tree.
 
 
 
@@ -196,6 +197,6 @@ This GitHub repo provides additional resources for readers including:
 - All example scripts, see folder [`examples`](RVC3/examples/README.md)
 
 To get this material you need to clone the repo
-```
-$ git clone https://github.com/petercorke/RVC3-python.git
+```shell
+git clone https://github.com/petercorke/RVC3-python.git
 ```
