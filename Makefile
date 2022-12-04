@@ -11,7 +11,8 @@ help:
 
 dist: .FORCE
 	# $(MAKE) test
-	python setup.py sdist
+	python -m build
+	ls -lh dist/rvc3python-*
 
 upload: .FORCE
 	twine upload dist/*
