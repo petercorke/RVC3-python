@@ -1,11 +1,21 @@
 # Robotics, Vision & Control: 3rd edition in Python (2023)
+[![A Python Robotics Package](https://raw.githubusercontent.com/petercorke/robotics-toolbox-python/master/.github/svg/py_collection.min.svg)](https://github.com/petercorke/robotics-toolbox-python)
+[![QUT Centre for Robotics Open Source](https://github.com/qcr/qcr.github.io/raw/master/misc/badge.svg)](https://qcr.github.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![PyPI version](https://badge.fury.io/py/rvc3python.svg)](https://badge.fury.io/py/rvc3python)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rvc3python.svg)
+[![PyPI - Downloads](https://img.shields.io/pypi/dw/rvc3python)](https://pypistats.org/packages/rvc3python)
+
+
+coming soon, this is a work in progress, please don't post issues
 
 <img src="https://github.com/petercorke/RVC3-python/raw/main/doc/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="300">
 
-This book depends on the following open-source Python packages:
+This book depends on the following open-source Python packages
 
-- [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python)
-- [Machine Vision Toolbox for Python](https://github.com/petercorke/machinevision-toolbox-python)
+<a href="https://github.com/petercorke/robotics-toolbox-python"><img alt="Robotics Toolbox for Python" src="https://github.com/petercorke/robotics-toolbox-python/raw/master/docs/figs/RobToolBox_RoundLogoB.png" width="150"></a>
+<a href="https://github.com/petercorke/machinevision-toolbox-python"><img alt="Machine Vision Toolbox for Python" src="https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/VisionToolboxLogo_NoBackgnd@2x.png" width="150"></a>
 
 which in turn have dependencies on other packages created by the author and third parties.
 
