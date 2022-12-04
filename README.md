@@ -1,4 +1,4 @@
-# Robotics, Vision & Control: 3rd edition in Python
+# Robotics, Vision & Control: 3rd edition in Python (2023)
 
 <img src="https://github.com/petercorke/RVC3-python/raw/main/doc/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="300">
 
@@ -177,13 +177,11 @@ to the module search path.  This means you can invoke them from `rvctool` by
 >>> %run -m vloop_test
 ```
 
-If you want to directly access the folder containing the models
-use the command line tool
+If you want to directly access the folder containing the models, the command line tool
 ```shell
 bdsim_path
-... opt/miniconda3/envs/RVC3b/lib/python3.8/site-packages/RVC3/models
 ```
-to find where they have been installed in the Python package tree.
+will display the full path to where they have been installed in the Python package tree.
 
 
 
@@ -191,10 +189,10 @@ to find where they have been installed in the Python package tree.
 # Additional book resources
 
 This GitHub repo provides additional resources for readers including:
-- Jupyter notebooks containing all code lines from each chapter, see folder [`notebooks`](RVC3/notebooks/README.md)
+- Jupyter notebooks containing all code lines from each chapter, see folder [`notebooks`](notebooks/README.md)
 
-- The code to produce every Python-generated figure in the book, see folder [`figures`](RVC3/figures/README.md)
-- All example scripts, see folder [`examples`](RVC3/examples/README.md)
+- The code to produce every Python-generated figure in the book, see folder [`figures`](figures/README.md)
+- All example scripts, see folder [`examples`](examples/README.md)
 
 To get this material you need to clone the repo
 ```shell
