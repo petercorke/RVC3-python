@@ -17,7 +17,8 @@ This book depends on the following open-source Python packages
 <a href="https://github.com/petercorke/robotics-toolbox-python"><img alt="Robotics Toolbox for Python" src="https://github.com/petercorke/robotics-toolbox-python/raw/master/docs/figs/RobToolBox_RoundLogoB.png" width="150"></a>
 <a href="https://github.com/petercorke/machinevision-toolbox-python"><img alt="Machine Vision Toolbox for Python" src="https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/VisionToolboxLogo_NoBackgnd@2x.png" width="150"></a>
 
-which in turn have dependencies on other packages created by the author and third parties.
+which in turn have dependencies on other packages created by the author and
+third parties.
 
 ## Installing the package
 
@@ -32,9 +33,9 @@ conda install rvc3python
 
 ### Installing into a Conda environment
 
-It's probably a good idea to create a virtual environment to keep this package and its dependencies
-separated from your other Python code and projects.  This is really easy using Conda 
-conda, and only adds a couple of extra lines
+It's probably a good idea to create a virtual environment to keep this package
+and its dependencies separated from your other Python code and projects.  This
+is really easy using Conda conda, and only adds a couple of extra lines
 ```shell
 conda create -n RVC3 python=3.10
 conda activate RVC3
@@ -44,7 +45,7 @@ pip install rvc3python
 ### Installing deep learning tools
 
 Chapter 11 has some deep learning examples based on PyTorch.  If you don't have 
-PyTorch installed you can use an install option
+PyTorch installed you can use the `pytorch` install option
 ```shell
 pip install rvc3python[pytorch]
 ```
@@ -92,12 +93,12 @@ IPython 8.0.1 -- An enhanced Interactive Python. Type '?' for help.
 >>> 
 ```
 
-This provides an interactive Python (IPython) session with all the Toolboxes preloaded, and ready
-to go.  It's a convenient and "MATLAB-like"
-workbench environment for robotics and computer vision.
+This provides an interactive Python (IPython) session with all the Toolboxes
+preloaded, and ready to go.  It's a convenient and "MATLAB-like" workbench
+environment for robotics and computer vision.
 
-For example to load an ETS model of a Panda robot, solve a forward kinematics and
-inverse kinematics problem, and an interactive graphical display is simply:
+For example to load an ETS model of a Panda robot, solve a forward kinematics
+and inverse kinematics problem, and an interactive graphical display is simply:
 
 ```python
 >>> panda = models.ETS.Panda()
@@ -133,15 +134,16 @@ IKSolution(q=array([  -1.849,   -2.576,   -2.914,     1.22,   -1.587,    2.056, 
 ```
 ![](https://github.com/petercorke/RVC3-python/raw/main/doc/panda_noodle.png)
 
-Computer vision is just as easy.  For example, we can import an image, blur it and display it alongside the
-original
+Computer vision is just as easy.  For example, we can import an image, blur it
+and display it alongside the original
 ```python
 >>> mona = Image.Read("monalisa.png")
 >>> Image.Hstack([mona, mona.smooth(sigma=5)]).disp()
 ```
 ![](https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/mona%2Bsmooth.png)
 
-or load two images of the same scene, compute SIFT features and display putative matches
+or load two images of the same scene, compute SIFT features and display putative
+matches
 ```python
 >>> sf1 = Image.Read("eiffel-1.png", mono=True).SIFT()
 >>> sf2 = Image.Read("eiffel-2.png", mono=True).SIFT()
@@ -150,61 +152,78 @@ or load two images of the same scene, compute SIFT features and display putative
 ```
 ![](https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/matching.png)
 
-`rvctool` is a wrapper around [IPython](https://ipython.readthedocs.io/en/stable) where:
+`rvctool` is a wrapper around
+[IPython](https://ipython.readthedocs.io/en/stable) where:
 - functions and classes can be accessed without needing package prefixes
-- results are displayed by default like MATLAB does, and like MATLAB you need to put a semicolon on the
-  end of the line to prevent this
-- the prompt is the standard Python REPL prompt `>>>` rather than the IPython prompt, this can
-  be overridden by a command-line switch
-- allows cutting and pasting in lines from the book, and prompt characters are ignored
+- results are displayed by default like MATLAB does, and like MATLAB you need to
+  put a semicolon on the end of the line to prevent this
+- the prompt is the standard Python REPL prompt `>>>` rather than the IPython
+  prompt, this can be overridden by a command-line switch
+- allows cutting and pasting in lines from the book, and prompt characters are
+  ignored
 
-The Robotics, Vision & Control book uses `rvctool` for all the included examples.
+The Robotics, Vision & Control book uses `rvctool` for all the included
+examples.
 
-`rvctool` imports the all the above mentioned packages using `import *` which is not considered
-best Python practice.  It is very convenient for interactive experimentation, but in your own
-code you can control the imports as you see fit.
+`rvctool` imports the all the above mentioned packages using `import *` which is
+not considered best Python practice.  It is very convenient for interactive
+experimentation, but in your own code you can control the imports as you see
+fit.
 
 ## Other command line tools
 
 This package provides additional command line tools including:
-- `eigdemo`, animation showing linear transformation of a rotating unit vector which demonstrates
-  eigenvalues and eigenvectors.
+- `eigdemo`, animation showing linear transformation of a rotating unit vector
+  which demonstrates eigenvalues and eigenvectors.
 - `tripleangledemo`, experiment with various triple-angle sequences.
 - `twistdemo`, experiment with 3D twists.
 # Block diagram models
 
-<a href="https://github.com/petercorke/bdsim"><img src="https://github.com/petercorke/bdsim/raw/master/figs/BDSimLogo_NoBackgnd%402x.png" alt="bdsim logo" width="300"></a>
+<a href="https://github.com/petercorke/bdsim"><img
+src="https://github.com/petercorke/bdsim/raw/master/figs/BDSimLogo_NoBackgnd%402x.png"
+alt="bdsim logo" width="300"></a>
 
-Block diagram models are key to the pedagogy of the RVC3 book and 25 models are included.
-To simulate these models we use the Python package [bdsim](https://github.com/petercorke/bdsim) which can run models:
+Block diagram models are key to the pedagogy of the RVC3 book and 25 models are
+included. To simulate these models we use the Python package
+[bdsim](https://github.com/petercorke/bdsim) which can run models:
 
-- written in Python using [bdsim](https://github.com/petercorke/bdsim#getting-started) blocks and wiring.
-- created graphically using [bdedit](https://github.com/petercorke/bdsim#bdedit-the-graphical-editing-tool) and saved as a `.bd` (JSON format) file.
+- written in Python using
+  [bdsim](https://github.com/petercorke/bdsim#getting-started) blocks and
+  wiring.
+- created graphically using
+  [bdedit](https://github.com/petercorke/bdsim#bdedit-the-graphical-editing-tool)
+  and saved as a `.bd` (JSON format) file.
 
-The models are included in the `RVC3` package when it is installed and `rvctool` adds them
-to the module search path.  This means you can invoke them from `rvctool` by
+The models are included in the `RVC3` package when it is installed and `rvctool`
+adds them to the module search path.  This means you can invoke them from
+`rvctool` by
 ```python
 >>> %run -m vloop_test
 ```
 
-If you want to directly access the folder containing the models, the command line tool
+If you want to directly access the folder containing the models, the command
+line tool
 ```shell
 bdsim_path
 ```
-will display the full path to where they have been installed in the Python package tree.
-
-
+will display the full path to where they have been installed in the Python
+package tree.
 
 
 # Additional book resources
 
+<img src="https://github.com/petercorke/RVC3-python/raw/main/doc/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="100">
+
 This GitHub repo provides additional resources for readers including:
-- Jupyter notebooks containing all code lines from each chapter, see folder [`notebooks`](notebooks/README.md)
+- Jupyter notebooks containing all code lines from each chapter, see
+  the [`notebooks`](notebooks) folder
+- The code to produce every Python/Matplotlib (2D) figure in the book, see the [`figures`](figures) folder
+- 3D points clouds from chapter 14, and the code to create them, see
+  the [`pointclouds`](../pointclouds) folder.
+- 3D figures from chapters 2-3, 7-9, and the code to create them, see the [`3dfigures`](../3dfigures) folder.
+- All example scripts, see the [`examples`](examples) from chapter 14.
 
-- The code to produce every Python-generated figure in the book, see folder [`figures`](figures/README.md)
-- All example scripts, see folder [`examples`](examples/README.md)
-
-To get this material you need to clone the repo
+To get this material you must clone the repo
 ```shell
 git clone https://github.com/petercorke/RVC3-python.git
 ```

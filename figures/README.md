@@ -43,7 +43,7 @@ In addition to the Matplotlib generated figures, there are a number of "3D"
 figures.  Matplotlib is still not very good at 3D plots so alternate tools such
 as PyVista or Open3D have been used instead.
 
-- 3D points clouds, and the code to create them, from chapter 14 can be found in
+- 3D points clouds from chapter 14, and the code to create them, can be found in
   the [pointclouds](../pointclouds) folder.
 - 3D figures from chapters 2-3, 7-9, and the code to create them, can be found
   in the [3dfigures](../3dfigures) folder.
