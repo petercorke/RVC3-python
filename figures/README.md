@@ -1,9 +1,14 @@
 # Figure generation scripts
 
-The code examples in the book contain the essential commands to generate most
-of the figures.  What they leave out are the fiddly Matplotlib commands to set
-colors, line styles, axis labels, legends etc.  All that detail is given in
-these Python scripts which generated the actual figures included in the book.
+Most of the figures in the book have been generated using Matplotlib.  The code
+examples in the book contain the essential commands to generate most of the
+figures, but they leave out the fiddly Matplotlib commands to set colors, line
+styles, axis labels, legends etc.  That would make the code examples too long,
+and get in the way of understanding.  So the in-book examples are pretty bare
+bones, and all the fiddly detail to make good looking plots is in these Python
+scripts which generated the actual figures included in the book.
+
+## Running the scripts
 
 Each chapter is located in a folder `chapterN` which contains:
 
@@ -31,3 +36,15 @@ Some files generate multiple sub-figures with lowercase letter suffixes.
 
 All these files use `RVC3.tools.rvcprint` to save the created files.  The
 package `rvcpython` must have been installed. 
+
+# 3D figures
+
+In addition to the Matplotlib generated figures, there are a number of "3D"
+figures.  Matplotlib is still not very good at 3D plots so alternate tools such
+as PyVista or Open3D have been used instead.
+
+- 3D points clouds, and the code to create them, from chapter 14 can be found in
+  the [pointclouds](../pointclouds) folder.
+- 3D figures from chapters 2-3, 7-9, and the code to create them, can be found
+  in the [3dfigures](../3dfigures) folder.
+
