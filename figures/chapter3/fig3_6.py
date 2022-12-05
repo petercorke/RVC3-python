@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from spatialmath import SO2
 from spatialmath.base import plot_point
-from rvcprint import rvcprint
+from rvcprint from RVC3.tools import rvcprint
 from spatialmath.base import plot_box
 
 

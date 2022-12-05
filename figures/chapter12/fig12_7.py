@@ -16,7 +16,7 @@ CLASSES = [  # Pascal VOC 20 classes
 from machinevisiontoolbox import Image, plot_labelbox
 from spatialmath.base import plot_box
 import matplotlib.pyplot as plt
-import rvcprint
+from RVC3.tools import rvcprint
 
 
 scene = Image.Read('image3.jpg')

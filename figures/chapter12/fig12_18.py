@@ -21,7 +21,7 @@ import torchvision.transforms as transforms
 
 from machinevisiontoolbox import Image, plot_labelbox
 import matplotlib.pyplot as plt
-import rvcprint
+from RVC3.tools import rvcprint
 
 
 image = Image.Read('image3.jpg')

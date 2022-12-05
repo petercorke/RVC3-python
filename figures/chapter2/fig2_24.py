@@ -4,7 +4,7 @@ import numpy as np
 from spatialmath import SE3, Twist3
 from spatialmath import base
 from math import cos, sin, pi
-import rvcprint
+from RVC3.tools import rvcprint
 from PIL import Image
 
 def add_arrow(i, T):

@@ -10,7 +10,7 @@ import sys
 from spatialmath.base import *
 from spatialmath.base import sym
 from spatialmath import SE3, SO2, SO3, UnitQuaternion
-from rvcprint import rvcprint
+from rvcprint from RVC3.tools import rvcprint
 
 # load the simulation data
 from imu_data import IMU

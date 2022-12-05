@@ -8,7 +8,7 @@ from roboticstoolbox.models.DH import Puma560
 from spatialmath import SE3, base
 import matplotlib.pyplot as plt
 
-import rvcprint
+from RVC3.tools import rvcprint
 
 
 sim = bdsim.BDSim(hold=False)

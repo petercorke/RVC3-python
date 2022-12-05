@@ -1,7 +1,7 @@
 #!/usr/bin/en
 import math
 from roboticstoolbox.mobile.OccGrid import PolygonMap
-import rvcprint
+from RVC3.tools import rvcprint
 from roboticstoolbox import *
 import numpy as np
 import matplotlib.pyplot as plt

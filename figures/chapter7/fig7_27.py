@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from spatialmath import SE3
 from spatialgeometry import Cuboid
 from math import pi
-import rvcprint
+from RVC3.tools import rvcprint
 
 # Copyright (C) 1993-2021, by Peter I. Corke
 

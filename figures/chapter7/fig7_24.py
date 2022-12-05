@@ -5,7 +5,7 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 from spatialmath import SE3
-import rvcprint
+from RVC3.tools import rvcprint
 
 hdict = rtb_load_jsonfile("../../examples/hershey/hershey.json")
 

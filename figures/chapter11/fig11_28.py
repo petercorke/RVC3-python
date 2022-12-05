@@ -3,7 +3,7 @@
 # now dilate
 
 
-import rvcprint
+from RVC3.tools import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *

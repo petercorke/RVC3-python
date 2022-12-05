@@ -6,7 +6,7 @@ import numpy as np
 from roboticstoolbox.models.DH import Puma560
 from roboticstoolbox import xplot
 import bdsim
-import rvcprint
+from RVC3.tools import rvcprint
 import matplotlib.pyplot as plt
 
 sim = bdsim.BDSim(hold=False)

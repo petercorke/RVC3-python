@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from spatialmath import SE3
 from math import pi
-from rvcprint import rvcprint
+from rvcprint from RVC3.tools import rvcprint
 from cycler import cycler
 
 custom_cycler = cycler(color=['r', 'g', 'b'])

@@ -2,7 +2,7 @@
 from spatialmath import SO3, base
 import numpy as np
 import matplotlib.pyplot as plt
-import rvcprint
+from RVC3.tools import rvcprint
 
 # base.plotvol3(2)
 SO3().plot(frame='O', colors=('r', 'g', 'b'), projection='persp')

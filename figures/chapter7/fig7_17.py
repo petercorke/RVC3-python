@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from roboticstoolbox import *
-import rvcprint
+from RVC3.tools import rvcprint
 from roboticstoolbox.backends.swift import Swift
 from spatialmath import SE3
 import time

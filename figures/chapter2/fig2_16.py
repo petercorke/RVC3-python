@@ -4,7 +4,7 @@ import numpy as np
 from spatialmath import SE3
 from math import pi
 import pvplus
-import rvcprint
+from RVC3.tools import rvcprint
 
 plotter = pv.Plotter(shape=(2,3), border=False, polygon_smoothing=True, window_size=(2000,1000))
 plotter.set_background('white')

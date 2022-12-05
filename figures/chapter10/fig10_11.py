@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from machinevisiontoolbox.base.color import plot_spectral_locus
-import rvcprint
+from RVC3.tools import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon

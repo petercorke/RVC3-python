@@ -3,7 +3,7 @@
 import numpy as np
 import scipy.linalg
 import matplotlib.pyplot as plt
-import rvcprint
+from RVC3.tools import rvcprint
 from spatialmath.base import *
 
 E = np.array([[1, 1], [1, 2]]);

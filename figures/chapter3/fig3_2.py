@@ -4,7 +4,7 @@ from numpy.core.shape_base import block
 from roboticstoolbox import quintic
 import matplotlib.pyplot as plt
 import numpy as np
-from rvcprint import rvcprint
+from rvcprint from RVC3.tools import rvcprint
 
 traj = quintic(0, 1, np.linspace(0, 1, 50))
 traj.plot()

@@ -4,7 +4,7 @@
 # Demo for colorspace.m - the CIE xyY "tongue"
 # Based on xycolorspace.m
 
-import rvcprint
+from RVC3.tools import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *

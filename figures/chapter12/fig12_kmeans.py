@@ -1,4 +1,4 @@
-import rvcprint
+from RVC3.tools import rvcprint
 import numpy as np
 from scipy.cluster.vq import kmeans2
 import matplotlib.pyplot as plt

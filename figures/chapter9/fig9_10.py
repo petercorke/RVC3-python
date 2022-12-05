@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import matplotlib.pyplot as plt
-import rvcprint
+from RVC3.tools import rvcprint
 
 import bdsim
 

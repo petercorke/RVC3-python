@@ -3,7 +3,7 @@
 from roboticstoolbox import *
 import matplotlib.pyplot as plt
 from spatialmath import base
-import rvcprint
+from RVC3.tools import rvcprint
 
 # puma = models.DH.Puma560()
 # puma.plot(puma.qz, backend='pyplot')

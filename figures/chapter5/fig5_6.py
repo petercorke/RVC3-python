@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import rvcprint
+from RVC3.tools import rvcprint
 from roboticstoolbox import rtb_load_jsonfile, rtb_load_matfile, mobile
 import matplotlib.pyplot as plt
 import matplotlib as mpl

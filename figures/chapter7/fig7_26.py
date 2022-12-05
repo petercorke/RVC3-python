@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from spatialmath import SE3
 from math import pi
-import rvcprint
+from RVC3.tools import rvcprint
 from mpl_toolkits.mplot3d import Axes3D, proj3d
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import rvcprint
+from RVC3.tools import rvcprint
 from machinevisiontoolbox import Image
 
 flowers = Image.Read('flowers8.png')

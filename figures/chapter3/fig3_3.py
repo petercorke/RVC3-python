@@ -3,7 +3,7 @@
 from roboticstoolbox import trapezoidal
 import matplotlib.pyplot as plt
 import numpy as np
-from rvcprint import rvcprint
+from rvcprint from RVC3.tools import rvcprint
 from cycler import cycler
 
 traj = trapezoidal(0, 1, np.linspace(0, 1, 50))

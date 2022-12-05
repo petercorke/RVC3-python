@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import matplotlib
-import rvcprint
+from RVC3.tools import rvcprint
 from machinevisiontoolbox.base import iread, idisp
 
 flowers, name = iread('flowers8.png')
