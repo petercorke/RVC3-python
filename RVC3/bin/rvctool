@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 
-# a simple Robotics Toolbox "shell", runs Python3 and loads in NumPy, RTB, SMTB
+# a simple Robotics & Vision Toolbox "shell", runs Python3 and loads
+# NumPy, SciPy, RTB-P, SMTB-P, MVTB-P.
 #
 # Run it from the shell
-#  % rtb.py
+#  $ rvctool
 #
-# or setup an alias
+# Default switches can be set using the environent variables RVCTOOL, eg.
 #
-#  alias rtb=PATH/rtb.py   # sh/bash
-#  alias rtb PATH/rtb.py   # csh/tcsh
-#
-# % rtb
+#  setenv RVCTOOL "-n"
+#  export RVCTOOL="-n" 
 
 # import stuff
 import os
@@ -19,14 +18,11 @@ import sys
 from importlib.metadata import version
 import argparse
 
-
-
 from pygments.token import Token
 from IPython.terminal.prompts import Prompts
 from IPython.terminal.prompts import ClassicPrompts
 from traitlets.config import Config
 import IPython
-
 
 try:
     from colored import fg, bg, attr
@@ -37,9 +33,9 @@ except ImportError:
     # print('colored not found')
     _colored = False
 
-
-
-parser = argparse.ArgumentParser("RVC book console")
+parser = argparse.ArgumentParser("rvctool",
+    epilog="To set defaults put the relevant command line switches as a string in the environment varible RVCTOOL.",
+    description="Interactive python enviroment for Robotics & Machine Vision toolboxes")
 parser.add_argument("script", default=None, nargs="?", help="specify script to run")
 parser.add_argument("--backend", "-B", default=None, help="specify graphics backend")
 parser.add_argument(
@@ -115,11 +111,17 @@ parser.add_argument(
     action="store_true",
     help="use Swift as default backend",
 )
-args = parser.parse_args()
 
-# TODO more options
-# color scheme, light/dark
-# silent startup
+# add options for light/dark mode
+
+env = os.getenv("RVCTOOL")
+if env is not None:
+    # if envariable is set, parse it just like command line options
+    args = parser.parse_args(env.split())
+    # then use it to set the defaults for the actual command line parsing
+    parser.set_defaults(**args.__dict__)
+
+args = parser.parse_args()
 
 sys.argv = [sys.argv[0]]
 
@@ -189,6 +191,10 @@ if args.robot:
 if args.vision:
     versions.append(f"MVTB=={version('machinevision-toolbox-python')}")
 versions.append(f"SMTB=={version('spatialmath-python')}")
+versions.append(f"NumPy=={version('numpy')}")
+versions.append(f"SciPy=={version('scipy')}")
+
+# create banner
 banner += " (" + ", ".join(versions) + ")"
 banner += r"""
 
@@ -224,8 +230,9 @@ root = Path(__file__).absolute().parent.parent
 sys.path.append(str(root / "models"))
 sys.path.append(str(root / "examples"))
 
-import roboticstoolbox as rtb
-sys.path.append(str(Path(rtb.__path__[0]) / "examples"))
+if args.robot:
+    import roboticstoolbox as rtb
+    sys.path.append(str(Path(rtb.__path__[0]) / "examples"))
 
 if args.cwd:
     os.chdir(root)
@@ -238,13 +245,6 @@ if args.showassign and args.banner:
 """,
         attr(0),
     )
-
-# drop into IPython
-
-# def my_file_finder(*args, **kwargs):
-#     print("FF", *args, **kwargs)
-# IPython.core.magics.execution.ExecutionMagics.run.im_func.func_defaults[2] = my_file_finder
-
 
 class MyPrompt(Prompts):
     def in_prompt_tokens(self, cli=None):
@@ -273,7 +273,6 @@ if args.showassign:
     c.InteractiveShell.ast_node_interactivity = "last_expr_or_assign"
 c.TerminalIPythonApp.display_banner = args.banner
 
-
 # set precision, same as %precision
 c.PlainTextFormatter.float_precision = "%.3f"
 
@@ -281,6 +280,7 @@ c.PlainTextFormatter.float_precision = "%.3f"
 code = None
 if args.script is not None:
     path = Path(args.script)
+    print(path)
     if not path.exists():
         raise ValueError(f"script does not exist: {args.script}")
     code = path.open("r").readlines()
