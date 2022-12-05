@@ -1,3 +1,5 @@
+# helper functions for creating figures for RVC3 Python book
+
 import sys
 import os
 import os.path
@@ -14,10 +16,39 @@ from matplotlib import colors
 fileparts = re.compile(r'fig(?P<chapter>[0-9]+|[A-K])_(?P<fig>.+).py')
 
 def bdmodel(model, subfig=''):
+    """Print bdsim model to a file
+
+    :param model: name of the bdsim model file, including ``.bd`` extension
+    :type model: str
+    :param subfig: subfigure designation, typically a single lower, defaults to ''
+    :type subfig: str, optional
+
+    Invokes ``bdedit`` to render the model as a PDF file.
+    """
     file = outfile(format='pdf', subfig=subfig)
     os.system(f"bdedit -s=14 ../../models/{model} -p {str(file)}")
 
 def outfile(subfig='', format=None, include=False):
+    """Generate name of output file
+
+    :param subfig: subfigure designation, typically a single lower, defaults to ''
+    :type subfig: str, optional
+    :param format: file format, defaults to 'pdf'
+    :type format: str, optional
+    :param include: add "-include" to the generated path, defaults to False
+    :type include: bool, optional
+    :return: path where figure is to be stored
+    :rtype: Path
+
+    The path is derived from the name of
+    the script that invokes ``rvcprint``, for example, calling ``outfile`` from
+    the file ``fig6_1.py`` will return ``fig6_1.pdf``.
+
+    The option ``include`` changes the path to ``fig6_1-include.pdf`` and would
+    be used to create a PDF that is subsequently edited to form the included
+    figure ``fig6_1.pdf``.  This prevents accidental overwriting of a hand
+    edited figure.
+    """
     # build the path for saving
     try:
         m = fileparts.search(os.path.basename(sys.argv[0]))
@@ -26,22 +57,7 @@ def outfile(subfig='', format=None, include=False):
     except:
         print('bad file name')
 
-    # figure = os.path.splitext(figure)[0] + subfig + '.' + format
-    # chapter = figure[3]
-
-    # if chapter.isalpha():
-    #     # its an appendix
-    #     path = Path(f"/Users/corkep/code/RVC3-python/RVC3/figures/appendices"
-    #         f"/Figures_generated")
-    # else:
-    #     path = Path(f"/Users/corkep/code/RVC3-python/RVC3/figures/chapter{chapter}"
-    #         f"/Figures_generated")
-
-    
-    # if not path.exists():
-    #     print('creating folder', path)
-    #     path.mkdir()
-
+    # change this next line to set figure output location
     path = Path(".")
 
     if include:
@@ -56,8 +72,41 @@ def outfile(subfig='', format=None, include=False):
 def figname(subfig=''):
     return os.path.splitext(os.path.basename(sys.argv[0]))[0]
 
-def rvcprint(subfig='', debug=False, thicken=1.5, facecolor='white', interval=None, ax=None, fignum=None, format='pdf', pause=2, **kwargs):
+def rvcprint(subfig='', thicken=1.5, facecolor='white', interval=None, ax=None, fignum=None, format='pdf', pause=2, debug=False, **kwargs):
+    """Save Matplotlib figure as a PDF file
 
+    :param subfig: subfigure designation, typically a single lower, defaults to ''
+    :type subfig: str, optional
+    :param thicken: set all lines this ``linewidth``, set to ``None`` to disable, defaults to 1.5
+    :type thicken: float, optional
+    :param facecolor: background color of the plot, defaults to 'white'
+    :type facecolor: str, optional
+    :param interval: specify tick interval, defaults to Matplotlib default
+    :type interval: float, 2-tuple, 3-tuple, optional
+    :param ax: use these axes instead of current figure, defaults to None
+    :type ax: Axes, optional
+    :param fignum: use this figure number instead of current figure, defaults to None
+    :type fignum: int, optional
+    :param format: file format, defaults to 'pdf'
+    :type format: str, optional
+    :param pause: delay time in seconds when the tweaked figure is displayed, defaults to 2
+    :type pause: float, optional
+    :param debug: block after figure has been tweaked but before saving, defaults to False
+    :type debug: bool, optional
+
+    The figure is saved as a PDF file with the root name equal to the name of
+    the script that invokes ``rvcprint``, for example, calling ``rvcprint`` from
+    the file ``fig6_1.py`` will save the figure as ``fig6_1.pdf``.
+
+    Lines are thickened, axis labels are bolded.  
+    
+    Tick interval is adjusted by ``interval``
+    - float, set this interval for all axes
+    - 2-tuple, set intervals for x- and y-axes
+    - 3-tupe, set intervals for x-, y- and z-axes
+
+    :seealso: :func:`outfile`
+    """
     # if the envariable RVCPRINT is 'no' then don't save the figure
     # this can be set by runall.py
     if os.getenv('RVCPRINT') == 'no':
