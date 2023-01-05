@@ -94,8 +94,8 @@ IPython 8.0.1 -- An enhanced Interactive Python. Type '?' for help.
 ```
 
 This provides an interactive Python (IPython) session with all the Toolboxes
-preloaded, and ready to go.  It's a convenient and "MATLAB-like" workbench
-environment for robotics and computer vision.
+preloaded, and ready to go.  It's a highly capable, convenient, and
+"MATLAB-like" workbench environment for robotics and computer vision.
 
 For example to load an ETS model of a Panda robot, solve a forward kinematics
 and inverse kinematics problem, and an interactive graphical display is simply:
@@ -221,7 +221,7 @@ This GitHub repo provides additional resources for readers including:
 - 3D points clouds from chapter 14, and the code to create them, see
   the [`pointclouds`](../pointclouds) folder.
 - 3D figures from chapters 2-3, 7-9, and the code to create them, see the [`3dfigures`](../3dfigures) folder.
-- All example scripts, see the [`examples`](examples) from chapter 14.
+- All example scripts, see the [`examples`](examples) folder.
 
 To get this material you must clone the repo
 ```shell
