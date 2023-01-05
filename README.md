@@ -222,6 +222,7 @@ This GitHub repo provides additional resources for readers including:
   the [`pointclouds`](../pointclouds) folder.
 - 3D figures from chapters 2-3, 7-9, and the code to create them, see the [`3dfigures`](../3dfigures) folder.
 - All example scripts, see the [`examples`](examples) folder.
+- To run the visual odometry example in Sect. 14.8.3 you need to download two image sequence, each over 100MB, [see the instructions here](https://github.com/petercorke/machinevision-toolbox-python/blob/master/mvtb-data/README.md#install-big-image-files). 
 
 To get this material you must clone the repo
 ```shell
