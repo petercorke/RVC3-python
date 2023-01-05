@@ -17,3 +17,7 @@ as PyVista or Open3D have been used instead.
   the [pointclouds](./pointclouds) folder.
 - 3D figures from chapters 2-3, 7-9, and the code to create them, can be found
   in the [3dfigures](./3d) folder.
+  
+# Not included
+
+Images that have been licenced from third parties, these have an image credit in the book, are not included this repo.
