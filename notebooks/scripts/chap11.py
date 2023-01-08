@@ -100,7 +100,9 @@ images[3]
 for image in images:
   image.disp()  # do some operation
 
-images = ZipArchive("bridge-l.zip", "*.pgm");
+# this may fail unless you have installed these extra image zip files
+# see https://github.com/petercorke/machinevision-toolbox-python/tree/master/mvtb-data#install-big-image-files
+# images = ZipArchive("bridge-l.zip", "*.pgm");
 len(images)
 
 # ## 11.1.3 Images from an Attached Camera
@@ -121,7 +123,7 @@ video = VideoFile("traffic_sequence.mp4")
 video.shape
 
 for frame in video:
-  frame.disp(reuse=True) # display frame in the same axes
+  frame.disp(fps=video.fps) # display frame in the same axes
 
 # ## 11.1.5 Images from the Web
 #
@@ -160,9 +162,10 @@ canvas.draw_line((100, 100), (800, 800), color=250, thickness=8)
 
 canvas.disp();
 
+
 #  11.2 Pixel Value Distribution
 #
-
+plt.close('all')
 church = Image.Read("church.png", mono=True)
 
 church.min()
@@ -281,7 +284,7 @@ for im in video:
   else:
     d = im - background
     background += d.clip(-sigma, sigma)
-  background.disp()
+  background.disp(fps=video.fps)
 
 # # 11.5 Spatial Operations
 # ## 11.5.1 Linear Spatial Filtering
@@ -291,6 +294,7 @@ for im in video:
 
 # ### 11.5.1.1 Image Smoothing
 #
+plt.close('all')
 
 K = Image.Constant(21, 21, value=1/21**2);
 K.shape
@@ -515,12 +519,15 @@ dx = im.distance_transform(norm="L2")
 # ## 11.7.1 Cropping
 #
 
+plt.close('all')
+
 mona.disp();
 
-eyes, roi = mona.roi();
-eyes
+# Select a region of interest on the image, left click then drag
+# eyes, roi = mona.roi();
+#eyes
 
-roi
+#roi
 
 smile = mona.roi([265, 342, 264, 286])
 smile.disp();
@@ -571,5 +578,6 @@ M = S.exp(pi / 6)
 out = mona.warp_affine(M, bgcolor=np.nan)
 
 twisted_mona = mona.rotate(pi/6);
+twisted_mona.disp()
 
 

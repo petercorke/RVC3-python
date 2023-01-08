@@ -160,8 +160,8 @@ hsv.plane("V").disp();
 
 Lab = flowers.colorspace("L*a*b*")
 
-Lab.plane("a*").disp();
-Lab.plane("b*").disp();
+Lab.plane("a*:").disp();
+Lab.plane("b*:").disp();
 
 # ## 10.2.8 Transforming between Different Primaries
 #

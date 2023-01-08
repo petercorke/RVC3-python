@@ -38,7 +38,7 @@ castle2 = Image.Read("castle2.png", dtype="float");
 
 t = castle2.otsu()
 
-castle2.adaptive_threshold().disp();
+castle2.threshold_adaptive().disp();
 
 # ### 12.1.1.2 Color Image Classification
 #

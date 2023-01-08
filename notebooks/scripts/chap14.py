@@ -519,7 +519,7 @@ walls_l.anaglyph(walls_r, "rc").disp();
 bunny_pcd = PointCloud.Read('data/bunny.ply')
 bunny_pcd.disp(block=False)
 
-pcd = bunny_pcd.voxel_grid(voxel_size=0.01).disp()
+pcd = bunny_pcd.voxel_grid(voxel_size=0.01).disp(block=False)
 
 pcd = bunny_pcd.downsample_voxel(voxel_size=0.01)
 
