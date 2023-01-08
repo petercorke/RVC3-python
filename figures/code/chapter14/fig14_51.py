@@ -125,7 +125,7 @@ for left, right in zip(lefts, rights):
             if np.any(np.isnan(Pk)):
                 continue  # discard bad matches
 
-            id = matchLR[k].descriptor1.id
+            id = matchLR[k].id1
             m = matchFB.by_id1(id)
             if m is None:
                 continue
@@ -143,10 +143,11 @@ for left, right in zip(lefts, rights):
     left_prev = left
     right_prev = right
 
+    # only do first 250 frames
     if left.id > 250:
         break
 
-f = open('vo.pickle', 'wb')
-d = dict(displacements=displacements, errors=errors, nmatches=nmatches)
-pickle.dump(d, f)
-f.close()
+# since it took so long to compute, let's save the results
+with open('vo.pickle', 'wb') as f:
+    d = dict(displacements=displacements, errors=errors, nmatches=nmatches)
+    pickle.dump(d, f)

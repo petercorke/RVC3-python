@@ -23,19 +23,24 @@ V = r * np.sin(Phi) + v0
 # spherical = fisheye.interp2d(Us, Vs)
 spherical = fisheye.warp(U, V, domain=(phi_range, theta_range))
 
-# sphere
-R = 1
-x = R * np.sin(Theta) * np.cos(Phi)
-y = R * np.sin(Theta) * np.sin(Phi)
-z = R * np.cos(Theta)
+# # sphere
+# R = 1
+# x = R * np.sin(Theta) * np.cos(Phi)
+# y = R * np.sin(Theta) * np.sin(Phi)
+# z = R * np.cos(Theta)
 
 # create 3d Axes
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+# fig = plt.figure()
+# ax = fig.add_subplot(111, projection='3d')
+ax = plotvol3();
+
 img = spherical.colorize()
 
-ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1)
-# ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1) # we've already pruned ourselves
+# ax.plot_surface(x, y, z, facecolors=img.image, cstride=1, rstride=1)
+from spatialmath.base import plot_sphere
+
+plot_sphere(radius=1, ax=ax, filled=True, resolution=500,
+  facecolors=img.A, cstride=1, rstride=1);
 ax.set_box_aspect((1, 1, 48/54))
 ax.set_xlabel('x')
 ax.set_ylabel('y')
@@ -44,4 +49,4 @@ ax.view_init(azim=-143.0, elev=-9)
 
 plt.show()
 plt.tight_layout()
-rvcprint.rvcprint(format='png', interval=0.5)
+rvcprint.rvcprint(debug=True, format='png', interval=0.5)
