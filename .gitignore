@@ -23,3 +23,5 @@ Figures_generated
 __pycache__
 OLD
 .vscode
+dist
+build
