@@ -24,3 +24,27 @@ this [folder](.).  They can also be run, from GitHub, on [Google Colab](https://
 | **Vision-Based Control** |||
 | 15 | Vision-based Control | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/petercorke/RVC3-python/blob/main/notebooks/chap16.ipynb)
 | 16 | Advanced Visual Servoing | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/petercorke/RVC3-python/blob/main/notebooks/chap16.ipynb)
+
+# Animation issues
+
+Matplotlib and Jupyter don't play as well together as they should.  The biggest issues are:
+- ensuring that multiple plots that are meant to overlay appear on the one figure, not separate figures
+- animations
+
+The Jupyter code is annotated where this is an issue, and sometimes alternative appproaches are
+given instead.
+
+Animations using Matplotlib work well from the Python REPL or scripts, or from IPython (`rvctool`).
+# Convert to Python script
+
+To convert a Jupyter notebook to a Python script use
+```shell
+jupyter nbconvert notebook.ipynb --to python
+```
+which creates `notebook.py`
+
+Other options for `--to` include `html`, `pdf`, `markdown`, `latex`.  See
+```shell
+jupyter nbconvert help
+```
+for all the details.
