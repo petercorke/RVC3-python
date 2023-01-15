@@ -25,16 +25,44 @@ this [folder](.).  They can also be run, from GitHub, on [Google Colab](https://
 | 15 | Vision-based Control | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/petercorke/RVC3-python/blob/main/notebooks/chap16.ipynb)
 | 16 | Advanced Visual Servoing | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/petercorke/RVC3-python/blob/main/notebooks/chap16.ipynb)
 
-# Animation issues
 
-Matplotlib and Jupyter don't play as well together as they should.  The biggest issues are:
-- ensuring that multiple plots that are meant to overlay appear on the one figure, not separate figures
-- animations
+# Issues when running with CoLab
+
+## Ancient Matplotlib
+
+These notebooks work for > 3.6.0 and progressively less well for older versions.  CoLab is problematic because
+it provides only 3.2.2 (as of January 2023) and are problems with some multi-stage plots not properly
+overlaying, and ending up as a stack of individual plots.
+
+
+Therefore the first code cell in the notebook installs a newer version of Matplotlib.  This is an annoying thing to have to
+do, since then we have to restart the kernel and run the cell again.  Until Google updates the default
+Matplotlib I'm not sure what else to do.
+
+##  Animation issues
+
+Animations using Matplotlib work well from the Python REPL or scripts, or from IPython (`rvctool`).
+
+I have not found a good way to do Matplotlib animations from CoLab.  Jupyter itself makes this hard
+but you can always have windows that pop out of Jupyter, this can't be done from CoLab.
 
 The Jupyter code is annotated where this is an issue, and sometimes alternative appproaches are
 given instead.
 
-Animations using Matplotlib work well from the Python REPL or scripts, or from IPython (`rvctool`).
+
+## Setting default result printing
+
+The book assumes that Python results are displayed by default, and use a semicolon on the end of the
+line to disable the printing.  This is like MATLAB and simplifies the examples, print statements are
+not required.  In a Jupyter this automatic printing only applies to the last statement in the cell.
+
+This feature is enabled in the first code cell of the notebook with the code lines:
+
+```
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "last_expr_or_assign"
+```
+
 # Convert to Python script
 
 To convert a Jupyter notebook to a Python script use
