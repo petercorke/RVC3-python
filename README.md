@@ -8,14 +8,13 @@
 [![PyPI - Downloads](https://img.shields.io/pypi/dw/rvc3python)](https://pypistats.org/packages/rvc3python)
 
 
-coming soon, this is a work in progress, please don't post issues
-
 <img src="https://github.com/petercorke/RVC3-python/raw/main/doc/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="300">
 
 This book depends on the following open-source Python packages
 
 <a href="https://github.com/petercorke/robotics-toolbox-python"><img alt="Robotics Toolbox for Python" src="https://github.com/petercorke/robotics-toolbox-python/raw/master/docs/figs/RobToolBox_RoundLogoB.png" width="150"></a>
 <a href="https://github.com/petercorke/machinevision-toolbox-python"><img alt="Machine Vision Toolbox for Python" src="https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/VisionToolboxLogo_NoBackgnd@2x.png" width="150"></a>
+<a href="https://github.com/petercorke/bdsim"><img alt="Block diagram simulation for Python" src="https://github.com/petercorke/bdsim/raw/master/figs/BDSimLogo_NoBackgnd@2x.png" width="250"></a>
 
 which in turn have dependencies on other packages created by the author and
 third parties.
@@ -31,11 +30,24 @@ or
 conda install rvc3python
 ```
 
+There are a lot of dependencies and this might take a minute or so.  You now have a very
+powerful computing environment for robotics and computer vision.
+
+### Python version
+
+Given the rapid rate of language additions, particularly around type hinting, use at
+least Python 3.8.  Python 3.7 goes end of life in June 2023.
+
+Not all package dependencies will work with the latest release of Python.  In particular, check:
+* [PyTorch](https://pypi.org/project/torch/) used for segmentation examples in Chapter 12
+* [Open3D](https://pypi.org/project/open3d), used for point cloud examples in Chapter 14.
+
 ### Installing into a Conda environment
 
 It's probably a good idea to create a virtual environment to keep this package
-and its dependencies separated from your other Python code and projects.  This
-is really easy using Conda conda, and only adds a couple of extra lines
+and its dependencies separated from your other Python code and projects.  If you've
+never used virtual environments before this might be a good time to start, and it
+is really easy [using Conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html):
 ```shell
 conda create -n RVC3 python=3.10
 conda activate RVC3
@@ -68,7 +80,7 @@ $ rvctool
 for Python (RTB==1.0.2, MVTB==0.9.1, SMTB==1.0.0)
 
 import numpy as np
-import scipy as sp
+from scipy import linalg, optimize
 import matplotlib.pyplot as plt
 from math import pi
 from spatialmath import *
@@ -93,8 +105,9 @@ IPython 8.0.1 -- An enhanced Interactive Python. Type '?' for help.
 >>> 
 ```
 
-This provides an interactive Python (IPython) session with all the Toolboxes
-preloaded, and ready to go.  It's a highly capable, convenient, and
+This provides an interactive Python
+([IPython](https://ipython.readthedocs.io/en/stable)) session with all the Toolboxes and
+supporting packages imported, and ready to go.  It's a highly capable, convenient, and
 "MATLAB-like" workbench environment for robotics and computer vision.
 
 For example to load an ETS model of a Panda robot, solve a forward kinematics
@@ -154,7 +167,8 @@ matches
 
 `rvctool` is a wrapper around
 [IPython](https://ipython.readthedocs.io/en/stable) where:
-- functions and classes can be accessed without needing package prefixes
+- robotics and vision functions and classes can be accessed without needing
+  package prefixes
 - results are displayed by default like MATLAB does, and like MATLAB you need to
   put a semicolon on the end of the line to prevent this
 - the prompt is the standard Python REPL prompt `>>>` rather than the IPython
@@ -167,7 +181,7 @@ examples.
 
 `rvctool` imports the all the above mentioned packages using `import *` which is
 not considered best Python practice.  It is very convenient for interactive
-experimentation, but in your own code you can control the imports as you see
+experimentation, but in your own code you can handle the imports as you see
 fit.
 
 ## Other command line tools
