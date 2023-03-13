@@ -2,7 +2,6 @@
 
 # run with command line -a switch to show animation
 
-import bdsim
 import numpy as np
 import math
 import roboticstoolbox as rtb
@@ -27,7 +26,7 @@ robot_traj = rtb.mstraj(path[1:,:], qdmax=speed, q0=path[0,:], dt=0.1, tacc=tacc
 total_time = robot_traj.shape[0] * dt + look_ahead / speed
 print(robot_traj.shape)
 
-sim = bdsim.BDSim(graphics=False)
+sim = bdsim.BDSim(animation=True)
 bd = sim.blockdiagram()
 
 def background_graphics(ax):
@@ -48,7 +47,6 @@ def pure_pursuit(cp, R=None, traj=None):
         k = k[0]  # first point beyond look ahead distance
         pstar = traj[k+i,:]
     return pstar.flatten()
-
 
 speed = bd.CONSTANT(speed, name='speed')
 pos_error = bd.SUM('+-', name='err')

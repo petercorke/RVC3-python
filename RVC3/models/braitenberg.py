@@ -59,7 +59,3 @@ if __name__ == "__main__":
 
     out = sim.run(bd, T=125, dt=0.2)
 
-    sim.done(bd, block=False)
-
-    sim = bdsim.BDSim(animation=False)
-    bd = sim.blockdiagram()

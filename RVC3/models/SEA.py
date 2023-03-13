@@ -78,7 +78,6 @@ def SEA(obstacle_pos=0.8, block=False, graphics=False):
     # out = vloop.run(2, checkstep=1e-6)  # simulate for 5s
     # # vloop.dotfile('bd1.dot')  # output a graphviz dot file
     # # vloop.savefig('pdf')      # save all figures as pdf
-    sim.done(bd, block=block)
 
     return out
 

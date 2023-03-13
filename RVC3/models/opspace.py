@@ -128,4 +128,3 @@ bd.plan_dotfile('opspace.dot')
 if __name__ == "__main__":
 
     out = sim.run(bd, 2, dt=5e-3, watch=[x_error, pprod, robot_x.x, robot_x.xd, robot_x.xdd])
-    sim.done(bd, block=True)

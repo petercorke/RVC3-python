@@ -16,4 +16,3 @@ bd.compile()
 if __name__ == "__main__":
     bd.report_summary()
     out = sim.run(bd, T=10)
-    bd.done(block=True)

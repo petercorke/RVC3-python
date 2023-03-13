@@ -23,4 +23,3 @@ bd.compile()
 bd.report()
 
 sim.run(bd, 10)
-sim.done(bd, block=True)
