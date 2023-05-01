@@ -1,6 +1,5 @@
 #! /usr/bin/env python3
 
-
 import subprocess
 import sys
 import re
@@ -71,6 +70,9 @@ parser.add_argument('--replace', '-R',
 parser.add_argument('--output', '-o', 
         action='store_const', const=True, default=False, dest='write_tex',
         help='copy input .tex file to .output -py.tex, default %(default)s')
+parser.add_argument('--nocolor',
+        action='store_const', const=False, default=True, dest='color',
+        help='no colorization of results, default %(default)s')
 
 parser.add_argument('--plot', '-P', 
         action='store_const', const=True, default=False, dest='show_plots',
@@ -112,7 +114,6 @@ os.system("clear")
 root = Path(__file__).absolute().parent.parent / "RVC3"
 sys.path.append(str(root / "models"))
 sys.path.append(str(root / "examples"))
-print(sys.path)
 
 def cprint(color, str, **kwargs):
     if str is not None:
@@ -131,7 +132,6 @@ if args.texfile is None:
     sys.exit(1)
 else:
     filename = args.texfile
-print(args)
 
 out = None
 if args.write_tex:
@@ -146,7 +146,7 @@ if not args.matlab:
     from PIL import Image
     import io
 
-    class IPython:
+    class ExecutePython:
 
         def __init__(self, plots=False):
             ## connect to the kernel
@@ -346,68 +346,83 @@ if not args.matlab:
         def shutdown(self):
             self.client.shutdown()
 
+        def startup(self):
+            # initial commands pushed to IPython
+            startup = textwrap.dedent(r"""
+                %config InteractiveShell.ast_node_interactivity = 'last_expr_or_assign'
+                import numpy as np
+                import scipy as sp
+                import matplotlib.pyplot as plt
+                import cv2 as cv
+
+                import ansitable
+                ansitable.options(unicode=True)
+
+                from spatialmath import *
+                from spatialmath.base import *
+                BasePoseMatrix._color=False
+                from roboticstoolbox import *
+
+                from spatialmath.base import *
+                import math
+                from math import pi
+
+                from machinevisiontoolbox import *
+                from machinevisiontoolbox.base import *
+
+                %precision %.4g
+                np.set_printoptions(
+                    linewidth=120, formatter={
+                        'float': lambda x: f"{0:8.4g}" if abs(x) < 1e-10 else f"{x:8.4g}"})
+
+                np.random.seed(0)
+                cv.setRNGSeed(0)
+                """)
+
+            self.run_cell(startup)
 
     prompt = ">>> "
     prompt_contin = "... "
     prompt_wrong = [">> ", "...: "]
 
-    # initial commands pushed to IPython
-    startup_python = textwrap.dedent(r"""
-        %config InteractiveShell.ast_node_interactivity = 'last_expr_or_assign'
-        import numpy as np
-        import scipy as sp
-        import matplotlib.pyplot as plt
-        import cv2 as cv
-
-        import ansitable
-        ansitable.options(unicode=True)
-
-        from spatialmath import *
-        from spatialmath.base import *
-        BasePoseMatrix._color=False
-        from roboticstoolbox import *
-
-        from spatialmath.base import *
-        import math
-        from math import pi
-
-        from machinevisiontoolbox import *
-        from machinevisiontoolbox.base import *
-
-        %precision %.3g
-        np.set_printoptions(
-            linewidth=120, formatter={
-                'float': lambda x: f"{0:8.4g}" if abs(x) < 1e-10 else f"{x:8.4g}"})
-
-        np.random.seed(0)
-        cv.setRNGSeed(0)
-        """)
-
-    server = IPython(args.show_plots)
-    server.run_cell(startup_python)
-
+    
+    server = ExecutePython(args.show_plots)
+    
 else:
 
     import matlab.engine
 
-    class MATLAB:
+    class ExecuteMATLAB:
 
         def __init__(self):
-            self.engine = matlab.engine.connect_matlab()
+            self.engine = matlab.engine.start_matlab('-desktop')  #matlab.engine.connect_matlab()
             print('MATLAB engine started')
 
         def run_cell(self, code):
-            return elf.engine.evalc(code)
+            print(linenum, code)
+            z = self.engine.evalc(code)
+            print(z)
+            return z
 
         def shutdown(self):
             self.engine.quit()
 
-    server = MATLAB()
-    server.run_cell(startup_matlab)
+        def startup(self):
+            # initial commands pushed to MATLAB
+            startup = textwrap.dedent(r"""
+                addpath(genpath("~/Dropbox/code/MATLAB/RVC3-MATLAB/newtoolbox"));
+                ver
+                """)
+
+            self.run_cell(startup)
+
+    server = ExecuteMATLAB()
 
     prompt = ">> "
     prompt_contin = ">> "
     prompt_wrong = [">>> "]
+
+server.startup()
 
 def getline():
     """
@@ -499,6 +514,9 @@ def getblocks():
     either code (starts with a prompt or continuation) or results.
     """
 
+    def stripprompt(s):
+        return s[len(prompt):]
+
     for listing in getlisting():
         buffer = []
         lstenv = []
@@ -521,7 +539,7 @@ def getblocks():
                 while len(listing) > 0 and listing[0].startswith(prompt_contin):
                     buffer.append(listing.pop(0))
 
-                lstenv.append(('code', '\n'.join([l[4:] for l in buffer]), '\n'.join(buffer)))
+                lstenv.append(('code', '\n'.join([stripprompt(l) for l in buffer]), '\n'.join(buffer)))
             else:
                 # results line
                 buffer = [line]
@@ -539,15 +557,8 @@ indent = 0
 
 def main():
 
-
-
-
     nmismatch = 0
 
-
-
-    # if args.show_cell:
-    #     cprint('blue', block)
     result = None
 
     for listenv in getblocks():
@@ -576,7 +587,10 @@ def main():
 
                 # result is a list of strings or None if error
                 if args.show_cell_results and result is not None:
-                    cprint('yellow', '\n'.join(result))
+                    if args.color:
+                        cprint('yellow', '\n'.join(result))  # Python result
+                    else:
+                        print('\n'.join(result))
 
                 if result is None:
                     if args.stop_on_error:
@@ -601,7 +615,7 @@ def main():
             
                 # display the current line
                 if args.show_file_results:
-                    cprint('sky_blue_3', block)
+                    cprint('sky_blue_3', block)  # book version
                     if args.show_cell_results:
                         print()
 
@@ -626,8 +640,9 @@ def main():
                         print()
                         c2print('black', 'white', lastsection.strip())
                     if args.show_diff:
-                        cprint('sky_blue_3', block)
-                        cprint('yellow', result)
+                        cprint('sky_blue_3', block)  # book version
+                        if not args.show_cell_results:
+                            cprint('yellow', result)     # Python result
                         print(f'^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ at line {linenum}\n')
                     
         if result is None and args.stop_on_error and not args.script:
