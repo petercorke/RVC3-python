@@ -210,7 +210,10 @@ def rvcprint(subfig='', thicken=1.5, facecolor='white', interval=None, ax=None, 
 
         if format == 'pdf':
             # crop it
-            subprocess.run(['pdfcrop', figure, figure], capture_output=True)
+            try:
+                subprocess.run(['pdfcrop', figure, figure], capture_output=True)
+            except FileNotFoundError:
+                print('pdfcrop not found, not cropping')
 
         if pause > 0:
             plt.pause(pause)
