@@ -1165,7 +1165,7 @@
                 ],
                 [
                     "vector",
-                    0
+                    null
                 ],
                 [
                     "styles",
@@ -1272,7 +1272,7 @@
                 ],
                 [
                     "vector",
-                    0
+                    null
                 ],
                 [
                     "styles",
@@ -1372,7 +1372,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",
@@ -1477,7 +1477,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",
@@ -1537,7 +1537,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",

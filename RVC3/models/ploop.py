@@ -1,8 +1,16 @@
+#! /usr/bin/env python
+
+"""
+Creates Fig 9.13
+Robotics, Vision & Control for Python, P. Corke, Springer 2023.
+Copyright (c) 2021- Peter Corke
+"""
+
 import site
 import numpy as np
 import bdsim
 
-site.addsitedir('bdsim')
+site.addsitedir("bdsim")
 
 from vloop import vloop
 
@@ -14,16 +22,16 @@ Kff = 0.0
 G = 107.815
 
 # define blocks
-inp = ploop.INPORT(3, onames=('theta*', 'w*', 'tau_d'), name='in')
-outp = ploop.OUTPORT(4,  name='out') # inames=('theta', 'theta_err'),
-sum1 = ploop.SUM('+-')
-sum2 = ploop.SUM('++')
-kp = ploop.GAIN(Kp, name='Kp')
-kff = ploop.GAIN(Kff, name='Kff')
+inp = ploop.INPORT(3, onames=("theta*", "w*", "tau_d"), name="in")
+outp = ploop.OUTPORT(4, name="out")  # inames=('theta', 'theta_err'),
+sum1 = ploop.SUM("+-")
+sum2 = ploop.SUM("++")
+kp = ploop.GAIN(Kp, name="Kp")
+kff = ploop.GAIN(Kff, name="Kff")
 gearbox = ploop.GAIN(1 / G)
 theta = ploop.INTEGRATOR(x0=0)
 fftorque = ploop.CONSTANT(0)
-VLOOP = ploop.SUBSYSTEM(vloop, name='VLOOP')
+VLOOP = ploop.SUBSYSTEM(vloop, name="VLOOP")
 
 # s1 = ploop.SCOPE()
 # s2 = ploop.SCOPE()
@@ -47,9 +55,8 @@ ploop.connect(VLOOP[1], outp[2])
 ploop.connect(VLOOP[2], outp[3])
 
 
-
 # if __name__ == "__main__":
-#     # test harness 
+#     # test harness
 #     bd = bdsim.BlockDiagram()
 
 #     # position = bd.LSPB(0) HACK

@@ -1,9 +1,10 @@
 {
-    "id": 140268991027040,
+    "id": 5234808128,
     "created_by": "corkep",
     "creation_time": 1632776601,
-    "scene_width": 9794.400000000001,
-    "scene_height": 4440.8,
+    "simulation_time": 10.0,
+    "scene_width": 12096.000000000002,
+    "scene_height": 5269.6,
     "blocks": [
         {
             "id": 140660237829696,
@@ -37,7 +38,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    100
                 ],
                 [
                     "premul",
@@ -81,7 +82,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    5
                 ],
                 [
                     "premul",
@@ -346,8 +347,8 @@
                     "=robot"
                 ],
                 [
-                    "end",
-                    "end-effector"
+                    "q0",
+                    "=robot.qr"
                 ],
                 [
                     "blockargs",
@@ -405,7 +406,7 @@
                 ],
                 [
                     "gravity",
-                    "end-effector"
+                    null
                 ],
                 [
                     "blockargs",
@@ -455,7 +456,7 @@
                 ],
                 [
                     "qf",
-                    "=robot.qn"
+                    "=robot.qz"
                 ],
                 [
                     "T",
@@ -507,11 +508,18 @@
             "parameters": [
                 [
                     "clock",
-                    null
+                    "=clock_fb"
                 ],
                 [
                     "x0",
-                    0
+                    [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
                 ],
                 [
                     "blockargs",
@@ -552,6 +560,10 @@
                 [
                     "blockargs",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -587,11 +599,18 @@
             "parameters": [
                 [
                     "clock",
-                    null
+                    "=clock_ff"
                 ],
                 [
                     "x0",
-                    0
+                    [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
                 ],
                 [
                     "blockargs",
@@ -640,6 +659,142 @@
                 [
                     "file name",
                     "=feedforward-main.py"
+                ]
+            ]
+        },
+        {
+            "id": 6342629008,
+            "block_type": "SCOPE",
+            "title": "ff torque",
+            "pos_x": 880.0,
+            "pos_y": 200.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 6342629104,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    null
+                ],
+                [
+                    "vector",
+                    6
+                ],
+                [
+                    "styles",
+                    null
+                ],
+                [
+                    "stairs",
+                    false
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "title",
+                    null
+                ],
+                [
+                    "loc",
+                    "best"
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 6342633136,
+            "block_type": "SCOPE",
+            "title": "fb torque",
+            "pos_x": 760.0,
+            "pos_y": -20.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 6342638224,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    null
+                ],
+                [
+                    "vector",
+                    6
+                ],
+                [
+                    "styles",
+                    null
+                ],
+                [
+                    "stairs",
+                    false
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "title",
+                    null
+                ],
+                [
+                    "loc",
+                    "best"
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         }
@@ -797,75 +952,24 @@
             "start_socket": 140660238418176,
             "end_socket": 140660238326560,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    100.0,
-                    240.0
-                ],
-                [
-                    12.5,
-                    240.0
-                ],
-                [
-                    12.5,
-                    -140.0
-                ],
-                [
-                    -55.0,
-                    -140.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140328069404800,
             "start_socket": 140660238418944,
             "end_socket": 140660238326272,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    100.0,
-                    260.0
-                ],
-                [
-                    -7.5,
-                    260.0
-                ],
-                [
-                    -7.5,
-                    -120.0
-                ],
-                [
-                    -55.0,
-                    -120.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140328069405040,
             "start_socket": 140660238418704,
             "end_socket": 140660238326224,
             "wire_type": 3,
-            "custom_routing": true,
-            "wire_coordinates": [
-                [
-                    100.0,
-                    280.0
-                ],
-                [
-                    -27.5,
-                    280.0
-                ],
-                [
-                    -27.5,
-                    -100.0
-                ],
-                [
-                    -55.0,
-                    -100.0
-                ]
-            ]
+            "custom_routing": false,
+            "wire_coordinates": []
         },
         {
             "id": 140328069405088,
@@ -949,6 +1053,22 @@
                     -300.0
                 ]
             ]
+        },
+        {
+            "id": 6342633472,
+            "start_socket": 140660238129280,
+            "end_socket": 6342629104,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 6381893136,
+            "start_socket": 140660237968336,
+            "end_socket": 6342638224,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
         }
     ],
     "labels": [

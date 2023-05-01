@@ -1219,7 +1219,7 @@
                 ],
                 [
                     "init",
-                    null
+                    "=plot_init"
                 ],
                 [
                     "blockargs",
@@ -1393,7 +1393,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",

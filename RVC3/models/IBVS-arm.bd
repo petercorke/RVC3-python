@@ -923,7 +923,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",
@@ -979,7 +979,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",

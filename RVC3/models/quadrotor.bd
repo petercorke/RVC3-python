@@ -37,7 +37,7 @@
             "parameters": [
                 [
                     "model",
-                    "=quad_model"
+                    "=quadrotor"
                 ],
                 [
                     "groundcheck",
@@ -713,7 +713,7 @@
             "parameters": [
                 [
                     "model",
-                    "=quad_model"
+                    "=quadrotor"
                 ],
                 [
                     "scale",
@@ -895,7 +895,7 @@
             "parameters": [
                 [
                     "model",
-                    "=quad_model"
+                    "=quadrotor"
                 ],
                 [
                     "nrotors",
@@ -999,7 +999,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",
@@ -1059,7 +1059,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",
@@ -1123,7 +1123,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",

@@ -1,3 +1,11 @@
+#! /usr/bin/env python
+
+"""
+Creates Fig 9.18
+Robotics, Vision & Control for Python, P. Corke, Springer 2023.
+Copyright (c) 2021- Peter Corke
+"""
+
 import bdsim
 from math import pi
 import numpy as np
@@ -21,5 +29,4 @@ bd.compile()  # check the diagram
 bd.report()  # list all blocks and wires
 
 if __name__ == "__main__":
-
     out = sim.run(bd, 5)  # simulate for 5s

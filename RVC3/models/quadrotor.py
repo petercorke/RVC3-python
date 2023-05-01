@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+#! /usr/bin/env python
+
+"""
+Creates Fig 4.24
+Robotics, Vision & Control for Python, P. Corke, Springer 2023.
+Copyright (c) 2021- Peter Corke
+"""
 
 from enum import IntEnum
 import numpy as np
@@ -7,8 +13,13 @@ from bdsim.blockdiagram import BlockDiagram
 from math import pi, sqrt, atan, atan2
 import bdsim
 
+
+# dict of quadrotor parameters
+from RVC3.models.quad_model import quadrotor
+
 sim = bdsim.BDSim(animation=True)
 bd = sim.blockdiagram()
+
 
 # state vector indices
 #   would expect the order to R, P, Y but this is compatible with the
@@ -53,6 +64,7 @@ z_dmd = bd.INTERPOLATE(
     (0, 0.5, 5.5, np.inf), (0, 0, -5, -5), time=True, name="height demand"
 )
 
+
 # yaw control
 def yaw_controller(yaw_dmd, x):
     r = x["rot"]
@@ -60,6 +72,7 @@ def yaw_controller(yaw_dmd, x):
 
 
 yaw = bd.FUNCTION(yaw_controller, nin=2, nout=1, name="yawcontrol")
+
 
 # height control
 def height_controller(height_dmd, x):
@@ -70,6 +83,7 @@ def height_controller(height_dmd, x):
 
 
 height = bd.FUNCTION(height_controller, nin=2, nout=1, name="zcontrol")
+
 
 # velocity control
 def velocity_controller(xy_dmd, x):
@@ -82,6 +96,7 @@ def velocity_controller(xy_dmd, x):
 
 velocity = bd.FUNCTION(velocity_controller, nin=2, nout=1, name="velcontrol")
 
+
 # attitude control
 def attitude_controller(rp_dmd, x):
     r = x["rot"]
@@ -90,9 +105,6 @@ def attitude_controller(rp_dmd, x):
 
 
 attitude = bd.FUNCTION(attitude_controller, nin=2, nout=2, name="attitudecontrol")
-
-# dict of quadrotor parameters
-from RVC3.models.quad_model import quadrotor
 
 # drone + input mixer
 mixer = bd.MULTIROTORMIXER(quadrotor, name="mixer", wmax=1500)

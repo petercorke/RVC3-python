@@ -1,4 +1,10 @@
-# fig 8.5
+#! /usr/bin/env python
+
+"""
+Creates Fig 8.3
+Robotics, Vision & Control for Python, P. Corke, Springer 2023.
+Copyright (c) 2021- Peter Corke
+"""
 
 from math import pi
 import numpy as np
@@ -28,7 +34,7 @@ bd.connect(qdot, integrator)
 bd.connect(integrator, jacobian, robot)
 
 bd.compile()  # check the diagram
-bd.report()  # list all blocks and wires
+bd.report_summary()  # list all blocks and wires
 out = sim.run(bd, 2, minstepsize=1e-6)  # simulate for 5s
 # bd.dotfile('bd1.dot')  # output a graphviz dot file
 # bd.savefig('pdf')      # save all figures as pdf

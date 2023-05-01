@@ -229,7 +229,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=np.array([1, 0, 1, 0])"
                 ],
                 [
                     "premul",
@@ -273,7 +273,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=LQR"
                 ],
                 [
                     "premul",
@@ -317,7 +317,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=1/m1"
                 ],
                 [
                     "premul",
@@ -361,7 +361,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=Ks"
                 ],
                 [
                     "premul",
@@ -405,7 +405,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=1/m2"
                 ],
                 [
                     "premul",
@@ -602,11 +602,11 @@
             "parameters": [
                 [
                     "min",
-                    "-math.inf"
+                    "=-force_lim"
                 ],
                 [
                     "max",
-                    "math.inf"
+                    "=force_lim"
                 ],
                 [
                     "blockargs",
@@ -697,7 +697,7 @@
             "parameters": [
                 [
                     "func",
-                    null
+                    "=lambda x: 0 if x >= obstacle_pos else 1"
                 ],
                 [
                     "nin",

@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+"""
+Creates Fig 4.7
+Robotics, Vision & Control for Python, P. Corke, Springer 2023.
+Copyright (c) 2021- Peter Corke
+"""
+
 # run with command line -a switch to show animation
 
 import math
@@ -57,3 +63,4 @@ if __name__ == "__main__":
     bd.report_summary()
 
     out = sim.run(bd, T=10)
+    pass

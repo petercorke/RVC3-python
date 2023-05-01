@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+"""
+Creates Fig 4.14
+Robotics, Vision & Control for Python, P. Corke, Springer 2023.
+Copyright (c) 2021- Peter Corke
+"""
+
 # run with command line -a switch to show animation
 
 from math import pi, sqrt, atan, atan2
@@ -17,6 +23,7 @@ Kbeta = bd.GAIN(-2, name="Kbeta")
 xg = [5, 5, pi / 2]
 x0 = [5, 2, 0]
 x0 = [5, 9, 0]
+
 
 # annotate the graphics
 def background_graphics(ax):
@@ -93,8 +100,8 @@ vplot = bd.VEHICLEPLOT(
     shape="box",
     path="b:",
     init=background_graphics,
-    movie="rvc4_11.mp4",
 )
+# movie="rvc4_11.mp4",)
 ascope = bd.SCOPE(name=r"$\alpha$")
 bscope = bd.SCOPE(name=r"$\beta$")
 

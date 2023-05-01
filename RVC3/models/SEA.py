@@ -1,10 +1,17 @@
-# fig 9.24
+#! /usr/bin/env python
+
+"""
+Creates Fig 9.28
+Robotics, Vision & Control for Python, P. Corke, Springer 2023.
+Copyright (c) 2021- Peter Corke
+"""
 
 import numpy as np
 import bdsim
 
+
 def SEA(obstacle_pos=0.8, block=False, graphics=False):
-    sim = bdsim.BDSim(name='SEA', graphics=graphics)
+    sim = bdsim.BDSim(name="SEA", graphics=graphics)
 
     bd = sim.blockdiagram()
 
@@ -18,28 +25,32 @@ def SEA(obstacle_pos=0.8, block=False, graphics=False):
     # define the blocks
     step = bd.STEP(1)
     inputgain = bd.GAIN(np.r_[1, 0, 1, 0])
-    sum1 = bd.SUM('+-')
+    sum1 = bd.SUM("+-")
     lqr = bd.GAIN(LQR)
-    limit = bd.CLIP(min=-force_lim, max=force_lim, name='torquelimit')
+    limit = bd.CLIP(min=-force_lim, max=force_lim, name="torquelimit")
 
-    motor_sum = bd.SUM('+-')
+    motor_sum = bd.SUM("+-")
     motor_accel = bd.GAIN(1 / m1)
     motor_vel = bd.INTEGRATOR(x0=0)
     motor_pos = bd.INTEGRATOR(x0=0)
 
-    spring_sum = bd.SUM('+-')
+    spring_sum = bd.SUM("+-")
     spring_force = bd.GAIN(Ks)
 
     load_accel = bd.GAIN(1 / m2)
     load_vel = bd.INTEGRATOR(x0=0)
     load_pos = bd.INTEGRATOR(x0=0)
     obstacle = bd.FUNCTION(lambda x: 0 if x >= obstacle_pos else 1)
-    load_prod = bd.PROD('**')
+    load_prod = bd.PROD("**")
 
-    spring_scope = bd.SCOPE(name='spring scope')
-    state_scope = bd.SCOPE(vector=4, labels=['$x_m$', r'$\dot{x}_m$', '$x_l$', r'$\dot{x}_l$'], name='state scope')
+    spring_scope = bd.SCOPE(name="spring scope")
+    state_scope = bd.SCOPE(
+        vector=4,
+        labels=["$x_m$", r"$\dot{x}_m$", "$x_l$", r"$\dot{x}_l$"],
+        name="state scope",
+    )
 
-    fig_scope = bd.SCOPE(nin=3, labels=['$x_l$', '$u$', '$F_s$'], name='figure scope')
+    fig_scope = bd.SCOPE(nin=3, labels=["$x_l$", "$u$", "$F_s$"], name="figure scope")
     mux = bd.MUX(4)
 
     # connect the blocks
@@ -71,8 +82,8 @@ def SEA(obstacle_pos=0.8, block=False, graphics=False):
 
     bd.connect(mux, state_scope)
 
-    bd.compile()   # check the diagram
-    bd.report()    # list all blocks and wires
+    bd.compile()  # check the diagram
+    bd.report()  # list all blocks and wires
 
     out = sim.run(bd, 5, dt=5e-3, watch=[limit, spring_force])
     # out = vloop.run(2, checkstep=1e-6)  # simulate for 5s
@@ -81,6 +92,6 @@ def SEA(obstacle_pos=0.8, block=False, graphics=False):
 
     return out
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     SEA(block=True, graphics=True)

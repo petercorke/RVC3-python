@@ -43,19 +43,15 @@
             ],
             "parameters": [
                 [
-                    "x0",
-                    null
-                ],
-                [
                     "L",
                     1
                 ],
                 [
-                    "vlim",
+                    "speed_max",
                     1
                 ],
                 [
-                    "slim",
+                    "steer_max",
                     1
                 ],
                 [
@@ -255,7 +251,7 @@
             "parameters": [
                 [
                     "func",
-                    null
+                    "=lambda d: math.atan2(d[1], d[0])"
                 ],
                 [
                     "nin",

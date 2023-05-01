@@ -12,7 +12,7 @@ For each bdsim model called `model` there can be many related files
 | -------------- | -------------------------------- |
 | model.py       | a Python+bdsim implementation of the model |
 | model.bd       | a block diagram drawn with bdedit (a JSON file) |
-| model-main.py  | a "main" function called by a complex bdsim model file |
+| model-main.py  | a "main" function that loads and runs a complex bdsim model file |
 
 ## `model.py`
 
@@ -30,6 +30,10 @@ or from inside Jupyter or IPython by
 %run -m model
 ```
 
+Any output from the model file, typically `out`, will become available as a variable within
+Jupyter.  Some weird interactions with the Jupyter extension for Visual Studio have been 
+observed.
+
 ## `model.bd`
 You can open a model file using the Qt-based graphical tool `bdedit`, from the command line, by
 ```
@@ -40,7 +44,7 @@ build a block diagram and execute it.
 
 
 ## `model-main.py`
-This approach is used for a "complex" model file that contains a "Main" block.
+This approach is used for a "complex" model file that contains a "MAIN" block.
 It comprises a `bdsim` model called `model.bd` as well a Python file `model-main.py`, referenced by the "Main" block,
 which sets up the Python objects required for the bdsim model, then imports that model and executes it.
 

@@ -29,7 +29,7 @@
             "parameters": [
                 [
                     "value",
-                    null
+                    "=Fstar"
                 ],
                 [
                     "blockargs",
@@ -61,7 +61,7 @@
             "parameters": [
                 [
                     "value",
-                    null
+                    "=Xstar"
                 ],
                 [
                     "blockargs",
@@ -407,7 +407,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=Kvf"
                 ],
                 [
                     "premul",
@@ -451,7 +451,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=Kf"
                 ],
                 [
                     "premul",
@@ -495,7 +495,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=omega_f"
                 ],
                 [
                     "premul",
@@ -583,7 +583,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=Kp"
                 ],
                 [
                     "premul",
@@ -627,7 +627,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=Kv"
                 ],
                 [
                     "premul",
@@ -671,7 +671,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    "=omega_p"
                 ],
                 [
                     "premul",
@@ -809,7 +809,7 @@
             "parameters": [
                 [
                     "value",
-                    null
+                    "=Xdstar"
                 ],
                 [
                     "blockargs",
@@ -901,11 +901,23 @@
             "parameters": [
                 [
                     "robot",
-                    null
+                    "=robot"
                 ],
                 [
-                    "end",
-                    "end-effector"
+                    "q0",
+                    "=q0"
+                ],
+                [
+                    "gravcomp",
+                    true
+                ],
+                [
+                    "velcomp",
+                    true
+                ],
+                [
+                    "representation",
+                    null
                 ],
                 [
                     "blockargs",
@@ -945,7 +957,7 @@
             "parameters": [
                 [
                     "robot",
-                    null
+                    "=robot"
                 ],
                 [
                     "blockargs",
@@ -992,7 +1004,7 @@
             "parameters": [
                 [
                     "func",
-                    null
+                    "=x_error_func"
                 ],
                 [
                     "nin",
@@ -1052,7 +1064,7 @@
             "parameters": [
                 [
                     "func",
-                    null
+                    "=ft_sensor_func"
                 ],
                 [
                     "nin",
@@ -1104,7 +1116,11 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
+                ],
+                [
+                    "vector",
+                    6
                 ],
                 [
                     "styles",
@@ -1164,7 +1180,11 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
+                ],
+                [
+                    "vector",
+                    6
                 ],
                 [
                     "styles",
@@ -1216,7 +1236,7 @@
             "parameters": [
                 [
                     "file name",
-                    null
+                    "opspace-main.py"
                 ]
             ]
         }

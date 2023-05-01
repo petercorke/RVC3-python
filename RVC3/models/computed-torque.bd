@@ -1,9 +1,10 @@
 {
-    "id": 140606813588208,
+    "id": 5306143968,
     "created_by": "corkep",
     "creation_time": 1632776601,
-    "scene_width": 12628.000000000002,
-    "scene_height": 5908.000000000001,
+    "simulation_time": 10.0,
+    "scene_width": 11580.800000000001,
+    "scene_height": 5712.000000000001,
     "blocks": [
         {
             "id": 140660237829696,
@@ -37,7 +38,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    20
                 ],
                 [
                     "premul",
@@ -81,7 +82,7 @@
             "parameters": [
                 [
                     "K",
-                    1
+                    5
                 ],
                 [
                     "premul",
@@ -295,8 +296,8 @@
                     "=robot"
                 ],
                 [
-                    "end",
-                    "end-effector"
+                    "q0",
+                    "=robot.qr"
                 ],
                 [
                     "blockargs",
@@ -400,15 +401,15 @@
             "parameters": [
                 [
                     "q0",
-                    null
+                    "=robot.qr"
                 ],
                 [
                     "qf",
-                    null
+                    "=robot.qz"
                 ],
                 [
                     "T",
-                    null
+                    5
                 ],
                 [
                     "qd0",
@@ -457,6 +458,10 @@
                 [
                     "blockargs",
                     null
+                ],
+                [
+                    "blockargs",
+                    null
                 ]
             ]
         },
@@ -492,11 +497,18 @@
             "parameters": [
                 [
                     "clock",
-                    null
+                    "=clock_fb"
                 ],
                 [
                     "x0",
-                    0
+                    [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
                 ],
                 [
                     "blockargs",
@@ -520,7 +532,7 @@
             "parameters": [
                 [
                     "file name",
-                    null
+                    "computed-torque-main.py"
                 ]
             ]
         },

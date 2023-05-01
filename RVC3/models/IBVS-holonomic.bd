@@ -702,7 +702,7 @@
             "parameters": [
                 [
                     "nin",
-                    1
+                    null
                 ],
                 [
                     "vector",
@@ -948,7 +948,7 @@
             "parameters": [
                 [
                     "pose",
-                    "=T_vc"
+                    "=T_B_C"
                 ],
                 [
                     "blockargs",
