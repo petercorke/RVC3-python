@@ -24,6 +24,8 @@ for framenum, im in enumerate(movie):
     if framenum > 200:
         break
 
+    # background.disp(reuse=True, fps=10)
+
 im.disp()
 rvcprint.rvcprint(subfig='a')
 

@@ -47,6 +47,7 @@ print(T)
 m2 = m.subset(50)  # short list of matches
 
 ba = BundleAdjust(cam)
+print(ba)
 
 view1 = ba.add_view(SE3(), fixed=True, color="blue")
 view2 = ba.add_view(SE3(0.3, 0, 0), color="red")
