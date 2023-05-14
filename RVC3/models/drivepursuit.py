@@ -89,5 +89,5 @@ bd.connect(bike, xy, theta, vplot)
 bd.compile()
 
 if __name__ == "__main__":
-    bd.report_summary()
+    sim.report(bd)
     out = sim.run(bd, T=total_time)

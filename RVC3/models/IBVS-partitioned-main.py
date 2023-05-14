@@ -43,10 +43,7 @@ def rho_theta(p):
 
 bd = bdload(bd, model, globalvars=globals())
 bd.compile()
-bd.report_summary()
 
-print("about to run")
-print(sim.options)
-sim.set_options(animation=False)
+sim.report(bd)
 out = sim.run(bd, 150)
 print(out)

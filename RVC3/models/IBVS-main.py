@@ -24,14 +24,7 @@ def plot_init(camera):
 
 bd = bdload(bd, model, globalvars=globals())
 bd.compile()
-bd.report_summary()
 
-print('about to run')
-print(sim.options)
-sim.set_options(animation=False)
+sim.report(bd)
 out = sim.run(bd, 50)
-print('done')
-print(out)
 
-# sim.done(bd)
-# plt.pause(5)

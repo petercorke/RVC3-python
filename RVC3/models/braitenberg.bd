@@ -224,11 +224,11 @@
                     false
                 ],
                 [
-                    "args",
+                    "fargs",
                     []
                 ],
                 [
-                    "blockargs",
+                    "fkwargs",
                     null
                 ],
                 [
@@ -284,11 +284,11 @@
                     false
                 ],
                 [
-                    "args",
+                    "fargs",
                     []
                 ],
                 [
-                    "blockargs",
+                    "fkwargs",
                     null
                 ],
                 [

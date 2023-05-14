@@ -6,7 +6,7 @@ This folder holds a number of [bdsim](https://github.com/petercorke/bdsim) model
 
 ## The files
 
-For each bdsim model called `model` there can be many related files
+For each bdsim model called `model` there can be several related files
 
 | File name      |     Description                  |
 | -------------- | -------------------------------- |
@@ -41,6 +41,10 @@ $ bdedit model.bd
 ```
 and execute the model by pushing the run button.  This will invoke `bdrun` which will load and parse `model.bd`,
 build a block diagram and execute it.
+
+NOTE that not all of the models provided are executable, some do not have `main` files
+to set up their parameters.  They were created only to provide figures for the book, and
+generally have a pure Python `model.py` counterpart that is executable.
 
 
 ## `model-main.py`

@@ -93,12 +93,8 @@ bd.compile()
 
 
 if __name__ == "__main__":
-    bd.report_summary()
-
+    sim.report(bd)
     out = sim.run(bd, T=10, dt=0.05)
-
-    bd.done(block=True)
-
 
 # np.set_printoptions(linewidth=300, suppress=True, precision=4)
 # quad.setstate(np.r_[1, 2, -3, 0.1, 0.2, 0.3,  0.1, 0.2, 0.3, 0.1, 0,2, 0.3])

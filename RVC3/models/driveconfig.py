@@ -132,5 +132,6 @@ bd.connect(gsum, wprod[0])
 bd.compile()
 
 if __name__ == "__main__":
-    bd.report_summary()
+
+    sim.report(bd)
     out = sim.run(bd, T=10)

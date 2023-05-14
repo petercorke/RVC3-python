@@ -1393,7 +1393,7 @@
             "parameters": [
                 [
                     "nin",
-                    null
+                    1
                 ],
                 [
                     "vector",

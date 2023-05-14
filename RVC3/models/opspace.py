@@ -1,12 +1,11 @@
 #! /usr/bin/env python
 
 """
-Creates Fig 9.25
+Creates Fig 9.25 using pure Python code
 Robotics, Vision & Control for Python, P. Corke, Springer 2023.
 Copyright (c) 2021- Peter Corke
 """
 
-from re import X
 import numpy as np
 from scipy import linalg
 import bdsim
@@ -65,8 +64,8 @@ fstar = bd.CONSTANT(Fstar, name="f*")
 xstar = bd.CONSTANT(Xstar, name="x*")
 xdstar = bd.CONSTANT(np.zeros((6,)), name="xd*")
 
-fprod = bd.PROD(matrix=True, name="fprod")
-pprod = bd.PROD(matrix=True, name="pprod")
+fprod = bd.PROD("**", matrix=True, name="fprod")
+pprod = bd.PROD("**", matrix=True, name="pprod")
 fsum = bd.SUM("+-", name="fsum")
 
 
@@ -110,6 +109,7 @@ xe_scope = bd.SCOPE(vector=6, name="x error")
 fsum_scope = bd.SCOPE(vector=6, name="fsum scope")
 fprod_scope = bd.SCOPE(vector=6, name="fprod scope")
 sum1_scope = bd.SCOPE(vector=6, name="_sum1 scope")
+x_scope = bd.SCOPE(vector=6, name="x scope")
 
 ##  connect the blocks
 
@@ -128,6 +128,7 @@ robot_x.w = fsum + pprod
 Mx[0] = robot_x.q
 bd.connect(Mx, fprod[0], pprod[0])
 ftsensor[0] = robot_x.x
+x_scope[0] = robot_x.x
 
 pos_scope[0] = robot_x.x >> bd.INDEX([0, 1, 2])
 force_scope[0] = ftsensor
@@ -138,8 +139,7 @@ fprod_scope[0] = fprod
 sum1_scope[0] = bd["_sum.1"]
 
 bd.compile()  # check the diagram
-
-sim.report(bd)
+sim.report(bd, sortby="type")
 
 if __name__ == "__main__":
     out = sim.run(

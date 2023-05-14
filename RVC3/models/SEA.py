@@ -83,8 +83,8 @@ def SEA(obstacle_pos=0.8, block=False, graphics=False):
     bd.connect(mux, state_scope)
 
     bd.compile()  # check the diagram
-    bd.report()  # list all blocks and wires
 
+    sim.report(bd)
     out = sim.run(bd, 5, dt=5e-3, watch=[limit, spring_force])
     # out = vloop.run(2, checkstep=1e-6)  # simulate for 5s
     # # vloop.dotfile('bd1.dot')  # output a graphviz dot file

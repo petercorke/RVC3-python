@@ -26,7 +26,8 @@ bd.connect(torque, robot)
 bd.connect(robot[0], plot)
 
 bd.compile()  # check the diagram
-bd.report()  # list all blocks and wires
 
 if __name__ == "__main__":
+    sim.report(bd)
+
     out = sim.run(bd, 5)  # simulate for 5s

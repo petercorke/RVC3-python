@@ -69,6 +69,6 @@ bd.connect(delta, norm)
 bd.connect(norm, scope_norm)
 
 bd.compile()
-bd.report_summary()
 
+sim.report(bd)
 out = sim.run(bd, 5, minstepsize=1e-6)  # simulate for 5s

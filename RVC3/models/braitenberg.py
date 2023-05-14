@@ -72,6 +72,5 @@ bd.connect(Ks, bike.gamma)
 bd.compile()
 
 if __name__ == "__main__":
-    bd.report()
-
+    sim.report(bd)
     out = sim.run(bd, T=125, dt=0.2)

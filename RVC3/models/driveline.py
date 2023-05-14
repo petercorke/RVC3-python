@@ -66,5 +66,5 @@ bd.connect(theta, hscope)
 bd.compile()
 
 if __name__ == "__main__":
-    bd.report_summary()
+    sim.report(bd)
     out = sim.run(bd, T=20)

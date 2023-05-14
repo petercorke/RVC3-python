@@ -34,14 +34,6 @@ bd.connect(qdot, integrator)
 bd.connect(integrator, jacobian, robot)
 
 bd.compile()  # check the diagram
-bd.report_summary()  # list all blocks and wires
+
+sim.report(bd)
 out = sim.run(bd, 2, minstepsize=1e-6)  # simulate for 5s
-# bd.dotfile('bd1.dot')  # output a graphviz dot file
-# bd.savefig('pdf')      # save all figures as pdf
-
-"""
-[A] -> bd.JACOBIAN(puma)          -> bd.PRODUCT('**') -> bd.DINTEGRATOR(x0=[0, pi/4, pi, 0, pi/4, 0]) -> bd.ROBOTPLOT(puma, backend='swift')
-bd.CONSTANT([0, 0.5, 0, 0, 0, 0]) -> 
-                                                                                                        -> [A]
-
-"""

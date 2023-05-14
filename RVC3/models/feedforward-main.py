@@ -23,5 +23,10 @@ bd = bdload(bd, model, globalvars=globals())
 bd.compile()
 
 sim.report(bd, "summary")
-out = sim.run(bd, 5)
+out = sim.run(bd, 5, watch=["Joint space trajectory[0]"])
 print(out)
+
+import matplotlib.pyplot as plt
+
+plt.plot(out.t, out.x[:, 1], out.t, out.y0[:, 1])
+plt.show(block=True)
