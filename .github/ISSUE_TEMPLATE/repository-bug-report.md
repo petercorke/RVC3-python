@@ -1,13 +1,13 @@
 ---
 name: Repository bug report
-about: Create a report to help us improve this repository
+about: Create a report to help us improve the `RVC3-python` repository
 title: ''
 labels: bug
 assignees: petercorke
 
 ---
 
-**This report is for bugs with the repo: missing files, incorrect documentation, broken links etc.**
+**This report is for bugs with the `RVC3-python` repo: missing files, incorrect documentation, broken links etc.**
 
 **Reports related to specific software components used in the RVC3 book should be reported on the issues pages of those components, listed below.  They will not be actioned if posted here.**
 
