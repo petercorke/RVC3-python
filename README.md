@@ -12,11 +12,12 @@
 
 This book depends on the following open-source Python packages
 
-<a href="https://github.com/petercorke/robotics-toolbox-python"><img alt="Robotics Toolbox for Python" src="https://github.com/petercorke/robotics-toolbox-python/raw/master/docs/figs/RobToolBox_RoundLogoB.png" width="150"></a>
+<a href="https://github.com/petercorke/robotics-toolbox-python"><img alt="Robotics Toolbox for Python" src="https://github.com/petercorke/robotics-toolbox-python/raw/master/docs/figs/RobToolBox_RoundLogoB.png" width="130"></a>
 <a href="https://github.com/petercorke/machinevision-toolbox-python"><img alt="Machine Vision Toolbox for Python" src="https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/VisionToolboxLogo_NoBackgnd@2x.png" width="150"></a>
+<a href="https://github.com/petercorke/spatialmath-python"><img alt="Spatial Maths Toolbox for Python" src="https://github.com/petercorke/spatialmath-python/raw/master/docs/figs/CartesianSnakes_LogoW.png" width="130"></a>
 <a href="https://github.com/petercorke/bdsim"><img alt="Block diagram simulation for Python" src="https://github.com/petercorke/bdsim/raw/master/figs/BDSimLogo_NoBackgnd@2x.png" width="250"></a>
 
-which in turn have dependencies on other packages created by the author and
+**Robotics Toolbox for Python**, **Machine Vision Toolbox for Python**, **Spatial Maths Toolbox for Python**, **Block Diagram Simulation for Python**.  These in turn have dependencies on other packages created by the author and
 third parties.
 
 ## Installing the package
@@ -77,29 +78,35 @@ $ rvctool
 |  _ < (_) | |_) | (_) | |_| | (__\__ \_    \ V / | \__ \ | (_) | | | | | (_>  < | |__| (_) | | | | |_| | | (_) | |  ___) |
 |_| \_\___/|_.__/ \___/ \__|_|\___|___( )    \_/  |_|___/_|\___/|_| |_|  \___/\/  \____\___/|_| |_|\__|_|  \___/|_| |____/ 
                                       |/                                                                                   
-for Python (RTB==1.0.2, MVTB==0.9.1, SMTB==1.0.0)
+                                                                                 
+for Python (RTB==1.1.0, MVTB==0.9.5, SG==1.1.7, SMTB==1.1.7, NumPy==1.24.2, SciPy==1.10.1, Matplotlib==3.7.1)
 
-import numpy as np
-from scipy import linalg, optimize
-import matplotlib.pyplot as plt
-from math import pi
-from spatialmath import *
-from spatialmath.base import *
-from roboticstoolbox import *
-from machinevisiontoolbox import *
-import machinevisiontoolbox.base as mvbase
+    import math
+    import numpy as np
+    from scipy import linalg, optimize
+    import matplotlib.pyplot as plt
+    from spatialmath import *
+    from spatialmath.base import *
+    from spatialmath.base import sym
+    from spatialgeometry import *
+    from roboticstoolbox import *
+    from machinevisiontoolbox import *
+    import machinevisiontoolbox.base as mvb
+    
+    # useful variables
+    from math import pi
+    puma = models.DH.Puma560()
+    panda = models.DH.Panda()
 
-func/object?       - show brief help
-help(func/object)  - show detailed help
-func/object??      - show source code
-
+    func/object?       - show brief help
+    help(func/object)  - show detailed help
+    func/object??      - show source code
 
 Results of assignments will be displayed, use trailing ; to suppress
-
- 
-Python 3.8.5 (default, Sep  4 2020, 02:22:02) 
+    
+Python 3.10.9 | packaged by conda-forge | (main, Feb  2 2023, 20:24:27) [Clang 14.0.6 ]
 Type 'copyright', 'credits' or 'license' for more information
-IPython 8.0.1 -- An enhanced Interactive Python. Type '?' for help.
+IPython 8.11.0 -- An enhanced Interactive Python. Type '?' for help.
 
 
 >>> 
@@ -184,13 +191,57 @@ not considered best Python practice.  It is very convenient for interactive
 experimentation, but in your own code you can handle the imports as you see
 fit.
 
+### Cutting and pasting
+
+IPython is very forgiving when it comes to cutting and pasting in blocks of Python
+code.  It will strip off the `>>>` prompt character and ignore indentation.  The normal
+python REPL is not so forgiving.  IPython also allows maintains a command history and
+allows command editing.
+### Simple scripting
+You can write very simple scripts, for example `test.py` is
+
+```python
+T = puma.fkine(puma.qn)
+sol = puma.ikine_LM(T)
+sol.q
+puma.plot(sol.q);
+```
+
+then 
+
+```shell
+$ rvctool test.py
+   0         0         1         0.5963    
+   0         1         0        -0.1501    
+  -1         0         0         0.6575    
+   0         0         0         1         
+
+IKSolution(q=array([7.235e-08,  -0.8335,  0.09396,    3.142,   0.8312,   -3.142]), success=True, iterations=15, searches=1, residual=1.406125546650288e-07, reason='Success')
+array([7.235e-08,  -0.8335,  0.09396,    3.142,   0.8312,   -3.142])
+PyPlot3D backend, t = 0.05, scene:
+  robot: Text(0.0, 0.0, 'Puma 560')
+>>>
+```
+and you are dropped into an IPython session after the script has run.
+
+## Using Jupyter and Colab
+
+Graphics and animations are problematic in these environments, some things work
+well, some don't.  As much as possible I've tweaked the Jupyter notebooks to work
+as best they can in these environments.
+
+For local use the [Jupyter plugin for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) is pretty decent.  Colab suffers
+from old versions of major packages (though they are getting better at keeping up to date)
+and animations can suffer from slow update over the network.
 ## Other command line tools
 
-This package provides additional command line tools including:
+Additional command line tools available (from the Robotics Toolbox) include:
 - `eigdemo`, animation showing linear transformation of a rotating unit vector
   which demonstrates eigenvalues and eigenvectors.
-- `tripleangledemo`, experiment with various triple-angle sequences.
-- `twistdemo`, experiment with 3D twists.
+- `tripleangledemo`, Swift visualization that lets you experiment with various triple-angle sequences.
+- `twistdemo`, Swift visualization that lets you experiment with 3D twists. The screw axis is the blue rod and you can
+   position and orient it using the sliders, and adjust its pitch. Then apply a rotation
+   about the screw using the bottom slider.
 # Block diagram models
 
 <a href="https://github.com/petercorke/bdsim"><img
