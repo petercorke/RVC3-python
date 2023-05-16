@@ -7,10 +7,29 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rvc3python.svg)
 [![PyPI - Downloads](https://img.shields.io/pypi/dw/rvc3python)](https://pypistats.org/packages/rvc3python)
 
-
+<table style="border:0px">
+<tr style="border:0px">
+<td style="border:0px">
 <img src="https://github.com/petercorke/RVC3-python/raw/main/doc/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="300">
+</td>
+<td style="border:0px">
+Welcome to the online hub for the book:
+<ul type="none">
+<li><b>Robotics, Vision & Control</b>: fundamental algorithms in Python (3rd edition) 
+<li>Peter Corke, published by Springer-Nature 2023.</li>
+<li><b>ISBN</b> 978-3-031-06468-5 (hardcopy), 978-3-031-06469-2 (eBook)</li>
+<li><b>DOI</b> <a href="https://doi.org/10.1007/978-3-031-06469-2">10.1007/978-3-031-06469-2</a></li>
+</ul>
+<br><br>
+<p>Report an issue with the book or its supporting code <a href="https://github.com/petercorke/RVC3-python/issues/new/choose">here</a>.</p>
 
-This book depends on the following open-source Python packages
+<p>Knwon errata for the book can be viewed <a href="https://github.com/petercorke/RVC3-python/wiki/Errata">here</a>.</p>
+</td>
+</tr>
+</table>
+
+
+This book uses many examples based on the following open-source Python packages
 
 <a href="https://github.com/petercorke/robotics-toolbox-python"><img alt="Robotics Toolbox for Python" src="https://github.com/petercorke/robotics-toolbox-python/raw/master/docs/figs/RobToolBox_RoundLogoB.png" width="130"></a>
 <a href="https://github.com/petercorke/machinevision-toolbox-python"><img alt="Machine Vision Toolbox for Python" src="https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/VisionToolboxLogo_NoBackgnd@2x.png" width="150"></a>
@@ -22,7 +41,7 @@ third parties.
 
 ## Installing the package
 
-This package provides a simple one-step installation of the required Toolboxes
+This package provides a simple one-step installation of *all* the required Toolboxes
 ```shell
 pip install rvc3python
 ```
@@ -289,7 +308,7 @@ This GitHub repo provides additional resources for readers including:
 - All example scripts, see the [`examples`](examples) folder.
 - To run the visual odometry example in Sect. 14.8.3 you need to download two image sequence, each over 100MB, [see the instructions here](https://github.com/petercorke/machinevision-toolbox-python/blob/master/mvtb-data/README.md#install-big-image-files). 
 
-To get this material you must clone the repo
+To get that material you must clone the repo
 ```shell
 git clone https://github.com/petercorke/RVC3-python.git
 ```

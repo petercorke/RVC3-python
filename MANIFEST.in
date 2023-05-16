@@ -1,0 +1,17 @@
+
+include RVC3/*/*/*
+include *.ipynb
+include RVC3/models/*.bd
+exclude 3dfigures/*
+exclude 3ddisplay/*
+exclude pointclouds/*
+
+global-exclude *.tif
+global-exclude *.jpg
+global-exclude *.pdf
+global-exclude *.pyc
+global-exclude *.py.old
+global-exclude *.mp4
+global-exclude *.png
+global-exclude .DS_Store
+global-exclude __pycache__
