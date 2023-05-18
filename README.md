@@ -23,7 +23,7 @@ Welcome to the online hub for the book:
 <br><br>
 <p>Report an issue with the book or its supporting code <a href="https://github.com/petercorke/RVC3-python/issues/new/choose">here</a>.</p>
 
-<p>Knwon errata for the book can be viewed <a href="https://github.com/petercorke/RVC3-python/wiki/Errata">here</a>.</p>
+<p>Known errata for the book can be viewed <a href="https://github.com/petercorke/RVC3-python/wiki/Errata">here</a>.</p>
 </td>
 </tr>
 </table>
