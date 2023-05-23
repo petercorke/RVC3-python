@@ -1,6 +1,6 @@
 ---
 name: Errata
-about: 'Report errors in the book: Robotics, Vision & Control 3e, in MATLAB'
+about: 'Report errors in the book: Robotics, Vision & Control 3e, in Python'
 title: ''
 labels: errata
 assignees: petercorke
