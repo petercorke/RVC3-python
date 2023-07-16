@@ -243,6 +243,10 @@ PyPlot3D backend, t = 0.05, scene:
 ```
 and you are dropped into an IPython session after the script has run.
 
+## Issues running on Apple Silicon
+
+Check out the [wiki page](https://github.com/petercorke/RVC3-python/wiki/Running-on-Apple-Silicon).
+
 ## Using Jupyter and Colab
 
 Graphics and animations are problematic in these environments, some things work
