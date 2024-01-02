@@ -83,7 +83,7 @@ pip install rvc3python[pytorch]
 ```
 or
 ```shell
-conda install rvc3python[pytorch]
+conda install rvc3python
 ```
 ## Using the Toolboxes
 
@@ -214,7 +214,7 @@ fit.
 
 IPython is very forgiving when it comes to cutting and pasting in blocks of Python
 code.  It will strip off the `>>>` prompt character and ignore indentation.  The normal
-python REPL is not so forgiving.  IPython also allows maintains a command history and
+python REPL is not so forgiving.  IPython also maintains a command history and
 allows command editing.
 ### Simple scripting
 You can write very simple scripts, for example `test.py` is
