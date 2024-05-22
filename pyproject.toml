@@ -1,9 +1,7 @@
 [project]
 name = "rvc3python"
-version = "0.9.0"
-authors = [
-  { name="Peter Corke", email="rvc@petercorke.com" },
-]
+version = "0.9.1"
+authors = [{ name = "Peter Corke", email = "rvc@petercorke.com" }]
 description = "Support for book: Robotics, Vision & Control 3 in Python"
 readme = "README.md"
 requires-python = ">=3.7"
@@ -17,27 +15,68 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-
+    "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 keywords = [
-    "robotics", "robot", "manipulator", "robot arm", 
-    "mobile robot", "mobile manipulation",
-    "path planning", "SLAM", "pose graph", 
-    "Dubins", "Reeds-Shepp", "lattice planner", "RRT", "PRM",
-    "rapidly exploring random tree", "probabilistic roadmap planner",
-    "force control", "kinematics", "Jacobian", "position control", "velocity control",
-    "spatial math", 
-    "SO(2)", "SE(2)", "SO(3)", "SE(3)",
-    "twist", "product of exponential", "translation", "orientation",
-    "angle-axis", "Lie group", "skew symmetric matrix",
-    "pose", "translation", "rotation matrix", "rigid body transform", "homogeneous transformation",
-    "Euler angles", "roll-pitch-yaw angles", "quaternion", "unit-quaternion",
-    "computer vision", "machine vision", "robotic vision",
-    "color space", "blackbody", "image segmentation", "blobs",
-    "Hough transform", "k-means", "homography", "camera calibration", "visual odometry",
-    "bundle adjustment",  "stereo vision", "rectification",
+    "robotics",
+    "robot",
+    "manipulator",
+    "robot arm",
+    "mobile robot",
+    "mobile manipulation",
+    "path planning",
+    "SLAM",
+    "pose graph",
+    "Dubins",
+    "Reeds-Shepp",
+    "lattice planner",
+    "RRT",
+    "PRM",
+    "rapidly exploring random tree",
+    "probabilistic roadmap planner",
+    "force control",
+    "kinematics",
+    "Jacobian",
+    "position control",
+    "velocity control",
+    "spatial math",
+    "SO(2)",
+    "SE(2)",
+    "SO(3)",
+    "SE(3)",
+    "twist",
+    "product of exponential",
+    "translation",
+    "orientation",
+    "angle-axis",
+    "Lie group",
+    "skew symmetric matrix",
+    "pose",
+    "translation",
+    "rotation matrix",
+    "rigid body transform",
+    "homogeneous transformation",
+    "Euler angles",
+    "roll-pitch-yaw angles",
+    "quaternion",
+    "unit-quaternion",
+    "computer vision",
+    "machine vision",
+    "robotic vision",
+    "color space",
+    "blackbody",
+    "image segmentation",
+    "blobs",
+    "Hough transform",
+    "k-means",
+    "homography",
+    "camera calibration",
+    "visual odometry",
+    "bundle adjustment",
+    "stereo vision",
+    "rectification",
 ]
 
 dependencies = [
@@ -57,10 +96,7 @@ dependencies = [
 
 [project.optional-dependencies]
 
-pytorch = [
-    "torch",
-    "torchvision",
-]
+pytorch = ["torch", "torchvision"]
 
 [project.scripts]
 
@@ -80,12 +116,5 @@ build-backend = "setuptools.build_meta"
 models = ["*.bd"]
 
 [tool.setuptools]
- 
-packages = [
-    "RVC3",
-    "RVC3.examples",
-    "RVC3.tools",
-    "RVC3.bin",
-    "RVC3.models",
-]
 
+packages = ["RVC3", "RVC3.examples", "RVC3.tools", "RVC3.bin", "RVC3.models"]
