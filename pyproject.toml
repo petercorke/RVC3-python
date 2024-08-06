@@ -1,6 +1,6 @@
 [project]
 name = "rvc3python"
-version = "0.9.1"
+version = "0.9.2"
 authors = [{ name = "Peter Corke", email = "rvc@petercorke.com" }]
 description = "Support for book: Robotics, Vision & Control 3 in Python"
 readme = "README.md"
