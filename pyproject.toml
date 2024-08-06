@@ -81,6 +81,7 @@ keywords = [
 
 dependencies = [
     "matplotlib",
+    "numpy < 2",                    # OpenCV and SpatialGeom don't like numpy 2
     "roboticstoolbox-python >= 1",
     "machinevision-toolbox-python",
     "bdsim >= 1.1",
