@@ -1,3 +1,4 @@
+import importlib.metadata
 #!/usr/bin/env python3
 
 # a simple Robotics & Vision Toolbox "shell", runs Python3 and loads
@@ -12,6 +13,7 @@
 #  export RVCTOOL="-n"
 
 # import stuff
+import importlib.metadata
 import os
 from pathlib import Path
 import sys
@@ -183,17 +185,17 @@ for Python"""
 
     versions = []
     if args.robot:
-        versions.append(f"RTB=={version('roboticstoolbox-python')}")
+        versions.append(f"RTB=={importlib.metadata.version('roboticstoolbox-python')}")
     if args.vision:
-        versions.append(f"MVTB=={version('machinevision-toolbox-python')}")
+        versions.append(f"MVTB=={importlib.metadata.version('machinevision-toolbox-python')}")
     try:
-        versions.append(f"SG=={version('spatialmath-python')}")
+        versions.append(f"SG=={importlib.metadata.version('spatialmath-python')}")
     except:
         pass
-    versions.append(f"SMTB=={version('spatialmath-python')}")
-    versions.append(f"NumPy=={version('numpy')}")
-    versions.append(f"SciPy=={version('scipy')}")
-    versions.append(f"Matplotlib=={version('matplotlib')}")
+    versions.append(f"SMTB=={importlib.metadata.version('spatialmath-python')}")
+    versions.append(f"NumPy=={importlib.metadata.version('numpy')}")
+    versions.append(f"SciPy=={importlib.metadata.version('scipy')}")
+    versions.append(f"Matplotlib=={importlib.metadata.version('matplotlib')}")
 
     # create banner
     banner += " (" + ", ".join(versions) + ")"

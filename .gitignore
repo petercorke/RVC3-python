@@ -24,3 +24,4 @@ OLD
 .vscode
 dist
 build
+rvc3python.egg-info/
