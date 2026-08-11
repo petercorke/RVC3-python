@@ -1,0 +1,8 @@
+repos:
+  # Strip notebook outputs and execution counts before every commit, so
+  # diffs stay readable and committed notebooks never carry stale/cached
+  # results. Install once: pip install pre-commit && pre-commit install
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.9.1
+    hooks:
+      - id: nbstripout
