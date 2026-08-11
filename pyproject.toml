@@ -98,6 +98,7 @@ dependencies = [
 [project.optional-dependencies]
 
 pytorch = ["torch", "torchvision"]
+dev = ["pre-commit", "nbstripout"]
 
 [project.scripts]
 
