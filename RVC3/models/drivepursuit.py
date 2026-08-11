@@ -15,7 +15,7 @@ import bdsim
 
 # parameters for the path
 look_ahead = 5
-speed = 1
+speed = 5
 dt = 0.1
 tacc = 1
 x0 = [2, 2, 0]
@@ -32,7 +32,7 @@ bd = sim.blockdiagram()
 
 
 def background_graphics(ax):
-    ax.plot(path[:, 0], path[:, 1], "r", linewidth=3, alpha=0.7)
+    ax.plot(path[:, 0], path[:, 1], "r", linewidth=3, alpha=0.7, zorder=0)
 
 
 def pure_pursuit(cp, R=None, traj=None):
@@ -60,7 +60,7 @@ heading_error = bd.SUM("+-", mode="c", name="herr")
 Kh = bd.GAIN(0.5, name="Kh")
 bike = bd.BICYCLE(x0=x0)
 vplot = bd.VEHICLEPLOT(
-    scale=[0, 80, 0, 80], size=0.7, shape="box", init=background_graphics
+    scale=[0, 80, 0, 80], size=3, shape="car", init=background_graphics
 )  # , movie='rvc4_8.mp4')
 sscope = bd.SCOPE(name="steer angle")
 hscope = bd.SCOPE(name="heading angle")
