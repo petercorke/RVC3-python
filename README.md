@@ -53,6 +53,14 @@ conda install rvc3python
 There are a lot of dependencies and this might take a minute or so.  You now have a very
 powerful computing environment for robotics and computer vision.
 
+To check everything installed and works correctly, run
+```shell
+rvctool --test
+```
+This is a quick, non-interactive check that prints package versions and exercises one
+real code path per toolbox (RTB, MVTB, spatialgeometry, spatialmath, bdsim, and Open3D
+if installed), reporting PASS/FAIL for each rather than just "it imported".
+
 ### Python version
 
 `rvc3python` requires **Python 3.10 or later**.
@@ -129,13 +137,10 @@ for Python (RTB==1.3.1, MVTB==2.3.0, SG==1.3.0, SMTB==1.1.16, NumPy==2.5.2, SciP
     func/object??      - show source code
 
 Results of assignments will be displayed, use trailing ; to suppress
-    
-Python 3.12.8 | packaged by conda-forge
-Type 'copyright', 'credits' or 'license' for more information
-IPython 9.16.1 -- An enhanced Interactive Python. Type '?' for help.
 
+Default numeric formatting: %.3g
 
->>> 
+>>>
 ```
 
 This provides an interactive Python
