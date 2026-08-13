@@ -5,7 +5,7 @@
 
 [![PyPI version](https://badge.fury.io/py/rvc3python.svg)](https://badge.fury.io/py/rvc3python)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rvc3python.svg)
-[![PyPI - Downloads](https://img.shields.io/pypi/dw/rvc3python)](https://pypistats.org/packages/rvc3python)
+[![Downloads](https://static.pepy.tech/badge/rvc3python/month)](https://pepy.tech/projects/rvc3python)
 
 <table style="border:0px">
 <tr style="border:0px">
@@ -32,9 +32,9 @@ Welcome to the online hub for the book:
 This book uses many examples based on the following open-source Python packages
 
 <a href="https://github.com/petercorke/robotics-toolbox-python"><img alt="Robotics Toolbox for Python" src="https://github.com/petercorke/robotics-toolbox-python/raw/master/docs/figs/RobToolBox_RoundLogoB.png" width="130"></a>
-<a href="https://github.com/petercorke/machinevision-toolbox-python"><img alt="Machine Vision Toolbox for Python" src="https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/VisionToolboxLogo_NoBackgnd@2x.png" width="150"></a>
+<a href="https://github.com/petercorke/machinevision-toolbox-python"><img alt="Machine Vision Toolbox for Python" src="https://github.com/petercorke/machinevision-toolbox-python/raw/main/docs/figs/VisionToolboxLogo_NoBackgnd@2x.png" width="150"></a>
 <a href="https://github.com/petercorke/spatialmath-python"><img alt="Spatial Maths Toolbox for Python" src="https://github.com/petercorke/spatialmath-python/raw/master/docs/figs/CartesianSnakes_LogoW.png" width="130"></a>
-<a href="https://github.com/petercorke/bdsim"><img alt="Block diagram simulation for Python" src="https://github.com/petercorke/bdsim/raw/master/figs/BDSimLogo_NoBackgnd@2x.png" width="250"></a>
+<a href="https://github.com/petercorke/bdsim"><img alt="Block diagram simulation for Python" src="https://github.com/petercorke/bdsim/raw/main/docs/figs/bdsim_logo.png" width="250"></a>
 
 **Robotics Toolbox for Python**, **Machine Vision Toolbox for Python**, **Spatial Maths Toolbox for Python**, **Block Diagram Simulation for Python**.  These in turn have dependencies on other packages created by the author and
 third parties.
@@ -55,12 +55,19 @@ powerful computing environment for robotics and computer vision.
 
 ### Python version
 
-Given the rapid rate of language additions, particularly around type hinting, use at
-least Python 3.8.  Python 3.7 goes end of life in June 2023.
+`rvc3python` requires **Python 3.10 or later**.
 
-Not all package dependencies will work with the latest release of Python.  In particular, check:
-* [PyTorch](https://pypi.org/project/torch/) used for segmentation examples in Chapter 12
-* [Open3D](https://pypi.org/project/open3d), used for point cloud examples in Chapter 14.
+A handful of book examples need extra, optional packages that aren't installed by
+default — each has its own platform or Python-version limits, worth knowing about
+before you hit them as a surprise rather than as a bug:
+* [PyTorch](https://pypi.org/project/torch/) (`pip install rvc3python[pytorch]`) —
+  used for the segmentation and object-detection examples in Chapter 12. Check
+  current platform support before installing.
+* [Open3D](https://pypi.org/project/open3d) (`pip install machinevision-toolbox-python[open3d]`)
+  — used for the point cloud examples in Chapter 14. Doesn't yet ship wheels for
+  Python 3.13+.
+* [coal](https://pypi.org/project/coal) (`pip install roboticstoolbox-python[collision]`)
+  — used for the collision-checking examples in Chapter 7. Not available on Windows.
 
 ### Installing into a Conda environment
 
@@ -69,14 +76,14 @@ and its dependencies separated from your other Python code and projects.  If you
 never used virtual environments before this might be a good time to start, and it
 is really easy [using Conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html):
 ```shell
-conda create -n RVC3 python=3.10
+conda create -n RVC3 python=3.12
 conda activate RVC3
 pip install rvc3python
 ```
 
 ### Installing deep learning tools
 
-Chapter 11 has some deep learning examples based on PyTorch.  If you don't have 
+Chapter 12 has some deep learning examples based on PyTorch.  If you don't have 
 PyTorch installed you can use the `pytorch` install option
 ```shell
 pip install rvc3python[pytorch]
@@ -98,7 +105,7 @@ $ rvctool
 |_| \_\___/|_.__/ \___/ \__|_|\___|___( )    \_/  |_|___/_|\___/|_| |_|  \___/\/  \____\___/|_| |_|\__|_|  \___/|_| |____/ 
                                       |/                                                                                   
                                                                                  
-for Python (RTB==1.1.0, MVTB==0.9.5, SG==1.1.7, SMTB==1.1.7, NumPy==1.24.2, SciPy==1.10.1, Matplotlib==3.7.1)
+for Python (RTB==1.3.1, MVTB==2.3.0, SG==1.3.0, SMTB==1.1.16, NumPy==2.5.2, SciPy==1.18.0, Matplotlib==3.11.1)
 
     import math
     import numpy as np
@@ -123,9 +130,9 @@ for Python (RTB==1.1.0, MVTB==0.9.5, SG==1.1.7, SMTB==1.1.7, NumPy==1.24.2, SciP
 
 Results of assignments will be displayed, use trailing ; to suppress
     
-Python 3.10.9 | packaged by conda-forge | (main, Feb  2 2023, 20:24:27) [Clang 14.0.6 ]
+Python 3.12.8 | packaged by conda-forge
 Type 'copyright', 'credits' or 'license' for more information
-IPython 8.11.0 -- An enhanced Interactive Python. Type '?' for help.
+IPython 9.16.1 -- An enhanced Interactive Python. Type '?' for help.
 
 
 >>> 
@@ -179,7 +186,7 @@ and display it alongside the original
 >>> mona = Image.Read("monalisa.png")
 >>> Image.Hstack([mona, mona.smooth(sigma=5)]).disp()
 ```
-![](https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/mona%2Bsmooth.png)
+![](https://github.com/petercorke/machinevision-toolbox-python/raw/main/docs/figs/mona%2Bsmooth.png)
 
 or load two images of the same scene, compute SIFT features and display putative
 matches
@@ -189,7 +196,7 @@ matches
 >>> matches = sf1.match(sf2)
 >>> matches.subset(100).plot("w")
 ```
-![](https://github.com/petercorke/machinevision-toolbox-python/raw/master/figs/matching.png)
+![](https://github.com/petercorke/machinevision-toolbox-python/raw/main/docs/figs/matching.png)
 
 `rvctool` is a wrapper around
 [IPython](https://ipython.readthedocs.io/en/stable) where:
@@ -243,10 +250,6 @@ PyPlot3D backend, t = 0.05, scene:
 ```
 and you are dropped into an IPython session after the script has run.
 
-## Issues running on Apple Silicon
-
-Check out the [wiki page](https://github.com/petercorke/RVC3-python/wiki/Running-on-Apple-Silicon).
-
 ## Using Jupyter and Colab
 
 Graphics and animations are problematic in these environments, some things work
@@ -268,19 +271,17 @@ Additional command line tools available (from the Robotics Toolbox) include:
 # Block diagram models
 
 <a href="https://github.com/petercorke/bdsim"><img
-src="https://github.com/petercorke/bdsim/raw/master/figs/BDSimLogo_NoBackgnd%402x.png"
+src="https://github.com/petercorke/bdsim/raw/main/docs/figs/bdsim_logo.png"
 alt="bdsim logo" width="300"></a>
 
 Block diagram models are key to the pedagogy of the RVC3 book and 25 models are
 included. To simulate these models we use the Python package
 [bdsim](https://github.com/petercorke/bdsim) which can run models:
 
-- written in Python using
-  [bdsim](https://github.com/petercorke/bdsim#getting-started) blocks and
-  wiring.
-- created graphically using
-  [bdedit](https://github.com/petercorke/bdsim#bdedit-the-graphical-editing-tool)
-  and saved as a `.bd` (JSON format) file.
+- written in Python using [bdsim](https://github.com/petercorke/bdsim) blocks
+  and wiring.
+- created graphically using `bdedit`, bdsim's graphical editor, and saved as
+  a `.bd` (JSON format) file.
 
 The models are included in the `RVC3` package when it is installed and `rvctool`
 adds them to the module search path.  This means you can invoke them from
