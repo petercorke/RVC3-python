@@ -130,10 +130,6 @@ for Python (RTB==1.1.0, MVTB==0.9.5, SG==1.1.7, SMTB==1.1.7, NumPy==1.24.2, SciP
     func/object??      - show source code
 
 Results of assignments will be displayed, use trailing ; to suppress
-    
-Python 3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:29:01) [Clang 20.1.8 ]
-Type 'copyright', 'credits' or 'license' for more information
-IPython 9.16.1 -- An enhanced Interactive Python. Type '?' for help.
 
 Default numeric formatting: %.3g
 
