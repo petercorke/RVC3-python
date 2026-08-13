@@ -79,14 +79,13 @@ keywords = [
 
 dependencies = [
     "matplotlib",
-    "numpy >= 2",
+    "numpy > 1",
     "roboticstoolbox-python >= 1",
     "machinevision-toolbox-python",
-    "bdsim >= 1.1",
+    "bdsim",
     "IPython",
     "ipykernel",
     "sympy",
-    "pybullet",
 ]
 
 [project.urls]
