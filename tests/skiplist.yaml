@@ -1,0 +1,18 @@
+# Cells that structurally cannot run in an automated/headless environment,
+# no matter how correct the code is -- missing hardware, needs a paid/quota'd
+# API key, requires real user interaction, etc.
+#
+# Do NOT add entries here for things that are merely "not installed right
+# now but could be" (torch, pytesseract, open3d, ...) -- those should fail
+# for real and show up in the report, since installing the missing package
+# is a legitimate fix. This list is only for things no environment change
+# can fix.
+#
+# Match is a plain substring test against the cell's joined source -- keep
+# patterns specific enough not to accidentally match unrelated cells.
+
+chap11.ipynb:
+  - match: "VideoCamera(0)"
+    reason: "no physical webcam available in this environment"
+  - match: "world.grab("
+    reason: "Google Maps Static API call, needs a key/quota"
