@@ -120,6 +120,49 @@ facecolors=spherical.colorize().A, cstride=1, rstride=1
 facecolors=spherical.colorize().array, cstride=1, rstride=1
 ```
 
+## §13.6.1 — `f=3045` is a book typo for `f=4.25e-3`
+
+**Notebook:** `chap13.ipynb`
+
+**Reason:** Not a toolbox API change -- a transcription error. `rho=1.4e-6`
+is in metres, so `f` must be too; `f=3045` (3045 metres) makes `fx = f/rho`
+absurdly large (~2.18e9 pixels), which makes every `cv2.solvePnP` call
+inside `scene.fiducial()` silently fail. The figure-generation script that
+produced the book's own printed figure (`figures/code/chapter13/
+fig13_31.py`) uses the correct value, `f=4.25e-3`.
+
+**As printed:**
+```python
+camera = CentralCamera(f=3045, imagesize=scene.shape, 
+                       pp=(2016, 1512), rho=1.4e-6);
+```
+
+**Current toolbox syntax:**
+```python
+camera = CentralCamera(f=4.25e-3, imagesize=scene.shape, 
+                       pp=(2016, 1512), rho=1.4e-6);
+```
+
+## §13.4.1 — `\phi`/`\theta` need raw strings
+
+**Notebook:** `chap13.ipynb`
+
+**Reason:** Not a toolbox API change -- a plain (non-raw) Python string
+containing `\p` and `\t` isn't a recognized escape sequence, so this raises
+`SyntaxWarning: invalid escape sequence '\p'` (and would for `\t` too, but
+`\t` happens to be a legitimate escape -- tab -- so only `\phi` warns; both
+should be raw strings for correctness).
+
+**As printed:**
+```python
+spherical.disp(axes=("$\phi$", "$\theta$"));
+```
+
+**Current toolbox syntax:**
+```python
+spherical.disp(axes=(r"$\phi$", r"$\theta$"));
+```
+
 ## §11.2 — `Histogram.plot()`'s `'ncdf'` type renamed to `'cdf'`
 
 **Notebook:** `chap11.ipynb`
