@@ -113,7 +113,8 @@ build-backend = "setuptools.build_meta"
 # where = ["."]
 
 [tool.setuptools.package-data]
-models = ["*.bd"]
+"RVC3.models" = ["*.bd"]
+"RVC3.examples" = ["hershey/*"]
 
 [tool.setuptools]
 
