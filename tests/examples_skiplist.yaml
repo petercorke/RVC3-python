@@ -1,0 +1,25 @@
+# Per-script overrides for tests/test_examples.py, applied by tests/run_example.py.
+#
+# skip: true         -- don't run the script at all, report as skipped with `reason`
+# patches: [...]      -- literal-text substitutions applied to the script's source
+#                        before exec, e.g. to cap a hardcoded animation loop so it
+#                        finishes quickly under test. `match` must appear verbatim
+#                        in the script or the patch is a no-op (with a warning).
+#
+# Global to every script, applied by run_example.py itself (not listed per-script
+# here): MPLBACKEND=Agg, and matplotlib.pyplot.pause() replaced with a no-op, since
+# it sleeps in real wall-clock time even under a headless backend.
+
+visodom.py:
+  skip: true
+  reason: >-
+    requires the manually-downloaded .enpeda stereo dataset
+    (bridge-l.zip / bridge-r.zip), not bundled with this repo
+
+walking.py:
+  patches:
+    - match: "for i in range(4000):"
+      replace: "for i in range(50):"
+      reason: >-
+        cap the gait animation loop to keep the smoke test fast;
+        the full demo walks for 4000 steps
