@@ -466,3 +466,30 @@ K = Image.Constant(21, 21, value=1/21**2)
 canvas = Image.Zeros(size=(1000, 1000), dtype="uint8")
 K = Image.Constant(value=1/21**2, size=(21, 21))
 ```
+
+## §7.1.4 — `ERobot.URDF_read()` removed; use the module-level `URDF_read()` with a bare robot name
+
+**Notebook:** `chap7.ipynb`
+
+**Reason:** RTB's June 2026 xacro/URDF rework removed `URDF_read()` as a
+static method on `Robot`/`ERobot` entirely (no deprecation shim -- this
+was an architectural change, not a rename) and replaced it with a
+module-level function in `roboticstoolbox.models.URDF.URDFRobot`. The
+loading mechanism changed too: RTB no longer bundles raw xacro package
+trees like `ur_description/` directly, so a full relative xacro path no
+longer resolves. Bare robot names (`"ur5"`) now resolve via the
+`robot_descriptions` package instead, matching how the packaged
+`models.URDF.UR5()` class itself loads its data.
+
+**As printed:**
+```python
+urdf, *_ = ERobot.URDF_read("ur_description/urdf/ur5_joint_limited_robot.urdf.xacro")
+urdf
+```
+
+**Current toolbox syntax:**
+```python
+from roboticstoolbox.models.URDF.URDFRobot import URDF_read
+urdf, *_ = URDF_read("ur5")
+urdf
+```
