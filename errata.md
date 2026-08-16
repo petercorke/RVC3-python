@@ -198,6 +198,30 @@ composite = composite.paste(tile, topleft, method="blend");
 composite.disp();
 ```
 
+## §14.7 — `PointCloud.Read('data/bunny.ply')` — redundant `data/` prefix
+
+**Notebook:** `chap14.ipynb`
+
+**Reason:** `PointCloud.Read()` already prepends the `mvtbdata` package's
+`data` subfolder internally, so the documented convention is a bare
+filename. The book's own `data/bunny.ply` form (also used in the printed
+figure-generation scripts) double-joined to a nonexistent
+`data/data/bunny.ply`, even though `bunny.ply` is genuinely present in the
+package. Fixed upstream in MVTB (accepts both forms now,
+`fix/pointcloud-read-data-prefix`), but the bare form is the documented
+one, so the notebook uses it directly rather than relying on the
+backward-compat path.
+
+**As printed:**
+```python
+bunny_pcd = PointCloud.Read('data/bunny.ply')
+```
+
+**Current toolbox syntax:**
+```python
+bunny_pcd = PointCloud.Read('bunny.ply')
+```
+
 ## §11.2 — `Histogram.plot()`'s `'ncdf'` type renamed to `'cdf'`
 
 **Notebook:** `chap11.ipynb`
