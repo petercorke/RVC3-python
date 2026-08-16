@@ -16,3 +16,7 @@ chap11.ipynb:
     reason: "no physical webcam available in this environment"
   - match: "world.grab("
     reason: "Google Maps Static API call, needs a key/quota"
+
+chap14.ipynb:
+  - match: 'cv_destroy_window("bridge-l")'
+    reason: "opens a real OpenCV/HighGUI window and blocks on a 'q' keypress to close it -- needs a live display and a real user, by design (same idiom as a plain cv2.waitKey(0) loop)"

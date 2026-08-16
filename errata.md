@@ -163,6 +163,41 @@ spherical.disp(axes=("$\phi$", "$\theta$"));
 spherical.disp(axes=(r"$\phi$", r"$\theta$"));
 ```
 
+## §14.8.2 — `Image.paste()` no longer mutates in place
+
+**Notebook:** `chap14.ipynb`
+
+**Reason:** MVTB's `Image` class moved to an immutability model (commit
+`9afa287a7`, "Image immutability"): `paste()` used to modify the receiver
+in place (when called with its old default `copy=False`) and this is what
+the book's own figure-generation script relied on
+(`figures/code/chapter14/fig14_49.py`, which predates this change). It now
+always returns a new `Image` and leaves the original untouched, matching
+every other `Image` method's current functional style -- the `copy=`
+parameter is retained on the signature but ignored. Calls that don't
+capture the return value are now silent no-ops: `composite` never
+accumulates the pasted tiles, so every downstream cell in this section
+(SIFT on an all-zero canvas, homography estimation, the second `paste()`)
+fails or produces nonsense.
+
+**As printed:**
+```python
+composite.paste(images[0], (0, 0));
+composite.disp();
+...
+composite.paste(tile, topleft, method="blend");
+composite.disp();
+```
+
+**Current toolbox syntax:**
+```python
+composite = composite.paste(images[0], (0, 0));
+composite.disp();
+...
+composite = composite.paste(tile, topleft, method="blend");
+composite.disp();
+```
+
 ## §11.2 — `Histogram.plot()`'s `'ncdf'` type renamed to `'cdf'`
 
 **Notebook:** `chap11.ipynb`
