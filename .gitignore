@@ -24,3 +24,6 @@ OLD
 dist
 build
 tests/reports
+*.egg-info
+.claude
+/UNTRACKED
