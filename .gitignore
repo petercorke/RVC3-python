@@ -24,3 +24,6 @@ OLD
 .vscode
 dist
 build
+*.egg-info
+.claude
+/UNTRACKED
