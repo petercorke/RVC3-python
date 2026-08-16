@@ -71,7 +71,7 @@ goal0 = bd.CONSTANT([xg[0], xg[1], 0], name="goal_pos")
 goalh = bd.CONSTANT(xg[2], name="goal_heading")
 
 # stateful blocks
-bike = bd.BICYCLE(x0=x0, vlim=2, slim=1.3, name="vehicle")
+bike = bd.BICYCLE(x0=x0, speed_max=2, steer_max=1.3, name="vehicle")
 
 # functions
 fabs = bd.FUNCTION(lambda x: abs(x), name="abs")

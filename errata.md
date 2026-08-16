@@ -120,6 +120,224 @@ facecolors=spherical.colorize().A, cstride=1, rstride=1
 facecolors=spherical.colorize().array, cstride=1, rstride=1
 ```
 
+## §13.6.1 — `f=3045` is a book typo for `f=4.25e-3`
+
+**Notebook:** `chap13.ipynb`
+
+**Reason:** Not a toolbox API change -- a transcription error. `rho=1.4e-6`
+is in metres, so `f` must be too; `f=3045` (3045 metres) makes `fx = f/rho`
+absurdly large (~2.18e9 pixels), which makes every `cv2.solvePnP` call
+inside `scene.fiducial()` silently fail. The figure-generation script that
+produced the book's own printed figure (`figures/code/chapter13/
+fig13_31.py`) uses the correct value, `f=4.25e-3`.
+
+**As printed:**
+```python
+camera = CentralCamera(f=3045, imagesize=scene.shape, 
+                       pp=(2016, 1512), rho=1.4e-6);
+```
+
+**Current toolbox syntax:**
+```python
+camera = CentralCamera(f=4.25e-3, imagesize=scene.shape, 
+                       pp=(2016, 1512), rho=1.4e-6);
+```
+
+## §13.4.1 — `\phi`/`\theta` need raw strings
+
+**Notebook:** `chap13.ipynb`
+
+**Reason:** Not a toolbox API change -- a plain (non-raw) Python string
+containing `\p` and `\t` isn't a recognized escape sequence, so this raises
+`SyntaxWarning: invalid escape sequence '\p'` (and would for `\t` too, but
+`\t` happens to be a legitimate escape -- tab -- so only `\phi` warns; both
+should be raw strings for correctness).
+
+**As printed:**
+```python
+spherical.disp(axes=("$\phi$", "$\theta$"));
+```
+
+**Current toolbox syntax:**
+```python
+spherical.disp(axes=(r"$\phi$", r"$\theta$"));
+```
+
+## §14.8.2 — `Image.paste()` no longer mutates in place
+
+**Notebook:** `chap14.ipynb`
+
+**Reason:** MVTB's `Image` class moved to an immutability model (commit
+`9afa287a7`, "Image immutability"): `paste()` used to modify the receiver
+in place (when called with its old default `copy=False`) and this is what
+the book's own figure-generation script relied on
+(`figures/code/chapter14/fig14_49.py`, which predates this change). It now
+always returns a new `Image` and leaves the original untouched, matching
+every other `Image` method's current functional style -- the `copy=`
+parameter is retained on the signature but ignored. Calls that don't
+capture the return value are now silent no-ops: `composite` never
+accumulates the pasted tiles, so every downstream cell in this section
+(SIFT on an all-zero canvas, homography estimation, the second `paste()`)
+fails or produces nonsense.
+
+**As printed:**
+```python
+composite.paste(images[0], (0, 0));
+composite.disp();
+...
+composite.paste(tile, topleft, method="blend");
+composite.disp();
+```
+
+**Current toolbox syntax:**
+```python
+composite = composite.paste(images[0], (0, 0));
+composite.disp();
+...
+composite = composite.paste(tile, topleft, method="blend");
+composite.disp();
+```
+
+## §14.7 — `PointCloud.Read('data/bunny.ply')` — redundant `data/` prefix
+
+**Notebook:** `chap14.ipynb`
+
+**Reason:** `PointCloud.Read()` already prepends the `mvtbdata` package's
+`data` subfolder internally, so the documented convention is a bare
+filename. The book's own `data/bunny.ply` form (also used in the printed
+figure-generation scripts) double-joined to a nonexistent
+`data/data/bunny.ply`, even though `bunny.ply` is genuinely present in the
+package. Fixed upstream in MVTB (accepts both forms now,
+`fix/pointcloud-read-data-prefix`), but the bare form is the documented
+one, so the notebook uses it directly rather than relying on the
+backward-compat path.
+
+**As printed:**
+```python
+bunny_pcd = PointCloud.Read('data/bunny.ply')
+```
+
+**Current toolbox syntax:**
+```python
+bunny_pcd = PointCloud.Read('bunny.ply')
+```
+
+## §11.2 — `Histogram.plot()`'s `'ncdf'` type renamed to `'cdf'`
+
+**Notebook:** `chap11.ipynb`
+
+**Reason:** A real CDF is normalized by definition, so MVTB simplified the
+name -- `'cdf'` is what `'ncdf'` (normalized CDF) always meant. `'ncdf'`
+remains accepted as a deprecated alias.
+
+**As printed:**
+```python
+h.plot("ncdf", color="blue")
+```
+
+**Current toolbox syntax:**
+```python
+h.plot("cdf", color="blue")
+```
+
+## §12.1.1.3, §12.1.4 — torchvision `pretrained=True` replaced by `weights=`
+
+**Notebook:** `chap12.ipynb`
+
+**Reason:** torchvision deprecated the boolean `pretrained=` argument on
+model constructors in 0.13, in favour of an explicit `weights=` enum
+naming the exact pretrained-weights set. Passing `weights=<enum>.DEFAULT`
+would track torchvision's current recommendation, but that can change
+between torchvision releases; using the specific enum member that
+`pretrained=True` used to select keeps the notebook's results reproducible.
+
+**As printed:**
+```python
+model = tv.models.segmentation.fcn_resnet50(pretrained=True).eval();
+```
+```python
+model = tv.models.detection.fasterrcnn_resnet50_fpn(pretrained=True).eval();
+```
+
+**Current toolbox syntax:**
+```python
+model = tv.models.segmentation.fcn_resnet50(
+    weights=tv.models.segmentation.FCN_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
+).eval();
+```
+```python
+model = tv.models.detection.fasterrcnn_resnet50_fpn(
+    weights=tv.models.detection.FasterRCNN_ResNet50_FPN_Weights.COCO_V1
+).eval();
+```
+
+## §12.1.3.3 — `np.linalg.eig()` on a symmetric matrix now returns complex dtype
+
+**Notebook:** `chap12.ipynb`
+
+**Reason:** NumPy 2.0 made `np.linalg.eig()` always return complex-dtype
+arrays, even when every eigenvalue's imaginary part is exactly zero
+(NumPy 1.x returned real dtype in that case). `J` here is a real
+symmetric matrix (built from image moments), so its eigenvalues are
+always real -- `np.linalg.eigh()` is both the numerically correct choice
+for a symmetric matrix and sidesteps this NumPy 2.0 change, since it
+guarantees real output.
+
+**As printed:**
+```python
+lmbda, x = np.linalg.eig(J)
+```
+
+**Current toolbox syntax:**
+```python
+lmbda, x = np.linalg.eigh(J)
+```
+
+## §C.1.4 — `np.linalg.eig()` on a symmetric matrix now returns complex dtype
+
+**Notebook:** `app.ipynb`
+
+**Reason:** Same NumPy 2.0 change as §12.1.3.3: `np.linalg.eig()` now
+always returns complex-dtype arrays, even when every eigenvalue's
+imaginary part is exactly zero (NumPy 1.x returned real dtype in that
+case). `E` here is a real symmetric matrix (the ellipse's defining
+matrix), so its eigenvalues are always real -- `np.linalg.eigh()` is
+both the numerically correct choice for a symmetric matrix and
+sidesteps this NumPy 2.0 change. The complex dtype leaking downstream
+into `v`/`r` is what broke the following cells' `plot_arrow()` (a bare
+`TypeError: ufunc 'hypot' not supported for the input types`) and
+`np.arctan2()` calls.
+
+**As printed:**
+```python
+e, v = np.linalg.eig(E)
+```
+
+**Current toolbox syntax:**
+```python
+e, v = np.linalg.eigh(E)
+```
+
+## §I — `pgraph`'s `UVertex.adjacent()` renamed to `.neighbours()`
+
+**Notebook:** `app.ipynb`
+
+**Reason:** `pgraph` (a dependency of RTB's `BundleAdjust`/pose-graph code)
+renamed this method; `.adjacent()` no longer exists. Both `.neighbours()`
+and `.neighbors()` are defined (not aliases of each other, but identical
+in behaviour) -- used the British spelling for consistency with the rest
+of the book's voice.
+
+**As printed:**
+```python
+g[1].adjacent()
+```
+
+**Current toolbox syntax:**
+```python
+g[1].neighbours()
+```
+
 ## §11.5.2.2 — `Image.rank()` renamed to `Image.rankfilter()`
 
 **Notebook:** `chap11.ipynb`
@@ -210,12 +428,14 @@ porjus= WebCam("http://uk.jokkmokk.jp/photo/nr4/latest.jpg");
 next(porjus).disp();
 ```
 
-## §11.1, §11.2 — `Image.stats()` is now a property, not a method
+## §11.1, §11.2 — `Image.stats()` replaced by `.stats` property + `.printstats()` method
 
 **Notebook:** `chap11.ipynb`
 
-**Reason:** MVTB 2.0.0 changed `stats` from a callable method to a
-dict-valued property. Same change at 4 call sites.
+**Reason:** MVTB 2.0.0 split what used to be a single callable `stats()`
+into two: `.stats`, a dict-valued property (doesn't print), and
+`.printstats()`, a method that prints the same summary the book's
+`stats()` call used to. Same change at 4 call sites.
 
 **As printed:**
 ```python
@@ -224,7 +444,7 @@ street.stats()
 
 **Current toolbox syntax:**
 ```python
-street.stats
+street.printstats()
 ```
 
 ## §11.1.7, §11.5, §14.8.2 — `ImageConstantsMixin` factory methods are keyword-only for size
@@ -245,4 +465,31 @@ K = Image.Constant(21, 21, value=1/21**2)
 ```python
 canvas = Image.Zeros(size=(1000, 1000), dtype="uint8")
 K = Image.Constant(value=1/21**2, size=(21, 21))
+```
+
+## §7.1.4 — `ERobot.URDF_read()` removed; use the module-level `URDF_read()` with a bare robot name
+
+**Notebook:** `chap7.ipynb`
+
+**Reason:** RTB's June 2026 xacro/URDF rework removed `URDF_read()` as a
+static method on `Robot`/`ERobot` entirely (no deprecation shim -- this
+was an architectural change, not a rename) and replaced it with a
+module-level function in `roboticstoolbox.models.URDF.URDFRobot`. The
+loading mechanism changed too: RTB no longer bundles raw xacro package
+trees like `ur_description/` directly, so a full relative xacro path no
+longer resolves. Bare robot names (`"ur5"`) now resolve via the
+`robot_descriptions` package instead, matching how the packaged
+`models.URDF.UR5()` class itself loads its data.
+
+**As printed:**
+```python
+urdf, *_ = ERobot.URDF_read("ur_description/urdf/ur5_joint_limited_robot.urdf.xacro")
+urdf
+```
+
+**Current toolbox syntax:**
+```python
+from roboticstoolbox.models.URDF.URDFRobot import URDF_read
+urdf, *_ = URDF_read("ur5")
+urdf
 ```

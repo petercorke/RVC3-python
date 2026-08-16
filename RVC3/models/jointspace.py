@@ -23,7 +23,7 @@ xyplot = bd.SCOPEXY(name="XZ plane")
 bd.connect(_jtraj.q, fk.q, rplot.q)
 bd.connect(fk.T, _transl.T)
 bd.connect(_transl.x, xyplot[0])
-bd.connect(_translt.z, xyplot[1])
+bd.connect(_transl.z, xyplot[1])
 
 bd.compile()
 

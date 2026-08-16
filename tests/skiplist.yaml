@@ -1,0 +1,57 @@
+# Cells that structurally cannot run in an automated/headless environment,
+# no matter how correct the code is -- missing hardware, needs a paid/quota'd
+# API key, requires real user interaction, etc.
+#
+# Do NOT add entries here for things that are merely "not installed right
+# now but could be" (torch, pytesseract, open3d, ...) -- those should fail
+# for real and show up in the report, since installing the missing package
+# is a legitimate fix. This list is only for things no environment change
+# can fix.
+#
+# Match is a plain substring test against the cell's joined source -- keep
+# patterns specific enough not to accidentally match unrelated cells.
+
+chap11.ipynb:
+  - match: "VideoCamera(0)"
+    reason: "no physical webcam available in this environment"
+  - match: "world.grab("
+    reason: "Google Maps Static API call, needs a key/quota"
+
+chap7.ipynb:
+  # These four all use the "swift" backend (directly, or as the default
+  # backend for URDF-loaded robots) -- it opens a live browser-based 3D
+  # visualizer over a websocket and blocks waiting for a real browser to
+  # connect. Same "requires real user interaction" category as the
+  # cv_destroy_window/PointCloud.disp() entries in chap14.
+  - match: "ur5.plot(ur5.qr)"
+    reason: "swift backend opens a live browser-based 3D visualizer and blocks waiting for a browser connection"
+  - match: "yumi.plot(yumi.q1)"
+    reason: "swift backend opens a live browser-based 3D visualizer and blocks waiting for a browser connection"
+  - match: "pr2.plot(pr2.qz)"
+    reason: "swift backend opens a live browser-based 3D visualizer and blocks waiting for a browser connection"
+  - match: 'env = panda.plot(panda.qr, backend="swift")'
+    reason: "swift backend opens a live browser-based 3D visualizer and blocks waiting for a browser connection"
+  - match: "env.step()"
+    reason: "depends on env from a skipped cell above (same swift live-visualizer reason)"
+
+chap14.ipynb:
+  - match: 'cv_destroy_window("bridge-l")'
+    reason: "opens a real OpenCV/HighGUI window and blocks on a 'q' keypress to close it -- needs a live display and a real user, by design (same idiom as a plain cv2.waitKey(0) loop)"
+  # The six entries below are NOT the "open3d not installed" case the header
+  # comment above warns against skiplisting -- open3d is installed here.
+  # PointCloud.disp() defaults to block=True, which opens Open3D's native
+  # GUI viewer and blocks until a real user closes the window -- same
+  # "requires real user interaction" category as the cv_destroy_window entry
+  # above, just surfaced only once open3d is actually present.
+  - match: "walls_pcd = PointCloud(P)"
+    reason: "PointCloud.disp(block=True) opens Open3D's native GUI viewer and blocks until a real user closes it"
+  - match: "pcd = SE3.Rx(pi) * PointCloud(P, colors=np.array(colors).T)"
+    reason: "PointCloud.disp(block=True) opens Open3D's native GUI viewer and blocks until a real user closes it"
+  - match: "pcd = PointCloud(Z, image=rocks_l, camera=cam, depth_trunc=1.9)"
+    reason: "PointCloud.disp(block=True) opens Open3D's native GUI viewer and blocks until a real user closes it"
+  - match: "bunny_pcd = PointCloud.Read('bunny.ply')"
+    reason: "PointCloud.disp(block=True) opens Open3D's native GUI viewer and blocks until a real user closes it"
+  - match: "plane, plane_pcd, pcd = pcd.segment_plane(distance_threshold=0.05)"
+    reason: "depends on walls_pcd from a skipped cell above (same block=True GUI-viewer reason)"
+  - match: "model = bunny_pcd.downsample_random(0.1, seed=0)"
+    reason: "PointCloud.disp(block=True) opens Open3D's native GUI viewer and blocks until a real user closes it"
