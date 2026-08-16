@@ -1,4 +1,3 @@
-*test*
 *.p
 *.jpg
 *.pdf
@@ -24,6 +23,7 @@ OLD
 .vscode
 dist
 build
+tests/reports
 *.egg-info
 .claude
 /UNTRACKED

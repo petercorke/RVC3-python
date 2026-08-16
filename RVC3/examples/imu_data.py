@@ -20,7 +20,7 @@ from spatialmath import UnitQuaternion
 
 import matplotlib.pyplot as plt
 
-def IMU():
+def tumble():
     # accelerometer
     g0 = unitvec( [0, 0, 9.8] ).T
     gbias = 0.02 * np.r_[2, -2, 2].T  # bias 2% of norm
@@ -30,7 +30,7 @@ def IMU():
     mbias = 0.02 * np.r_[-1, -1, 2]   # bias 2# of norm
 
     # gyro
-    wbias = 0.05 * np.r_[-1, 2, -1] # bias 10% of max
+    wbias = 0.05 * np.r_[-1, 2, -1] # bias 5% of max
 
     ## simulation
 
@@ -53,10 +53,10 @@ def IMU():
     # 1 row per timestep
     t = np.arange(0, 20, dt)
     omega = odeint( lambda w, t:  -np.linalg.inv(J) @ np.cross(w, J @ w),
-        w0, t) 
+        w0, t)
 
     # Solve for simulated sensor readings and true attitude
-    # 1 row per timestep
+    # 1 column per timestep
     am = np.zeros(omega.shape)
     mm = np.zeros(omega.shape)
 
@@ -68,12 +68,11 @@ def IMU():
         mm[k,:] = iq * m0 + mbias  # sensor reading
         truth.append(truth[k] * UnitQuaternion.EulerVec(w * dt))
     del truth[-1]
-    # add bias to measured 
+    # add bias to measured
     wm = omega + wbias
 
-    imu = namedtuple('imu', 't dt gyro accel magno')
-    true = namedtuple('true', 't dt omega orientation g B')
-    return true(t, dt, omega, truth, g0, m0), imu(t, dt, wm, am, mm)
+    data = namedtuple('tumble', 't omega_true attitude_true g B gyro accel magno')
+    return data(t, omega, truth, g0, m0, wm, am, mm)
 
 if __name__ == "__main__":
 
