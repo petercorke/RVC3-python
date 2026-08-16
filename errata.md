@@ -293,6 +293,51 @@ lmbda, x = np.linalg.eig(J)
 lmbda, x = np.linalg.eigh(J)
 ```
 
+## §C.1.4 — `np.linalg.eig()` on a symmetric matrix now returns complex dtype
+
+**Notebook:** `app.ipynb`
+
+**Reason:** Same NumPy 2.0 change as §12.1.3.3: `np.linalg.eig()` now
+always returns complex-dtype arrays, even when every eigenvalue's
+imaginary part is exactly zero (NumPy 1.x returned real dtype in that
+case). `E` here is a real symmetric matrix (the ellipse's defining
+matrix), so its eigenvalues are always real -- `np.linalg.eigh()` is
+both the numerically correct choice for a symmetric matrix and
+sidesteps this NumPy 2.0 change. The complex dtype leaking downstream
+into `v`/`r` is what broke the following cells' `plot_arrow()` (a bare
+`TypeError: ufunc 'hypot' not supported for the input types`) and
+`np.arctan2()` calls.
+
+**As printed:**
+```python
+e, v = np.linalg.eig(E)
+```
+
+**Current toolbox syntax:**
+```python
+e, v = np.linalg.eigh(E)
+```
+
+## §I — `pgraph`'s `UVertex.adjacent()` renamed to `.neighbours()`
+
+**Notebook:** `app.ipynb`
+
+**Reason:** `pgraph` (a dependency of RTB's `BundleAdjust`/pose-graph code)
+renamed this method; `.adjacent()` no longer exists. Both `.neighbours()`
+and `.neighbors()` are defined (not aliases of each other, but identical
+in behaviour) -- used the British spelling for consistency with the rest
+of the book's voice.
+
+**As printed:**
+```python
+g[1].adjacent()
+```
+
+**Current toolbox syntax:**
+```python
+g[1].neighbours()
+```
+
 ## §11.5.2.2 — `Image.rank()` renamed to `Image.rankfilter()`
 
 **Notebook:** `chap11.ipynb`
