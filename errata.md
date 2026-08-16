@@ -138,6 +138,28 @@ h.plot("ncdf", color="blue")
 h.plot("cdf", color="blue")
 ```
 
+## §12.1.3.3 — `np.linalg.eig()` on a symmetric matrix now returns complex dtype
+
+**Notebook:** `chap12.ipynb`
+
+**Reason:** NumPy 2.0 made `np.linalg.eig()` always return complex-dtype
+arrays, even when every eigenvalue's imaginary part is exactly zero
+(NumPy 1.x returned real dtype in that case). `J` here is a real
+symmetric matrix (built from image moments), so its eigenvalues are
+always real -- `np.linalg.eigh()` is both the numerically correct choice
+for a symmetric matrix and sidesteps this NumPy 2.0 change, since it
+guarantees real output.
+
+**As printed:**
+```python
+lmbda, x = np.linalg.eig(J)
+```
+
+**Current toolbox syntax:**
+```python
+lmbda, x = np.linalg.eigh(J)
+```
+
 ## §11.5.2.2 — `Image.rank()` renamed to `Image.rankfilter()`
 
 **Notebook:** `chap11.ipynb`
