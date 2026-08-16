@@ -120,6 +120,24 @@ facecolors=spherical.colorize().A, cstride=1, rstride=1
 facecolors=spherical.colorize().array, cstride=1, rstride=1
 ```
 
+## §11.2 — `Histogram.plot()`'s `'ncdf'` type renamed to `'cdf'`
+
+**Notebook:** `chap11.ipynb`
+
+**Reason:** A real CDF is normalized by definition, so MVTB simplified the
+name -- `'cdf'` is what `'ncdf'` (normalized CDF) always meant. `'ncdf'`
+remains accepted as a deprecated alias.
+
+**As printed:**
+```python
+h.plot("ncdf", color="blue")
+```
+
+**Current toolbox syntax:**
+```python
+h.plot("cdf", color="blue")
+```
+
 ## §11.5.2.2 — `Image.rank()` renamed to `Image.rankfilter()`
 
 **Notebook:** `chap11.ipynb`
@@ -210,12 +228,14 @@ porjus= WebCam("http://uk.jokkmokk.jp/photo/nr4/latest.jpg");
 next(porjus).disp();
 ```
 
-## §11.1, §11.2 — `Image.stats()` is now a property, not a method
+## §11.1, §11.2 — `Image.stats()` replaced by `.stats` property + `.printstats()` method
 
 **Notebook:** `chap11.ipynb`
 
-**Reason:** MVTB 2.0.0 changed `stats` from a callable method to a
-dict-valued property. Same change at 4 call sites.
+**Reason:** MVTB 2.0.0 split what used to be a single callable `stats()`
+into two: `.stats`, a dict-valued property (doesn't print), and
+`.printstats()`, a method that prints the same summary the book's
+`stats()` call used to. Same change at 4 call sites.
 
 **As printed:**
 ```python
@@ -224,7 +244,7 @@ street.stats()
 
 **Current toolbox syntax:**
 ```python
-street.stats
+street.printstats()
 ```
 
 ## §11.1.7, §11.5, §14.8.2 — `ImageConstantsMixin` factory methods are keyword-only for size
