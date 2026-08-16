@@ -138,6 +138,37 @@ h.plot("ncdf", color="blue")
 h.plot("cdf", color="blue")
 ```
 
+## §12.1.1.3, §12.1.4 — torchvision `pretrained=True` replaced by `weights=`
+
+**Notebook:** `chap12.ipynb`
+
+**Reason:** torchvision deprecated the boolean `pretrained=` argument on
+model constructors in 0.13, in favour of an explicit `weights=` enum
+naming the exact pretrained-weights set. Passing `weights=<enum>.DEFAULT`
+would track torchvision's current recommendation, but that can change
+between torchvision releases; using the specific enum member that
+`pretrained=True` used to select keeps the notebook's results reproducible.
+
+**As printed:**
+```python
+model = tv.models.segmentation.fcn_resnet50(pretrained=True).eval();
+```
+```python
+model = tv.models.detection.fasterrcnn_resnet50_fpn(pretrained=True).eval();
+```
+
+**Current toolbox syntax:**
+```python
+model = tv.models.segmentation.fcn_resnet50(
+    weights=tv.models.segmentation.FCN_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
+).eval();
+```
+```python
+model = tv.models.detection.fasterrcnn_resnet50_fpn(
+    weights=tv.models.detection.FasterRCNN_ResNet50_FPN_Weights.COCO_V1
+).eval();
+```
+
 ## §12.1.3.3 — `np.linalg.eig()` on a symmetric matrix now returns complex dtype
 
 **Notebook:** `chap12.ipynb`
