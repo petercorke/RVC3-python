@@ -22,8 +22,8 @@ q0 = [0, pi / 4, pi, 0, pi / 4, 0]
 # define the blocks
 jacobian = bd.JACOBIAN(robot=puma, frame="0", inverse=True, name="Jacobian")
 velocity = bd.CONSTANT([0, 0.05, 0, 0, 0, 0])
-qdot = bd.PROD("**", matrix=True)
-integrator = bd.DINTEGRATOR(clock, x0=q0, name="q")
+qdot = bd.PROD("**")
+integrator = bd.INTEGRATOR_S(clock, x0=q0, name="q")
 robot = bd.ARMPLOT(robot=puma, q0=q0, name="plot")
 # robot = bd.PRINT('{:.3f}')
 
