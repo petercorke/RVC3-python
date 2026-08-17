@@ -2,7 +2,7 @@
 
 from roboticstoolbox import *
 import pyvista as pv
-import pvplus
+from RVC3.tools import pvplus
 
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))
 

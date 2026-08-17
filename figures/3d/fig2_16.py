@@ -3,8 +3,8 @@ import pyvista as pv
 import numpy as np
 from spatialmath import SE3
 from math import pi
-import pvplus
-import rvcprint
+from RVC3.tools import pvplus
+# import rvcprint  -- book-production helper, not needed here
 
 plotter = pv.Plotter(border=False, polygon_smoothing=True, window_size=(2000,1000))
 plotter.set_background('white')

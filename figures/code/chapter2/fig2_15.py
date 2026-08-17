@@ -2,8 +2,8 @@
 import pyvista as pv
 import numpy as np
 from spatialmath import SE3
-import pvplus
-from RVC3.tools import rvcprint
+from RVC3.tools import pvplus
+# from RVC3.tools import rvcprint  -- book-production helper, not needed here
 
 plotter = pv.Plotter(shape=(2,3), border=False, polygon_smoothing=True, window_size=(2000,1000))
 plotter.enable_parallel_projection()
@@ -25,4 +25,4 @@ add_plot(1, 2, SE3().Rz(90, 'deg'))
 plotter.set_background('white')
 # plotter.enable_eye_dome_lighting()  # messes up subplots
 
-plotter.show(screenshot=rvcprint.outfile(format='png'))
+plotter.show()

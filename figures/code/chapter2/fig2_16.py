@@ -3,8 +3,8 @@ import pyvista as pv
 import numpy as np
 from spatialmath import SE3
 from math import pi
-import pvplus
-from RVC3.tools import rvcprint
+from RVC3.tools import pvplus
+# from RVC3.tools import rvcprint  -- book-production helper, not needed here
 
 plotter = pv.Plotter(shape=(2,3), border=False, polygon_smoothing=True, window_size=(2000,1000))
 plotter.set_background('white')
@@ -60,4 +60,4 @@ plotter.add_text('after second rotation', position='lower_edge', color='black')
 
 # plotter.enable_eye_dome_lighting()  # messes up subplots
 
-plotter.show(screenshot=rvcprint.outfile(format='png'))
+plotter.show()

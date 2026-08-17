@@ -5,9 +5,9 @@ import numpy as np
 # from spatialmath import SE3
 from spatialmath import base
 from math import cos, sin, pi
-import pvplus
+from RVC3.tools import pvplus
 import roboticstoolbox as rtb
-from rvcprint import outfile
+# from rvcprint import outfile  -- book-production helper, not needed here
 
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))
 print(pv.__version__)
@@ -43,4 +43,4 @@ plotter.set_background('white')
 
 # plotter.add_axes()
 # plotter.export_obj('exported.obj')
-plotter.show(screenshot=outfile(format='png'))
+plotter.show()
