@@ -514,3 +514,24 @@ argument to process more frames.
 ```python
 %run -m visodom 50
 ```
+
+## §15.2.2 — bdsim clock log field renamed from `.x` to `.X`
+
+**Notebook:** `chap15.ipynb`
+
+**Reason:** bdsim's per-clock logged state array was renamed from a
+lowercase `.x` attribute to `.X`, to match the uppercase convention
+used for state-array fields elsewhere in a run's output struct (eg.
+the top-level `out.x`/`out.xnames` pairing uses lowercase for the
+continuous state but clocked/discrete state blocks use the
+uppercase form).
+
+**As printed:**
+```python
+plt.plot(out.clock0.t, out.clock0.x)
+```
+
+**Current toolbox syntax:**
+```python
+plt.plot(out.clock0.t, out.clock0.X)
+```
