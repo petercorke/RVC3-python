@@ -208,6 +208,7 @@ def main() -> int:
     args = parser.parse_args()
 
     os.environ.setdefault("MPLBACKEND", "Agg")  # never pop real GUI windows during an automated run
+    os.environ.setdefault("BDSIM_NO_GRAPHICS", "1")  # unconditionally disables bdsim animation/graphics/movies
 
     if args.notebooks:
         paths = [Path(p) for p in args.notebooks]
