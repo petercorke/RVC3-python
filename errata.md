@@ -493,3 +493,47 @@ from roboticstoolbox.models.URDF.URDFRobot import URDF_read
 urdf, *_ = URDF_read("ur5")
 urdf
 ```
+
+## §14.8.3 — `visodom.py` limited to 50 frames by default
+
+**Notebook:** `chap14.ipynb`
+
+**Reason:** The bridge dataset has 251 stereo frame pairs; processing all
+of them (ORB matching + bundle adjustment per frame) takes several
+minutes. Added an optional frame-count argument to
+`RVC3/examples/visodom.py` (processes every frame if omitted) and the
+notebook now passes 50 for a much faster run. Increase or drop the
+argument to process more frames.
+
+**As printed:**
+```python
+%run -m visodom
+```
+
+**Current toolbox syntax:**
+```python
+%run -m visodom 50
+```
+
+## §14.8.3 — load `timestamps.dat` via `mvtb_path_to_datafile()`, not `left.open()`
+
+**Notebook:** `chap14.ipynb`
+
+**Reason:** `timestamps.dat` isn't a member of `bridge-l.zip` -- it's a
+separate file bundled in the `mvtb-data` package, at
+`mvtbdata/images/timestamps.dat`. `left.open("timestamps.dat")` only
+appeared to work when that exact filename happened to exist in the
+current working directory (`FileArchive.open()` falls back to a plain
+local file read when the name isn't found inside the archive), which
+isn't portable across working directories. `mvtb_path_to_datafile()`
+resolves the bundled data file's real location directly.
+
+**As printed:**
+```python
+ts = np.loadtxt(left.open("timestamps.dat"));
+```
+
+**Current toolbox syntax:**
+```python
+ts = np.loadtxt(mvtb_path_to_datafile("images", "timestamps.dat"));
+```
