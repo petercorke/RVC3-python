@@ -28,5 +28,5 @@ print(out)
 
 import matplotlib.pyplot as plt
 
-plt.plot(out.t, out.x[:, 1], out.t, out.y0[:, 1])
+plt.plot(out.t, out.x[:, 1], out.t, out.y[:, 1])
 plt.show(block=True)
