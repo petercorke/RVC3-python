@@ -4,7 +4,7 @@ import numpy as np
 from spatialmath import SE3
 from math import cos, sin, pi
 from RVC3.tools import pvplus
-# from RVC3.tools import rvcprint  -- book-production helper, not needed here
+from RVC3.tools import rvcprint
 
 
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000), off_screen=True)
@@ -18,6 +18,6 @@ pvplus.add_frame(plotter, SE3(-.4,1.5,.8) * SE3.OA([0.5,1,.6], [-.3,.7,.7]),
 plotter.set_background('white')
 # plotter.enable_eye_dome_lighting()  # messes up subplots
 
-# filename = rvcprint.outfile(format='png', include=True)  -- book-production helper, not needed here
+filename = rvcprint.outfile(format='png', include=True)
 
-plotter.show()
+plotter.show(screenshot=filename)

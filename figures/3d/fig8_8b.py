@@ -8,7 +8,6 @@ from spatialmath import base
 from math import cos, sin, pi
 from RVC3.tools import pvplus
 import roboticstoolbox as rtb
-# from rvcprint import outfile  -- book-production helper, not needed here
 
 
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))
