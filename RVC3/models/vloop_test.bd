@@ -1,0 +1,625 @@
+{
+    "id": 140192552973888,
+    "created_by": "corkep",
+    "creation_time": 1632727013,
+    "scene_width": 7168.000000000001,
+    "scene_height": 4368.0,
+    "blocks": [
+        {
+            "id": 140588467244768,
+            "block_type": "SUBSYSTEM",
+            "title": "velocity loop",
+            "pos_x": -160.0,
+            "pos_y": -120.0,
+            "width": 200,
+            "height": 150,
+            "flipped": false,
+            "inputsNum": 3,
+            "outputsNum": 4,
+            "inputs": [
+                {
+                    "id": 140588467291760,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140588467322208,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140588467322688,
+                    "index": 2,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140588467291808,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                },
+                {
+                    "id": 140588467322448,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                },
+                {
+                    "id": 140588467322640,
+                    "index": 2,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                },
+                {
+                    "id": 140588473625424,
+                    "index": 3,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "subsys",
+                    null
+                ],
+                [
+                    "nin",
+                    3
+                ],
+                [
+                    "nout",
+                    4
+                ],
+                [
+                    "blockargs",
+                    null
+                ],
+                [
+                    "inport labels",
+                    null
+                ],
+                [
+                    "outport labels",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140588473655152,
+            "block_type": "INTERPOLATE",
+            "title": "velocity profile",
+            "pos_x": -380.0,
+            "pos_y": -120.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 1,
+            "inputs": [
+                {
+                    "id": 140588473655248,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 140588473655200,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "x",
+                    null
+                ],
+                [
+                    "y",
+                    null
+                ],
+                [
+                    "xy",
+                    null
+                ],
+                [
+                    "time",
+                    false
+                ],
+                [
+                    "kind",
+                    "linear"
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140588473690960,
+            "block_type": "SCOPE",
+            "title": "\u03c9",
+            "pos_x": 160.0,
+            "pos_y": -240.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 2,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140588473691056,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                },
+                {
+                    "id": 140588473717424,
+                    "index": 1,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    2
+                ],
+                [
+                    "styles",
+                    "None"
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    [
+                        "w*",
+                        "w"
+                    ]
+                ],
+                [
+                    "grid",
+                    "true"
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140588473691200,
+            "block_type": "SCOPE",
+            "title": "\u03c9 error",
+            "pos_x": 160.0,
+            "pos_y": -100.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140588473691488,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    1
+                ],
+                [
+                    "styles",
+                    "None"
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    "none"
+                ],
+                [
+                    "grid",
+                    "true"
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140588473691632,
+            "block_type": "SCOPE",
+            "title": "motor torque",
+            "pos_x": 160.0,
+            "pos_y": 40.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140588473691920,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    1
+                ],
+                [
+                    "styles",
+                    null
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140588473692064,
+            "block_type": "SCOPE",
+            "title": "integral term",
+            "pos_x": 160.0,
+            "pos_y": 180.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 1,
+            "outputsNum": 0,
+            "inputs": [
+                {
+                    "id": 140588473688128,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 1,
+                    "socket_type": 1
+                }
+            ],
+            "outputs": [],
+            "parameters": [
+                [
+                    "nin",
+                    1
+                ],
+                [
+                    "styles",
+                    null
+                ],
+                [
+                    "scale",
+                    "auto"
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "labels",
+                    null
+                ],
+                [
+                    "grid",
+                    true
+                ],
+                [
+                    "watch",
+                    false
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140588473720064,
+            "block_type": "CONSTANT",
+            "title": "disturbance torque",
+            "pos_x": -380.0,
+            "pos_y": 20.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140588473719776,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "value",
+                    null
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140588473719200,
+            "block_type": "CONSTANT",
+            "title": "feedforward torque",
+            "pos_x": -380.0,
+            "pos_y": 160.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140588473719440,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "value",
+                    null
+                ],
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        },
+        {
+            "id": 140237887245040,
+            "block_type": "TIME",
+            "title": "time",
+            "pos_x": -520.0,
+            "pos_y": -120.0,
+            "width": 100,
+            "height": 100,
+            "flipped": false,
+            "inputsNum": 0,
+            "outputsNum": 1,
+            "inputs": [],
+            "outputs": [
+                {
+                    "id": 140237887245136,
+                    "index": 0,
+                    "multi_wire": true,
+                    "position": 3,
+                    "socket_type": 2
+                }
+            ],
+            "parameters": [
+                [
+                    "blockargs",
+                    null
+                ]
+            ]
+        }
+    ],
+    "wires": [
+        {
+            "id": 140588473688992,
+            "start_socket": 140588473655200,
+            "end_socket": 140588467291760,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140588473718960,
+            "start_socket": 140588467291808,
+            "end_socket": 140588473717424,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140588473719296,
+            "start_socket": 140588467322448,
+            "end_socket": 140588473691488,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140588473719392,
+            "start_socket": 140588467322640,
+            "end_socket": 140588473691920,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140588473718624,
+            "start_socket": 140588473719776,
+            "end_socket": 140588467322208,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140237887272704,
+            "start_socket": 140237887245136,
+            "end_socket": 140588473655248,
+            "wire_type": 3,
+            "custom_routing": false,
+            "wire_coordinates": []
+        },
+        {
+            "id": 140192616650400,
+            "start_socket": 140588473655200,
+            "end_socket": 140588473691056,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    160.0,
+                    -200.0
+                ],
+                [
+                    -220.0,
+                    -200.0
+                ],
+                [
+                    -220.0,
+                    -80.0
+                ],
+                [
+                    -280.0,
+                    -80.0
+                ]
+            ]
+        },
+        {
+            "id": 140192616650544,
+            "start_socket": 140588473625424,
+            "end_socket": 140588473688128,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    160.0,
+                    220.0
+                ],
+                [
+                    80.0,
+                    220.0
+                ],
+                [
+                    80.0,
+                    -20.0
+                ],
+                [
+                    40.0,
+                    -20.0
+                ]
+            ]
+        },
+        {
+            "id": 140192616650688,
+            "start_socket": 140588473719440,
+            "end_socket": 140588467322688,
+            "wire_type": 3,
+            "custom_routing": true,
+            "wire_coordinates": [
+                [
+                    -160.0,
+                    -40.0
+                ],
+                [
+                    -200.0,
+                    -40.0
+                ],
+                [
+                    -200.0,
+                    200.0
+                ],
+                [
+                    -280.0,
+                    200.0
+                ]
+            ]
+        }
+    ],
+    "labels": [],
+    "grouping_boxes": []
+}
