@@ -20,7 +20,7 @@ from spatialmath import UnitQuaternion
 
 import matplotlib.pyplot as plt
 
-def tumble():
+def IMU():
     # accelerometer
     g0 = unitvec( [0, 0, 9.8] ).T
     gbias = 0.02 * np.r_[2, -2, 2].T  # bias 2% of norm
@@ -30,7 +30,7 @@ def tumble():
     mbias = 0.02 * np.r_[-1, -1, 2]   # bias 2# of norm
 
     # gyro
-    wbias = 0.05 * np.r_[-1, 2, -1] # bias 5% of max
+    wbias = 0.05 * np.r_[-1, 2, -1] # bias 10% of max
 
     ## simulation
 
@@ -56,7 +56,7 @@ def tumble():
         w0, t)
 
     # Solve for simulated sensor readings and true attitude
-    # 1 column per timestep
+    # 1 row per timestep
     am = np.zeros(omega.shape)
     mm = np.zeros(omega.shape)
 
@@ -71,8 +71,9 @@ def tumble():
     # add bias to measured
     wm = omega + wbias
 
-    data = namedtuple('tumble', 't omega_true attitude_true g B gyro accel magno')
-    return data(t, omega, truth, g0, m0, wm, am, mm)
+    imu = namedtuple('imu', 't dt gyro accel magno')
+    true = namedtuple('true', 't dt omega orientation g B')
+    return true(t, dt, omega, truth, g0, m0), imu(t, dt, wm, am, mm)
 
 if __name__ == "__main__":
 
@@ -82,14 +83,14 @@ if __name__ == "__main__":
         plt.grid(True)
         plt.title(title)
 
-    data = tumble()
+    true, imu = IMU()
 
-    print(data.attitude_true[100])
-    print(data.attitude_true[100].rpy())
+    print(true.orientation[100])
+    print(true.orientation[100].rpy())
 
-    plot(data.t, data.attitude_true.rpy(), 'attitude')
-    plot(data.t, data.gyro, 'gyro')
-    plot(data.t, data.accel, 'accel')
-    plot(data.t, data.magno, 'magno')
+    plot(true.t, true.orientation.rpy(), 'attitude')
+    plot(imu.t, imu.gyro, 'gyro')
+    plot(imu.t, imu.accel, 'accel')
+    plot(imu.t, imu.magno, 'magno')
 
     plt.show(block=True)
