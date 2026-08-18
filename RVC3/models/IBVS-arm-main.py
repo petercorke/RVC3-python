@@ -7,7 +7,9 @@ Copyright (c) 2021- Peter Corke
 """
 
 from pathlib import Path
+import numpy as np
 from machinevisiontoolbox import *
+from machinevisiontoolbox.base import mkgrid
 from roboticstoolbox import *
 from math import pi
 
