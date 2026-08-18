@@ -535,3 +535,61 @@ plt.plot(out.clock0.t, out.clock0.x)
 ```python
 plt.plot(out.clock0.t, out.clock0.X)
 ```
+
+## §2.3.1.2 — `tripleangledemo` is now an installed CLI command
+
+**Notebook:** `chap2.ipynb`
+
+**Reason:** RTB used to ship `tripleangledemo.py` as a standalone
+script; it's now `roboticstoolbox.demo.tripleangledemo`, exposed as
+an installed console command (`[project.scripts]` entry point in
+RTB's `pyproject.toml`) rather than a bare top-level module, so
+`%run -m tripleangledemo` can no longer find it
+(`'tripleangledemo' is not a valid modulename on sys.path`). Invoke
+it as the installed command directly instead.
+
+**As printed:**
+```python
+%run -m tripleangledemo
+```
+
+**Current toolbox syntax:**
+```python
+!tripleangledemo
+```
+
+## §2.4.8 — `twistdemo` is now an installed CLI command
+
+**Notebook:** `chap2.ipynb`
+
+**Reason:** Same change as `tripleangledemo` above --
+`twistdemo.py` is now `roboticstoolbox.demo.twistdemo`, an installed
+console command rather than a bare top-level module.
+
+**As printed:**
+```python
+%run -m twistdemo
+```
+
+**Current toolbox syntax:**
+```python
+!twistdemo
+```
+
+## §B.2.1 — `eigdemo` is now an installed CLI command
+
+**Notebook:** `app.ipynb`
+
+**Reason:** Same change as `tripleangledemo`/`twistdemo` above --
+`eigdemo.py` is now `roboticstoolbox.demo.eigdemo`, an installed
+console command rather than a bare top-level module.
+
+**As printed:**
+```python
+%run -m eigdemo 1 2 3 4
+```
+
+**Current toolbox syntax:**
+```python
+!eigdemo 1 2 3 4
+```
