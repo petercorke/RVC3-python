@@ -102,6 +102,7 @@ dev = ["pre-commit", "nbstripout"]
 
 rvctool = "RVC3.bin.rvctool:main"
 bdsim_path = "RVC3.bin.bdsim_path:main"
+rvc3-model = "RVC3.bin.rvc3_model:main"
 
 
 [build-system]

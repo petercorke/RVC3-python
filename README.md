@@ -7,6 +7,13 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rvc3python.svg)
 [![Downloads](https://static.pepy.tech/badge/rvc3python/month)](https://pepy.tech/projects/rvc3python)
 
+> [!NOTE]
+> **Actively maintained — August 2026.** Every chapter notebook, the CLI
+> tools (`rvctool`, `bdsim_path`, `rvc3-model`), and the packaging have
+> been re-verified against current RTB/MVTB/SMTB/bdsim releases and fixed
+> where they'd drifted. See [`errata.md`](errata.md) for the full list of
+> what changed and why.
+
 <table style="border:0px">
 <tr style="border:0px">
 <td style="border:0px">
@@ -61,6 +68,12 @@ This is a quick, non-interactive check that prints package versions and exercise
 real code path per toolbox (RTB, MVTB, spatialgeometry, spatialmath, bdsim, and Open3D
 if installed), reporting PASS/FAIL for each rather than just "it imported".
 
+> [!NOTE]
+> `pip`/`conda install` gives you the importable support code only. Jupyter
+> notebooks, figure-generation scripts, and example data live in this
+> GitHub repo — see [Additional book resources](#additional-book-resources)
+> below, or just `git clone` now.
+
 ### Python version
 
 `rvc3python` requires **Python 3.10 or later**.
@@ -100,6 +113,26 @@ or
 ```shell
 conda install rvc3python
 ```
+
+## Additional book resources
+
+<img src="https://github.com/petercorke/RVC3-python/raw/main/doc/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="100">
+
+This GitHub repo provides additional resources for readers including:
+- Jupyter notebooks containing all code lines from each chapter, see
+  the [`notebooks`](notebooks) folder
+- The code to produce every Python/Matplotlib (2D) figure in the book, see the [`figures`](figures) folder
+- 3D points clouds from chapter 14, and the code to create them, see
+  the [`figures/pointclouds`](figures/pointclouds) folder.
+- 3D figures from chapters 2-3, 7-9, and the code to create them, see the [`figures/3d`](figures/3d) folder.
+- All example scripts, see the [`RVC3/examples`](RVC3/examples) folder.
+- To run the visual odometry example in Sect. 14.8.3 you need to download two image sequence, each over 100MB, [see the instructions here](https://github.com/petercorke/machinevision-toolbox-python/blob/main/packages/mvtb-data/README.md#install-really-big-image-files). 
+
+To get that material you must clone the repo
+```shell
+git clone https://github.com/petercorke/RVC3-python.git
+```
+
 ## Using the Toolboxes
 
 The simplest way to get going is to use the command line tool
@@ -140,7 +173,7 @@ Results of assignments will be displayed, use trailing ; to suppress
 
 Default numeric formatting: %.3g
 
->>>
+RVC3 >>>
 ```
 
 This provides an interactive Python
@@ -152,7 +185,7 @@ For example to load an ETS model of a Panda robot, solve a forward kinematics
 and inverse kinematics problem, and an interactive graphical display is simply:
 
 ```python
->>> panda = models.ETS.Panda()
+RVC3 >>> panda = models.ETS.Panda()
 ERobot: Panda (by Franka Emika), 7 joints (RRRRRRR)
 ┌─────┬───────┬───────┬────────┬─────────────────────────────────────────────┐
 │link │ link  │ joint │ parent │             ETS: parent to link             │
@@ -174,32 +207,32 @@ ERobot: Panda (by Franka Emika), 7 joints (RRRRRRR)
 │  qz │  0° │  0°    │  0° │  0°   │  0° │  0°   │  0°  │
 └─────┴─────┴────────┴─────┴───────┴─────┴───────┴──────┘
 
->>> panda.fkine(panda.qz)
+RVC3 >>> panda.fkine(panda.qz)
    0.7071    0.7071    0         0.088     
    0.7071   -0.7071    0         0         
    0         0        -1         0.823     
    0         0         0         1      
->>> panda.ikine_LM(SE3.Trans(0.4, 0.5, 0.2) * SE3.Ry(pi/2))
+RVC3 >>> panda.ikine_LM(SE3.Trans(0.4, 0.5, 0.2) * SE3.Ry(pi/2))
 IKSolution(q=array([  -1.849,   -2.576,   -2.914,     1.22,   -1.587,    2.056,   -1.013]), success=True, iterations=13, searches=1, residual=3.3549072615799585e-10, reason='Success')
->>> panda.teach(panda.qz)
+RVC3 >>> panda.teach(panda.qz)
 ```
 ![](https://github.com/petercorke/RVC3-python/raw/main/doc/panda_noodle.png)
 
 Computer vision is just as easy.  For example, we can import an image, blur it
 and display it alongside the original
 ```python
->>> mona = Image.Read("monalisa.png")
->>> Image.Hstack([mona, mona.smooth(sigma=5)]).disp()
+RVC3 >>> mona = Image.Read("monalisa.png")
+RVC3 >>> Image.Hstack([mona, mona.smooth(sigma=5)]).disp()
 ```
 ![](https://github.com/petercorke/machinevision-toolbox-python/raw/main/docs/figs/mona%2Bsmooth.png)
 
 or load two images of the same scene, compute SIFT features and display putative
 matches
 ```python
->>> sf1 = Image.Read("eiffel-1.png", mono=True).SIFT()
->>> sf2 = Image.Read("eiffel-2.png", mono=True).SIFT()
->>> matches = sf1.match(sf2)
->>> matches.subset(100).plot("w")
+RVC3 >>> sf1 = Image.Read("eiffel-1.png", mono=True).SIFT()
+RVC3 >>> sf2 = Image.Read("eiffel-2.png", mono=True).SIFT()
+RVC3 >>> matches = sf1.match(sf2)
+RVC3 >>> matches.subset(100).plot("w")
 ```
 ![](https://github.com/petercorke/machinevision-toolbox-python/raw/main/docs/figs/matching.png)
 
@@ -209,8 +242,10 @@ matches
   package prefixes
 - results are displayed by default like MATLAB does, and like MATLAB you need to
   put a semicolon on the end of the line to prevent this
-- the prompt is the standard Python REPL prompt `>>>` rather than the IPython
-  prompt, this can be overridden by a command-line switch
+- the prompt is `RVC3 >>> ` by default, distinct from a plain Python or
+  IPython prompt so a transcript is recognisable at a glance; override it
+  with `--prompt`, or pass `--book` to match the book's printed transcripts
+  exactly (plain `>>> `, no `Out[N]:` labels, no ANSI matrix colouring)
 - allows cutting and pasting in lines from the book, and prompt characters are
   ignored
 
@@ -251,7 +286,7 @@ IKSolution(q=array([7.235e-08,  -0.8335,  0.09396,    3.142,   0.8312,   -3.142]
 array([7.235e-08,  -0.8335,  0.09396,    3.142,   0.8312,   -3.142])
 PyPlot3D backend, t = 0.05, scene:
   robot: Text(0.0, 0.0, 'Puma 560')
->>>
+RVC3 >>>
 ```
 and you are dropped into an IPython session after the script has run.
 
@@ -273,7 +308,7 @@ Additional command line tools available (from the Robotics Toolbox) include:
 - `twistdemo`, Swift visualization that lets you experiment with 3D twists. The screw axis is the blue rod and you can
    position and orient it using the sliders, and adjust its pitch. Then apply a rotation
    about the screw using the bottom slider.
-# Block diagram models
+## Block diagram models
 
 <a href="https://github.com/petercorke/bdsim"><img
 src="https://github.com/petercorke/bdsim/raw/main/docs/figs/bdsim_logo.png"
@@ -288,37 +323,22 @@ included. To simulate these models we use the Python package
 - created graphically using `bdedit`, bdsim's graphical editor, and saved as
   a `.bd` (JSON format) file.
 
-The models are included in the `RVC3` package when it is installed and `rvctool`
-adds them to the module search path.  This means you can invoke them from
-`rvctool` by
-```python
->>> %run -m vloop_test
-```
+The models are included in the `RVC3` package when it is installed. There
+are three ways to run one:
 
-If you want to directly access the folder containing the models, the command
-line tool
-```shell
-bdsim_path
-```
-will display the full path to where they have been installed in the Python
-package tree.
-
-
-# Additional book resources
-
-<img src="https://github.com/petercorke/RVC3-python/raw/main/doc/frontcover.png" alt="Front cover 978-3-031-06468-5_5208" width="100">
-
-This GitHub repo provides additional resources for readers including:
-- Jupyter notebooks containing all code lines from each chapter, see
-  the [`notebooks`](notebooks) folder
-- The code to produce every Python/Matplotlib (2D) figure in the book, see the [`figures`](figures) folder
-- 3D points clouds from chapter 14, and the code to create them, see
-  the [`pointclouds`](../pointclouds) folder.
-- 3D figures from chapters 2-3, 7-9, and the code to create them, see the [`3dfigures`](../3dfigures) folder.
-- All example scripts, see the [`examples`](examples) folder.
-- To run the visual odometry example in Sect. 14.8.3 you need to download two image sequence, each over 100MB, [see the instructions here](https://github.com/petercorke/machinevision-toolbox-python/blob/main/packages/mvtb-data/README.md#install-really-big-image-files). 
-
-To get that material you must clone the repo
-```shell
-git clone https://github.com/petercorke/RVC3-python.git
-```
+- From inside `rvctool` (or any Jupyter notebook), `%run -i` shares the
+  current namespace, which some models rely on:
+  ```python
+  RVC3 >>> %run -i vloop_test
+  ```
+- From a bare shell, the `rvc3-model` command runs a model directly —
+  no `rvctool`/Jupyter session needed:
+  ```shell
+  $ rvc3-model vloop_test
+  ```
+  Run `rvc3-model` with no arguments to list every model by name.
+- To find where the models are installed on disk (e.g. to open a `.py` or
+  `.bd` file directly in an editor), use `bdsim_path`:
+  ```shell
+  $ bdsim_path
+  ```
