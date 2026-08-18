@@ -37,7 +37,10 @@ def test_notebook(notebook_name: str):
     assert result.load_error is None, result.load_error
     counts = result.counts()
     errors = [c for c in result.cells if c.status == "error"]
-    detail = "; ".join(f"cell[{c.index}] {c.detail}" for c in errors)
+    # Cell numbers aren't meaningful to a reader -- Jupyter doesn't show
+    # them. Just the error itself; see tests/reports/latest.md for the
+    # per-cell source preview if more context is needed.
+    detail = "; ".join(c.detail for c in errors)
     assert counts["error"] == 0, detail
 
 

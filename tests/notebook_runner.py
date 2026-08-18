@@ -112,6 +112,9 @@ def classify_outputs(outputs: list) -> tuple[str, str]:
 
 
 def run_notebook(path: Path, skiplist: list[dict[str, str]], timeout: int) -> NotebookResult:
+    os.environ.setdefault("MPLBACKEND", "Agg")  # never pop real GUI windows during an automated run
+    os.environ.setdefault("BDSIM_NO_GRAPHICS", "1")  # unconditionally disables bdsim animation/graphics/movies
+
     result = NotebookResult(name=path.name)
 
     try:
@@ -167,6 +170,19 @@ def write_report(results: list[NotebookResult], out_path: Path) -> None:
     lines = ["# Notebook test run\n"]
     totals = {"clean": 0, "warning": 0, "error": 0, "skipped": 0}
 
+    # Concise pass/fail-per-notebook summary up top -- cell numbers below
+    # aren't meaningful to a reader (Jupyter doesn't show them), so lead
+    # with what actually matters: which notebooks are clean.
+    summary_lines = ["## Summary\n"]
+    for r in results:
+        if r.load_error:
+            summary_lines.append(f"- **{r.name}**: FAILED TO LOAD/RUN")
+            continue
+        counts = r.counts()
+        status = "clean" if counts["error"] == 0 else f"{counts['error']} error(s)"
+        summary_lines.append(f"- **{r.name}**: {status}")
+    summary_lines.append("")
+
     for r in results:
         counts = r.counts()
         for k, v in counts.items():
@@ -185,16 +201,17 @@ def write_report(results: list[NotebookResult], out_path: Path) -> None:
             if cell.status == "clean":
                 continue
             marker = {"warning": "WARN", "error": "FAIL", "skipped": "SKIP"}[cell.status]
-            lines.append(f"- [{marker}] cell[{cell.index}] `{cell.source_preview}`")
+            lines.append(f"- [{marker}] `{cell.source_preview}`")
             if cell.detail:
                 lines.append(f"  {cell.detail}")
         lines.append("")
 
-    lines.insert(
-        1,
+    header_lines = [
         f"**Totals:** {totals['clean']} clean, {totals['warning']} warning, "
         f"{totals['error']} error, {totals['skipped']} skipped\n",
-    )
+        *summary_lines,
+    ]
+    lines[1:1] = header_lines
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text("\n".join(lines))
@@ -206,9 +223,6 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=300, help="per-cell timeout in seconds (default 300)")
     parser.add_argument("--report", default=str(REPORTS_DIR / "latest.md"), help="output report path")
     args = parser.parse_args()
-
-    os.environ.setdefault("MPLBACKEND", "Agg")  # never pop real GUI windows during an automated run
-    os.environ.setdefault("BDSIM_NO_GRAPHICS", "1")  # unconditionally disables bdsim animation/graphics/movies
 
     if args.notebooks:
         paths = [Path(p) for p in args.notebooks]
