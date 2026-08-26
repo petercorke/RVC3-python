@@ -110,7 +110,7 @@ def parse_arguments():
     parser.add_argument(
         "--confirmexit", "-x", default=False, action="store_true", help="confirm exit"
     )
-    parser.add_argument("--prompt", "-p", default=None, help="input prompt")
+    parser.add_argument("--prompt", "-p", default="RVC3 >>> ", help="input prompt")
     parser.add_argument(
         "-r",
         "--resultprefix",
@@ -136,17 +136,18 @@ def parse_arguments():
     parser.add_argument(
         "-a",
         "--showassign",
-        default=False,
+        default=True,
         action="store_true",
-        help="do not display the result of assignments",
+        help="display the result of assignments",
     )
     parser.add_argument(
-        "-n",
-        "--normal",
-        dest="book",
-        default=True,
-        action="store_false",
-        help="use normal ipython settings for prompts and display on assignment",
+        "--book",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        help=(
+            "match the book's printed transcripts exactly: plain '>>> ' prompt, "
+            "no Out[N]: labels, no ANSI matrix colouring"
+        ),
     )
     parser.add_argument(
         "-R",
@@ -166,14 +167,17 @@ def parse_arguments():
     )
     parser.add_argument(
         "--ansi",
-        default=False,
-        action="store_true",
-        help="use ANSImatrix to display matrices",
+        default=True,
+        action=argparse.BooleanOptionalAction,
+        help=(
+            "use ANSImatrix to display matrices -- colour codes can be problematic "
+            "when copying/pasting terminal output, pass --no-ansi to disable"
+        ),
     )
     parser.add_argument(
         "-e",
         "--examples",
-        default=False,
+        default=True,
         action="store_true",
         help="change working directory to shipped examples",
     )
@@ -474,12 +478,10 @@ def main():
         )
 
     if args.book:
-        # set book options
+        # match the book's printed transcripts exactly
         args.resultprefix = ""
         args.prompt = ">>> "
-        args.showassign = True
         args.ansi = False
-        args.examples = True
 
     # setup defaults
     np.set_printoptions(
@@ -546,10 +548,9 @@ def main():
 
     class MyPrompt(Prompts):
         def in_prompt_tokens(self, cli=None):
-            if args.prompt is None:
-                return super().in_prompt_tokens()
-            else:
-                return [(Token.Prompt, args.prompt)]
+            # args.prompt always has a real value now (default "RVC3 >>> "),
+            # so this is never falling back to IPython's native In[N]: prompt.
+            return [(Token.Prompt, args.prompt)]
 
         def out_prompt_tokens(self, cli=None):
             if args.resultprefix is None:
