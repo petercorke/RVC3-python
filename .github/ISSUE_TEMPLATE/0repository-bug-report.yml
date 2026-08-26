@@ -1,0 +1,74 @@
+name: Repository bug report
+description: Create a report to help us improve the RVC3-python repository
+labels: ["bug"]
+assignees: ["petercorke"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This report is for bugs with the **RVC3-python repo itself**: missing files,
+        incorrect documentation, broken links, notebooks that won't run, etc.
+
+        Reports related to a specific software component used in the book should be
+        reported on that component's own issues page instead — they will not be
+        actioned if posted here:
+
+        - [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python/issues)
+        - [Machine Vision Toolbox for Python](https://github.com/petercorke/machinevision-toolbox-python/issues)
+        - [Spatial Maths Toolbox for Python](https://github.com/petercorke/spatialmath-python/issues)
+        - [bdsim: block diagram simulation for Python](https://github.com/petercorke/bdsim/issues)
+        - [Swift graphical simulator for Python](https://github.com/jhavl/swift/issues)
+        - [Spatial Geometry Toolbox for Python](https://github.com/jhavl/spatialgeometry/issues)
+        - [PGraph, mathematical graph library for Python](https://github.com/petercorke/pgraph-python/issues)
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: To reproduce
+      description: Provide the smallest possible code snippet, or exact steps, that demonstrate the error.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      description: If you're running a script from the command line.
+      options: [macOS, Linux, Windows, Other, Not applicable]
+    validations:
+      required: false
+  - type: dropdown
+    id: notebook-env
+    attributes:
+      label: Notebook environment
+      description: If this is about a Jupyter notebook.
+      options: [Google Colab, Local Jupyter, Not applicable]
+    validations:
+      required: false
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      description: If using Colab or local Jupyter.
+      placeholder: "e.g. Chrome, Safari"
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add any other context, or screenshots, about the problem here.
+    validations:
+      required: false

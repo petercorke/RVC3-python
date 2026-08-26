@@ -1,0 +1,43 @@
+name: Errata
+description: 'Report errors in the book: Robotics, Vision & Control 3e, in Python'
+labels: ["errata"]
+assignees: ["petercorke"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Errors in books are a nightmare for the readers and the author! If you spot
+        something that is wrong, or something that could be improved (clearer, less
+        confusing, less ambiguous) please log it here. This will help fellow readers
+        of the book, and will improve future editions of the book.
+  - type: input
+    id: page
+    attributes:
+      label: Page number
+      description: Or a figure/equation/table number if that's clearer.
+      placeholder: "e.g. 142, or 'Fig 3.5 caption'"
+    validations:
+      required: true
+  - type: textarea
+    id: location
+    attributes:
+      label: Where is the error?
+      description: >-
+        Clearly describe where on the page the issue is. Provide the existing text
+        as a reference, or specify the location relative to an equation or figure.
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: What is the error?
+      description: A clear and concise description of how you'd like to see the text changed, and why.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add any other context, or screenshots, here.
+    validations:
+      required: false
