@@ -85,6 +85,7 @@ dependencies = [
     "bdsim",
     "IPython",
     "ipykernel",
+    "ipympl",
     "sympy",
 ]
 
@@ -96,7 +97,7 @@ dependencies = [
 [project.optional-dependencies]
 
 pytorch = ["torch", "torchvision"]
-dev = ["pre-commit", "nbstripout"]
+dev = ["pre-commit", "nbstripout", "pytest", "nbformat", "nbclient"]
 figures = ["pyvista", "vtk", "pillow"]
 
 [project.scripts]
@@ -121,3 +122,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 
 packages = ["RVC3", "RVC3.examples", "RVC3.tools", "RVC3.bin", "RVC3.models"]
+
+[tool.pytest.ini_options]
+
+testpaths = ["tests"]
