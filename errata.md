@@ -493,3 +493,103 @@ from roboticstoolbox.models.URDF.URDFRobot import URDF_read
 urdf, *_ = URDF_read("ur5")
 urdf
 ```
+
+## §14.8.3 — `visodom.py` limited to 50 frames by default
+
+**Notebook:** `chap14.ipynb`
+
+**Reason:** The bridge dataset has 251 stereo frame pairs; processing all
+of them (ORB matching + bundle adjustment per frame) takes several
+minutes. Added an optional frame-count argument to
+`RVC3/examples/visodom.py` (processes every frame if omitted) and the
+notebook now passes 50 for a much faster run. Increase or drop the
+argument to process more frames.
+
+**As printed:**
+```python
+%run -m visodom
+```
+
+**Current toolbox syntax:**
+```python
+%run -m visodom 50
+```
+
+## §15.2.2 — bdsim clock log field renamed from `.x` to `.X`
+
+**Notebook:** `chap15.ipynb`
+
+**Reason:** bdsim's per-clock logged state array was renamed from a
+lowercase `.x` attribute to `.X`, to match the uppercase convention
+used for state-array fields elsewhere in a run's output struct (eg.
+the top-level `out.x`/`out.xnames` pairing uses lowercase for the
+continuous state but clocked/discrete state blocks use the
+uppercase form).
+
+**As printed:**
+```python
+plt.plot(out.clock0.t, out.clock0.x)
+```
+
+**Current toolbox syntax:**
+```python
+plt.plot(out.clock0.t, out.clock0.X)
+```
+
+## §2.3.1.2 — `tripleangledemo` is now an installed CLI command
+
+**Notebook:** `chap2.ipynb`
+
+**Reason:** RTB used to ship `tripleangledemo.py` as a standalone
+script; it's now `roboticstoolbox.demo.tripleangledemo`, exposed as
+an installed console command (`[project.scripts]` entry point in
+RTB's `pyproject.toml`) rather than a bare top-level module, so
+`%run -m tripleangledemo` can no longer find it
+(`'tripleangledemo' is not a valid modulename on sys.path`). Invoke
+it as the installed command directly instead.
+
+**As printed:**
+```python
+%run -m tripleangledemo
+```
+
+**Current toolbox syntax:**
+```python
+!tripleangledemo
+```
+
+## §2.4.8 — `twistdemo` is now an installed CLI command
+
+**Notebook:** `chap2.ipynb`
+
+**Reason:** Same change as `tripleangledemo` above --
+`twistdemo.py` is now `roboticstoolbox.demo.twistdemo`, an installed
+console command rather than a bare top-level module.
+
+**As printed:**
+```python
+%run -m twistdemo
+```
+
+**Current toolbox syntax:**
+```python
+!twistdemo
+```
+
+## §B.2.1 — `eigdemo` is now an installed CLI command
+
+**Notebook:** `app.ipynb`
+
+**Reason:** Same change as `tripleangledemo`/`twistdemo` above --
+`eigdemo.py` is now `roboticstoolbox.demo.eigdemo`, an installed
+console command rather than a bare top-level module.
+
+**As printed:**
+```python
+%run -m eigdemo 1 2 3 4
+```
+
+**Current toolbox syntax:**
+```python
+!eigdemo 1 2 3 4
+```

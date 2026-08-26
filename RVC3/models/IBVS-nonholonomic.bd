@@ -299,11 +299,11 @@
                     false
                 ],
                 [
-                    "args",
+                    "fargs",
                     []
                 ],
                 [
-                    "kwargs",
+                    "fkwargs",
                     {}
                 ],
                 [
@@ -491,11 +491,11 @@
                     false
                 ],
                 [
-                    "args",
+                    "fargs",
                     []
                 ],
                 [
-                    "kwargs",
+                    "fkwargs",
                     {}
                 ],
                 [
@@ -572,11 +572,11 @@
                     true
                 ],
                 [
-                    "args",
+                    "fargs",
                     []
                 ],
                 [
-                    "kwargs",
+                    "fkwargs",
                     {}
                 ],
                 [
@@ -996,7 +996,7 @@
                     false
                 ],
                 [
-                    "args",
+                    "fargs",
                     []
                 ],
                 [
@@ -1162,7 +1162,7 @@
                     false
                 ],
                 [
-                    "args",
+                    "fargs",
                     []
                 ],
                 [

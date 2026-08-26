@@ -11,6 +11,10 @@
 # Match is a plain substring test against the cell's joined source -- keep
 # patterns specific enough not to accidentally match unrelated cells.
 
+chap10.ipynb:
+  - match: "theta = esttheta(im)"
+    reason: "esttheta() calls plt.ginput() to let the user click a region on the image -- under a headless Agg backend there's no display to click on, so ginput() returns no points and Polygon2() gets an empty array instead of a real polygon. Same 'requires real user interaction' category as the ginput() cell in the next markdown block."
+
 chap11.ipynb:
   - match: "VideoCamera(0)"
     reason: "no physical webcam available in this environment"

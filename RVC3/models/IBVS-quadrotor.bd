@@ -513,11 +513,11 @@
                     "=quadrotor"
                 ],
                 [
-                    "maxw",
+                    "wmax",
                     1000
                 ],
                 [
-                    "minw",
+                    "wmin",
                     5
                 ],
                 [
