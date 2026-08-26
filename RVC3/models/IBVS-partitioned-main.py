@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 
 from pathlib import Path
+import numpy as np
 from machinevisiontoolbox import *
+from machinevisiontoolbox.base import mkgrid
 from bdsim import Clock, bdload, BDSim
 from spatialmath import SE3, Polygon2
 from spatialmath.base import angdiff

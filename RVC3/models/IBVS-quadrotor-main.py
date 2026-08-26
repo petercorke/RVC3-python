@@ -8,7 +8,9 @@ Copyright (c) 2021- Peter Corke
 
 from pathlib import Path
 from enum import IntEnum
+import numpy as np
 from machinevisiontoolbox import *
+from machinevisiontoolbox.base import mkgrid
 from bdsim import Clock, bdload, BDSim
 from spatialmath import SE3
 import matplotlib.pyplot as plt
