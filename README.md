@@ -1,11 +1,14 @@
 # Robotics, Vision & Control: 3rd edition in Python (2023)
-[![A Python Robotics Package](https://raw.githubusercontent.com/petercorke/robotics-toolbox-python/master/.github/svg/py_collection.min.svg)](https://github.com/petercorke/robotics-toolbox-python)
-[![QUT Centre for Robotics Open Source](https://github.com/qcr/qcr.github.io/raw/master/misc/badge.svg)](https://qcr.github.io)
+
+### Status & Project Health
+[![PyPI version](https://badge.fury.io/py/rvc3python.svg)](https://badge.fury.io/py/rvc3python)
+[![Downloads](https://static.pepy.tech/badge/rvc3python/month)](https://pepy.tech/projects/rvc3python)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rvc3python.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![PyPI version](https://badge.fury.io/py/rvc3python.svg)](https://badge.fury.io/py/rvc3python)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rvc3python.svg)
-[![Downloads](https://static.pepy.tech/badge/rvc3python/month)](https://pepy.tech/projects/rvc3python)
+### Ecosystem & Dependencies
+[![A Python Robotics Package](https://raw.githubusercontent.com/petercorke/robotics-toolbox-python/master/.github/svg/py_collection.min.svg)](https://github.com/petercorke/robotics-toolbox-python)
+[![QUT Centre for Robotics Open Source](https://github.com/qcr/qcr.github.io/raw/master/misc/badge.svg)](https://qcr.github.io)
 
 > [!NOTE]
 > **Actively maintained — August 2026.** Every chapter notebook, the CLI
