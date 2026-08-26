@@ -4,7 +4,7 @@ import cv2
 import cv2.aruco as aruco
 from spatialmath import SE3, SO3
 import pyvista as pv
-import pvplus
+from RVC3.tools import pvplus
 
 
 def main():

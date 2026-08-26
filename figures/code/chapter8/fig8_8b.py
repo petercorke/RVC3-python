@@ -6,7 +6,7 @@ import numpy as np
 # from spatialmath import SE3
 from spatialmath import base
 from math import cos, sin, pi
-import pvplus
+from RVC3.tools import pvplus
 import roboticstoolbox as rtb
 from rvcprint import outfile
 

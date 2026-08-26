@@ -5,7 +5,7 @@ from math import cos, sin, pi
 from roboticstoolbox import ETS2 as ET
 
 
-import pvplus
+from RVC3.tools import pvplus
 
 
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))

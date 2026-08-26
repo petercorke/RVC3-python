@@ -35,7 +35,7 @@ saving -->  fig10_20.pdf
 Some files generate multiple sub-figures with lowercase letter suffixes.
 
 All these files use `RVC3.tools.rvcprint` to save the created files.  The
-package `rvcpython` must have been installed. 
+package `rvc3python` must have been installed. 
 
 
 

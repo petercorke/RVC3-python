@@ -4,7 +4,7 @@ import numpy as np
 from spatialmath import SE3
 from math import cos, sin, pi
 
-import pvplus
+from RVC3.tools import pvplus
 
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))
 

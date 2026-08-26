@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 import pyvista as pv
 import vtk
-import pvplus
+from RVC3.tools import pvplus
 from spatialmath import SE3
 import numpy as np
 

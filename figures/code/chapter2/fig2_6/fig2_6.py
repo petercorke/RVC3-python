@@ -4,7 +4,7 @@ import cv2
 import matplotlib.pyplot as plt
 import pyvista as pv
 import vtk
-import pvplus
+from RVC3.tools import pvplus
 
 scene = Image('IMG_8787.JPG')
 
