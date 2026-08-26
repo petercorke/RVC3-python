@@ -15,7 +15,8 @@ import os
 import shlex
 import sys
 import textwrap
-from importlib.metadata import PackageNotFoundError, version
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as pkg_version
 from math import pi  # lgtm [py/unused-import]
 import pathlib
 
@@ -262,17 +263,17 @@ def get_versions(args, torch_modules=None):
 
     versions = [f"Python=={sys.version.split()[0]}"]
     if args.robot:
-        versions.append(f"RTB=={version('roboticstoolbox-python')}")
+        versions.append(f"RTB=={pkg_version('roboticstoolbox-python')}")
     if args.vision:
-        versions.append(f"MVTB=={version('machinevision-toolbox-python')}")
-    versions.append(f"SG=={version('spatialgeometry')}")
-    versions.append(f"SMTB=={version('spatialmath-python')}")
-    versions.append(f"bdsim=={version('bdsim')}")
-    versions.append(f"NumPy=={version('numpy')}")
-    versions.append(f"SciPy=={version('scipy')}")
-    versions.append(f"Matplotlib=={version('matplotlib')}")
+        versions.append(f"MVTB=={pkg_version('machinevision-toolbox-python')}")
+    versions.append(f"SG=={pkg_version('spatialgeometry')}")
+    versions.append(f"SMTB=={pkg_version('spatialmath-python')}")
+    versions.append(f"bdsim=={pkg_version('bdsim')}")
+    versions.append(f"NumPy=={pkg_version('numpy')}")
+    versions.append(f"SciPy=={pkg_version('scipy')}")
+    versions.append(f"Matplotlib=={pkg_version('matplotlib')}")
     try:
-        versions.append(f"Open3D=={version('open3d')}")
+        versions.append(f"Open3D=={pkg_version('open3d')}")
     except PackageNotFoundError:
         versions.append("Open3D==not installed")
     if "torch" in torch_modules:
