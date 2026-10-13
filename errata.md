@@ -16,6 +16,14 @@ actually changed a line the reader would see. (For the fuller
 investigation log — including issues that turned out not to need a
 notebook change — see `claude-notes/notebook-testing-issues.md`.)
 
+The same applies to a renamed API that keeps a working deprecated alias:
+if the printed code still runs against the *released* packages, perhaps
+with a `DeprecationWarning`, it isn't an erratum (the notebooks were still
+updated). Those are listed under [Not listed](#not-listed-printed-code-still-runs)
+at the end. The reader-facing version of this file, with book page numbers
+and links to the fixing and causing PRs, is the
+[Errata wiki page](https://github.com/petercorke/RVC3-python/wiki/Errata).
+
 ## Entry format
 
 One `##` entry per changed cell/line group, in reading order. Section
@@ -43,24 +51,6 @@ and why>
 
 ---
 
-## §7.1.1.1 — `ET.eta` deprecated, use `.param`
-
-**Notebook:** `chap7.ipynb`
-
-**Reason:** RTB deprecated `ET.eta` since 1.4.0 in favour of `.param`.
-
-**As printed:**
-```python
-e[1].eta
-e[1].A()
-```
-
-**Current toolbox syntax:**
-```python
-e[1].param
-e[1].A()
-```
-
 ## §7.1.2.2, §7.1.4, §7.1.5 — `models.list()` removed, use `models.catalog()`
 
 **Notebook:** `chap7.ipynb`
@@ -82,42 +72,6 @@ models.list(type="DH")
 models.catalog(mtype="ETS")
 models.catalog(mtype="URDF")
 models.catalog(mtype="DH")
-```
-
-## §10.4.2, §11.1, §11.5.1.2, §12.1.1.3, §12.1.4, §12.3.2, §12.4, §14.3.1, §14.4.2.4, §14.4.2.8 — `Image.image` renamed to `Image.array`
-
-**Notebooks:** `chap10.ipynb`, `chap11.ipynb`, `chap12.ipynb`, `chap14.ipynb`
-
-**Reason:** MVTB 2.0.0 renamed the `Image` class's raw-pixel-data property
-from `.image` to `.array`. Same one-line change everywhere it appears —
-listed once here rather than per occurrence (roughly 15 individual cells
-across these four notebooks).
-
-**As printed:**
-```python
-s = shadow_invariant(im.image, 0.7)
-```
-
-**Current toolbox syntax:**
-```python
-s = shadow_invariant(im.array, 0.7)
-```
-
-## §13.4 — `Image.A` renamed to `Image.array`
-
-**Notebook:** `chap13.ipynb`
-
-**Reason:** Same MVTB 2.0.0 rename as `.image`→`.array` above, but from
-the older `.A` alias rather than `.image`.
-
-**As printed:**
-```python
-facecolors=spherical.colorize().A, cstride=1, rstride=1
-```
-
-**Current toolbox syntax:**
-```python
-facecolors=spherical.colorize().array, cstride=1, rstride=1
 ```
 
 ## §13.6.1 — `f=3045` is a book typo for `f=4.25e-3`
@@ -198,79 +152,6 @@ composite = composite.paste(tile, topleft, method="blend");
 composite.disp();
 ```
 
-## §14.7 — `PointCloud.Read('data/bunny.ply')` — redundant `data/` prefix
-
-**Notebook:** `chap14.ipynb`
-
-**Reason:** `PointCloud.Read()` already prepends the `mvtbdata` package's
-`data` subfolder internally, so the documented convention is a bare
-filename. The book's own `data/bunny.ply` form (also used in the printed
-figure-generation scripts) double-joined to a nonexistent
-`data/data/bunny.ply`, even though `bunny.ply` is genuinely present in the
-package. Fixed upstream in MVTB (accepts both forms now,
-`fix/pointcloud-read-data-prefix`), but the bare form is the documented
-one, so the notebook uses it directly rather than relying on the
-backward-compat path.
-
-**As printed:**
-```python
-bunny_pcd = PointCloud.Read('data/bunny.ply')
-```
-
-**Current toolbox syntax:**
-```python
-bunny_pcd = PointCloud.Read('bunny.ply')
-```
-
-## §11.2 — `Histogram.plot()`'s `'ncdf'` type renamed to `'cdf'`
-
-**Notebook:** `chap11.ipynb`
-
-**Reason:** A real CDF is normalized by definition, so MVTB simplified the
-name -- `'cdf'` is what `'ncdf'` (normalized CDF) always meant. `'ncdf'`
-remains accepted as a deprecated alias.
-
-**As printed:**
-```python
-h.plot("ncdf", color="blue")
-```
-
-**Current toolbox syntax:**
-```python
-h.plot("cdf", color="blue")
-```
-
-## §12.1.1.3, §12.1.4 — torchvision `pretrained=True` replaced by `weights=`
-
-**Notebook:** `chap12.ipynb`
-
-**Reason:** torchvision deprecated the boolean `pretrained=` argument on
-model constructors in 0.13, in favour of an explicit `weights=` enum
-naming the exact pretrained-weights set. Passing `weights=<enum>.DEFAULT`
-would track torchvision's current recommendation, but that can change
-between torchvision releases; using the specific enum member that
-`pretrained=True` used to select keeps the notebook's results reproducible.
-
-**As printed:**
-```python
-model = tv.models.segmentation.fcn_resnet50(pretrained=True).eval();
-```
-```python
-model = tv.models.detection.fasterrcnn_resnet50_fpn(pretrained=True).eval();
-```
-
-**Current toolbox syntax:**
-```python
-model = tv.models.segmentation.fcn_resnet50(
-    weights=tv.models.segmentation.FCN_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
-).eval();
-```
-```python
-model = tv.models.detection.fasterrcnn_resnet50_fpn(
-    weights=tv.models.detection.FasterRCNN_ResNet50_FPN_Weights.COCO_V1
-).eval();
-```
-
 ## §12.1.3.3 — `np.linalg.eig()` on a symmetric matrix now returns complex dtype
 
 **Notebook:** `chap12.ipynb`
@@ -316,116 +197,6 @@ e, v = np.linalg.eig(E)
 **Current toolbox syntax:**
 ```python
 e, v = np.linalg.eigh(E)
-```
-
-## §I — `pgraph`'s `UVertex.adjacent()` renamed to `.neighbours()`
-
-**Notebook:** `app.ipynb`
-
-**Reason:** `pgraph` (a dependency of RTB's `BundleAdjust`/pose-graph code)
-renamed this method; `.adjacent()` no longer exists. Both `.neighbours()`
-and `.neighbors()` are defined (not aliases of each other, but identical
-in behaviour) -- used the British spelling for consistency with the rest
-of the book's voice.
-
-**As printed:**
-```python
-g[1].adjacent()
-```
-
-**Current toolbox syntax:**
-```python
-g[1].neighbours()
-```
-
-## §11.5.2.2 — `Image.rank()` renamed to `Image.rankfilter()`
-
-**Notebook:** `chap11.ipynb`
-
-**Reason:** MVTB 2.0.0 renamed this method. Same change at 4 call sites
-in this section.
-
-**As printed:**
-```python
-mx = mona.rank(rank=0, h=2)
-```
-
-**Current toolbox syntax:**
-```python
-mx = mona.rankfilter(rank=0, h=2)
-```
-
-## §11.1.2, §12.4.2, §13.2.2, §14.8.2 — `ImageCollection` renamed to `FileCollection`
-
-**Notebooks:** `chap11.ipynb`, `chap12.ipynb`, `chap13.ipynb`, `chap14.ipynb`
-
-**Reason:** MVTB 2.0.0 renamed this class.
-
-**As printed:**
-```python
-images = ImageCollection("seq/*.png")
-```
-
-**Current toolbox syntax:**
-```python
-images = FileCollection("seq/*.png")
-```
-
-## §11.1.2, §14.8.3 — `ZipArchive` renamed to `FileArchive`
-
-**Notebooks:** `chap11.ipynb`, `chap14.ipynb`
-
-**Reason:** MVTB 2.0.0 renamed this class.
-
-**As printed:**
-```python
-images = ZipArchive("bridge-l.zip", "*.pgm")
-```
-
-**Current toolbox syntax:**
-```python
-images = FileArchive("bridge-l.zip", "*.pgm")
-```
-
-## §11.1.3 — `VideoCamera.grab()` replaced by the iterator protocol
-
-**Notebook:** `chap11.ipynb`
-
-**Reason:** MVTB 2.0.0 moved camera frame-grabbing onto Python's iterator
-protocol.
-
-**As printed:**
-```python
-camera = VideoCamera(0)
-image = camera.grab()
-camera.release()
-image.disp()
-```
-
-**Current toolbox syntax:**
-```python
-camera = VideoCamera(0)
-image = next(camera)
-camera.release()
-image.disp()
-```
-
-## §11.1.5 — `WebCam.grab()` replaced by the iterator protocol
-
-**Notebook:** `chap11.ipynb`
-
-**Reason:** Same change as `VideoCamera.grab()` above, applied to `WebCam`.
-
-**As printed:**
-```python
-porjus= WebCam("http://uk.jokkmokk.jp/photo/nr4/latest.jpg");
-porjus.grab().disp();
-```
-
-**Current toolbox syntax:**
-```python
-porjus= WebCam("http://uk.jokkmokk.jp/photo/nr4/latest.jpg");
-next(porjus).disp();
 ```
 
 ## §11.1, §11.2 — `Image.stats()` replaced by `.stats` property + `.printstats()` method
@@ -593,3 +364,26 @@ console command rather than a bare top-level module.
 ```python
 !eigdemo 1 2 3 4
 ```
+
+---
+
+## Not listed: printed code still runs
+
+Checked 2026-10-13 against the released packages in a clean venv (RTB 1.4.4,
+MVTB 2.4.0, bdsim 1.4.0, pgraph-python 1.0.0, NumPy 2.5; torchvision 0.29.1
+checked by reading its source, not executed). Each of these used to have an
+entry here. The printed form still works, at most with a `DeprecationWarning`,
+so a reader doesn't have to change anything. If a future release removes
+the alias, the entry should come back.
+
+| Printed | Replacement | Why it still works |
+| ------- | ----------- | ------------------ |
+| `ET.eta` (§7.1.1.1) | `.param` | RTB keeps `eta` as a deprecated alias ([RTB#553](https://github.com/petercorke/robotics-toolbox-python/pull/553)) |
+| `im.image`, `.A` (§10.4.2, §11.1, §11.5.1.2, §12.x, §13.4, §14.x) | `.array` | MVTB 2.0.0 deprecated aliases |
+| `Histogram.plot("ncdf")` (§11.2) | `"cdf"` | accepted as a deprecated alias ([MVTB#85](https://github.com/petercorke/machinevision-toolbox-python/pull/85)) |
+| `PointCloud.Read('data/bunny.ply')` (§14.7) | `Read('bunny.ply')` | redundant `data/` prefix is now stripped ([MVTB#92](https://github.com/petercorke/machinevision-toolbox-python/pull/92)) |
+| `fcn_resnet50(pretrained=True)` etc. (§12.1.1.3, §12.1.4) | `weights=` | torchvision still maps `pretrained` with a warning |
+| `g[1].adjacent()` (§I) | `.neighbours()` | pgraph restored `adjacent()` as the canonical name (2026-10-12) |
+| `Image.rank()` (§11.5.2.2) | `.rankfilter()` | deprecated alias |
+| `ImageCollection`, `ZipArchive` (§11.1.2, §12.4.2, §13.2.2, §14.8.x) | `FileCollection`, `FileArchive` | deprecated subclasses, same arguments |
+| `VideoCamera.grab()`, `WebCam.grab()` (§11.1.3, §11.1.5) | `next(camera)` | deprecated methods call `next()` |
