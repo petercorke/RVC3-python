@@ -26,7 +26,7 @@ ekf.run(T=100)
 
 print(ekf.landmark(8))
 
-ekf.plot_map(ellipse=dict(filled=False, color='g'))
+ekf.plot_map(ellipse_style=dict(filled=False, color='g'))
 veh.plot_xy('b', label='true path')
 plt.legend()
 rvcprint.rvcprint(subfig='a')
