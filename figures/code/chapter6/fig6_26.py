@@ -7,7 +7,7 @@ from roboticstoolbox.mobile import *
 from spatialmath import SE2, SE3
 from spatialmath.base import ICP2d
 
-pg = PoseGraph('data/killian.g2o.zip', laser=True)
+pg = PoseGraph('data/killian.g2o.zip', lidar=True)
 print(pg)
 print(pg.graph)
 
