@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from roboticstoolbox.mobile import *
 from spatialmath import SE2, SE3, base
 
-pg = PoseGraph('data/killian.g2o.zip', laser=True)
+pg = PoseGraph('data/killian.g2o.zip', lidar=True)
 print(pg)
 print(pg.graph)
 
