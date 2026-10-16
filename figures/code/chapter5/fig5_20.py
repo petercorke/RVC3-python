@@ -25,9 +25,7 @@ prm.plan(npoints=300)  # second plan
 path = prm.query(places.br3, places.kitchen)
 print(prm)
 
-striped_line = (dict(color='k', linewidth=3, zorder=21),
-    dict(color='yellow', linewidth=2, dashes=(4,4), zorder=21))
-prm.plot(path, edge=dict(alpha=0.1), vertex=dict(alpha=0.1), path_marker=striped_line)
+prm.plot(path, edge=dict(alpha=0.1), vertex=dict(alpha=0.1))
 
 
 rvcprint.rvcprint(subfig='a', thicken=None)
