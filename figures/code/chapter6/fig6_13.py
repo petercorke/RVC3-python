@@ -96,7 +96,7 @@ def align2d(source, target):
 
 plt.clf()
 ekf.plot_xy(color='r', label='estimated path')
-ekf.plot_map(confidence=0.99, ellipse=dict(filled=False, color='g'))
+ekf.plot_map(confidence=0.99, ellipse_style=dict(filled=False, color='g'))
 v.plot(ekf._x0, facecolor='none', edgecolor='k')
 # plt.legend(loc='lower right')
 

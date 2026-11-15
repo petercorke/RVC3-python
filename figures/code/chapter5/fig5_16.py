@@ -14,7 +14,7 @@ dx = DistanceTransformPlanner(floorplan, inflate=5)
 dx.plan(places.kitchen)
 p = dx.query(places.br3)
 
-dx.plot(p, inflated=True, path_marker=pmarker)
+dx.plot(p, path_style=pmarker)
 rvcprint.rvcprint()
 
 # plt.clf()

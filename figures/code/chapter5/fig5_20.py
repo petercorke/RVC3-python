@@ -27,7 +27,7 @@ print(prm)
 
 striped_line = (dict(color='k', linewidth=3, zorder=21),
     dict(color='yellow', linewidth=2, dashes=(4,4), zorder=21))
-prm.plot(path, edge=dict(alpha=0.1), vertex=dict(alpha=0.1), path_marker=striped_line)
+prm.plot(path, edge_style=dict(alpha=0.1), vertex_style=dict(alpha=0.1), path_style=striped_line)
 
 
 rvcprint.rvcprint(subfig='a', thicken=None)

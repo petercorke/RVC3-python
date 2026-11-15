@@ -22,7 +22,7 @@ goalmarker = {'marker': ''}
 floorplan[2,1] = 0
 dx = DistanceTransformPlanner(occgrid=floorplan, metric='euclidean')
 dx.plan((1,2))
-dx.plot(goal_marker=goalmarker,colorbar=dict(shrink=1.2))
+dx.plot(goal_style=goalmarker)
 ax = plt.gca()
 ax.grid(False)
 for i in range(floorplan.shape[0]):
@@ -39,7 +39,7 @@ plt.clf()
 
 dx = DistanceTransformPlanner(occgrid=floorplan, metric='manhattan')
 dx.plan((1,2))
-dx.plot(goal_marker=goalmarker)
+dx.plot(goal_style=goalmarker)
 ax = plt.gca()
 ax.grid(False)
 for i in range(floorplan.shape[0]):
