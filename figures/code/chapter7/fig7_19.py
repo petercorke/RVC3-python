@@ -4,7 +4,7 @@ from roboticstoolbox import *
 
 from roboticstoolbox.backends.swift import Swift
 from pathlib import Path
-from rvcprint import outfile
+from RVC3.tools.rvcprint import outfile
 import time
 
 root = Path('~/Downloads').expanduser()
