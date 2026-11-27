@@ -54,7 +54,7 @@ def string(text, subscript=None, scale=1):
         m = np.max(textmesh.points, axis=0)
 
 
-        submesh.translate([m[0] * 0.9, -m[1] * 0.5, 0])
+        submesh.translate([m[0] * 0.9, -m[1] * 0.5, 0], inplace=True)
         textmesh = textmesh + submesh  # append it
 
     # centre the whole thing
@@ -91,7 +91,7 @@ def add_arrow(p, T, i, color='silver', label=None, subscript=None, scale=1.0, op
 
         # shift it to the right and down a bit
         m = np.max(text.points, axis=0)
-        axlabel.translate([m[0] * 0.8, -m[1] * 0.5, 0])
+        axlabel.translate([m[0] * 0.8, -m[1] * 0.5, 0], inplace=True)
         text = text + axlabel  # append it
 
     # centre the whole thing
@@ -102,15 +102,15 @@ def add_arrow(p, T, i, color='silver', label=None, subscript=None, scale=1.0, op
 
     # now orient it in space, rotate about centre
     if i == 0:
-        text.rotate_x(90)
+        text.rotate_x(90, inplace=True)
     elif i == 1:
-        text.rotate_y(90)
-        text.rotate_x(90)
+        text.rotate_y(90, inplace=True)
+        text.rotate_x(90, inplace=True)
     elif i == 2:
-        text.rotate_x(90)
-        text.rotate_z(90)
+        text.rotate_x(90, inplace=True)
+        text.rotate_z(90, inplace=True)
 
-    text.translate(pos)
+    text.translate(pos, inplace=True)
     text.transform(T, inplace=True)
 
     ## combine arrow and text
