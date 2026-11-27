@@ -143,7 +143,11 @@ def rvcprint(subfig='', thicken=1.5, facecolor='white', interval=None, ax=None, 
             # thicken lines in legend
             legend = ax.get_legend()
             if legend is not None:
-                for legobj in legend.legendHandles:
+                # legendHandles was renamed legend_handles in matplotlib 3.7
+                handles = getattr(legend, "legend_handles", None)
+                if handles is None:
+                    handles = legend.legendHandles
+                for legobj in handles:
                     legobj.set_linewidth(thicken)
                 # ax.legend(prop=dict(size=18))
                 # legend.set_fontsize(20)
@@ -192,9 +196,10 @@ def rvcprint(subfig='', thicken=1.5, facecolor='white', interval=None, ax=None, 
             if facecolor is not None:
                 if dims == 3:
                     rgba = colors.to_rgba(facecolor)
-                    ax.w_xaxis.set_pane_color(rgba)
-                    ax.w_yaxis.set_pane_color(rgba)
-                    ax.w_zaxis.set_pane_color(rgba)
+                    # w_xaxis etc. were removed in matplotlib 3.8
+                    ax.xaxis.set_pane_color(rgba)
+                    ax.yaxis.set_pane_color(rgba)
+                    ax.zaxis.set_pane_color(rgba)
 
                 ax.set_facecolor(facecolor)
 
