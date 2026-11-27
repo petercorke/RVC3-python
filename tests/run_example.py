@@ -47,6 +47,8 @@ def main() -> int:
 
     plt.pause = lambda *args, **kwargs: None
 
+    sys.argv[0] = str(args.script)  # rvcprint names its output from sys.argv[0]
+
     config = load_config().get(args.script.name, {})
     source = args.script.read_text()
     for patch in config.get("patches", []):
