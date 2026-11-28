@@ -88,6 +88,9 @@ chapter14/fig14_new.py:
 chapter2/fig2_lie.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
+chapter2/swiftshow.py:
+  reason: needs a live Swift browser (launches a browser tab and downloads screenshots to ~/Downloads); cannot run headless
+  skip: true
 chapter3/fig3_17.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
@@ -124,8 +127,14 @@ chapter5/fig5_30.py:
 chapter5/fig5_4.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
+chapter7/fig7_17.py:
+  reason: needs a live Swift browser (launches a browser tab and downloads screenshots to ~/Downloads); cannot run headless
+  skip: true
 chapter7/fig7_18swift.py:
   reason: fails headless (API drift, old script or missing optional package)
+  skip: true
+chapter7/fig7_19.py:
+  reason: needs a live Swift browser (launches a browser tab and downloads screenshots to ~/Downloads); cannot run headless
   skip: true
 chapter7/fig7_24.py:
   reason: fails headless (API drift, old script or missing optional package)
@@ -135,6 +144,9 @@ chapter7/fig7_27.py:
   skip: true
 chapter7/fig7_32.py:
   reason: fails headless (API drift, old script or missing optional package)
+  skip: true
+chapter8/fig8_2.py:
+  reason: launches Swift and ends with env.hold(), which blocks until stopped
   skip: true
 chapter8/fig8_4.py:
   reason: fails headless (API drift, old script or missing optional package)
