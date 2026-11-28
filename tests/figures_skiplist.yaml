@@ -52,12 +52,6 @@ chapter12/fig12_deep.py:
 chapter14/fig14_18.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter14/fig14_29_pv.py:
-  reason: needs DSI.p, which is written by fig14_27.py; cannot run on its own
-  skip: true
-chapter14/fig14_29_pv2.py:
-  reason: needs DSI.p, which is written by fig14_27.py; cannot run on its own
-  skip: true
 chapter14/fig14_33.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
@@ -129,9 +123,6 @@ chapter5/fig5_4.py:
   skip: true
 chapter7/fig7_17.py:
   reason: needs a live Swift browser (launches a browser tab and downloads screenshots to ~/Downloads); cannot run headless
-  skip: true
-chapter7/fig7_18swift.py:
-  reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter7/fig7_19.py:
   reason: needs a live Swift browser (launches a browser tab and downloads screenshots to ~/Downloads); cannot run headless
