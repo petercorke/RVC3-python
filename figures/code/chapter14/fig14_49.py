@@ -12,7 +12,7 @@ import spatialmath.base as smb
 images = ImageCollection('mosaic/aerial2-*.png', grey=True)
 print(images)
 composite = Image.Zeros(size=(2_000, 2_000))
-composite.paste(images[0], (0, 0))
+composite = composite.paste(images[0], (0, 0))
 # composite.disp()
 
 frames = []
@@ -28,7 +28,7 @@ for i in range(1, 6):
     
     tile, topleft, corners = new.warp_perspective(H, inverse=True, tile=True)
     frames.append(corners)
-    composite.paste(tile, topleft, 'blend')
+    composite = composite.paste(tile, topleft, 'blend')
 
 # show the mosaic
 composite.disp(grid=True)

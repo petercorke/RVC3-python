@@ -73,9 +73,6 @@ chapter14/fig14_43.py:
 chapter14/fig14_44.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter14/fig14_49.py:
-  reason: OpenCV findHomography rejects the matched points (after the Image.Zeros fix); not yet investigated
-  skip: true
 chapter14/fig14_50.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
