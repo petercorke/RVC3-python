@@ -26,9 +26,9 @@ rvcprint.rvcprint(subfig='d', format='png')
 
 lab = flowers.colorspace('L*a*b*')
 
-lab.plane('a*').disp(**options)  # A*
+lab.plane('a*:').disp(**options)  # A*
 rvcprint.rvcprint(subfig='e', format='png')
 
-lab.plane('b*').disp(**options)  # B*
+lab.plane('b*:').disp(**options)  # B*
 rvcprint.rvcprint(subfig='f', format='png')
 

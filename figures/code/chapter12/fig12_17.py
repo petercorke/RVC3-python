@@ -13,7 +13,8 @@ blobs = sharks.blobs()
 
 print(np.array(blobs[1].perimeter).shape)
 
-polar = blobs[1].polar()
+r, theta = blobs[1].polar()
+polar = np.vstack((r, theta))
 s = np.linspace(0, 1, polar.shape[1])
 
 fig, ax1 = plt.subplots()
@@ -38,7 +39,8 @@ rvcprint.rvcprint(subfig='a')
 
 plt.clf()
 for i in range(4):
-    polar = blobs[i].polar()
+    r, theta = blobs[i].polar()
+    polar = np.vstack((r, theta))
     if i == 3:
         plt.plot(s, polar[0, :] / polar[0, :].max(), '--')
     else:

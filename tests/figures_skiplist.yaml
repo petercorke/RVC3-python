@@ -13,22 +13,10 @@ appendices/figC_4.py:
 appendices/figH_4.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter10/fig10_15.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
 chapter11/box_signeddistance.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter11/fig11_12.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter11/fig11_4.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
 chapter12/fig12_11.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter12/fig12_17.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter12/fig12_18.py:
@@ -138,12 +126,6 @@ chapter7/fig7_32.py:
   skip: true
 chapter8/fig8_2.py:
   reason: launches Swift and ends with env.hold(), which blocks until stopped
-  skip: true
-chapter8/fig8_4.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter8/fig8_6.py:
-  reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter9/fig9_10.py:
   reason: fails headless (API drift, old script or missing optional package)

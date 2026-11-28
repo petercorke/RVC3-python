@@ -9,14 +9,16 @@ from spatialmath import SE3
 from machinevisiontoolbox.base.imageio import convert
 
 
-dartmouth = WebCam('https://webcam.dartmouth.edu/webcam/image.jpg')
+# the Dartmouth webcam used in the first edition no longer responds, so use a
+# camera in Porjus, Lappland, Sweden (as the chapter 11 notebook does)
+porjus = WebCam('http://uk.jokkmokk.jp/photo/nr4/latest.jpg')
 
-dartmouth.grab().disp()
+next(porjus).disp()
 
 # commented out so we don't auto clobber a nice image
 # rvcprint.rvcprint()
 
-# for im in dartmouth:
+# for im in porjus:
 
 #     plt.imshow(im.image)
 #     plt.pause(0.02)

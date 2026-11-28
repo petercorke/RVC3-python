@@ -76,7 +76,7 @@ out = sim.run(bd, 10, watch=[tr2t[0], tr2t[1], tr2t[2]], block=False)  # simulat
 # bd.savefig('pdf')      # save all figures as pdf
 print(out)
 t = out.clock0.t
-x = out.clock0.x
+x = out.clock0.X
 
 plt.figure()
 # plt.subplot(121)

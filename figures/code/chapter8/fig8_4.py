@@ -40,7 +40,7 @@ print(out)
 # x = out.x
 
 t = out.clock0.t
-x = out.clock0.x
+x = out.clock0.X
 
 xplot(t, x[:,:3], stack=True, color='k')
 
