@@ -19,7 +19,7 @@ rvcprint.rvcprint(subfig='a')
 
 M = np.array([[0.5, 0, 100], [0, 0.5, 200]])
 
-out = mona.affine_warp(M, bgcolor=np.nan)
+out = mona.warp_affine(M, bgcolor=np.nan)
 out.disp(badcolor='r')
 
 rvcprint.rvcprint(subfig='b')
@@ -27,7 +27,7 @@ rvcprint.rvcprint(subfig='b')
 tw = Twist2.UnitRevolute([300, 300])
 M = tw.exp(np.pi / 6).A[:2, :]
 
-out = mona.affine_warp(M, bgcolor=np.nan)
+out = mona.warp_affine(M, bgcolor=np.nan)
 out.disp(badcolor='r')
 
 rvcprint.rvcprint(subfig='c')

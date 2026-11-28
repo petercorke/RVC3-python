@@ -13,7 +13,7 @@ foreground = Image.Read('greenscreen.png', dtype='float')
 foreground.disp(title=False)
 rvcprint.rvcprint(subfig='a')
 
-cc = foreground.gamma_decode('sRGB').tristim2cc()
+cc = foreground.gamma_decode('sRGB').chromaticity()
 print(cc)
 h = cc.plane('g').hist()
 

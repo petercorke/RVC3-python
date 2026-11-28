@@ -26,7 +26,7 @@ d3 = e3.morph(S3, 'max')
 results = Image.Tile([im, e1, d1, im, e2, d2, im, e3, d3], columns=3, sep=1, bgcolor=1)
 
 # stack the structuring elements
-SE = Image.Zeros(25, results.shape[0], dtype='uint8')
+SE = Image.Zeros(size=(25, results.shape[0]), dtype='uint8')
 SE = SE.paste(S1, [5,15])
 SE = SE.paste(S2, [5,55])
 SE = SE.paste(S3, [5,115])

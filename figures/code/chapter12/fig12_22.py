@@ -14,7 +14,7 @@ h = edges.Hough()
 im.disp(grid=True, darken=True, title=False)
 lines = h.lines_p(100, 200, 5, seed=0)
 print(lines.shape)
-h.plot_lines_p(lines, 'r--')
+h.plot_lines(lines, 'r--')
 
 
 # plt.show(block=True)

@@ -12,7 +12,7 @@ print(pyramid)
 
 width = sum([im.width for im in pyramid])
 
-out = Image.Constant(width, pyramid[0].height, 0.99)
+out = Image.Constant(value=0.99, size=(width, pyramid[0].height))
 u = 0
 for im in pyramid:
     out.paste(im, [u, 0])

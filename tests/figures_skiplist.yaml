@@ -19,28 +19,10 @@ chapter10/fig10_15.py:
 chapter11/box_signeddistance.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter11/fig11_11.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
 chapter11/fig11_12.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter11/fig11_27.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter11/fig11_28.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter11/fig11_36.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter11/fig11_37.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
 chapter11/fig11_4.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter11/fig11_6.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter12/fig12_11.py:
@@ -56,9 +38,6 @@ chapter12/fig12_19.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter12/fig12_21.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter12/fig12_22.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter12/fig12_33.py:
@@ -85,9 +64,6 @@ chapter14/fig14_33.py:
 chapter14/fig14_37.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter14/fig14_38.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
 chapter14/fig14_42.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
@@ -98,7 +74,7 @@ chapter14/fig14_44.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter14/fig14_49.py:
-  reason: fails headless (API drift, old script or missing optional package)
+  reason: OpenCV findHomography rejects the matched points (after the Image.Zeros fix); not yet investigated
   skip: true
 chapter14/fig14_50.py:
   reason: fails headless (API drift, old script or missing optional package)

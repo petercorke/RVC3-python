@@ -25,7 +25,7 @@ print(HR)
 
 walls_l_rect = walls_l.warp_perspective(HL)
 walls_r_rect = walls_r.warp_perspective(HR)
-Image.hcat(walls_l_rect, walls_r_rect).disp()
+Image.Hstack([walls_l_rect, walls_r_rect]).disp()
 
 rvcprint.rvcprint()
 

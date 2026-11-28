@@ -18,19 +18,19 @@ im = Image.Sin(cycles=5, size=500, dir='y')
 im.disp(ax=ax, plain=True)
 
 ax = plt.subplot(2, 2, 3)
-im = Image.Squares(5, 500)
+im = Image.Squares(number=5, size=500)
 im.disp(ax=ax, plain=True)
 
 ax = plt.subplot(2, 2, 4)
 # im = testpattern('dots', 256, 256, 100)
-im = Image.Circles(2, 500)
+im = Image.Circles(number=2, size=500)
 
 im.disp(ax=ax, plain=True)
 
 rvcprint.rvcprint(subfig='a')
 
 
-canvas = Image.Zeros(1000, 1000, dtype='uint8')
+canvas = Image.Zeros(size=(1000, 1000), dtype='uint8')
 
 canvas.draw_box(lb=(100, 100), wh=(150, 150), color=100, thickness=-1)
 canvas.draw_box(lb=(300, 300), wh=(80, 80), color=150, thickness=-1)

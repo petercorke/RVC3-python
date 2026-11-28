@@ -11,7 +11,7 @@ import spatialmath.base as smb
 
 images = ImageCollection('mosaic/aerial2-*.png', grey=True)
 print(images)
-composite = Image.Zeros(2_000, 2_000)
+composite = Image.Zeros(size=(2_000, 2_000))
 composite.paste(images[0], (0, 0))
 # composite.disp()
 
