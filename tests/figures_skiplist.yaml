@@ -250,9 +250,6 @@ chapter2/fig2_16.py:
 chapter2/fig2_24.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter2/fig2_4-old.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
 chapter2/fig2_4.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
@@ -328,9 +325,6 @@ chapter5/fig5_4.py:
 chapter7/fig7_10b.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter7/fig7_13a.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
 chapter7/fig7_17.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
@@ -347,21 +341,6 @@ chapter7/fig7_27.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter7/fig7_32.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter7/fig7_4a.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter7/fig7_4b.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter7/fig7_4c.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter7/fig7_6.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter7/fig7_7.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter8/fig8_2.py:

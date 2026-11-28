@@ -37,7 +37,7 @@ pvplus.add_frame2(plotter, SE3(0, 0, zl), scale=0.5, label='O')
 
 ## link 1
 L1 = pv.Box(bounds=(-overlap, 1+overlap, -0.2, 0.2, -0.1, 0))
-L1.transform(T1.A)
+L1.transform(T1.A, inplace=True)
 plotter.add_mesh(L1, color='red', show_edges=wf, opacity=opacity)
 
 # joint
@@ -50,7 +50,7 @@ pvplus.add_frame2(plotter, T1, label='1', scale=0.5)
 ## link 2
 L2 = pv.Box(bounds=(-overlap, 1, -0.2, 0.2, -0.1, 0))
 T = SE3(1, 0, 0.2)
-L2.transform(T2.A)
+L2.transform(T2.A, inplace=True)
 plotter.add_mesh(L2, color='blue', show_edges=wf, opacity=opacity)
 pvplus.add_frame2(plotter, T2, scale=0.5, label='2')
 
@@ -59,7 +59,7 @@ pvplus.axis(plotter, T2, text='q_2')
 
 ## end-effector
 EE = pv.Sphere(radius=eer, center=(0,0, 0))
-EE.transform(TE.A)
+EE.transform(TE.A, inplace=True)
 plotter.add_mesh(EE, color='black')
 pvplus.add_frame2(plotter, TE, scale=0.5, label='E')
 

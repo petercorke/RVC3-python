@@ -24,7 +24,7 @@ TE = SE3.Rz(q1) * SE3.Tx(1)
 
 ## link 1
 L1 = pv.Box(bounds=(-overlap, 1, -0.2, 0.2, -0.05, 0.05))
-L1.transform(T1.A)
+L1.transform(T1.A, inplace=True)
 plotter.add_mesh(L1, color='red', show_edges=wf, opacity=opacity)
 
 pvplus.add_frame2(plotter, SE3(0, 0, zl), scale=0.5, label='O')
@@ -36,7 +36,7 @@ pvplus.axis(plotter, text='q')
 
 # end-effector
 EE = pv.Sphere(radius=eer, center=(0,0, 0))
-EE.transform(TE.A)
+EE.transform(TE.A, inplace=True)
 pvplus.add_frame2(plotter, TE, scale=0.5, label='E')
 
 plotter.add_mesh(EE, color='black')

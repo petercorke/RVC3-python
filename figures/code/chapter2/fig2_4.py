@@ -29,7 +29,7 @@ plotter.add_mesh(cube, color='blue', show_edges=True, style='wireframe', opacity
 T = SE3(-0.5, 1.5, 1.5) * SE3.Rz(pi/4) * SE3.Rx(pi/8) * SE3.Ry(pi/8)
 pvplus.add_frame(plotter, T, label='B')
 cube = pv.Cube(y_length=L, x_length=L/2, z_length=L/2)
-cube.transform(T.A)
+cube.transform(T.A, inplace=True)
 plotter.add_mesh(cube, color='red', show_edges=True, style='wireframe', opacity=0.2, line_width=15)
 
 # centre the scene in camera view, look along -X axis

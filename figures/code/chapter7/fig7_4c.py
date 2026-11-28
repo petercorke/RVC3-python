@@ -28,7 +28,7 @@ TE = SE3.Rz(q1) * SE3.Tx(q2) * SE3.Tx(1)
 
 ## link 1
 L1 = pv.Box(bounds=(-overlap, 1+overlap, -0.2, 0.2, -0.05, 0.05))
-L1.transform(T1.A)
+L1.transform(T1.A, inplace=True)
 plotter.add_mesh(L1, color='red', show_edges=wf, opacity=opacity)
 
 # arrow
@@ -41,7 +41,7 @@ pvplus.add_frame2(plotter, SE3(0, 0, zl), scale=0.5, label='O')
 ## link 2
 L2 = pv.Box(bounds=(0, 1, -0.15, 0.15, -0.04, 0.04))
 T = SE3(1, 0, 0.2)
-L2.transform(T2.A)
+L2.transform(T2.A, inplace=True)
 plotter.add_mesh(L2, color='blue', show_edges=wf, opacity=opacity)
 
 # arrow
@@ -53,7 +53,7 @@ pvplus.axis(plotter, text='q_2', square=True, direction=T1.R[:,0])
 ## end effector
 
 EE = pv.Sphere(radius=eer, center=(0,0, 0))
-EE.transform(TE.A)
+EE.transform(TE.A, inplace=True)
 plotter.add_mesh(EE, color='black')
 
 pvplus.add_frame2(plotter, TE, scale=0.5, label='E')

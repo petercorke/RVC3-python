@@ -26,7 +26,7 @@ def add_arrow(p, i, T, opacity=1.0):
 	pos[i] = 1.1
 
 	arrow = pv.Arrow(direction=pos, tip_resolution=r, shaft_resolution=r)
-	arrow.transform(T)
+	arrow.transform(T, inplace=True)
 	p.add_mesh(arrow, color=colors[i], specular=s, specular_power=sp, smooth_shading=ss, show_edges=se, opacity=opacity)
 
 	names = 'XYZ'
@@ -44,7 +44,7 @@ def add_arrow(p, i, T, opacity=1.0):
 		text.rotate_x(-90)
 
 	text.translate(pos)
-	text.transform(T)
+	text.transform(T, inplace=True)
 	p.add_mesh(text, color=colors[i], opacity=opacity)
 
 def add_plot(T, opacity=1.0):
