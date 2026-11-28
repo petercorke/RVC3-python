@@ -52,6 +52,9 @@ chapter12/fig12_deep.py:
 chapter14/fig14_18.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
+chapter14/fig14_28.py:
+  reason: fails headless (API drift, old script or missing optional package)
+  skip: true
 chapter14/fig14_33.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
@@ -74,9 +77,6 @@ chapter14/fig14_51.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter14/fig14_52.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
-chapter14/fig14_new.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
 chapter2/fig2_lie.py:
