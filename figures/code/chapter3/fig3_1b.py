@@ -34,6 +34,6 @@ pvplus.add_frame(plotter, SE3(-2, 0, 0) * SE3.Rz(-pi/2) * SE3.Rx(pi/2), color='r
 plotter.set_background('white')
 # plotter.enable_eye_dome_lighting()  # messes up subplots
 
-pvplus.export_gltf(plotter, 'exported.glb')
+plotter.export_gltf('exported.glb')
 plotter.show(screenshot='fig3_1b.png')
 

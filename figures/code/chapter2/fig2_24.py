@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import pyvista as pv
+from pathlib import Path
 import numpy as np
 from spatialmath import SE3, Twist3
 from spatialmath import base
@@ -13,7 +14,7 @@ def add_arrow(i, T):
 	pos[i] = 1.1
 
 	arrow = pv.Arrow(direction=pos, tip_resolution=r, shaft_resolution=r)
-	arrow.transform(T)
+	arrow.transform(T, inplace=True)
 
 	names = 'XYZ'
 
@@ -30,7 +31,7 @@ def add_arrow(i, T):
 		text.rotate_x(-90)
 
 	text.translate(pos)
-	text.transform(T)
+	text.transform(T, inplace=True)
 	return arrow + text
 
 def add_frame(T):
@@ -51,7 +52,7 @@ def add_strut(p1, p2, radius):
 	return pv.Cylinder(center=centre, direction=dir, radius=radius, height=h)
 
 def xform(mesh, T):
-	mesh.transform(T.A)
+	mesh.transform(T.A, inplace=True)
 
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))
 plotter.enable_parallel_projection()
@@ -75,7 +76,7 @@ S = Twist3.UnitRevolute(q=p0, a=dir, pitch=0.8)
 
 # -------------------------------------------------------------------------- #
 # create the leadscrew, it is in z-direction
-screw = pv.read('LeadScrew.stl')
+screw = pv.read(Path(__file__).parent / 'LeadScrew.stl')
 screw.points /= 40
 screw.rotate_x(90)
 screw.points += np.r_[0, 0, 2]
@@ -85,7 +86,7 @@ xform(screw, T0)
 
 # -------------------------------------------------------------------------- #
 # create nut
-nut = pv.read('nut.stl')
+nut = pv.read(Path(__file__).parent / 'nut.stl')
 nut.points /= 2.5
 nut.points -= nut.points.mean(axis=0)
 

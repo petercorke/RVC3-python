@@ -2,6 +2,7 @@
 
 from roboticstoolbox import *
 import pyvista as pv
+from pathlib import Path
 from RVC3.tools import pvplus
 
 plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))
@@ -9,7 +10,7 @@ plotter = pv.Plotter(polygon_smoothing=True, window_size=(2000,2000))
 # link1 = path_to_datafile("xacro/franka_description/meshes/visual/link1.dae")
 # print(link1)
 
-mesh = pv.read("link1.ply")
+mesh = pv.read(Path(__file__).parent / "link1.ply")
 mesh.points *= 20
 plotter.add_mesh(mesh, color='gray', opacity=0.3, show_edges=True)
 
