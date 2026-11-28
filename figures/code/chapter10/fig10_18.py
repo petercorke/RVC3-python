@@ -4,6 +4,7 @@ from RVC3.tools import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
+from machinevisiontoolbox.base import *
 from matplotlib.ticker import ScalarFormatter
 
 nm = 1e-9

@@ -3,6 +3,7 @@ from RVC3.tools import rvcprint
 import numpy as np
 import matplotlib.pyplot as plt
 from machinevisiontoolbox import *
+from spatialmath.base import plotvol3
 from matplotlib.ticker import ScalarFormatter
 from math import pi
 
