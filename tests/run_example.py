@@ -58,6 +58,17 @@ def main() -> int:
 
     sys.argv[0] = str(args.script)  # rvcprint names its output from sys.argv[0]
 
+    # pvplus.save() writes its PNG next to the script, which would overwrite the
+    # tracked images in the repository; write it to the working directory instead
+    try:
+        from RVC3.tools import pvplus
+
+        pvplus.outfile = lambda format="png": str(
+            Path.cwd() / (args.script.stem + "." + format)
+        )
+    except ImportError:
+        pass
+
     config = load_config().get(args.script.name, {})
     source = args.script.read_text()
     for patch in config.get("patches", []):
