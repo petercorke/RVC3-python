@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from rvcprint from RVC3.tools import rvcprint
+from RVC3.tools.rvcprint import rvcprint
 import matplotlib.pyplot as plt
 from cycler import cycler
 import site
