@@ -79,9 +79,6 @@ chapter14/fig14_29_pv.py:
 chapter14/fig14_29_pv2.py:
   reason: needs DSI.p, which is written by fig14_27.py; cannot run on its own
   skip: true
-chapter14/fig14_30.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
 chapter14/fig14_33.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
