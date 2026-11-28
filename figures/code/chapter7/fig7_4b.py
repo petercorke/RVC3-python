@@ -58,7 +58,7 @@ plotter.disable_parallel_projection()
 # plotter.show_axes()  # put a small frame for orientation in bottom left
 # plotter.show_bounds(grid='front')  # overlay a grid
 
-pvplus.save(plotter, show=False, zoom=1.2)
+pvplus.save(plotter, show=False, zoom=1.0)
 
 # plotter.export_gltf('fig7_4b.gltf')
 
