@@ -52,6 +52,8 @@ def test_figure_script_runs(script: Path):
         pytest.skip(skip.get("reason", "skiplisted"))
 
     with tempfile.TemporaryDirectory() as tmp:
+        # some scripts save into this subfolder of the working directory
+        (Path(tmp) / "Figures_generated").mkdir()
         result = subprocess.run(
             [sys.executable, str(RUNNER), str(script)],
             capture_output=True,

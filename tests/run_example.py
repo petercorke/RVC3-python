@@ -47,6 +47,15 @@ def main() -> int:
 
     plt.pause = lambda *args, **kwargs: None
 
+    # pyvista's plotter.show() opens a window and blocks until it is closed;
+    # render off screen instead (a no-op if pyvista is not installed)
+    try:
+        import pyvista as pv
+
+        pv.OFF_SCREEN = True
+    except ImportError:
+        pass
+
     sys.argv[0] = str(args.script)  # rvcprint names its output from sys.argv[0]
 
     config = load_config().get(args.script.name, {})
