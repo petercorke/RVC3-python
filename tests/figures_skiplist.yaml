@@ -283,9 +283,6 @@ chapter4/fig4_8.py:
 chapter5/fig5_14.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
-chapter5/fig5_15-old.py:
-  reason: fails headless (API drift, old script or missing optional package)
-  skip: true
 chapter5/fig5_20.py:
   reason: fails headless (API drift, old script or missing optional package)
   skip: true
